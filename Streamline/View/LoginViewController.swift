@@ -16,17 +16,14 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
     var loginButton: UIButton!
     var auth = SPTAuth.defaultInstance()!
     var session: SPTSession!
+    var user: SPTUser!
     
     var player: SPTAudioStreamingController?
     var loginUrl: URL?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        DB.createUser(username: "aj12ay")
         // Do any additional setup after loading the view, typically from a nib.
-        print("User created")
-        // spotify authentification should be here
         NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.updateAfterFirstLogin), name: NSNotification.Name(rawValue: "loginSuccessfull"), object: nil)
         
         setupAuth()
@@ -43,6 +40,7 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
         auth.requestedScopes = [SPTAuthStreamingScope, SPTAuthPlaylistReadPrivateScope, SPTAuthPlaylistModifyPublicScope, SPTAuthPlaylistModifyPrivateScope]
         loginUrl = auth.spotifyWebAuthenticationURL()
     }
+    
     func setupBackground() {
         view.backgroundColor = UIColor.black
     }
@@ -71,21 +69,21 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
         
     }
     
+    @objc
     func updateAfterFirstLogin () {
-        
         loginButton.isHidden = true
         let userDefaults = UserDefaults.standard
         
         if let sessionObj:AnyObject = userDefaults.object(forKey: "SpotifySession") as AnyObject? {
-            
             let sessionDataObj = sessionObj as! Data
             let firstTimeSession = NSKeyedUnarchiver.unarchiveObject(with: sessionDataObj) as! SPTSession
             
             self.session = firstTimeSession
-            initializaPlayer(authSession: session)
+            initializePlayer(authSession: session)
             self.loginButton.isHidden = true
             // self.loadingLabel.isHidden = false
-            
+            print(self.session.canonicalUsername)
+            DB.createUser(username: self.session.canonicalUsername)
         }
         
     }
@@ -93,7 +91,7 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
     func audioStreamingDidLogin(_ audioStreaming: SPTAudioStreamingController!) {
         // after a user authenticates a session, the SPTAudioStreamingController is then initialized and this method called
         print("logged in")
-        self.player?.playSpotifyURI("spotify:track:58s6EuEYJdlb0kO7awm3Vp", startingWith: 0, startingWithPosition: 0, callback: { (error) in
+        self.player?.playSpotifyURI("spotify:track:2ISSQPb9LHHiV6ng2NXosL", startingWith: 0, startingWithPosition: 0, callback: { (error) in
             if (error != nil) {
                 print("playing!")
             }
