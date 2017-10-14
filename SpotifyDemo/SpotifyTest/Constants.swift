@@ -12,5 +12,5 @@ import UIKit
 struct Constants{
     static let clientID = "ccbd2b5612b14b0bb01dfa484d755a02"
     static let redirectURI = "SpotifyTest://returnAfterLogin"
-    static let redirectURL = URL(string: Constants.redirectURI)
+    static let redirectURL = URL(string: "\(Constants.redirectURI)")
 }
