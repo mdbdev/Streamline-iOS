@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  LoginViewController.swift
 //  Streamline
 //
 //  Created by Stephen Jayakar on 10/14/17.
@@ -10,11 +10,13 @@ import UIKit
 import Firebase
 
 
-class ViewController: UIViewController {
+class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        // spotify authentification should be here
     }
 
     override func didReceiveMemoryWarning() {
