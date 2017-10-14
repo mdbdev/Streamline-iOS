@@ -1,0 +1,6 @@
+framework module Pods_StreamlineUITests {
+  umbrella header "Pods-StreamlineUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
