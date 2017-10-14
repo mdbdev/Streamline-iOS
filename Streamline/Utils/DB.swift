@@ -14,8 +14,8 @@ class DB {
     // Should probably pass in User type into withBlcok
     static func createUser(username: String) {
         var reference = Database.database().reference()
-        var userData = ["pid": ""]
-        reference.child("Users").child(username).setValue(userData)
+        let userData = ["pid": ""]
+        reference.child("users").child(username).setValue(userData)
     }
     
     // create post with post class file and user

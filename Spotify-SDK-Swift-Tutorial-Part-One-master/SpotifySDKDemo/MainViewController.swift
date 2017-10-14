@@ -62,7 +62,7 @@ class MainViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, S
         
     }
     
-    func initializaPlayer(authSession:SPTSession){
+    func initializePlayer(authSession:SPTSession){
         if self.player == nil {
             
             
