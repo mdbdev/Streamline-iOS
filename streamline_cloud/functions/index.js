@@ -5,23 +5,20 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
 
-// Take the text parameter passed to this HTTP endpoint and insert it into the
-// Realtime Database under the path /messages/:pushId/original
-exports.addMessage = functions.https.onRequest((req, res) => {
-  // Grab the text parameter.
-  const original = req.query.text;
-  // Push the new message into the Realtime Database using the Firebase Admin SDK.
-  admin.database().ref('/messages').push({original: original}).then(snapshot => {
-    // Redirect with 303 SEE OTHER to the URL of the pushed object in the Firebase console.
-    res.redirect(303, snapshot.ref);
+//Waits for cron job from cronjob.org request and then checks the Posts data
+exports.deletePosts = functions.https.onRequest((req, res) => {
+  var ref = admin.database().ref('/posts/{pushId}');
+  var now = Date.now();
+  console.log(now);
+  var cutoff = now - 12 * 60 * 60 * 1000;
+  var oldItemsQuery = ref.orderByChild('timestamp').endAt(cutoff);
+  return oldItemsQuery.once('value', function(snapshot) {
+    // create a map with all children that need to be removed
+    var updates = {};
+    snapshot.forEach(function(child) {
+      updates[child.key] = null
+    });
+    // execute all updates in one go and return the result to end the function
+    return ref.update(updates);
   });
-});
-
-exports.makeUppercase = functions.database.ref('/messages/{pushId}/original').onWrite(event => {
-  //The function call gets the onWrite event from the database
-  const message = event.data.val();
-  console.log('Uppercasing', event.params.pushId, message);
-  const uppercase = message.toUpperCase();
-  //Return a promise for asynch call
-  return event.data.ref.parent.child('uppercase').set(message.toUpperCase());
 });
