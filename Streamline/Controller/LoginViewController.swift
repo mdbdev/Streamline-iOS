@@ -10,9 +10,12 @@ import UIKit
 import Firebase
 import SafariServices
 import AVFoundation
-
+import Alamofire
 
 class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, SPTAudioStreamingDelegate {
+    
+    var authenticatedUser: User!
+    
     var loginButton: UIButton!
     var auth = SPTAuth.defaultInstance()!
     var session: SPTSession!
@@ -81,12 +84,19 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
             self.session = firstTimeSession
             initializePlayer(authSession: session)
             self.loginButton.isHidden = true
-            self.performSegue(withIdentifier: "toFeed", sender: self)
+            createUser()
+            print(self.session.accessToken)
             // self.loadingLabel.isHidden = false
-            print(self.session.canonicalUsername)
-            DB.createUser(username: self.session.canonicalUsername)
+            DB.createUser(username: self.session.accessToken)
         }
         
+    }
+    
+    //Create the user and check if they are from facebook or native spotify user
+    func createUser(){
+        
+        print(self.session.canonicalUsername)
+        authenticatedUser = User(uid: self.session.canonicalUsername)
     }
     
     func audioStreamingDidLogin(_ audioStreaming: SPTAudioStreamingController!) {

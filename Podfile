@@ -9,7 +9,8 @@ target 'Streamline' do
   pod 'Firebase/Core'
   pod 'Firebase/Database'
   pod 'Firebase/Storage'
-
+  pod 'Alamofire', '~> 4.5'
+  
   target 'StreamlineTests' do
     inherit! :search_paths
     # Pods for testing

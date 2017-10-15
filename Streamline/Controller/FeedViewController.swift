@@ -20,10 +20,10 @@ class FeedViewController: UIViewController {
         setupCollectionView()
         setupBackground()
         setupButton()
-        DB.getPosts { (postData) in
-            /self.posts = postData
+        /*DB.getPosts { (postData) in
+            self.posts = postData
             updatePosts()
-        }
+        }*/
     }
     
     func updatePosts() {

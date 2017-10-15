@@ -21,11 +21,11 @@
 		2D9017C21F92CCAA00A8C038 /* BridgeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9017C11F92CCAA00A8C038 /* BridgeViewController.m */; };
 		2DA03D1C1F92A8E900F88C13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA03D1B1F92A8E900F88C13 /* AppDelegate.swift */; };
 		2DA03D1E1F92A8E900F88C13 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA03D1D1F92A8E900F88C13 /* LoginViewController.swift */; };
-		2DA03D211F92A8E900F88C13 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2DA03D1F1F92A8E900F88C13 /* Main.storyboard */; };
 		2DA03D231F92A8E900F88C13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2DA03D221F92A8E900F88C13 /* Assets.xcassets */; };
-		2DA03D261F92A8E900F88C13 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2DA03D241F92A8E900F88C13 /* LaunchScreen.storyboard */; };
 		2DA03D311F92A8E900F88C13 /* StreamlineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA03D301F92A8E900F88C13 /* StreamlineTests.swift */; };
 		2DA03D3C1F92A8E900F88C13 /* StreamlineUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA03D3B1F92A8E900F88C13 /* StreamlineUITests.swift */; };
+		554826161F92EC5300B9147A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 554826151F92EC5300B9147A /* Main.storyboard */; };
+		554826181F92ED1500B9147A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 554826171F92ED1500B9147A /* LaunchScreen.storyboard */; };
 		9E0506D595C11CEBF4B7AF0B /* Pods_StreamlineTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB284140F1C8E9C54DFC8762 /* Pods_StreamlineTests.framework */; };
 		B269B4E280C9962B2F8D6148 /* Pods_StreamlineUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BBAE761855C48CADA2FEEBE /* Pods_StreamlineUITests.framework */; };
 /* End PBXBuildFile section */
@@ -66,9 +66,7 @@
 		2DA03D181F92A8E900F88C13 /* Streamline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Streamline.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DA03D1B1F92A8E900F88C13 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2DA03D1D1F92A8E900F88C13 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		2DA03D201F92A8E900F88C13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2DA03D221F92A8E900F88C13 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		2DA03D251F92A8E900F88C13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2DA03D271F92A8E900F88C13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2DA03D2C1F92A8E900F88C13 /* StreamlineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StreamlineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DA03D301F92A8E900F88C13 /* StreamlineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamlineTests.swift; sourceTree = "<group>"; };
@@ -76,6 +74,8 @@
 		2DA03D371F92A8E900F88C13 /* StreamlineUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StreamlineUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DA03D3B1F92A8E900F88C13 /* StreamlineUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamlineUITests.swift; sourceTree = "<group>"; };
 		2DA03D3D1F92A8E900F88C13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		554826151F92EC5300B9147A /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		554826171F92ED1500B9147A /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		617D6BC49E2D68BD311C03E2 /* Pods_Streamline.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Streamline.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FC9F10E8984FB6D86F6A1B2 /* Pods-StreamlineTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StreamlineTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StreamlineTests/Pods-StreamlineTests.debug.xcconfig"; sourceTree = "<group>"; };
 		AB284140F1C8E9C54DFC8762 /* Pods_StreamlineTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StreamlineTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -176,6 +176,8 @@
 		2DA03D1A1F92A8E900F88C13 /* Streamline */ = {
 			isa = PBXGroup;
 			children = (
+				554826151F92EC5300B9147A /* Main.storyboard */,
+				554826171F92ED1500B9147A /* LaunchScreen.storyboard */,
 				2D3634491F92D2C1000FB035 /* SpotifyAudioPlayback.framework */,
 				2D36344A1F92D2C2000FB035 /* SpotifyAuthentication.framework */,
 				2D36344B1F92D2C3000FB035 /* SpotifyMetadata.framework */,
@@ -185,9 +187,7 @@
 				2D6B7DD01F92AB9F009DA338 /* Model */,
 				2D6B7DCE1F92AA2D009DA338 /* GoogleService-Info.plist */,
 				2DA03D1B1F92A8E900F88C13 /* AppDelegate.swift */,
-				2DA03D1F1F92A8E900F88C13 /* Main.storyboard */,
 				2DA03D221F92A8E900F88C13 /* Assets.xcassets */,
-				2DA03D241F92A8E900F88C13 /* LaunchScreen.storyboard */,
 				2DA03D271F92A8E900F88C13 /* Info.plist */,
 				2D9017C01F92CCAA00A8C038 /* BridgeViewController.h */,
 				2D9017C11F92CCAA00A8C038 /* BridgeViewController.m */,
@@ -354,10 +354,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2DA03D261F92A8E900F88C13 /* LaunchScreen.storyboard in Resources */,
+				554826161F92EC5300B9147A /* Main.storyboard in Resources */,
+				554826181F92ED1500B9147A /* LaunchScreen.storyboard in Resources */,
 				2D6B7DCF1F92AA2D009DA338 /* GoogleService-Info.plist in Resources */,
 				2DA03D231F92A8E900F88C13 /* Assets.xcassets in Resources */,
-				2DA03D211F92A8E900F88C13 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -499,6 +499,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Streamline/Pods-Streamline-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
@@ -506,6 +507,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
@@ -580,25 +582,6 @@
 			targetProxy = 2DA03D381F92A8E900F88C13 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		2DA03D1F1F92A8E900F88C13 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2DA03D201F92A8E900F88C13 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		2DA03D241F92A8E900F88C13 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2DA03D251F92A8E900F88C13 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		2DA03D3E1F92A8E900F88C13 /* Debug */ = {
