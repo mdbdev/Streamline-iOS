@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0976FFE577761A1C7632379A /* Pods_Streamline.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 617D6BC49E2D68BD311C03E2 /* Pods_Streamline.framework */; };
 		2D36344C1F92D2ED000FB035 /* SpotifyAudioPlayback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D3634491F92D2C1000FB035 /* SpotifyAudioPlayback.framework */; };
 		2D36344D1F92D2ED000FB035 /* SpotifyAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D36344A1F92D2C2000FB035 /* SpotifyAuthentication.framework */; };
 		2D36344E1F92D2ED000FB035 /* SpotifyMetadata.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D36344B1F92D2C3000FB035 /* SpotifyMetadata.framework */; };
+		2D3F9A551F92E18E00A09DCB /* VCExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3F9A541F92E18E00A09DCB /* VCExtensions.swift */; };
 		2D6B7DCF1F92AA2D009DA338 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2D6B7DCE1F92AA2D009DA338 /* GoogleService-Info.plist */; };
 		2D6B7DD51F92ABCE009DA338 /* DB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6B7DD41F92ABCE009DA338 /* DB.swift */; };
 		2D6B7DD71F92AE31009DA338 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6B7DD61F92AE31009DA338 /* User.swift */; };
@@ -49,6 +51,7 @@
 		2D3634491F92D2C1000FB035 /* SpotifyAudioPlayback.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyAudioPlayback.framework; sourceTree = "<group>"; };
 		2D36344A1F92D2C2000FB035 /* SpotifyAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyAuthentication.framework; sourceTree = "<group>"; };
 		2D36344B1F92D2C3000FB035 /* SpotifyMetadata.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyMetadata.framework; sourceTree = "<group>"; };
+		2D3F9A541F92E18E00A09DCB /* VCExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCExtensions.swift; sourceTree = "<group>"; };
 		2D6B7DCE1F92AA2D009DA338 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		2D6B7DD41F92ABCE009DA338 /* DB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DB.swift; sourceTree = "<group>"; };
 		2D6B7DD61F92AE31009DA338 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -86,6 +89,7 @@
 				2D36344C1F92D2ED000FB035 /* SpotifyAudioPlayback.framework in Frameworks */,
 				2D36344D1F92D2ED000FB035 /* SpotifyAuthentication.framework in Frameworks */,
 				2D36344E1F92D2ED000FB035 /* SpotifyMetadata.framework in Frameworks */,
+				0976FFE577761A1C7632379A /* Pods_Streamline.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				2D6B7DD41F92ABCE009DA338 /* DB.swift */,
+				2D3F9A541F92E18E00A09DCB /* VCExtensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -532,6 +537,7 @@
 				2DA03D1C1F92A8E900F88C13 /* AppDelegate.swift in Sources */,
 				2D9017C21F92CCAA00A8C038 /* BridgeViewController.m in Sources */,
 				2D6B7DD51F92ABCE009DA338 /* DB.swift in Sources */,
+				2D3F9A551F92E18E00A09DCB /* VCExtensions.swift in Sources */,
 				2D6B7DD91F92AE71009DA338 /* Post.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -710,12 +716,13 @@
 					"$(PROJECT_DIR)/Streamline",
 				);
 				INFOPLIST_FILE = Streamline/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mdb.Streamline;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Streamline/Streamline-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -736,11 +743,12 @@
 					"$(PROJECT_DIR)/Streamline",
 				);
 				INFOPLIST_FILE = Streamline/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mdb.Streamline;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Streamline/Streamline-Bridging-Header.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
