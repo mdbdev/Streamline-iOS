@@ -12,6 +12,8 @@
 		2D36344D1F92D2ED000FB035 /* SpotifyAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D36344A1F92D2C2000FB035 /* SpotifyAuthentication.framework */; };
 		2D36344E1F92D2ED000FB035 /* SpotifyMetadata.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D36344B1F92D2C3000FB035 /* SpotifyMetadata.framework */; };
 		2D3F9A551F92E18E00A09DCB /* VCExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3F9A541F92E18E00A09DCB /* VCExtensions.swift */; };
+		2D3F9A571F92E2D100A09DCB /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3F9A561F92E2D100A09DCB /* FeedViewController.swift */; };
+		2D3F9A5C1F92E52300A09DCB /* PostCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3F9A5B1F92E52300A09DCB /* PostCollectionViewCell.swift */; };
 		2D6B7DCF1F92AA2D009DA338 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2D6B7DCE1F92AA2D009DA338 /* GoogleService-Info.plist */; };
 		2D6B7DD51F92ABCE009DA338 /* DB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6B7DD41F92ABCE009DA338 /* DB.swift */; };
 		2D6B7DD71F92AE31009DA338 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6B7DD61F92AE31009DA338 /* User.swift */; };
@@ -52,6 +54,8 @@
 		2D36344A1F92D2C2000FB035 /* SpotifyAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyAuthentication.framework; sourceTree = "<group>"; };
 		2D36344B1F92D2C3000FB035 /* SpotifyMetadata.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyMetadata.framework; sourceTree = "<group>"; };
 		2D3F9A541F92E18E00A09DCB /* VCExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCExtensions.swift; sourceTree = "<group>"; };
+		2D3F9A561F92E2D100A09DCB /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		2D3F9A5B1F92E52300A09DCB /* PostCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCollectionViewCell.swift; sourceTree = "<group>"; };
 		2D6B7DCE1F92AA2D009DA338 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		2D6B7DD41F92ABCE009DA338 /* DB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DB.swift; sourceTree = "<group>"; };
 		2D6B7DD61F92AE31009DA338 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -124,7 +128,7 @@
 		2D6B7DD11F92ABAA009DA338 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				2DA03D1D1F92A8E900F88C13 /* LoginViewController.swift */,
+				2D3F9A5B1F92E52300A09DCB /* PostCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -132,6 +136,8 @@
 		2D6B7DD21F92ABB0009DA338 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				2DA03D1D1F92A8E900F88C13 /* LoginViewController.swift */,
+				2D3F9A561F92E2D100A09DCB /* FeedViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -538,7 +544,9 @@
 				2D9017C21F92CCAA00A8C038 /* BridgeViewController.m in Sources */,
 				2D6B7DD51F92ABCE009DA338 /* DB.swift in Sources */,
 				2D3F9A551F92E18E00A09DCB /* VCExtensions.swift in Sources */,
+				2D3F9A571F92E2D100A09DCB /* FeedViewController.swift in Sources */,
 				2D6B7DD91F92AE71009DA338 /* Post.swift in Sources */,
+				2D3F9A5C1F92E52300A09DCB /* PostCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

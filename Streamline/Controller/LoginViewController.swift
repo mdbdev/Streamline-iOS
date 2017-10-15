@@ -81,6 +81,7 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
             self.session = firstTimeSession
             initializePlayer(authSession: session)
             self.loginButton.isHidden = true
+            self.performSegue(withIdentifier: "toFeed", sender: self)
             // self.loadingLabel.isHidden = false
             print(self.session.canonicalUsername)
             DB.createUser(username: self.session.canonicalUsername)
