@@ -26,6 +26,7 @@
 		2DA03D3C1F92A8E900F88C13 /* StreamlineUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA03D3B1F92A8E900F88C13 /* StreamlineUITests.swift */; };
 		554826161F92EC5300B9147A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 554826151F92EC5300B9147A /* Main.storyboard */; };
 		554826181F92ED1500B9147A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 554826171F92ED1500B9147A /* LaunchScreen.storyboard */; };
+		557A82901F95A86900A189AB /* SpotifyWeb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557A828F1F95A86900A189AB /* SpotifyWeb.swift */; };
 		9E0506D595C11CEBF4B7AF0B /* Pods_StreamlineTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB284140F1C8E9C54DFC8762 /* Pods_StreamlineTests.framework */; };
 		B269B4E280C9962B2F8D6148 /* Pods_StreamlineUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BBAE761855C48CADA2FEEBE /* Pods_StreamlineUITests.framework */; };
 /* End PBXBuildFile section */
@@ -76,6 +77,7 @@
 		2DA03D3D1F92A8E900F88C13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		554826151F92EC5300B9147A /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		554826171F92ED1500B9147A /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		557A828F1F95A86900A189AB /* SpotifyWeb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyWeb.swift; sourceTree = "<group>"; };
 		617D6BC49E2D68BD311C03E2 /* Pods_Streamline.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Streamline.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FC9F10E8984FB6D86F6A1B2 /* Pods-StreamlineTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StreamlineTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StreamlineTests/Pods-StreamlineTests.debug.xcconfig"; sourceTree = "<group>"; };
 		AB284140F1C8E9C54DFC8762 /* Pods_StreamlineTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StreamlineTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -147,6 +149,7 @@
 			children = (
 				2D6B7DD41F92ABCE009DA338 /* DB.swift */,
 				2D3F9A541F92E18E00A09DCB /* VCExtensions.swift */,
+				557A828F1F95A86900A189AB /* SpotifyWeb.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -543,6 +546,7 @@
 				2DA03D1E1F92A8E900F88C13 /* LoginViewController.swift in Sources */,
 				2D6B7DD71F92AE31009DA338 /* User.swift in Sources */,
 				2DA03D1C1F92A8E900F88C13 /* AppDelegate.swift in Sources */,
+				557A82901F95A86900A189AB /* SpotifyWeb.swift in Sources */,
 				2D9017C21F92CCAA00A8C038 /* BridgeViewController.m in Sources */,
 				2D6B7DD51F92ABCE009DA338 /* DB.swift in Sources */,
 				2D3F9A551F92E18E00A09DCB /* VCExtensions.swift in Sources */,

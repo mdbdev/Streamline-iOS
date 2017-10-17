@@ -85,17 +85,24 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
             initializePlayer(authSession: session)
             self.loginButton.isHidden = true
             createUser()
-            print(self.session.accessToken)
-            // self.loadingLabel.isHidden = false
-            DB.createUser(username: self.session.accessToken)
+            //Get the display name
+            SpotifyWeb.getUserDisplayName(accessToken: self.session.accessToken, withBlock: { username in
+                print(username)
+                if username == "null" {
+                    self.authenticatedUser.username = self.session.canonicalUsername
+                } else {
+                    self.authenticatedUser.username = username
+                }
+                DB.createUser(username: self.authenticatedUser.username)
+                self.authenticatedUser.getPID()
+            })
         }
-        
     }
     
     //Create the user and check if they are from facebook or native spotify user
     func createUser(){
         
-        print(self.session.canonicalUsername)
+        //print(self.session.canonicalUsername)
         authenticatedUser = User(uid: self.session.canonicalUsername)
     }
     
