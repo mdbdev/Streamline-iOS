@@ -13,6 +13,8 @@ import Firebase
 class FeedViewController: UIViewController {
     var postCollectionView: UICollectionView!
     var postButton: UIButton!
+    var logoutButton: UIButton!
+    var discoverLabel: UILabel!
     var posts: [Post] = []
     
     override func viewDidLoad() {
@@ -20,40 +22,58 @@ class FeedViewController: UIViewController {
         setupCollectionView()
         setupBackground()
         setupButton()
-        /*DB.getPosts { (postData) in
-            self.posts = postData
-            updatePosts()
-        }*/
-    }
-    
-    func updatePosts() {
-        
+        setupLabel()
     }
     
     // Setup Functions
+    func setupBackground() {
+        view.backgroundColor = UIColor.white
+    }
+    
     func setupCollectionView() {
-        postCollectionView = UICollectionView(frame: view.frame)
+        let layout = UICollectionViewFlowLayout()
+        // TODO: Change these to match the figma
+        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 0
+        postCollectionView = UICollectionView(frame: rRect(rx: 21, ry: 69, rw: 334, rh: 541), collectionViewLayout: layout)
         postCollectionView.register(PostCollectionViewCell.self, forCellWithReuseIdentifier: "postCell")
         postCollectionView.delegate = self
         postCollectionView.dataSource = self
+        postCollectionView.backgroundColor = UIColor.black
         view.addSubview(postCollectionView)
     }
     
-    func setupBackground() {
-    }
-    
     func setupButton() {
-        postButton = UIButton(frame: CGRect(x: view.frame.width * 0.8, y: view.frame.height * 0.05, width: 40, height: 40))
-        postButton.setTitle("Post", for: .normal)
+        postButton = UIButton(frame: rRect(rx: 328, ry: 26, rw: 28, rh: 27))
+        // TODO: Change this to an image that's in the Figma
+        postButton.setTitle("P", for: .normal)
         postButton.setTitleColor(UIColor.white, for: .normal)
         postButton.backgroundColor = UIColor.green
         postButton.addTarget(self, action: #selector(postButtonPressed), for: .touchUpInside)
         view.addSubview(postButton)
+        
+        logoutButton = UIButton(frame: rRect(rx: 15, ry: 26, rw: 74, rh: 22))
+        logoutButton.setTitle("Log Out", for: .normal)
+        logoutButton.setTitleColor(UIColor(hex: "737171"), for: .normal)
+        logoutButton.addTarget(self, action: #selector(logoutButtonPressed), for: .touchUpInside)
+        view.addSubview(logoutButton)
+    }
+    
+    func setupLabel() {
+        discoverLabel = UILabel(frame: rRect(rx: 94, ry: 20, rw: 187, rh: 44))
+        discoverLabel.textColor = UIColor(hex: "311b92")
+        discoverLabel.text = "DISCOVER"
+        discoverLabel.font = UIFont(name: "Helvetica", size: 30)
+        view.addSubview(discoverLabel)
     }
     
     // Selectors
     func postButtonPressed() {
         print("post button pressed")
+    }
+    
+    func logoutButtonPressed() {
+        print("logout button pressed")
     }
 }
 
@@ -63,12 +83,13 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 0
+        return posts.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        var cell = collectionView.dequeueReusableCell(withReuseIdentifier: "postCell", for: indexPath)
+        var cell = collectionView.dequeueReusableCell(withReuseIdentifier: "postCell", for: indexPath) as! PostCollectionViewCell
         cell.awakeFromNib()
+        cell.post = posts[indexPath.row]
         return cell
     }
     

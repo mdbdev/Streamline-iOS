@@ -9,5 +9,8 @@
 import UIKit
 
 class PostCollectionViewCell: UICollectionViewCell {
-    
+    var post: Post!
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
 }
