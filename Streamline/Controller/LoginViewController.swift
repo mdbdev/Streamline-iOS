@@ -9,18 +9,32 @@
 import UIKit
 
 class LoginViewController: UIViewController {
+    
+    //UI Elements
     var logoImage: UIImageView!
     var connectButton: UIButton!
-
+    
+    //Spotify Elements
+    var auth = SPTAuth.defaultInstance()!
+    var session: SPTSession!
+    var user: User!
+    var loginUrl: URL?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Add observer to listen for spotify login success
+        NotificationCenter.default.addObserver(self, selector: #selector(toFeedView), name: NSNotification.Name(rawValue: "loginSuccessfull"), object: nil)
+        
+        
         setupBackground()
         setupLogo()
+        setupAuth()
         setupButton()
     }
     
-    // Setup Functions
+    /* UI Setup Functions */
+    
     func setupBackground() {
         view.backgroundColor = UIColor(hex: "673ab7")
     }
@@ -40,11 +54,55 @@ class LoginViewController: UIViewController {
         view.addSubview(connectButton)
     }
     
+    
+    /* Spotify Connect Functions */
+    
+    func setupAuth() {
+        let redirectURL = SpotifyAPI.redirectURL // redirectURL
+        let clientID = SpotifyAPI.clientID // clientID
+        auth.redirectURL     = URL(string: "\(redirectURL)")
+        auth.clientID        = clientID
+        auth.requestedScopes = [SPTAuthStreamingScope, SPTAuthPlaylistReadPrivateScope, SPTAuthPlaylistModifyPublicScope, SPTAuthPlaylistModifyPrivateScope]
+        loginUrl = auth.spotifyWebAuthenticationURL()
+    }
+    
     // Selectors
     func connectButtonPressed() {
         // This is where we will try connecting with Spotify
-        
-        self.performSegue(withIdentifier: "toFeed", sender: self)
-        // TODO: Send the current user -> feed
+        if UIApplication.shared.openURL(loginUrl!) {
+            if auth.canHandle(auth.redirectURL) {
+                // handle errors
+            }
+        }
     }
+    
+    func toFeedView(){
+        let userDefaults = UserDefaults.standard
+        if let sessionObj:AnyObject = userDefaults.object(forKey: "SpotifySession") as AnyObject? {
+            let sessionDataObj = sessionObj as! Data
+            let firstTimeSession = NSKeyedUnarchiver.unarchiveObject(with: sessionDataObj) as! SPTSession
+            self.session = firstTimeSession
+            createUser()
+            self.performSegue(withIdentifier: "toFeed", sender: self)
+            // TODO: Send the current user -> feed
+        }
+    }
+    
+    
+    //Spotify Functions
+    
+    func createUser(){
+        user = User(uid: self.session.canonicalUsername)
+        
+        //Determine if the proper name to display
+        SpotifyWeb.getUserDisplayName(accessToken: self.session.accessToken, withBlock: { username in
+            if username == "null" {
+                self.user.username = self.session.canonicalUsername
+            } else {
+                self.user.username = username
+            }
+            DB.createUser(username: self.user.username)
+        })
+    }
+    
 }

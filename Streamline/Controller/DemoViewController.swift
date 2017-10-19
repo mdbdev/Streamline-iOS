@@ -67,7 +67,6 @@ class DemoViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, S
             self.player!.delegate = self
             try! player?.start(withClientId: auth.clientID)
             self.player!.login(withAccessToken: authSession.accessToken)
-            
         }
         
     }
