@@ -25,9 +25,10 @@
 		2D9017C21F92CCAA00A8C038 /* BridgeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9017C11F92CCAA00A8C038 /* BridgeViewController.m */; };
 		2DA03D1C1F92A8E900F88C13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA03D1B1F92A8E900F88C13 /* AppDelegate.swift */; };
 		2DA03D1E1F92A8E900F88C13 /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA03D1D1F92A8E900F88C13 /* DemoViewController.swift */; };
-		2DA03D231F92A8E900F88C13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2DA03D221F92A8E900F88C13 /* Assets.xcassets */; };
 		2DA03D311F92A8E900F88C13 /* StreamlineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA03D301F92A8E900F88C13 /* StreamlineTests.swift */; };
 		2DA03D3C1F92A8E900F88C13 /* StreamlineUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA03D3B1F92A8E900F88C13 /* StreamlineUITests.swift */; };
+		2DDF1E251F99AA100089489C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2DDF1E241F99AA100089489C /* Images.xcassets */; };
+		2DDF1E271F99AB850089489C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DDF1E261F99AB850089489C /* Constants.swift */; };
 		557A82901F95A86900A189AB /* SpotifyWeb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557A828F1F95A86900A189AB /* SpotifyWeb.swift */; };
 		55B0519A1F9950A5007B282E /* SpotifyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B051991F9950A5007B282E /* SpotifyAPI.swift */; };
 		9E0506D595C11CEBF4B7AF0B /* Pods_StreamlineTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB284140F1C8E9C54DFC8762 /* Pods_StreamlineTests.framework */; };
@@ -74,7 +75,6 @@
 		2DA03D181F92A8E900F88C13 /* Streamline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Streamline.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DA03D1B1F92A8E900F88C13 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2DA03D1D1F92A8E900F88C13 /* DemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
-		2DA03D221F92A8E900F88C13 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2DA03D271F92A8E900F88C13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2DA03D2C1F92A8E900F88C13 /* StreamlineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StreamlineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DA03D301F92A8E900F88C13 /* StreamlineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamlineTests.swift; sourceTree = "<group>"; };
@@ -82,6 +82,8 @@
 		2DA03D371F92A8E900F88C13 /* StreamlineUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StreamlineUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DA03D3B1F92A8E900F88C13 /* StreamlineUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamlineUITests.swift; sourceTree = "<group>"; };
 		2DA03D3D1F92A8E900F88C13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2DDF1E241F99AA100089489C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		2DDF1E261F99AB850089489C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		557A828F1F95A86900A189AB /* SpotifyWeb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyWeb.swift; sourceTree = "<group>"; };
 		55B051991F9950A5007B282E /* SpotifyAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyAPI.swift; sourceTree = "<group>"; };
 		617D6BC49E2D68BD311C03E2 /* Pods_Streamline.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Streamline.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -159,6 +161,7 @@
 				2D3F9A541F92E18E00A09DCB /* VCExtensions.swift */,
 				557A828F1F95A86900A189AB /* SpotifyWeb.swift */,
 				2D29EE881F98690B0053FDF0 /* UIColorHexExtension.swift */,
+				2DDF1E261F99AB850089489C /* Constants.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -197,13 +200,13 @@
 				2D6B7DD01F92AB9F009DA338 /* Model */,
 				2D6B7DCE1F92AA2D009DA338 /* GoogleService-Info.plist */,
 				2DA03D1B1F92A8E900F88C13 /* AppDelegate.swift */,
-				2DA03D221F92A8E900F88C13 /* Assets.xcassets */,
 				2DA03D271F92A8E900F88C13 /* Info.plist */,
 				2D9017C01F92CCAA00A8C038 /* BridgeViewController.h */,
 				2D9017C11F92CCAA00A8C038 /* BridgeViewController.m */,
 				2D9017BF1F92CCA900A8C038 /* Streamline-Bridging-Header.h */,
 				2D29EE8A1F9869C70053FDF0 /* Main.storyboard */,
 				2D29EE8C1F9869D60053FDF0 /* LaunchScreen.storyboard */,
+				2DDF1E241F99AA100089489C /* Images.xcassets */,
 			);
 			path = Streamline;
 			sourceTree = "<group>";
@@ -367,9 +370,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D29EE8B1F9869C70053FDF0 /* Main.storyboard in Resources */,
+				2DDF1E251F99AA100089489C /* Images.xcassets in Resources */,
 				2D29EE8D1F9869D60053FDF0 /* LaunchScreen.storyboard in Resources */,
 				2D6B7DCF1F92AA2D009DA338 /* GoogleService-Info.plist in Resources */,
-				2DA03D231F92A8E900F88C13 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -563,6 +566,7 @@
 				2D3F9A551F92E18E00A09DCB /* VCExtensions.swift in Sources */,
 				2D3F9A571F92E2D100A09DCB /* FeedViewController.swift in Sources */,
 				2D6B7DD91F92AE71009DA338 /* Post.swift in Sources */,
+				2DDF1E271F99AB850089489C /* Constants.swift in Sources */,
 				2D3F9A5C1F92E52300A09DCB /* PostCollectionViewCell.swift in Sources */,
 				2D8BA5421F984D5400D8DBE2 /* LoginViewController.swift in Sources */,
 			);
