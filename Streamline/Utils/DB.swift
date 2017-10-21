@@ -77,7 +77,7 @@ class DB {
         let key = ref.childByAutoId().key
         post.pid = key
         ref = ref.child(key)
-        let dict: [String: Any] = ["uid": post.username,
+        let dict: [String: Any] = ["uid": post.uid,
                                    "imageUrl": post.imageUrl,
                                    "timePosted": post.timePosted.timeIntervalSince1970,
                                    "songTitle": post.songTitle,

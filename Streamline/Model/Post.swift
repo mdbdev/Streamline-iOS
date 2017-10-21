@@ -22,7 +22,7 @@ class Post {
                      songTitle: String,
                      artist: String,
                      imageUrl: String) {
-        self.uid = username
+        self.uid = uid
         self.timePosted = timePosted
         self.trackId = trackId
         self.songTitle = songTitle
@@ -38,7 +38,7 @@ class Post {
         let songTitle = postDict["songTitle"] as! String
         let artist = postDict["artist"] as! String
         let trackId = postDict["trackId"] as! String
-        self.init(username: username, timePosted: Date(), trackId: trackId, songTitle: trackId, artist: artist, imageUrl: imageUrl)
+        self.init(uid: username, timePosted: Date(), trackId: trackId, songTitle: trackId, artist: artist, imageUrl: imageUrl)
         self.pid = pid
     }
     

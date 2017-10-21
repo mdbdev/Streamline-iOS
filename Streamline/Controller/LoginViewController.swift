@@ -32,10 +32,7 @@ class LoginViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(toFeedView), name: NSNotification.Name(rawValue: "loginSuccessfull"), object: nil)
         
         
-        setupBackground()
-        setupLogo()
-        setupAuth()
-        setupButton()
+        setupUI()
     }
     
     /* UI Setup Functions */
