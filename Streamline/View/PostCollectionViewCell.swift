@@ -23,11 +23,20 @@ class PostCollectionViewCell: UICollectionViewCell {
     }
     
     func updateData() {
+        songTitleLabel.text = post.songTitle
+        artistLabel.text = post.artist
+        postUserLabel.text = post.uid
+        // update image
     }
     
     // Setup Functions
     func setupLabels() {
-        
+        songTitleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        contentView.addSubview(songTitleLabel)
+        artistLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        contentView.addSubview(artistLabel)
+        postUserLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        contentView.addSubview(postUserLabel)
     }
     
     func setupAlbumImage() {

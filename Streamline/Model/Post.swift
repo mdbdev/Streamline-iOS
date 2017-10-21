@@ -22,7 +22,7 @@ class Post {
                      songTitle: String,
                      artist: String,
                      imageUrl: String) {
-        self.uid = username
+        self.uid = uid
         self.timePosted = timePosted
         self.trackId = trackId
         self.songTitle = songTitle
@@ -31,14 +31,14 @@ class Post {
     }
     
     convenience init(pid: String, postDict: [String: Any]) {
-        let username = postDict["uid"] as! String
+        let uid = postDict["uid"] as! String
         let imageUrl = postDict["imageUrl"] as! String
 //        // TODO: This will crash
 //        let timePosted = postDict["timePosted"] as! Date
         let songTitle = postDict["songTitle"] as! String
         let artist = postDict["artist"] as! String
         let trackId = postDict["trackId"] as! String
-        self.init(username: username, timePosted: Date(), trackId: trackId, songTitle: trackId, artist: artist, imageUrl: imageUrl)
+        self.init(uid: uid, timePosted: Date(), trackId: trackId, songTitle: trackId, artist: artist, imageUrl: imageUrl)
         self.pid = pid
     }
     
