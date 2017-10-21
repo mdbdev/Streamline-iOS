@@ -22,6 +22,10 @@ class LoginViewController: UIViewController {
     var loginUrl: URL?
     
     override func viewDidLoad() {
+        // Create sample post
+//        let p = Post(uid: "Ajay", timePosted: Date(), trackId: "4ZAerT2NicBmzZ4VkpmWEn", songTitle: "Free Fall", artist: "Illenium", imageUrl: "")
+//        let u = User(uid: "hello")
+//        DB.createPost(post: p, user: u)
         super.viewDidLoad()
         
         //Add observer to listen for spotify login success

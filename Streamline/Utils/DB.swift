@@ -71,4 +71,19 @@ class DB {
             }
         })
     }
+    
+    static func createPost(post: Post, user: User) {
+        var ref = Database.database().reference().child("posts")
+        let key = ref.childByAutoId().key
+        post.pid = key
+        ref = ref.child(key)
+        let dict: [String: Any] = ["uid": post.username,
+                                   "imageUrl": post.imageUrl,
+                                   "timePosted": post.timePosted.timeIntervalSince1970,
+                                   "songTitle": post.songTitle,
+                                   "artist": post.artist,
+                                   "trackId": post.trackId]
+        // Need to set the pid value of Post
+        ref.setValue(dict)
+    }
 }
