@@ -8,10 +8,18 @@
 
 
 class Post {
+    var username: String!
+    var timePosted: Date!
+    var trackId: String!
+    var songTitle: String!
+    var artist: String!
+    var imageUrl: String!
     
-    init() {
-        
+    init(pid: String, postDict: [String: Any]) {
+        print(postDict)
     }
     
-    
+    func getImage(withBlock: @escaping (UIImage) -> ()) {
+        // Do some type of asynch call
+    }
 }

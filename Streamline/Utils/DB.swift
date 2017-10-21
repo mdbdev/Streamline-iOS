@@ -53,6 +53,22 @@ class DB {
             }
         }
     }
-    // create post with post class file and user
-    // Probably pass in post to with block?
+
+    // Synchronous first time post call (we want feed view to be populated immediately)
+    static func getPosts(withBlock: @escaping ([Post]) -> ()) {
+        let ref = Database.database().reference().child("posts")
+        var posts: [Post] = []
+        ref.observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            if let value = value {
+                for (key, val) in value {
+                    let key = key as! String
+                    let val = val as! [String: Any]
+                    let post = Post(pid: key, postDict: val)
+                    posts.append(post)
+                }
+                withBlock(posts)
+            }
+        })
+    }
 }
