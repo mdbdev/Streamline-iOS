@@ -12,6 +12,7 @@ class LoginViewController: UIViewController {
     
     //UI Elements
     var logoImage: UIImageView!
+    var logoText: UILabel!
     var connectButton: UIButton!
     
     //Spotify Elements
@@ -36,21 +37,29 @@ class LoginViewController: UIViewController {
     /* UI Setup Functions */
     
     func setupBackground() {
-        view.backgroundColor = UIColor(hex: "673ab7")
+        view.backgroundColor = Constants.darkPurple
     }
     
     func setupLogo() {
-        logoImage = UIImageView(frame: rRect(rx: 0, ry: 216, rw: 375, rh: 79))
+        logoImage = UIImageView(frame: rRect(rx: 20, ry: 216, rw: 358, rh: 79))
         logoImage.contentMode = .scaleAspectFit
-        logoImage.image = UIImage(named: "Logo")
+        logoImage.image = UIImage(named: "LogoBackground")
         view.addSubview(logoImage)
+        
+        logoText = UILabel(frame: rRect(rx: 30, ry: 230, rw: 328, rh: 33))
+        logoText.text = "STREAMLINE"
+        logoText.textColor = Constants.darkPurple
+        logoText.font = UIFont(name: "Helvetica", size: 45)
+        view.addSubview(logoText)
     }
     
     func setupButton() {
         connectButton = UIButton(frame: rRect(rx: 75, ry: 324, rw: 239, rh: 45))
         connectButton.addTarget(self, action: #selector(connectButtonPressed), for: .touchUpInside)
         connectButton.setTitle("CONNECT WITH SPOTIFY", for: .normal)
+        connectButton.setTitleColor(Constants.darkPurple, for: .normal)
         connectButton.layer.cornerRadius = 15
+        connectButton.backgroundColor = UIColor.white
         view.addSubview(connectButton)
     }
     

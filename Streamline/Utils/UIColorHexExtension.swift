@@ -2,7 +2,7 @@
 //  UIColorHexExtension.swift
 //  Streamline
 //
-//  From github.com/yannickl
+//  From https://crunchybagel.com/working-with-hex-colors-in-swift-3/
 
 import Foundation
 import UIKit
