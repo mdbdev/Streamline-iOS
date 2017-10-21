@@ -71,7 +71,7 @@ class LoginViewController: UIViewController {
         let clientID = SpotifyAPI.clientID // clientID
         auth.redirectURL     = URL(string: "\(redirectURL)")
         auth.clientID        = clientID
-        auth.requestedScopes = [SPTAuthStreamingScope, SPTAuthPlaylistReadPrivateScope, SPTAuthPlaylistModifyPublicScope, SPTAuthPlaylistModifyPrivateScope]
+        auth.requestedScopes = [SPTAuthStreamingScope, SPTAuthPlaylistReadPrivateScope, SPTAuthPlaylistModifyPublicScope, SPTAuthPlaylistModifyPrivateScope, SPTAuthUserReadPrivateScope]
         loginUrl = auth.spotifyWebAuthenticationURL()
     }
     
@@ -105,12 +105,9 @@ class LoginViewController: UIViewController {
         
         //Determine if the proper name to display
         SpotifyWeb.getUserDisplayName(accessToken: self.session.accessToken, withBlock: { username in
-            if username == "null" {
-                self.user.username = self.session.canonicalUsername
-            } else {
-                self.user.username = username
-            }
-            DB.createUser(username: self.user.username)
+            self.user.username = username
+            self.user.getPID()
+            DB.createUser(uid: self.session.canonicalUsername, username: self.user.username)
         })
     }
     

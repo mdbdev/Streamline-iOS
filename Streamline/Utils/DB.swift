@@ -12,13 +12,13 @@ import Firebase
 class DB {
     // Probably add withBlock for asynch
     // Should probably pass in User type into withBlcok
-    static func createUser(username: String) {
+    static func createUser(uid: String, username: String) {
         let reference = Database.database().reference()
-        checkUserExists(username: username) { (userExists) in
+        checkUserExists(uid: uid) { (userExists) in
             if userExists == false {
                 //This is a new user so create the user and assign them a pID of ""
-                let userData = ["pid": ""]
-                reference.child("users").child(username).setValue(userData)
+                let userData = ["pid": "", "username" : username]
+                reference.child("users").child(uid).setValue(userData)
             } else {
                 //This is an old user so the pid is not changed
                 print("Logged in User has used app before and exists in database with username \(username)")
@@ -27,14 +27,14 @@ class DB {
     }
     
     //If the user exists return true or false so the pid doesnt get overwritten on login
-    static func checkUserExists(username: String, withBlock: @escaping (Bool) -> ()){
+    static func checkUserExists(uid: String, withBlock: @escaping (Bool) -> ()){
         var userExists = false
         let reference = Database.database().reference().child("users")
         reference.observeSingleEvent(of: .value) { (snapshot, error) in
             if error != nil {
                 print(error)
             } else {
-                if snapshot.hasChild(username) {
+                if snapshot.hasChild(uid) {
                     userExists = true
                 }
             }
@@ -43,8 +43,8 @@ class DB {
     }
     
     //Get the users pid -- method called from the USER model class
-    static func retrievePID(username: String, withBlock: @escaping (String) -> ()) {
-        let reference = Database.database().reference().child("users").child(username).child("pid")
+    static func retrievePID(uid: String, withBlock: @escaping (String) -> ()) {
+        let reference = Database.database().reference().child("users").child(uid).child("pid")
         reference.observeSingleEvent(of: .value) { (snapshot, error) in
             if error != nil {
                 print(error)

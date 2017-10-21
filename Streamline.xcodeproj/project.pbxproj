@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		0976FFE577761A1C7632379A /* Pods_Streamline.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 617D6BC49E2D68BD311C03E2 /* Pods_Streamline.framework */; };
 		2D29EE891F98690B0053FDF0 /* UIColorHexExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D29EE881F98690B0053FDF0 /* UIColorHexExtension.swift */; };
-		2D29EE8B1F9869C70053FDF0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D29EE8A1F9869C70053FDF0 /* Main.storyboard */; };
-		2D29EE8D1F9869D60053FDF0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D29EE8C1F9869D60053FDF0 /* LaunchScreen.storyboard */; };
 		2D36344C1F92D2ED000FB035 /* SpotifyAudioPlayback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D3634491F92D2C1000FB035 /* SpotifyAudioPlayback.framework */; };
 		2D36344D1F92D2ED000FB035 /* SpotifyAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D36344A1F92D2C2000FB035 /* SpotifyAuthentication.framework */; };
 		2D36344E1F92D2ED000FB035 /* SpotifyMetadata.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D36344B1F92D2C3000FB035 /* SpotifyMetadata.framework */; };
@@ -56,8 +54,6 @@
 		0950AD0098A9712A23326A9D /* Pods-StreamlineTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StreamlineTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StreamlineTests/Pods-StreamlineTests.release.xcconfig"; sourceTree = "<group>"; };
 		2BBAE761855C48CADA2FEEBE /* Pods_StreamlineUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StreamlineUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D29EE881F98690B0053FDF0 /* UIColorHexExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorHexExtension.swift; sourceTree = "<group>"; };
-		2D29EE8A1F9869C70053FDF0 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		2D29EE8C1F9869D60053FDF0 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2D3634491F92D2C1000FB035 /* SpotifyAudioPlayback.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyAudioPlayback.framework; sourceTree = "<group>"; };
 		2D36344A1F92D2C2000FB035 /* SpotifyAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyAuthentication.framework; sourceTree = "<group>"; };
 		2D36344B1F92D2C3000FB035 /* SpotifyMetadata.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyMetadata.framework; sourceTree = "<group>"; };
@@ -204,8 +200,6 @@
 				2D9017C01F92CCAA00A8C038 /* BridgeViewController.h */,
 				2D9017C11F92CCAA00A8C038 /* BridgeViewController.m */,
 				2D9017BF1F92CCA900A8C038 /* Streamline-Bridging-Header.h */,
-				2D29EE8A1F9869C70053FDF0 /* Main.storyboard */,
-				2D29EE8C1F9869D60053FDF0 /* LaunchScreen.storyboard */,
 				2DDF1E241F99AA100089489C /* Images.xcassets */,
 			);
 			path = Streamline;
@@ -369,9 +363,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2D29EE8B1F9869C70053FDF0 /* Main.storyboard in Resources */,
 				2DDF1E251F99AA100089489C /* Images.xcassets in Resources */,
-				2D29EE8D1F9869D60053FDF0 /* LaunchScreen.storyboard in Resources */,
 				2D6B7DCF1F92AA2D009DA338 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
