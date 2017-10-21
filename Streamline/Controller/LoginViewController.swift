@@ -106,7 +106,6 @@ class LoginViewController: UIViewController {
         //Determine if the proper name to display
         SpotifyWeb.getUserDisplayName(accessToken: self.session.accessToken, withBlock: { username in
             self.user.username = username
-            self.user.getPID()
             DB.createUser(uid: self.session.canonicalUsername, username: self.user.username)
         })
     }
