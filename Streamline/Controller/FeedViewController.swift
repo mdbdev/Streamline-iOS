@@ -23,6 +23,15 @@ class FeedViewController: UIViewController {
         setupBackground()
         setupButton()
         setupLabel()
+        
+        DB.getPosts { (posts) in
+            self.posts = posts
+            self.populateFeed()
+        }
+    }
+    
+    func populateFeed() {
+        postCollectionView.reloadData()
     }
     
     // Setup Functions
@@ -39,7 +48,7 @@ class FeedViewController: UIViewController {
         postCollectionView.register(PostCollectionViewCell.self, forCellWithReuseIdentifier: "postCell")
         postCollectionView.delegate = self
         postCollectionView.dataSource = self
-        postCollectionView.backgroundColor = UIColor.black
+        postCollectionView.backgroundColor = UIColor.white
         view.addSubview(postCollectionView)
     }
     
