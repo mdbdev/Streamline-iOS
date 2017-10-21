@@ -43,8 +43,8 @@ class DB {
     }
     
     //Get the users pid -- method called from the USER model class
-    static func retrievePID(username: String, withBlock: @escaping (String) -> ()) {
-        let reference = Database.database().reference().child("users").child(username).child("pid")
+    static func retrievePID(uid: String, withBlock: @escaping (String) -> ()) {
+        let reference = Database.database().reference().child("users").child(uid).child("pid")
         reference.observeSingleEvent(of: .value) { (snapshot, error) in
             if error != nil {
                 print(error)
