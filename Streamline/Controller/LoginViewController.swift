@@ -110,7 +110,8 @@ class LoginViewController: UIViewController {
             } else {
                 self.user.username = username
             }
-            DB.createUser(username: self.user.username)
+            DB.createUser(uid: self.session.canonicalUsername, username: self.user.username)
+            self.user.getPID()
         })
     }
     
