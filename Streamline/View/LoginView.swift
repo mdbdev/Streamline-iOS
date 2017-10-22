@@ -23,19 +23,30 @@ extension LoginViewController {
     
     func setupButton() {
         connectButton = UIButton(frame:
-            rRect(rx: 75, ry: 324, rw: 239, rh: 45))
+            rRect(rx: 75, ry: 315, rw: 239, rh: 45))
         connectButton.addTarget(self, action: #selector(connectButtonPressed), for: .touchUpInside)
         connectButton.layer.cornerRadius = 15
         connectButton.backgroundColor = UIColor.white
         view.addSubview(connectButton)
+        // Drop Shadow
+        connectButton.layer.shadowRadius = 3
+        connectButton.layer.shadowOffset = CGSize(width: 0, height: 4)
+        connectButton.layer.shadowColor = UIColor.black.cgColor
+        connectButton.layer.shadowOpacity = 0.35
         
         let connectLabel = UILabel(frame:
             rRect(rx: 120, ry: 328, rw: 185, rh: 20))
         connectLabel.textColor = Constants.darkPurple
         connectLabel.text = "CONNECT WITH SPOTIFY"
+        connectLabel.textAlignment = .center
         connectLabel.font = Constants.averageSans
         connectLabel.font = connectLabel.font.withSize(15)
         view.addSubview(connectLabel)
+        
+        let spotifyLogo = UIImageView(frame:
+            rRect(rx: 95, ry: 325, rw: 26, rh: 26))
+        spotifyLogo.image = #imageLiteral(resourceName: "spotify-logo")
+        view.addSubview(spotifyLogo)
     }
 
     
