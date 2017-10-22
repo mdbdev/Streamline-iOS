@@ -40,11 +40,11 @@ extension LoginViewController {
         connectLabel.text = "CONNECT WITH SPOTIFY"
         connectLabel.textAlignment = .center
         connectLabel.font = Constants.averageSans
-        connectLabel.font = connectLabel.font.withSize(15)
+        connectLabel.font = UIFont.systemFont(ofSize: 14, weight: 1)
         view.addSubview(connectLabel)
         
         let spotifyLogo = UIImageView(frame:
-            rRect(rx: 95, ry: 325, rw: 26, rh: 26))
+            rRect(rx: 90, ry: 325, rw: 26, rh: 26))
         spotifyLogo.image = #imageLiteral(resourceName: "spotify-logo")
         view.addSubview(spotifyLogo)
     }
