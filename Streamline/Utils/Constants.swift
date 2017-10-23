@@ -9,4 +9,5 @@
 
 struct Constants {
     static let darkPurple = UIColor(hex: "673AB7")
+    static let averageSans = UIFont(name: "AverageSans-Regular", size: 15)
 }
