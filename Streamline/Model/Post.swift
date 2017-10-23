@@ -6,6 +6,7 @@
 //  Copyright © 2017 Stephen Jayakar. All rights reserved.
 //
 
+// TODO: Use Haneke to get the post image!
 
 class Post {
     var pid: String!

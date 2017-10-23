@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "41A0A4F98E7915B96E1F872580D3BE62"
-               BuildableName = "Pods_Streamline.framework"
-               BlueprintName = "Pods-Streamline"
+               BlueprintIdentifier = "AE4759774042D8E013517E82C6F7A058"
+               BuildableName = "Haneke.framework"
+               BlueprintName = "HanekeSwift"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -47,9 +47,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "41A0A4F98E7915B96E1F872580D3BE62"
-            BuildableName = "Pods_Streamline.framework"
-            BlueprintName = "Pods-Streamline"
+            BlueprintIdentifier = "AE4759774042D8E013517E82C6F7A058"
+            BuildableName = "Haneke.framework"
+            BlueprintName = "HanekeSwift"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
