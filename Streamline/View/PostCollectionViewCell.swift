@@ -27,7 +27,9 @@ class PostCollectionViewCell: UICollectionViewCell {
         songTitleLabel.text = post.songTitle
         artistLabel.text = post.artist
         postUserLabel.text = post.uid
-        // update image
+        post.getImage { (img) in
+            self.albumImage.image = img
+        }
     }
     
     // Setup Functions

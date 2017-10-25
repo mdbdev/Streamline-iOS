@@ -6,7 +6,7 @@
 //  Copyright © 2017 Stephen Jayakar. All rights reserved.
 //
 
-// TODO: Use Haneke to get the post image!
+import Haneke
 
 class Post {
     var pid: String!
@@ -47,7 +47,13 @@ class Post {
         self.pid = pid
     }
     
-    func getImage(withBlock: @escaping (UIImage) -> ()) {
-        // Do some type of asynch call
+    func getImage(withBlock: @escaping (UIImage) -> ()) {        
+        let url = URL(string: imageUrl)
+        let cache = Shared.imageCache
+        if let url = url {
+            cache.fetch(URL: url).onSuccess({ img in
+                withBlock(img)
+            })
+        }
     }
 }
