@@ -32,6 +32,7 @@ class LoginViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(toFeedView), name: NSNotification.Name(rawValue: "loginSuccessfull"), object: nil)
         
         setupUI()
+        setupAuth()
     }
     
     
@@ -47,6 +48,7 @@ class LoginViewController: UIViewController {
     }
     
     // Selectors
+    // TODO: This crashes if you don't authenticate successfully 
     func connectButtonPressed() {
         // This is where we will try connecting with Spotify
         if UIApplication.shared.openURL(loginUrl!) {
@@ -64,7 +66,6 @@ class LoginViewController: UIViewController {
             self.session = firstTimeSession
             createUser()
             self.performSegue(withIdentifier: "toFeed", sender: self)
-            // TODO: Send the current user -> feed
         }
     }
     

@@ -19,7 +19,7 @@ class User {
         self.uid = uid
     }
     
-    //Get the users current pid from the database
+    // Get the users current pid from the database
     func getPID(){
         DB.retrievePID(uid: self.uid) { (pid) in
             self.pid = pid

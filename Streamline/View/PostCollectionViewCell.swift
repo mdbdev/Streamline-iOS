@@ -32,13 +32,15 @@ class PostCollectionViewCell: UICollectionViewCell {
     
     // Setup Functions
     func setupView() {
+        contentView.layer.borderWidth = 1
+        contentView.layer.borderColor = UIColor.black.cgColor
         // Drawing the shadow around the cell
         // TODO: investigate runtime of this, as well as shadowPath
         // Shadow is not working correctly :(
-        contentView.layer.shadowColor = UIColor.black.cgColor
-        contentView.layer.shadowOpacity = 1
-        contentView.layer.shadowOffset = CGSize.zero
-        contentView.layer.shadowRadius = 10
+//        contentView.layer.shadowColor = UIColor.black.cgColor
+//        contentView.layer.shadowOpacity = 1
+//        contentView.layer.shadowOffset = CGSize.zero
+//        contentView.layer.shadowRadius = 10
     }
     func setupLabels() {
         songTitleLabel = UILabel(frame: CGRect(x: contentView.frame.height + 10,
@@ -48,10 +50,25 @@ class PostCollectionViewCell: UICollectionViewCell {
         songTitleLabel.adjustsFontSizeToFitWidth = true
         songTitleLabel.textColor = UIColor.black
         songTitleLabel.text = "Song"
+        songTitleLabel.font = Constants.averageSans?.withSize(14)
         contentView.addSubview(songTitleLabel)
-        artistLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        artistLabel = UILabel(frame: CGRect(x: contentView.frame.height + 10,
+                                            y: 16 + 14,
+                                            width: contentView.frame.width - (contentView.frame.height + 10),
+                                            height: 28))
+        artistLabel.adjustsFontSizeToFitWidth = true
+        artistLabel.textColor = UIColor.black
+        artistLabel.text = "Artist"
+        artistLabel.font = Constants.averageSans
         contentView.addSubview(artistLabel)
-        postUserLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        postUserLabel = UILabel(frame: CGRect(x: contentView.frame.height + 24,
+                                              y: 16 + 14 + 20,
+                                              width: contentView.frame.width - (contentView.frame.height + 24),
+                                              height: 16))
+        postUserLabel.textColor = UIColor(hex: "77747a")
+        postUserLabel.text = "User"
+        postUserLabel.adjustsFontSizeToFitWidth = true
+        postUserLabel.font = Constants.averageSans?.withSize(12)
         contentView.addSubview(postUserLabel)
     }
     
