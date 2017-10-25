@@ -86,7 +86,7 @@ class FeedViewController: UIViewController {
     }
 }
 
-extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -95,11 +95,18 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
         return posts.count
     }
     
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var cell = collectionView.dequeueReusableCell(withReuseIdentifier: "postCell", for: indexPath) as! PostCollectionViewCell
         cell.awakeFromNib()
         cell.post = posts[indexPath.row]
+        cell.updateData()
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        // Maybe make the height relative too?
+        return CGSize(width: (334 / 375) * view.frame.width, height: 69)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

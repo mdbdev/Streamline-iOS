@@ -18,16 +18,41 @@ class PostCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        setupView()
         setupLabels()
         setupAlbumImage()
     }
     
     func updateData() {
+        songTitleLabel.text = post.songTitle
+        artistLabel.text = post.artist
+        postUserLabel.text = post.uid
+        // update image
     }
     
     // Setup Functions
+    func setupView() {
+        // Drawing the shadow around the cell
+        // TODO: investigate runtime of this, as well as shadowPath
+        // Shadow is not working correctly :(
+        contentView.layer.shadowColor = UIColor.black.cgColor
+        contentView.layer.shadowOpacity = 1
+        contentView.layer.shadowOffset = CGSize.zero
+        contentView.layer.shadowRadius = 10
+    }
     func setupLabels() {
-        
+        songTitleLabel = UILabel(frame: CGRect(x: contentView.frame.height + 10,
+                                               y: 16,
+                                               width: contentView.frame.width - (contentView.frame.height + 10),
+                                               height: 28))
+        songTitleLabel.adjustsFontSizeToFitWidth = true
+        songTitleLabel.textColor = UIColor.black
+        songTitleLabel.text = "Song"
+        contentView.addSubview(songTitleLabel)
+        artistLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        contentView.addSubview(artistLabel)
+        postUserLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        contentView.addSubview(postUserLabel)
     }
     
     func setupAlbumImage() {
