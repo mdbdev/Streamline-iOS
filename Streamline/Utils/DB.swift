@@ -78,6 +78,7 @@ class DB {
         post.pid = key
         ref = ref.child(key)
         let dict: [String: Any] = ["uid": post.uid,
+                                   "username": post.username,
                                    "imageUrl": post.imageUrl,
                                    "timePosted": post.timePosted.timeIntervalSince1970,
                                    "songTitle": post.songTitle,

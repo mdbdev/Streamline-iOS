@@ -16,6 +16,10 @@ class FeedViewController: UIViewController {
     var logoutButton: UIButton!
     var discoverLabel: UILabel!
     var posts: [Post] = []
+    // Spotify
+    var player: SPTAudioStreamingController!
+    var auth: SPTAuth!
+    var session: SPTSession!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +27,8 @@ class FeedViewController: UIViewController {
         setupBackground()
         setupButton()
         setupLabel()
+        
+        setupSpotify()
         
         DB.getPosts { (posts) in
             self.posts = posts
@@ -35,6 +41,16 @@ class FeedViewController: UIViewController {
     }
     
     // Setup Functions
+    func setupSpotify() {
+        // Initialize player
+        if self.player == nil {
+            self.player = SPTAudioStreamingController.sharedInstance()
+            self.player!.playbackDelegate = self
+            self.player!.delegate = self
+            try! player?.start(withClientId: self.auth.clientID)
+            self.player!.login(withAccessToken: self.session.accessToken)
+        }
+    }
     func setupBackground() {
         view.backgroundColor = UIColor.white
     }
@@ -110,6 +126,17 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("Mmooo")
+        // Play the song somewhere haha
+        // Get the post pointer
+        let post = posts[indexPath.row]
+        self.player.playSpotifyURI("spotify:track:" + post.trackId, startingWith: 0, startingWithPosition: 0, callback: { (error) in
+            if (error != nil) {
+                print("Playing " + post.songTitle)
+            }
+        })
     }
+}
+
+extension FeedViewController: SPTAudioStreamingDelegate, SPTAudioStreamingPlaybackDelegate {
+    
 }

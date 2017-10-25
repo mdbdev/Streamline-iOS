@@ -26,7 +26,7 @@ class PostCollectionViewCell: UICollectionViewCell {
     func updateData() {
         songTitleLabel.text = post.songTitle
         artistLabel.text = post.artist
-        postUserLabel.text = post.uid
+        postUserLabel.text = post.username
         post.getImage { (img) in
             self.albumImage.image = img
         }
