@@ -9,7 +9,7 @@
 
 import UIKit
 
-extension CreatePostViewController {
+extension NewPostViewController {
     func setupUI() {
         setupSearch()
         setupButtons()

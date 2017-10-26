@@ -104,7 +104,7 @@ class FeedViewController: UIViewController {
     
     // Selectors
     func postButtonPressed() {
-        self.performSegue(withIdentifier: "toCreatePost", sender: self)
+        self.performSegue(withIdentifier: "toNewPost", sender: self)
     }
     
     func logoutButtonPressed() {

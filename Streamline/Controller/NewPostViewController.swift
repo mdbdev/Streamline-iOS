@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreatePostViewController: UIViewController {
+class NewPostViewController: UIViewController {
     var searchBar: UISearchBar!
     var cancelButton: UIButton!
     var shareButton: UIButton!
@@ -34,7 +34,6 @@ class CreatePostViewController: UIViewController {
                 if let r = result as? SPTListPage {
                     let track = r.items[0] as! SPTPartialTrack
                     let u = DB.currentUser!
-                    print(track.identifier)
                     let artist = (track.artists[0] as! SPTPartialArtist).name
                     // TODO: Only gets one artist
                     // TODO: Doesn't get image
@@ -44,7 +43,7 @@ class CreatePostViewController: UIViewController {
                                     trackId: track.identifier,
                                     songTitle: track.name,
                                     artist: artist!,
-                                    imageUrl: "")
+                                    imageUrl: track.album.largestCover.imageURL.absoluteString)
                     DB.createPost(post: post, user: DB.currentUser)
                     self.dismiss(animated: true, completion: nil)
                 }
