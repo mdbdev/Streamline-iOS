@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0976FFE577761A1C7632379A /* Pods_Streamline.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 617D6BC49E2D68BD311C03E2 /* Pods_Streamline.framework */; };
 		2D125EB31FA12FB80031A21A /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D125EB21FA12FB80031A21A /* LoginView.swift */; };
+		2D125EB51FA143A40031A21A /* CreatePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D125EB41FA143A40031A21A /* CreatePostViewController.swift */; };
+		2D125EB71FA144A30031A21A /* CreatePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D125EB61FA144A30031A21A /* CreatePostView.swift */; };
 		2D29EE891F98690B0053FDF0 /* UIColorHexExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D29EE881F98690B0053FDF0 /* UIColorHexExtension.swift */; };
 		2D36344C1F92D2ED000FB035 /* SpotifyAudioPlayback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D3634491F92D2C1000FB035 /* SpotifyAudioPlayback.framework */; };
 		2D36344D1F92D2ED000FB035 /* SpotifyAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D36344A1F92D2C2000FB035 /* SpotifyAuthentication.framework */; };
@@ -57,6 +59,8 @@
 		0950AD0098A9712A23326A9D /* Pods-StreamlineTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StreamlineTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StreamlineTests/Pods-StreamlineTests.release.xcconfig"; sourceTree = "<group>"; };
 		2BBAE761855C48CADA2FEEBE /* Pods_StreamlineUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StreamlineUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D125EB21FA12FB80031A21A /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		2D125EB41FA143A40031A21A /* CreatePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewController.swift; sourceTree = "<group>"; };
+		2D125EB61FA144A30031A21A /* CreatePostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostView.swift; sourceTree = "<group>"; };
 		2D29EE881F98690B0053FDF0 /* UIColorHexExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorHexExtension.swift; sourceTree = "<group>"; };
 		2D3634491F92D2C1000FB035 /* SpotifyAudioPlayback.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyAudioPlayback.framework; sourceTree = "<group>"; };
 		2D36344A1F92D2C2000FB035 /* SpotifyAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyAuthentication.framework; sourceTree = "<group>"; };
@@ -142,6 +146,7 @@
 			children = (
 				2D125EB21FA12FB80031A21A /* LoginView.swift */,
 				2D3F9A5B1F92E52300A09DCB /* PostCollectionViewCell.swift */,
+				2D125EB61FA144A30031A21A /* CreatePostView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -151,6 +156,7 @@
 			children = (
 				2D8BA5411F984D5400D8DBE2 /* LoginViewController.swift */,
 				2D3F9A561F92E2D100A09DCB /* FeedViewController.swift */,
+				2D125EB41FA143A40031A21A /* CreatePostViewController.swift */,
 				2DA03D1D1F92A8E900F88C13 /* DemoViewController.swift */,
 			);
 			path = Controller;
@@ -562,6 +568,7 @@
 			files = (
 				2DA03D1E1F92A8E900F88C13 /* DemoViewController.swift in Sources */,
 				2D6B7DD71F92AE31009DA338 /* User.swift in Sources */,
+				2D125EB51FA143A40031A21A /* CreatePostViewController.swift in Sources */,
 				2DA03D1C1F92A8E900F88C13 /* AppDelegate.swift in Sources */,
 				2D125EB31FA12FB80031A21A /* LoginView.swift in Sources */,
 				2D29EE891F98690B0053FDF0 /* UIColorHexExtension.swift in Sources */,
@@ -573,6 +580,7 @@
 				2D3F9A571F92E2D100A09DCB /* FeedViewController.swift in Sources */,
 				2D6B7DD91F92AE71009DA338 /* Post.swift in Sources */,
 				2DDF1E271F99AB850089489C /* Constants.swift in Sources */,
+				2D125EB71FA144A30031A21A /* CreatePostView.swift in Sources */,
 				2D3F9A5C1F92E52300A09DCB /* PostCollectionViewCell.swift in Sources */,
 				2D8BA5421F984D5400D8DBE2 /* LoginViewController.swift in Sources */,
 			);

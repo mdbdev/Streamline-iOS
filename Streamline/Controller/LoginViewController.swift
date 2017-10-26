@@ -8,6 +8,7 @@
 
 import UIKit
 
+// TODO: Logging in, then out, then in again crashes!
 class LoginViewController: UIViewController {
     
     //UI Elements
@@ -63,6 +64,7 @@ class LoginViewController: UIViewController {
             let sessionDataObj = sessionObj as! Data
             let firstTimeSession = NSKeyedUnarchiver.unarchiveObject(with: sessionDataObj) as! SPTSession
             self.session = firstTimeSession
+            SpotifyAPI.session = self.session
             createUser()
             self.performSegue(withIdentifier: "toFeed", sender: self)
         }
@@ -79,7 +81,7 @@ class LoginViewController: UIViewController {
     
     func createUser(){
         user = User(uid: self.session.canonicalUsername)
-        
+        DB.currentUser = user
         //Determine if the proper name to display
         SpotifyWeb.getUserDisplayName(accessToken: self.session.accessToken, withBlock: { username in
             self.user.username = username

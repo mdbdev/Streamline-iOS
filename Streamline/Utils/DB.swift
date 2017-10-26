@@ -10,6 +10,7 @@
 import Firebase
 
 class DB {
+    static var currentUser: User!
     // Probably add withBlock for asynch
     // Should probably pass in User type into withBlcok
     static func createUser(uid: String, username: String) {

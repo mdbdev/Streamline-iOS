@@ -80,4 +80,12 @@ class PostCollectionViewCell: UICollectionViewCell {
         albumImage.image = UIImage(named: "albumPlaceholder")
         contentView.addSubview(albumImage)
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        postUserLabel.isHidden = true
+        artistLabel.isHidden = true
+        songTitleLabel.isHidden = true
+        albumImage.isHidden = true
+    }
 }

@@ -20,9 +20,19 @@ class FeedViewController: UIViewController {
     var player: SPTAudioStreamingController!
     var auth: SPTAuth!
     var session: SPTSession!
+    // Firebase
+    var refHandle: DatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // This is a really bad way of doing this :)
+        self.refHandle = Database.database().reference()
+        self.refHandle.observe(DataEventType.value, with: { (snapshot) in
+            DB.getPosts(withBlock: { (posts) in
+                self.posts = posts
+                self.postCollectionView.reloadData()
+            })
+        })
         setupCollectionView()
         setupBackground()
         setupButton()
@@ -94,11 +104,11 @@ class FeedViewController: UIViewController {
     
     // Selectors
     func postButtonPressed() {
-        print("post button pressed")
+        self.performSegue(withIdentifier: "toCreatePost", sender: self)
     }
     
     func logoutButtonPressed() {
-        print("logout button pressed")
+        self.dismiss(animated: true, completion: nil)
     }
 }
 
