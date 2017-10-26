@@ -108,6 +108,7 @@ class FeedViewController: UIViewController {
     }
     
     func logoutButtonPressed() {
+
         self.dismiss(animated: true, completion: nil)
     }
 }

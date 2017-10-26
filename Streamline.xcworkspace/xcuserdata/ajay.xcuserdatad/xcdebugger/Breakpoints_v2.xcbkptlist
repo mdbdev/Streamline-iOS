@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Streamline/View/PostCollectionViewCell.swift"
-            timestampString = "530684773.632842"
+            timestampString = "530754006.064464"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "27"
@@ -32,6 +32,22 @@
             startingLineNumber = "35"
             endingLineNumber = "35"
             landmarkName = "shareButtonPressed()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Streamline/Controller/NewPostViewController.swift"
+            timestampString = "530754006.064625"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
+            landmarkName = "searchSpotify()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

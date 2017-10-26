@@ -22,6 +22,7 @@
 		2D6B7DD51F92ABCE009DA338 /* DB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6B7DD41F92ABCE009DA338 /* DB.swift */; };
 		2D6B7DD71F92AE31009DA338 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6B7DD61F92AE31009DA338 /* User.swift */; };
 		2D6B7DD91F92AE71009DA338 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6B7DD81F92AE71009DA338 /* Post.swift */; };
+		2D763B141FA29D6600546166 /* ResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D763B131FA29D6600546166 /* ResultTableViewCell.swift */; };
 		2D8BA5421F984D5400D8DBE2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8BA5411F984D5400D8DBE2 /* LoginViewController.swift */; };
 		2D9017C21F92CCAA00A8C038 /* BridgeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9017C11F92CCAA00A8C038 /* BridgeViewController.m */; };
 		2DA03D1C1F92A8E900F88C13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA03D1B1F92A8E900F88C13 /* AppDelegate.swift */; };
@@ -72,6 +73,7 @@
 		2D6B7DD41F92ABCE009DA338 /* DB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DB.swift; sourceTree = "<group>"; };
 		2D6B7DD61F92AE31009DA338 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		2D6B7DD81F92AE71009DA338 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		2D763B131FA29D6600546166 /* ResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultTableViewCell.swift; sourceTree = "<group>"; };
 		2D8BA5411F984D5400D8DBE2 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2D9017BF1F92CCA900A8C038 /* Streamline-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Streamline-Bridging-Header.h"; sourceTree = "<group>"; };
 		2D9017C01F92CCAA00A8C038 /* BridgeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgeViewController.h; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				2D125EB21FA12FB80031A21A /* LoginView.swift */,
 				2D3F9A5B1F92E52300A09DCB /* PostCollectionViewCell.swift */,
 				2D125EB61FA144A30031A21A /* NewPostView.swift */,
+				2D763B131FA29D6600546166 /* ResultTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -582,6 +585,7 @@
 				2DDF1E271F99AB850089489C /* Constants.swift in Sources */,
 				2D125EB71FA144A30031A21A /* NewPostView.swift in Sources */,
 				2D3F9A5C1F92E52300A09DCB /* PostCollectionViewCell.swift in Sources */,
+				2D763B141FA29D6600546166 /* ResultTableViewCell.swift in Sources */,
 				2D8BA5421F984D5400D8DBE2 /* LoginViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
