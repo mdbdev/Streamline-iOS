@@ -31,9 +31,12 @@ class LoginViewController: UIViewController {
         
         //Add observer to listen for spotify login success
         NotificationCenter.default.addObserver(self, selector: #selector(toFeedView), name: NSNotification.Name(rawValue: "loginSuccessfull"), object: nil)
-        
-        setupUI()
-        setupAuth()
+        if(UserDefaults.standard.value(forKey: "SpotifySession") != nil) {
+            toFeedView()
+        } else {
+            setupUI()
+            setupAuth()
+        }
     }
     
     
@@ -66,7 +69,6 @@ class LoginViewController: UIViewController {
             self.session = firstTimeSession
             SpotifyAPI.session = self.session
             createUser()
-            self.performSegue(withIdentifier: "toFeed", sender: self)
         }
     }
     
@@ -86,6 +88,7 @@ class LoginViewController: UIViewController {
         SpotifyWeb.getUserDisplayName(accessToken: self.session.accessToken, withBlock: { username in
             self.user.username = username
             DB.createUser(uid: self.session.canonicalUsername, username: self.user.username)
+            self.performSegue(withIdentifier: "toFeed", sender: self)
         })
     }
     
