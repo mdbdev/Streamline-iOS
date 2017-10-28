@@ -113,9 +113,9 @@ class FeedViewController: UIViewController {
     // Selectors
     func postButtonPressed() {
         //self.performSegue(withIdentifier: "toNewPost", sender: self)
-        let inviteView = TestView(frame: CGRect(x: view.frame.width * 0.1 , y: view.frame.height * 0.15, width: view.frame.width * 0.8, height: view.frame.height * 0.3), large: true)
-        inviteView.delegate = self
-        modalView = AKModalView(view: inviteView)
+        let searchView = SearchView(frame: CGRect(x: view.frame.width * 0.1 , y: view.frame.height * 0.15, width: view.frame.width * 0.8, height: view.frame.height * 0.3), large: true)
+        searchView.delegate = self
+        modalView = AKModalView(view: searchView)
         modalView.automaticallyCenter = true
         view.addSubview(modalView)
         modalView.show()

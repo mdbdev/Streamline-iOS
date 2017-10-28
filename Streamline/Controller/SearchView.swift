@@ -17,7 +17,7 @@ protocol InviteViewDelegate {
 }
 
 
-class TestView: UIView {
+class SearchView: UIView {
     var delegate: InviteViewDelegate? = nil
     var view: UIView!
     var searchBar: UISearchBar!
