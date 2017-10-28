@@ -15,11 +15,9 @@ class FeedViewController: UIViewController {
     var postButton: UIButton!
     var logoutButton: UIButton!
     var discoverLabel: UILabel!
-    var posts: [Post] = []
-    // Spotify
-    var player: SPTAudioStreamingController!
-    var auth: SPTAuth!
-    var session: SPTSession!
+    var nowPlayingButton: UIButton!
+    var nowPlayingLabel: UILabel!
+    
     // Firebase
     var refHandle: DatabaseReference!
     
@@ -28,22 +26,19 @@ class FeedViewController: UIViewController {
         // This is a really bad way of doing this :)
         self.refHandle = Database.database().reference()
         self.refHandle.observe(DataEventType.value, with: { (snapshot) in
-            DB.getPosts(withBlock: { (posts) in
-                self.posts = posts
-                self.postCollectionView.reloadData()
-            })
+            DB.getPosts()
+            self.postCollectionView.reloadData()
         })
         setupCollectionView()
         setupBackground()
         setupButton()
         setupLabel()
+        setupNowPlaying()
         
         setupSpotify()
         
-        DB.getPosts { (posts) in
-            self.posts = posts
-            self.populateFeed()
-        }
+        DB.getPosts()
+        populateFeed()
     }
     
     func populateFeed() {
@@ -51,14 +46,26 @@ class FeedViewController: UIViewController {
     }
     
     // Setup Functions
+    func setupNowPlaying() {
+        nowPlayingButton = UIButton(frame: rRect(rx: 0, ry: 609, rw: 375, rh: 60))
+        nowPlayingButton.backgroundColor = UIColor.black
+        nowPlayingButton.addTarget(self, action: #selector(nowPlayingButtonPressed), for: .touchUpInside)
+        view.addSubview(nowPlayingButton)
+        
+        nowPlayingLabel = UILabel(frame: rRect(rx: 0, ry: 609, rw: 375, rh: 60))
+        nowPlayingLabel.textColor = UIColor.white
+        nowPlayingLabel.adjustsFontSizeToFitWidth = true
+        nowPlayingLabel.font = Constants.averageSans
+        view.addSubview(nowPlayingLabel)
+    }
     func setupSpotify() {
         // Initialize player
-        if self.player == nil {
-            self.player = SPTAudioStreamingController.sharedInstance()
-            self.player!.playbackDelegate = self
-            self.player!.delegate = self
-            try! player?.start(withClientId: self.auth.clientID)
-            self.player!.login(withAccessToken: self.session.accessToken)
+        if SpotifyAPI.player == nil {
+            SpotifyAPI.player = SPTAudioStreamingController.sharedInstance()
+            SpotifyAPI.player!.playbackDelegate = self
+            SpotifyAPI.player!.delegate = self
+            try! SpotifyAPI.player?.start(withClientId: SpotifyAPI.auth.clientID)
+            SpotifyAPI.player!.login(withAccessToken: SpotifyAPI.session.accessToken)
         }
     }
     func setupBackground() {
@@ -108,8 +115,11 @@ class FeedViewController: UIViewController {
     }
     
     func logoutButtonPressed() {
-
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    func nowPlayingButtonPressed() {
+        self.performSegue(withIdentifier: "toNowPlaying", sender: self)
     }
 }
 
@@ -119,14 +129,14 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return posts.count
+        return DB.posts.count
     }
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var cell = collectionView.dequeueReusableCell(withReuseIdentifier: "postCell", for: indexPath) as! PostCollectionViewCell
         cell.awakeFromNib()
-        cell.post = posts[indexPath.row]
+        cell.post = DB.posts[indexPath.row]
         cell.updateData()
         return cell
     }
@@ -139,11 +149,12 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // Play the song somewhere haha
         // Get the post pointer
-        let post = posts[indexPath.row]
-        self.player.playSpotifyURI("spotify:track:" + post.trackId, startingWith: 0, startingWithPosition: 0, callback: { (error) in
+        let post = DB.posts[indexPath.row]
+        SpotifyAPI.player.playSpotifyURI("spotify:track:" + post.trackId, startingWith: 0, startingWithPosition: 0, callback: { (error) in
             if (error != nil) {
-                print("Playing " + post.songTitle)
+                print(error!.localizedDescription)
             }
+            self.nowPlayingLabel.text = "Now playing " + post.songTitle
         })
     }
 }

@@ -48,6 +48,7 @@ class LoginViewController: UIViewController {
         auth.clientID        = clientID
         auth.requestedScopes = [SPTAuthStreamingScope, SPTAuthPlaylistReadPrivateScope, SPTAuthPlaylistModifyPublicScope, SPTAuthPlaylistModifyPrivateScope, SPTAuthUserReadPrivateScope]
         loginUrl = auth.spotifyWebAuthenticationURL()
+        SpotifyAPI.auth = auth
     }
 
     
@@ -80,8 +81,6 @@ class LoginViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Assume segue destination is feed
         let dest = segue.destination as! FeedViewController
-        dest.session = self.session
-        dest.auth = self.auth
     }
     
     //Spotify Functions
