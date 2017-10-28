@@ -9,6 +9,8 @@
 import UIKit
 
 class NowPlayingViewController: UIViewController {
+    var backButton: UIButton!
+    var albumImage: UIImageView!
     
     override func viewDidLoad() {
         setupUI()
