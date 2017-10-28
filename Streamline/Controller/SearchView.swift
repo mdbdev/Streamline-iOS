@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-protocol InviteViewDelegate {
+protocol SearchViewDelegate {
     func dismissView()
     //func inviteCollaborators(ids: [String])
     //func inviteObserver(withId: String)
@@ -18,7 +18,7 @@ protocol InviteViewDelegate {
 
 
 class SearchView: UIView {
-    var delegate: InviteViewDelegate? = nil
+    var delegate: SearchViewDelegate? = nil
     var view: UIView!
     var searchBar: UISearchBar!
     var cancelButton: UIButton!
@@ -120,7 +120,7 @@ class SearchView: UIView {
     
 }
 
-extension TestView: UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+extension SearchView: UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     // UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedResult = indexPath.row

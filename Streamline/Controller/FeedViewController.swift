@@ -130,7 +130,7 @@ class FeedViewController: UIViewController {
     }
 }
 
-extension FeedViewController: InviteViewDelegate {
+extension FeedViewController: SearchViewDelegate {
     func dismissView() {
         modalView.dismiss()
     }
