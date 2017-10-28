@@ -42,6 +42,8 @@ extension LoginViewController {
         connectLabel.font = Constants.averageSans
         connectLabel.font = UIFont.systemFont(ofSize: 14, weight: 1)
         view.addSubview(connectLabel)
+        connectLabel.minimumScaleFactor = 10/UIFont.labelFontSize
+        connectLabel.adjustsFontSizeToFitWidth = true
         
         let spotifyLogo = UIImageView(frame:
             rRect(rx: 90, ry: 325, rw: 26, rh: 26))
