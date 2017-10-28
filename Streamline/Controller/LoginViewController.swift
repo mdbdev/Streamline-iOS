@@ -31,12 +31,11 @@ class LoginViewController: UIViewController {
         
         //Add observer to listen for spotify login success
         NotificationCenter.default.addObserver(self, selector: #selector(toFeedView), name: NSNotification.Name(rawValue: "loginSuccessfull"), object: nil)
-        if(UserDefaults.standard.value(forKey: "SpotifySession") != nil) {
-            toFeedView()
-        } else {
-            setupUI()
-            setupAuth()
-        }
+//        if(UserDefaults.standard.value(forKey: "SpotifySession") != nil) {
+//            toFeedView()
+//        } else {
+        setupUI()
+        setupAuth()
     }
     
     
