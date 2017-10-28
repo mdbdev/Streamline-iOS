@@ -12,6 +12,7 @@ target 'Streamline' do
   pod 'Firebase/Storage'
   pod 'Alamofire', '~> 4.5'
   pod 'HanekeSwift', :git => ‘https://github.com/Haneke/HanekeSwift.git', :branch => ‘feature/swift-3’
+  pod 'ARNTransitionAnimator'
   
   target 'StreamlineTests' do
     inherit! :search_paths
