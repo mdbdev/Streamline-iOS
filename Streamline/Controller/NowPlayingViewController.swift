@@ -15,4 +15,18 @@ class NowPlayingViewController: UIViewController {
     override func viewDidLoad() {
         setupUI()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        print("updating image...")
+        if let index = State.nowPlayingIndex {
+            DB.posts[index].getImage { (img) in
+                self.albumImage.image = img
+            }
+        }
+    }
+    
+    // Selectors
+    func backButtonPressed() {
+        self.dismiss(animated: true, completion: nil)
+    }
 }

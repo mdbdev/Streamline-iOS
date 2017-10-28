@@ -18,12 +18,16 @@ class FeedViewController: UIViewController {
     var discoverLabel: UILabel!
     var nowPlayingButton: UIButton!
     var nowPlayingLabel: UILabel!
+    var nowPlayingVC: NowPlayingViewController!
     
     // Firebase
     var refHandle: DatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Preloading the player view
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        nowPlayingVC = storyboard.instantiateViewController(withIdentifier: "NowPlayingViewController") as! NowPlayingViewController
         // This is a really bad way of doing this :)
         self.refHandle = Database.database().reference()
         self.refHandle.observe(DataEventType.value, with: { (snapshot) in
@@ -42,6 +46,7 @@ class FeedViewController: UIViewController {
         populateFeed()
     }
     
+    // TODO: Change the now playing index to match the new data!
     func populateFeed() {
         postCollectionView.reloadData()
     }
@@ -126,7 +131,9 @@ class FeedViewController: UIViewController {
     }
     
     func nowPlayingButtonPressed() {
-        self.performSegue(withIdentifier: "toNowPlaying", sender: self)
+        if let index = State.nowPlayingIndex {
+            self.present(nowPlayingVC, animated: true, completion: nil)
+        }
     }
 }
 
@@ -169,6 +176,7 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 print(error!.localizedDescription)
             }
             self.nowPlayingLabel.text = "Now playing " + post.songTitle
+            State.nowPlayingIndex = indexPath.row
         })
     }
 }

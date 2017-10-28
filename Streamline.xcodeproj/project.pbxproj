@@ -18,6 +18,7 @@
 		2D3F9A551F92E18E00A09DCB /* VCExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3F9A541F92E18E00A09DCB /* VCExtensions.swift */; };
 		2D3F9A571F92E2D100A09DCB /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3F9A561F92E2D100A09DCB /* FeedViewController.swift */; };
 		2D3F9A5C1F92E52300A09DCB /* PostCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3F9A5B1F92E52300A09DCB /* PostCollectionViewCell.swift */; };
+		2D552A601FA54B0500C2093C /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D552A5F1FA54B0500C2093C /* State.swift */; };
 		2D6780161FA5014F00F30971 /* NowPlayingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6780151FA5014F00F30971 /* NowPlayingViewController.swift */; };
 		2D6780181FA501E700F30971 /* NowPlayingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6780171FA501E700F30971 /* NowPlayingView.swift */; };
 		2D6B7DCF1F92AA2D009DA338 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2D6B7DCE1F92AA2D009DA338 /* GoogleService-Info.plist */; };
@@ -72,6 +73,7 @@
 		2D3F9A541F92E18E00A09DCB /* VCExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCExtensions.swift; sourceTree = "<group>"; };
 		2D3F9A561F92E2D100A09DCB /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		2D3F9A5B1F92E52300A09DCB /* PostCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCollectionViewCell.swift; sourceTree = "<group>"; };
+		2D552A5F1FA54B0500C2093C /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		2D6780151FA5014F00F30971 /* NowPlayingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingViewController.swift; sourceTree = "<group>"; };
 		2D6780171FA501E700F30971 /* NowPlayingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingView.swift; sourceTree = "<group>"; };
 		2D6B7DCE1F92AA2D009DA338 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -179,6 +181,7 @@
 			children = (
 				2D6B7DD41F92ABCE009DA338 /* DB.swift */,
 				55B051991F9950A5007B282E /* SpotifyAPI.swift */,
+				2D552A5F1FA54B0500C2093C /* State.swift */,
 				2D3F9A541F92E18E00A09DCB /* VCExtensions.swift */,
 				557A828F1F95A86900A189AB /* SpotifyWeb.swift */,
 				2D29EE881F98690B0053FDF0 /* UIColorHexExtension.swift */,
@@ -585,6 +588,7 @@
 				55CF10201FA51765009E37A0 /* SearchView.swift in Sources */,
 				2D6B7DD71F92AE31009DA338 /* User.swift in Sources */,
 				2D125EB51FA143A40031A21A /* NewPostViewController.swift in Sources */,
+				2D552A601FA54B0500C2093C /* State.swift in Sources */,
 				2DA03D1C1F92A8E900F88C13 /* AppDelegate.swift in Sources */,
 				2D125EB31FA12FB80031A21A /* LoginView.swift in Sources */,
 				2D29EE891F98690B0053FDF0 /* UIColorHexExtension.swift in Sources */,
