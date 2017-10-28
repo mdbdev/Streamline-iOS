@@ -13,6 +13,7 @@ target 'Streamline' do
   pod 'Alamofire', '~> 4.5'
   pod 'HanekeSwift', :git => ‘https://github.com/Haneke/HanekeSwift.git', :branch => ‘feature/swift-3’
   pod 'ARNTransitionAnimator'
+  pod ‘Spring’, :git => ’https://github.com/MengTo/Spring.git', :branch => ‘swift3’
   
   target 'StreamlineTests' do
     inherit! :search_paths

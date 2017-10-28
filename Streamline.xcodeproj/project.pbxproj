@@ -34,6 +34,8 @@
 		2DDF1E271F99AB850089489C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DDF1E261F99AB850089489C /* Constants.swift */; };
 		557A82901F95A86900A189AB /* SpotifyWeb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557A828F1F95A86900A189AB /* SpotifyWeb.swift */; };
 		55B0519A1F9950A5007B282E /* SpotifyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B051991F9950A5007B282E /* SpotifyAPI.swift */; };
+		55CF101E1FA5130D009E37A0 /* AKModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CF101D1FA5130D009E37A0 /* AKModalView.swift */; };
+		55CF10201FA51765009E37A0 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CF101F1FA51765009E37A0 /* TestView.swift */; };
 		55E4A3A41F9BCD0B00E4E5E8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55E4A3A31F9BCD0B00E4E5E8 /* LaunchScreen.storyboard */; };
 		55E4A3A61F9BCD4800E4E5E8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55E4A3A51F9BCD4800E4E5E8 /* Main.storyboard */; };
 		9E0506D595C11CEBF4B7AF0B /* Pods_StreamlineTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB284140F1C8E9C54DFC8762 /* Pods_StreamlineTests.framework */; };
@@ -94,6 +96,8 @@
 		2DDF1E261F99AB850089489C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		557A828F1F95A86900A189AB /* SpotifyWeb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyWeb.swift; sourceTree = "<group>"; };
 		55B051991F9950A5007B282E /* SpotifyAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyAPI.swift; sourceTree = "<group>"; };
+		55CF101D1FA5130D009E37A0 /* AKModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AKModalView.swift; sourceTree = "<group>"; };
+		55CF101F1FA51765009E37A0 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		55E4A3A31F9BCD0B00E4E5E8 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		55E4A3A51F9BCD4800E4E5E8 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		617D6BC49E2D68BD311C03E2 /* Pods_Streamline.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Streamline.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -148,11 +152,12 @@
 		2D6B7DD11F92ABAA009DA338 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				55CF101D1FA5130D009E37A0 /* AKModalView.swift */,
 				2D125EB21FA12FB80031A21A /* LoginView.swift */,
 				2D3F9A5B1F92E52300A09DCB /* PostCollectionViewCell.swift */,
-				2D125EB61FA144A30031A21A /* NewPostView.swift */,
 				2D763B131FA29D6600546166 /* ResultTableViewCell.swift */,
 				2D6780171FA501E700F30971 /* NowPlayingView.swift */,
+				2D125EB61FA144A30031A21A /* NewPostView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -162,8 +167,9 @@
 			children = (
 				2D8BA5411F984D5400D8DBE2 /* LoginViewController.swift */,
 				2D3F9A561F92E2D100A09DCB /* FeedViewController.swift */,
-				2D125EB41FA143A40031A21A /* NewPostViewController.swift */,
+				55CF101F1FA51765009E37A0 /* TestView.swift */,
 				2D6780151FA5014F00F30971 /* NowPlayingViewController.swift */,
+				2D125EB41FA143A40031A21A /* NewPostViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -534,6 +540,7 @@
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/HanekeSwift/Haneke.framework",
+				"${BUILT_PRODUCTS_DIR}/Spring/Spring.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -544,6 +551,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Haneke.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Spring.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -574,6 +582,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55CF10201FA51765009E37A0 /* TestView.swift in Sources */,
 				2D6B7DD71F92AE31009DA338 /* User.swift in Sources */,
 				2D125EB51FA143A40031A21A /* NewPostViewController.swift in Sources */,
 				2DA03D1C1F92A8E900F88C13 /* AppDelegate.swift in Sources */,
@@ -582,6 +591,7 @@
 				557A82901F95A86900A189AB /* SpotifyWeb.swift in Sources */,
 				2D9017C21F92CCAA00A8C038 /* BridgeViewController.m in Sources */,
 				2D6B7DD51F92ABCE009DA338 /* DB.swift in Sources */,
+				55CF101E1FA5130D009E37A0 /* AKModalView.swift in Sources */,
 				55B0519A1F9950A5007B282E /* SpotifyAPI.swift in Sources */,
 				2D3F9A551F92E18E00A09DCB /* VCExtensions.swift in Sources */,
 				2D3F9A571F92E2D100A09DCB /* FeedViewController.swift in Sources */,

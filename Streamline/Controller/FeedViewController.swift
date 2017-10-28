@@ -11,6 +11,7 @@ import UIKit
 import Firebase
 
 class FeedViewController: UIViewController {
+    var modalView: AKModalView!
     var postCollectionView: UICollectionView!
     var postButton: UIButton!
     var logoutButton: UIButton!
@@ -111,7 +112,13 @@ class FeedViewController: UIViewController {
     
     // Selectors
     func postButtonPressed() {
-        self.performSegue(withIdentifier: "toNewPost", sender: self)
+        //self.performSegue(withIdentifier: "toNewPost", sender: self)
+        let inviteView = TestView(frame: CGRect(x: view.frame.width * 0.1 , y: view.frame.height * 0.15, width: view.frame.width * 0.8, height: view.frame.height * 0.3), large: true)
+        inviteView.delegate = self
+        modalView = AKModalView(view: inviteView)
+        modalView.automaticallyCenter = true
+        view.addSubview(modalView)
+        modalView.show()
     }
     
     func logoutButtonPressed() {
@@ -123,6 +130,13 @@ class FeedViewController: UIViewController {
     }
 }
 
+extension FeedViewController: InviteViewDelegate {
+    func dismissView() {
+        modalView.dismiss()
+    }
+    
+    
+}
 extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1

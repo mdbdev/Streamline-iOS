@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3949049AACF1A7F00EFD3105C2C4F08D"
+               BlueprintIdentifier = "F43DF562F06F434C9D88E1177A208913"
                BuildableName = "Pods_Streamline.framework"
                BlueprintName = "Pods-Streamline"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -47,7 +47,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3949049AACF1A7F00EFD3105C2C4F08D"
+            BlueprintIdentifier = "F43DF562F06F434C9D88E1177A208913"
             BuildableName = "Pods_Streamline.framework"
             BlueprintName = "Pods-Streamline"
             ReferencedContainer = "container:Pods.xcodeproj">
