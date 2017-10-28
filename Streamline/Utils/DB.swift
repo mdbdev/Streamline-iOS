@@ -13,7 +13,7 @@ class DB {
     static var currentUser: User!
     // Probably add withBlock for asynch
     // Should probably pass in User type into withBlcok
-    static func createUser(uid: String, username: String) {
+    static func createUser(uid: String, username: String, withBlock: @escaping () -> ()) {
         let reference = Database.database().reference()
         checkUserExists(uid: uid) { (userExists) in
             if userExists == false {
@@ -24,6 +24,7 @@ class DB {
                 //This is an old user so the pid is not changed
                 print("Logged in User has used app before and exists in database with username \(username)")
             }
+            withBlock()
         }
     }
     
