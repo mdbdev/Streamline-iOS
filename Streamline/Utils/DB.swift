@@ -9,11 +9,12 @@
 
 import Firebase
 
-class DB {
+struct DB {
     static var currentUser: User!
+    static var posts: [Post] = []
     // Probably add withBlock for asynch
     // Should probably pass in User type into withBlcok
-    static func createUser(uid: String, username: String) {
+    static func createUser(uid: String, username: String, withBlock: @escaping () -> ()) {
         let reference = Database.database().reference()
         checkUserExists(uid: uid) { (userExists) in
             if userExists == false {
@@ -24,6 +25,7 @@ class DB {
                 //This is an old user so the pid is not changed
                 print("Logged in User has used app before and exists in database with username \(username)")
             }
+            withBlock()
         }
     }
     
@@ -56,7 +58,7 @@ class DB {
     }
 
     // Synchronous first time post call (we want feed view to be populated immediately)
-    static func getPosts(withBlock: @escaping ([Post]) -> ()) {
+    static func getPosts() {
         let ref = Database.database().reference().child("posts")
         var posts: [Post] = []
         ref.observeSingleEvent(of: .value, with: { (snapshot) in
@@ -68,7 +70,7 @@ class DB {
                     let post = Post(pid: key, postDict: val)
                     posts.append(post)
                 }
-                withBlock(posts)
+                DB.posts = posts
             }
         })
     }

@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIViewController {
-    // creating a relative rectangle for my specific mapping in XD
+    // creating a relative rectangle for specific mapping from Figma mockup
     func rRect(rx: CGFloat, ry: CGFloat,
                rw: CGFloat, rh: CGFloat) -> CGRect {
         // magic numbers for iPhone 6/7 relative coords
@@ -17,10 +17,29 @@ extension UIViewController {
         let h: CGFloat = 667
         let x: CGFloat = (rx / w) * view.frame.width
         let y: CGFloat = (ry / h) * view.frame.height
+        
         let width: CGFloat = (rw / w) * view.frame.width
         let height: CGFloat = (rh / h) * view.frame.height
+        
+        if rw == rh {
+            return sRect(sqx: x, sqy: y, sqw: width, sqh: height)
+        }
+        
         return CGRect(x: x, y: y, width: width, height: height)
     }
+    
+    // creating a relative square, using rRect
+    func sRect(sqx: CGFloat, sqy: CGFloat,
+               sqw: CGFloat, sqh: CGFloat) -> CGRect {
+        let squareDim: CGFloat = min(sqw, sqh)
+        let offset: CGFloat = max(sqw, sqh) - squareDim
+        let y: CGFloat = sqy + offset/2
+        
+        return CGRect(x: sqx, y: y, width: squareDim, height: squareDim)
+    }
+    
+    
+    
     
     func warning(message: String) {
         let alert = UIAlertController(title: "Alert", message: message, preferredStyle: UIAlertControllerStyle.alert)

@@ -31,11 +31,10 @@ class LoginViewController: UIViewController {
         
         //Add observer to listen for spotify login success
         NotificationCenter.default.addObserver(self, selector: #selector(toFeedView), name: NSNotification.Name(rawValue: "loginSuccessfull"), object: nil)
+        setupAuth()
+        setupUI()
         if(UserDefaults.standard.value(forKey: "SpotifySession") != nil) {
             toFeedView()
-        } else {
-            setupUI()
-            setupAuth()
         }
     }
     
@@ -48,7 +47,9 @@ class LoginViewController: UIViewController {
         auth.clientID        = clientID
         auth.requestedScopes = [SPTAuthStreamingScope, SPTAuthPlaylistReadPrivateScope, SPTAuthPlaylistModifyPublicScope, SPTAuthPlaylistModifyPrivateScope, SPTAuthUserReadPrivateScope]
         loginUrl = auth.spotifyWebAuthenticationURL()
+        SpotifyAPI.auth = auth
     }
+
     
     // Selectors
     // TODO: This crashes if you don't authenticate successfully 
@@ -67,16 +68,18 @@ class LoginViewController: UIViewController {
             let sessionDataObj = sessionObj as! Data
             let firstTimeSession = NSKeyedUnarchiver.unarchiveObject(with: sessionDataObj) as! SPTSession
             self.session = firstTimeSession
-            SpotifyAPI.session = self.session
-            createUser()
+            if self.session.isValid() {
+                SpotifyAPI.session = self.session
+                createUser()
+            } else {
+                setupUI()
+            }
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Assume segue destination is feed
         let dest = segue.destination as! FeedViewController
-        dest.session = self.session
-        dest.auth = self.auth
     }
     
     //Spotify Functions
@@ -87,8 +90,10 @@ class LoginViewController: UIViewController {
         //Determine if the proper name to display
         SpotifyWeb.getUserDisplayName(accessToken: self.session.accessToken, withBlock: { username in
             self.user.username = username
-            DB.createUser(uid: self.session.canonicalUsername, username: self.user.username)
-            self.performSegue(withIdentifier: "toFeed", sender: self)
+            //DB.createUser(uid: self.session.canonicalUsername, username: self.user.username)
+            DB.createUser(uid: self.session.canonicalUsername, username: self.user.username, withBlock: {
+                self.performSegue(withIdentifier: "toFeed", sender: self)
+            })
         })
     }
     

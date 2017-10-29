@@ -18,6 +18,8 @@
 		2D3F9A551F92E18E00A09DCB /* VCExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3F9A541F92E18E00A09DCB /* VCExtensions.swift */; };
 		2D3F9A571F92E2D100A09DCB /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3F9A561F92E2D100A09DCB /* FeedViewController.swift */; };
 		2D3F9A5C1F92E52300A09DCB /* PostCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3F9A5B1F92E52300A09DCB /* PostCollectionViewCell.swift */; };
+		2D6780161FA5014F00F30971 /* NowPlayingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6780151FA5014F00F30971 /* NowPlayingViewController.swift */; };
+		2D6780181FA501E700F30971 /* NowPlayingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6780171FA501E700F30971 /* NowPlayingView.swift */; };
 		2D6B7DCF1F92AA2D009DA338 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2D6B7DCE1F92AA2D009DA338 /* GoogleService-Info.plist */; };
 		2D6B7DD51F92ABCE009DA338 /* DB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6B7DD41F92ABCE009DA338 /* DB.swift */; };
 		2D6B7DD71F92AE31009DA338 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6B7DD61F92AE31009DA338 /* User.swift */; };
@@ -26,7 +28,6 @@
 		2D8BA5421F984D5400D8DBE2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8BA5411F984D5400D8DBE2 /* LoginViewController.swift */; };
 		2D9017C21F92CCAA00A8C038 /* BridgeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9017C11F92CCAA00A8C038 /* BridgeViewController.m */; };
 		2DA03D1C1F92A8E900F88C13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA03D1B1F92A8E900F88C13 /* AppDelegate.swift */; };
-		2DA03D1E1F92A8E900F88C13 /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA03D1D1F92A8E900F88C13 /* DemoViewController.swift */; };
 		2DA03D311F92A8E900F88C13 /* StreamlineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA03D301F92A8E900F88C13 /* StreamlineTests.swift */; };
 		2DA03D3C1F92A8E900F88C13 /* StreamlineUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA03D3B1F92A8E900F88C13 /* StreamlineUITests.swift */; };
 		2DDF1E251F99AA100089489C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2DDF1E241F99AA100089489C /* Images.xcassets */; };
@@ -69,6 +70,8 @@
 		2D3F9A541F92E18E00A09DCB /* VCExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCExtensions.swift; sourceTree = "<group>"; };
 		2D3F9A561F92E2D100A09DCB /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		2D3F9A5B1F92E52300A09DCB /* PostCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCollectionViewCell.swift; sourceTree = "<group>"; };
+		2D6780151FA5014F00F30971 /* NowPlayingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingViewController.swift; sourceTree = "<group>"; };
+		2D6780171FA501E700F30971 /* NowPlayingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingView.swift; sourceTree = "<group>"; };
 		2D6B7DCE1F92AA2D009DA338 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		2D6B7DD41F92ABCE009DA338 /* DB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DB.swift; sourceTree = "<group>"; };
 		2D6B7DD61F92AE31009DA338 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -80,7 +83,6 @@
 		2D9017C11F92CCAA00A8C038 /* BridgeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BridgeViewController.m; sourceTree = "<group>"; };
 		2DA03D181F92A8E900F88C13 /* Streamline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Streamline.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DA03D1B1F92A8E900F88C13 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2DA03D1D1F92A8E900F88C13 /* DemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
 		2DA03D271F92A8E900F88C13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2DA03D2C1F92A8E900F88C13 /* StreamlineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StreamlineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DA03D301F92A8E900F88C13 /* StreamlineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamlineTests.swift; sourceTree = "<group>"; };
@@ -146,10 +148,12 @@
 		2D6B7DD11F92ABAA009DA338 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				55CF101D1FA5130D009E37A0 /* AKModalView.swift */,
 				2D125EB21FA12FB80031A21A /* LoginView.swift */,
 				2D3F9A5B1F92E52300A09DCB /* PostCollectionViewCell.swift */,
-				2D125EB61FA144A30031A21A /* NewPostView.swift */,
 				2D763B131FA29D6600546166 /* ResultTableViewCell.swift */,
+				2D6780171FA501E700F30971 /* NowPlayingView.swift */,
+				2D125EB61FA144A30031A21A /* NewPostView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -159,8 +163,9 @@
 			children = (
 				2D8BA5411F984D5400D8DBE2 /* LoginViewController.swift */,
 				2D3F9A561F92E2D100A09DCB /* FeedViewController.swift */,
+				55CF101F1FA51765009E37A0 /* SearchView.swift */,
+				2D6780151FA5014F00F30971 /* NowPlayingViewController.swift */,
 				2D125EB41FA143A40031A21A /* NewPostViewController.swift */,
-				2DA03D1D1F92A8E900F88C13 /* DemoViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -526,19 +531,23 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Streamline/Pods-Streamline-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ARNTransitionAnimator/ARNTransitionAnimator.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/HanekeSwift/Haneke.framework",
+				"${BUILT_PRODUCTS_DIR}/Spring/Spring.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ARNTransitionAnimator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Haneke.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Spring.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -569,7 +578,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2DA03D1E1F92A8E900F88C13 /* DemoViewController.swift in Sources */,
+				55CF10201FA51765009E37A0 /* SearchView.swift in Sources */,
 				2D6B7DD71F92AE31009DA338 /* User.swift in Sources */,
 				2D125EB51FA143A40031A21A /* NewPostViewController.swift in Sources */,
 				2DA03D1C1F92A8E900F88C13 /* AppDelegate.swift in Sources */,
@@ -578,10 +587,13 @@
 				557A82901F95A86900A189AB /* SpotifyWeb.swift in Sources */,
 				2D9017C21F92CCAA00A8C038 /* BridgeViewController.m in Sources */,
 				2D6B7DD51F92ABCE009DA338 /* DB.swift in Sources */,
+				55CF101E1FA5130D009E37A0 /* AKModalView.swift in Sources */,
 				55B0519A1F9950A5007B282E /* SpotifyAPI.swift in Sources */,
 				2D3F9A551F92E18E00A09DCB /* VCExtensions.swift in Sources */,
 				2D3F9A571F92E2D100A09DCB /* FeedViewController.swift in Sources */,
 				2D6B7DD91F92AE71009DA338 /* Post.swift in Sources */,
+				2D6780161FA5014F00F30971 /* NowPlayingViewController.swift in Sources */,
+				2D6780181FA501E700F30971 /* NowPlayingView.swift in Sources */,
 				2DDF1E271F99AB850089489C /* Constants.swift in Sources */,
 				2D125EB71FA144A30031A21A /* NewPostView.swift in Sources */,
 				2D3F9A5C1F92E52300A09DCB /* PostCollectionViewCell.swift in Sources */,
