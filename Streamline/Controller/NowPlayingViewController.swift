@@ -17,7 +17,6 @@ class NowPlayingViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print("updating image...")
         if let index = State.nowPlayingIndex {
             DB.posts[index].getImage { (img) in
                 self.albumImage.image = img
