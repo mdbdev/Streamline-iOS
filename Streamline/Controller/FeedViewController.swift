@@ -62,32 +62,39 @@ class FeedViewController: UIViewController {
         }
     }
     func setupBackground() {
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = Constants.cvBackground
     }
     
     func setupCollectionView() {
         let layout = UICollectionViewFlowLayout()
         // TODO: Change these to match the figma
-        layout.minimumLineSpacing = 0
-        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 8
+        layout.minimumInteritemSpacing = 8
         postCollectionView = UICollectionView(frame: rRect(rx: 21, ry: 69, rw: 334, rh: 541), collectionViewLayout: layout)
         postCollectionView.register(PostCollectionViewCell.self, forCellWithReuseIdentifier: "postCell")
         postCollectionView.delegate = self
         postCollectionView.dataSource = self
-        postCollectionView.backgroundColor = UIColor.white
+        postCollectionView.backgroundColor = Constants.cvBackground
         view.addSubview(postCollectionView)
     }
     
     func setupButton() {
-        postButton = UIButton(frame: rRect(rx: 328, ry: 26, rw: 28, rh: 27))
+        postButton = UIButton(frame: rRect(rx: 328, ry: 26, rw: 20, rh: 20))
         // TODO: Change this to an image that's in the Figma
-        postButton.setTitle("P", for: .normal)
-        postButton.setTitleColor(UIColor.white, for: .normal)
-        postButton.backgroundColor = UIColor.green
+        postButton.setTitle("+", for: .normal)
+        postButton.setTitleColor(UIColor(hex: "311b92"), for: .normal)
+        postButton.backgroundColor = UIColor.white
+    
+        
+        postButton.backgroundColor = .clear
+        postButton.layer.cornerRadius = 1
+        postButton.layer.borderWidth = 2
+        postButton.layer.borderColor = UIColor(hex: "311b92").cgColor
+        
         postButton.addTarget(self, action: #selector(postButtonPressed), for: .touchUpInside)
         view.addSubview(postButton)
         
-        logoutButton = UIButton(frame: rRect(rx: 15, ry: 26, rw: 74, rh: 22))
+        logoutButton = UIButton(frame: rRect(rx: 15, ry: 30, rw: 74, rh: 22))
         logoutButton.setTitle("Log Out", for: .normal)
         logoutButton.setTitleColor(UIColor(hex: "737171"), for: .normal)
         logoutButton.addTarget(self, action: #selector(logoutButtonPressed), for: .touchUpInside)
@@ -95,10 +102,16 @@ class FeedViewController: UIViewController {
     }
     
     func setupLabel() {
-        discoverLabel = UILabel(frame: rRect(rx: 94, ry: 20, rw: 187, rh: 44))
+        discoverLabel = UILabel(frame: CGRect(x: 0, y: 25, width: view.frame.width, height: 44))
+
         discoverLabel.textColor = UIColor(hex: "311b92")
         discoverLabel.text = "DISCOVER"
-        discoverLabel.font = UIFont(name: "Helvetica", size: 30)
+        discoverLabel.textAlignment = .center
+        //discoverLabel.font = UIFont(name: "AverageSans-Regular", size: 100)
+        
+        discoverLabel.font = Constants.averageSans?.withSize(20)
+        discoverLabel.font = UIFont.systemFont(ofSize: 30)
+        
         view.addSubview(discoverLabel)
     }
     
@@ -130,6 +143,7 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.updateData()
         return cell
     }
+
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         // Maybe make the height relative too?

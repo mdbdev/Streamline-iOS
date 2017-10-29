@@ -34,8 +34,8 @@ class PostCollectionViewCell: UICollectionViewCell {
     
     // Setup Functions
     func setupView() {
-        contentView.layer.borderWidth = 1
-        contentView.layer.borderColor = UIColor.black.cgColor
+        //contentView.layer.borderWidth = 1
+        //contentView.layer.borderColor = UIColor.black.cgColor
         // Drawing the shadow around the cell
         // TODO: investigate runtime of this, as well as shadowPath
         // Shadow is not working correctly :(
@@ -43,34 +43,41 @@ class PostCollectionViewCell: UICollectionViewCell {
 //        contentView.layer.shadowOpacity = 1
 //        contentView.layer.shadowOffset = CGSize.zero
 //        contentView.layer.shadowRadius = 10
+        self.backgroundColor = UIColor.white
     }
     func setupLabels() {
         songTitleLabel = UILabel(frame: CGRect(x: contentView.frame.height + 10,
-                                               y: 16,
+                                               y: 6,
                                                width: contentView.frame.width - (contentView.frame.height + 10),
                                                height: 28))
         songTitleLabel.adjustsFontSizeToFitWidth = true
         songTitleLabel.textColor = UIColor.black
         songTitleLabel.text = "Song"
-        songTitleLabel.font = Constants.averageSans?.withSize(14)
+        songTitleLabel.font = Constants.averageSans?.withSize(20)
+        songTitleLabel.font = UIFont.systemFont(ofSize: 13, weight: 2)
         contentView.addSubview(songTitleLabel)
+        
+        
         artistLabel = UILabel(frame: CGRect(x: contentView.frame.height + 10,
-                                            y: 16 + 14,
+                                            y: 16 + 7,
                                             width: contentView.frame.width - (contentView.frame.height + 10),
                                             height: 28))
         artistLabel.adjustsFontSizeToFitWidth = true
         artistLabel.textColor = UIColor.black
         artistLabel.text = "Artist"
         artistLabel.font = Constants.averageSans
+        artistLabel.font = UIFont.systemFont(ofSize: 13)
         contentView.addSubview(artistLabel)
-        postUserLabel = UILabel(frame: CGRect(x: contentView.frame.height + 24,
-                                              y: 16 + 14 + 20,
+        
+        postUserLabel = UILabel(frame: CGRect(x: contentView.frame.height + 10,
+                                              y: 16 + 7 + 20,
                                               width: contentView.frame.width - (contentView.frame.height + 24),
                                               height: 16))
         postUserLabel.textColor = UIColor(hex: "77747a")
         postUserLabel.text = "User"
         postUserLabel.adjustsFontSizeToFitWidth = true
         postUserLabel.font = Constants.averageSans?.withSize(12)
+        postUserLabel.font = UIFont.systemFont(ofSize: 12)
         contentView.addSubview(postUserLabel)
     }
     
