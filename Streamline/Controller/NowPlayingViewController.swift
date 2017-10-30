@@ -9,15 +9,14 @@
 import UIKit
 
 class NowPlayingViewController: UIViewController {
-    var backButton: UIButton!
-    var albumImage: UIImageView!
-    var songName: UILabel!
-    var artistName: UILabel!
     var recognizer: UIPanGestureRecognizer!
     var initialTouchPoint: CGPoint = CGPoint(x: 0, y: 0)
+    var subView: NowPlayingView!
     
     override func viewDidLoad() {
-        setupUI()
+        subView = NowPlayingView(frame: view.frame)
+        view.addSubview(subView)
+        subView.backButton.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
         recognizer = UIPanGestureRecognizer(target: self, action: #selector(panGestureRecognizerHandler))
         self.view.addGestureRecognizer(recognizer)
     }
@@ -25,12 +24,16 @@ class NowPlayingViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         if let index = State.nowPlayingIndex {
             let post = DB.posts[index]
-            post.getImage { (img) in
-                self.albumImage.image = img
-                self.songName.text = post.songTitle
-                self.artistName.text = post.artist
-            }
+            self.updateSongInformation(post: post)
         }
+    }
+    
+    func updateSongInformation(post: Post) {
+        self.subView.songName.text = post.songTitle
+        self.subView.artistName.text = post.artist
+        post.getImage(withBlock: { (img) in
+            self.subView.albumImage.image = img
+        })
     }
     
     // Selectors
