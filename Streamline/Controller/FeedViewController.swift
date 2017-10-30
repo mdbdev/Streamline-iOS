@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Firebase
+import AVFoundation
 
 class FeedViewController: UIViewController {
     var modalView: AKModalView!
@@ -185,6 +186,7 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
         // Play the song somewhere haha
         // Get the post pointer
         let post = DB.posts[indexPath.row]
+        activateAudioSession()
         SpotifyAPI.player.playSpotifyURI("spotify:track:" + post.trackId, startingWith: 0, startingWithPosition: 0, callback: { (error) in
             if (error != nil) {
                 print(error!.localizedDescription)
@@ -196,5 +198,8 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
 }
 
 extension FeedViewController: SPTAudioStreamingDelegate, SPTAudioStreamingPlaybackDelegate {
-    
+    func activateAudioSession() {
+        try? AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+        try? AVAudioSession.sharedInstance().setActive(true)
+    }
 }
