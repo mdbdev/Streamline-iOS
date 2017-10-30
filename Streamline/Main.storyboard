@@ -63,7 +63,7 @@
         <!--Now Playing View Controller-->
         <scene sceneID="xJy-26-X06">
             <objects>
-                <viewController storyboardIdentifier="NowPlayingViewController" id="0Ke-LL-6vq" customClass="NowPlayingViewController" customModule="Streamline" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NowPlayingViewController" modalPresentationStyle="overFullScreen" id="0Ke-LL-6vq" customClass="NowPlayingViewController" customModule="Streamline" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vHW-nx-rNZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

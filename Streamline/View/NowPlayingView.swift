@@ -27,7 +27,7 @@ extension NowPlayingViewController {
         songName.font = Constants.averageSans?.withSize(20)
         view.addSubview(songName)
         
-        artistName = UILabel(frame: rRect(rx: 65, ry: 412, rw: 245, rh: 19))
+        artistName = UILabel(frame: rRect(rx: 65, ry: 412, rw: 245, rh: 25))
         artistName.text = "Artist"
         artistName.adjustsFontSizeToFitWidth = true
         artistName.textColor = Constants.weirdGreen
