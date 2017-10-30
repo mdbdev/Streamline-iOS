@@ -11,6 +11,8 @@ import UIKit
 class NowPlayingViewController: UIViewController {
     var backButton: UIButton!
     var albumImage: UIImageView!
+    var songName: UILabel!
+    var artistName: UILabel!
     
     override func viewDidLoad() {
         setupUI()
@@ -18,8 +20,11 @@ class NowPlayingViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         if let index = State.nowPlayingIndex {
-            DB.posts[index].getImage { (img) in
+            let post = DB.posts[index]
+            post.getImage { (img) in
                 self.albumImage.image = img
+                self.songName.text = post.songTitle
+                self.artistName.text = post.artist
             }
         }
     }

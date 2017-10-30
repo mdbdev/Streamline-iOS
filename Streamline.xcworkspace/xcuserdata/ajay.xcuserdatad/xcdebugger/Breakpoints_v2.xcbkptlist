@@ -42,11 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Streamline/Controller/NewPostViewController.swift"
-<<<<<<< HEAD
-            timestampString = "530927118.614596"
-=======
-            timestampString = "530916904.131722"
->>>>>>> master
+            timestampString = "531039333.056835"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "63"

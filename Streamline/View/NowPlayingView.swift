@@ -19,5 +19,19 @@ extension NowPlayingViewController {
         albumImage.image = UIImage(named: "albumPlaceholder")
         albumImage.contentMode = .scaleAspectFit
         view.addSubview(albumImage)
+        
+        songName = UILabel(frame: rRect(rx: 65, ry: 387, rw: 245, rh: 25))
+        songName.text = "Song"
+        songName.adjustsFontSizeToFitWidth = true
+        songName.textColor = Constants.weirdGreen
+        songName.font = Constants.averageSans?.withSize(20)
+        view.addSubview(songName)
+        
+        artistName = UILabel(frame: rRect(rx: 65, ry: 412, rw: 245, rh: 19))
+        artistName.text = "Artist"
+        artistName.adjustsFontSizeToFitWidth = true
+        artistName.textColor = Constants.weirdGreen
+        artistName.font = Constants.averageSans?.withSize(15)
+        view.addSubview(artistName)
     }
 }
