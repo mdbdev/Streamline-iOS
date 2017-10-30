@@ -8,6 +8,23 @@
 
 import UIKit
 
+extension UIView {
+    func rRect(rx: CGFloat, ry: CGFloat,
+               rw: CGFloat, rh: CGFloat) -> CGRect {
+        // magic numbers for iPhone 6/7 relative coords
+        let w: CGFloat = 375
+        let h: CGFloat = 667
+        let x: CGFloat = (rx / w) * self.frame.width
+        let y: CGFloat = (ry / h) * self.frame.height
+        
+        let width: CGFloat = (rw / w) * self.frame.width
+        let height: CGFloat = (rh / h) * self.frame.height
+        
+        
+        return CGRect(x: x, y: y, width: width, height: height)
+    }
+}
+
 extension UIViewController {
     // creating a relative rectangle for specific mapping from Figma mockup
     func rRect(rx: CGFloat, ry: CGFloat,
