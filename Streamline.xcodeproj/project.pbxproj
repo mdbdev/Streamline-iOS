@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0976FFE577761A1C7632379A /* Pods_Streamline.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 617D6BC49E2D68BD311C03E2 /* Pods_Streamline.framework */; };
+		2D05B9DD1FA55C8100F26A79 /* AKModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D05B9DC1FA55C8100F26A79 /* AKModalView.swift */; };
+		2D05B9DF1FA55D0900F26A79 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D05B9DE1FA55D0900F26A79 /* SearchView.swift */; };
 		2D125EB31FA12FB80031A21A /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D125EB21FA12FB80031A21A /* LoginView.swift */; };
 		2D125EB51FA143A40031A21A /* NewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D125EB41FA143A40031A21A /* NewPostViewController.swift */; };
 		2D125EB71FA144A30031A21A /* NewPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D125EB61FA144A30031A21A /* NewPostView.swift */; };
@@ -61,6 +63,8 @@
 /* Begin PBXFileReference section */
 		0950AD0098A9712A23326A9D /* Pods-StreamlineTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StreamlineTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StreamlineTests/Pods-StreamlineTests.release.xcconfig"; sourceTree = "<group>"; };
 		2BBAE761855C48CADA2FEEBE /* Pods_StreamlineUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StreamlineUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D05B9DC1FA55C8100F26A79 /* AKModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AKModalView.swift; sourceTree = "<group>"; };
+		2D05B9DE1FA55D0900F26A79 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		2D125EB21FA12FB80031A21A /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		2D125EB41FA143A40031A21A /* NewPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostViewController.swift; sourceTree = "<group>"; };
 		2D125EB61FA144A30031A21A /* NewPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostView.swift; sourceTree = "<group>"; };
@@ -150,7 +154,7 @@
 		2D6B7DD11F92ABAA009DA338 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				55CF101D1FA5130D009E37A0 /* AKModalView.swift */,
+				2D05B9DC1FA55C8100F26A79 /* AKModalView.swift */,
 				2D125EB21FA12FB80031A21A /* LoginView.swift */,
 				2D3F9A5B1F92E52300A09DCB /* PostCollectionViewCell.swift */,
 				2D763B131FA29D6600546166 /* ResultTableViewCell.swift */,
@@ -165,9 +169,9 @@
 			children = (
 				2D8BA5411F984D5400D8DBE2 /* LoginViewController.swift */,
 				2D3F9A561F92E2D100A09DCB /* FeedViewController.swift */,
-				55CF101F1FA51765009E37A0 /* SearchView.swift */,
 				2D6780151FA5014F00F30971 /* NowPlayingViewController.swift */,
 				2D125EB41FA143A40031A21A /* NewPostViewController.swift */,
+				2D05B9DE1FA55D0900F26A79 /* SearchView.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -581,7 +585,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55CF10201FA51765009E37A0 /* SearchView.swift in Sources */,
 				2D6B7DD71F92AE31009DA338 /* User.swift in Sources */,
 				2D125EB51FA143A40031A21A /* NewPostViewController.swift in Sources */,
 				2D552A601FA54B0500C2093C /* State.swift in Sources */,
@@ -591,8 +594,9 @@
 				557A82901F95A86900A189AB /* SpotifyWeb.swift in Sources */,
 				2D9017C21F92CCAA00A8C038 /* BridgeViewController.m in Sources */,
 				2D6B7DD51F92ABCE009DA338 /* DB.swift in Sources */,
-				55CF101E1FA5130D009E37A0 /* AKModalView.swift in Sources */,
+				2D05B9DD1FA55C8100F26A79 /* AKModalView.swift in Sources */,
 				55B0519A1F9950A5007B282E /* SpotifyAPI.swift in Sources */,
+				2D05B9DF1FA55D0900F26A79 /* SearchView.swift in Sources */,
 				2D3F9A551F92E18E00A09DCB /* VCExtensions.swift in Sources */,
 				2D3F9A571F92E2D100A09DCB /* FeedViewController.swift in Sources */,
 				2D6B7DD91F92AE71009DA338 /* Post.swift in Sources */,
