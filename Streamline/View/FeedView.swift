@@ -8,7 +8,7 @@
 
 
 // TODO: Rewrite these to actual views rather than extensions
-extension FeedViewController {
+extension FeedViewController {    
     func setupUI() {
         setupCollectionView()
         setupBackground()

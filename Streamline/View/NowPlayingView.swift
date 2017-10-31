@@ -12,12 +12,14 @@ class NowPlayingView: UIView {
     var albumImage: UIImageView!
     var songName: UILabel!
     var artistName: UILabel!
+    var delegate: NowPlayingViewDelegate!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         backButton = UIButton(frame: rRect(rx: 26, ry: 26, rw: 40, rh: 40))
         backButton.setImage(UIImage(named: "arrow"), for: .normal)
         backButton.imageView?.contentMode = .scaleAspectFit
+        backButton.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
         addSubview(backButton)
         
         albumImage = UIImageView(frame: rRect(rx: 66, ry: 136, rw: 245, rh: 245))
@@ -43,4 +45,13 @@ class NowPlayingView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // Selectors
+    func backButtonPressed() {
+        self.delegate?.backButtonPressed()
+    }
+}
+
+protocol NowPlayingViewDelegate {
+    func backButtonPressed()
 }

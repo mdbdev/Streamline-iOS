@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NowPlayingViewController: UIViewController {
+class NowPlayingViewController: UIViewController, NowPlayingViewDelegate {
     var recognizer: UIPanGestureRecognizer!
     var initialTouchPoint: CGPoint = CGPoint(x: 0, y: 0)
     var subView: NowPlayingView!
@@ -16,7 +16,7 @@ class NowPlayingViewController: UIViewController {
     override func viewDidLoad() {
         subView = NowPlayingView(frame: view.frame)
         view.addSubview(subView)
-        subView.backButton.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
+        subView.delegate = self
         recognizer = UIPanGestureRecognizer(target: self, action: #selector(panGestureRecognizerHandler))
         self.view.addGestureRecognizer(recognizer)
     }
