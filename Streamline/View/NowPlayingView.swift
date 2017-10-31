@@ -12,6 +12,7 @@ class NowPlayingView: UIView {
     var albumImage: UIImageView!
     var songName: UILabel!
     var artistName: UILabel!
+    var slider: UISlider!
     var delegate: NowPlayingViewDelegate!
     
     override init(frame: CGRect) {
@@ -40,6 +41,12 @@ class NowPlayingView: UIView {
         artistName.textColor = Constants.weirdGreen
         artistName.font = Constants.averageSans?.withSize(15)
         addSubview(artistName)
+        
+        slider = UISlider(frame: rRect(rx: 26, ry: 447, rw: 328, rh: 20))
+        slider.isContinuous = true
+        slider.maximumValue = 1
+        slider.minimumValue = 0
+        addSubview(slider)
     }
     
     required init?(coder aDecoder: NSCoder) {

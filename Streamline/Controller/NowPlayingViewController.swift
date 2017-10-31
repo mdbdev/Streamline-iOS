@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 class NowPlayingViewController: UIViewController, NowPlayingViewDelegate {
     var recognizer: UIPanGestureRecognizer!
@@ -25,6 +26,15 @@ class NowPlayingViewController: UIViewController, NowPlayingViewDelegate {
         if let index = State.nowPlayingIndex {
             let post = DB.posts[index]
             self.updateSongInformation(post: post)
+            let timer = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true, block: { (t) in
+                print("timer ticked")
+                if let songPosition = State.songPosition {
+                    let percent = (songPosition / post.duration)
+                    self.subView.slider.setValue(Float(percent), animated: true)
+                }
+            })
+        } else {
+            self.dismiss(animated: true, completion: nil)
         }
     }
     

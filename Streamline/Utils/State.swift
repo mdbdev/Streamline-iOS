@@ -9,4 +9,5 @@
 
 struct State {
     static var nowPlayingIndex: Int?
+    static var songPosition: TimeInterval?
 }
