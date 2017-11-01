@@ -43,9 +43,12 @@ class NowPlayingView: UIView {
         addSubview(artistName)
         
         slider = UISlider(frame: rRect(rx: 26, ry: 447, rw: 328, rh: 20))
-        slider.isContinuous = true
+        slider.isContinuous = false
         slider.maximumValue = 1
         slider.minimumValue = 0
+        slider.addTarget(self, action: #selector(sliderChanging), for: .touchDown)
+        slider.addTarget(self, action: #selector(sliderNoLongerChanging), for: .touchUpInside)
+        slider.addTarget(self, action: #selector(sliderNoLongerChanging), for: .touchUpOutside)
         addSubview(slider)
     }
     
@@ -57,8 +60,18 @@ class NowPlayingView: UIView {
     func backButtonPressed() {
         self.delegate?.backButtonPressed()
     }
+    
+    func sliderChanging() {
+        self.delegate?.sliderChanging()
+    }
+    
+    func sliderNoLongerChanging() {
+        self.delegate?.sliderNoLongerChanging()
+    }
 }
 
 protocol NowPlayingViewDelegate {
     func backButtonPressed()
+    func sliderChanging()
+    func sliderNoLongerChanging()
 }

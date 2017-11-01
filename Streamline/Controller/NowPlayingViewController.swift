@@ -9,10 +9,11 @@
 import UIKit
 import Foundation
 
-class NowPlayingViewController: UIViewController, NowPlayingViewDelegate {
+class NowPlayingViewController: UIViewController {
     var recognizer: UIPanGestureRecognizer!
     var initialTouchPoint: CGPoint = CGPoint(x: 0, y: 0)
     var subView: NowPlayingView!
+    var sliderEdit: Bool = true
     
     override func viewDidLoad() {
         subView = NowPlayingView(frame: view.frame)
@@ -27,10 +28,11 @@ class NowPlayingViewController: UIViewController, NowPlayingViewDelegate {
             let post = DB.posts[index]
             self.updateSongInformation(post: post)
             let timer = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true, block: { (t) in
-                print("timer ticked")
                 if let songPosition = State.songPosition {
-                    let percent = (songPosition / post.duration)
-                    self.subView.slider.setValue(Float(percent), animated: true)
+                    if self.sliderEdit {
+                        let percent = (songPosition / post.duration)
+                        self.subView.slider.setValue(Float(percent), animated: true)
+                    }
                 }
             })
         } else {
@@ -45,29 +47,43 @@ class NowPlayingViewController: UIViewController, NowPlayingViewDelegate {
             self.subView.albumImage.image = img
         })
     }
-    
+
+    // Selectors
+    func panGestureRecognizerHandler(_ sender: UIPanGestureRecognizer) {
+        if sliderEdit {
+            let touchPoint = sender.location(in: self.view?.window)
+            
+            if sender.state == UIGestureRecognizerState.began {
+                initialTouchPoint = touchPoint
+            } else if sender.state == UIGestureRecognizerState.changed {
+                if touchPoint.y - initialTouchPoint.y > 0 {
+                    self.view.frame = CGRect(x: 0, y: touchPoint.y - initialTouchPoint.y, width: self.view.frame.size.width, height: self.view.frame.size.height)
+                }
+            } else if sender.state == UIGestureRecognizerState.ended || sender.state == UIGestureRecognizerState.cancelled {
+                if touchPoint.y - initialTouchPoint.y > 100 {
+                    self.dismiss(animated: true, completion: nil)
+                } else {
+                    UIView.animate(withDuration: 0.3, animations: {
+                        self.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
+                    })
+                }
+            }
+        }
+    }
+}
+
+extension NowPlayingViewController: NowPlayingViewDelegate {
     // Selectors
     func backButtonPressed() {
         self.dismiss(animated: true, completion: nil)
     }
+
+    func sliderChanging() {
+        sliderEdit = false
+    }
     
-    func panGestureRecognizerHandler(_ sender: UIPanGestureRecognizer) {
-        let touchPoint = sender.location(in: self.view?.window)
-        
-        if sender.state == UIGestureRecognizerState.began {
-            initialTouchPoint = touchPoint
-        } else if sender.state == UIGestureRecognizerState.changed {
-            if touchPoint.y - initialTouchPoint.y > 0 {
-                self.view.frame = CGRect(x: 0, y: touchPoint.y - initialTouchPoint.y, width: self.view.frame.size.width, height: self.view.frame.size.height)
-            }
-        } else if sender.state == UIGestureRecognizerState.ended || sender.state == UIGestureRecognizerState.cancelled {
-            if touchPoint.y - initialTouchPoint.y > 100 {
-                self.dismiss(animated: true, completion: nil)
-            } else {
-                UIView.animate(withDuration: 0.3, animations: {
-                    self.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
-                })
-            }
-        }
+    func sliderNoLongerChanging() {
+        sliderEdit = true
+        // TODO: Need to seek to the correct place in the track!
     }
 }
