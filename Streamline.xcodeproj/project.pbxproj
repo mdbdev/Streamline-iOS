@@ -20,6 +20,7 @@
 		2D3F9A551F92E18E00A09DCB /* VCExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3F9A541F92E18E00A09DCB /* VCExtensions.swift */; };
 		2D3F9A571F92E2D100A09DCB /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3F9A561F92E2D100A09DCB /* FeedViewController.swift */; };
 		2D3F9A5C1F92E52300A09DCB /* PostCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3F9A5B1F92E52300A09DCB /* PostCollectionViewCell.swift */; };
+		2D552A601FA54B0500C2093C /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D552A5F1FA54B0500C2093C /* State.swift */; };
 		2D6780161FA5014F00F30971 /* NowPlayingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6780151FA5014F00F30971 /* NowPlayingViewController.swift */; };
 		2D6780181FA501E700F30971 /* NowPlayingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6780171FA501E700F30971 /* NowPlayingView.swift */; };
 		2D6B7DCF1F92AA2D009DA338 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2D6B7DCE1F92AA2D009DA338 /* GoogleService-Info.plist */; };
@@ -27,6 +28,7 @@
 		2D6B7DD71F92AE31009DA338 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6B7DD61F92AE31009DA338 /* User.swift */; };
 		2D6B7DD91F92AE71009DA338 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6B7DD81F92AE71009DA338 /* Post.swift */; };
 		2D763B141FA29D6600546166 /* ResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D763B131FA29D6600546166 /* ResultTableViewCell.swift */; };
+		2D8314D71FA70862002F6C78 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8314D61FA70862002F6C78 /* FeedView.swift */; };
 		2D8BA5421F984D5400D8DBE2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8BA5411F984D5400D8DBE2 /* LoginViewController.swift */; };
 		2D9017C21F92CCAA00A8C038 /* BridgeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9017C11F92CCAA00A8C038 /* BridgeViewController.m */; };
 		2DA03D1C1F92A8E900F88C13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA03D1B1F92A8E900F88C13 /* AppDelegate.swift */; };
@@ -74,6 +76,7 @@
 		2D3F9A541F92E18E00A09DCB /* VCExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCExtensions.swift; sourceTree = "<group>"; };
 		2D3F9A561F92E2D100A09DCB /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		2D3F9A5B1F92E52300A09DCB /* PostCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCollectionViewCell.swift; sourceTree = "<group>"; };
+		2D552A5F1FA54B0500C2093C /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		2D6780151FA5014F00F30971 /* NowPlayingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingViewController.swift; sourceTree = "<group>"; };
 		2D6780171FA501E700F30971 /* NowPlayingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingView.swift; sourceTree = "<group>"; };
 		2D6B7DCE1F92AA2D009DA338 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -81,6 +84,7 @@
 		2D6B7DD61F92AE31009DA338 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		2D6B7DD81F92AE71009DA338 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		2D763B131FA29D6600546166 /* ResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultTableViewCell.swift; sourceTree = "<group>"; };
+		2D8314D61FA70862002F6C78 /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
 		2D8BA5411F984D5400D8DBE2 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2D9017BF1F92CCA900A8C038 /* Streamline-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Streamline-Bridging-Header.h"; sourceTree = "<group>"; };
 		2D9017C01F92CCAA00A8C038 /* BridgeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgeViewController.h; sourceTree = "<group>"; };
@@ -158,6 +162,7 @@
 				2D763B131FA29D6600546166 /* ResultTableViewCell.swift */,
 				2D6780171FA501E700F30971 /* NowPlayingView.swift */,
 				2D125EB61FA144A30031A21A /* NewPostView.swift */,
+				2D8314D61FA70862002F6C78 /* FeedView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -179,6 +184,7 @@
 			children = (
 				2D6B7DD41F92ABCE009DA338 /* DB.swift */,
 				55B051991F9950A5007B282E /* SpotifyAPI.swift */,
+				2D552A5F1FA54B0500C2093C /* State.swift */,
 				2D3F9A541F92E18E00A09DCB /* VCExtensions.swift */,
 				557A828F1F95A86900A189AB /* SpotifyWeb.swift */,
 				2D29EE881F98690B0053FDF0 /* UIColorHexExtension.swift */,
@@ -352,6 +358,11 @@
 						CreatedOnToolsVersion = 9.0;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					2DA03D2B1F92A8E900F88C13 = {
 						CreatedOnToolsVersion = 9.0;
@@ -584,6 +595,7 @@
 			files = (
 				2D6B7DD71F92AE31009DA338 /* User.swift in Sources */,
 				2D125EB51FA143A40031A21A /* NewPostViewController.swift in Sources */,
+				2D552A601FA54B0500C2093C /* State.swift in Sources */,
 				2DA03D1C1F92A8E900F88C13 /* AppDelegate.swift in Sources */,
 				2D125EB31FA12FB80031A21A /* LoginView.swift in Sources */,
 				2D29EE891F98690B0053FDF0 /* UIColorHexExtension.swift in Sources */,
@@ -593,6 +605,7 @@
 				2D05B9DD1FA55C8100F26A79 /* AKModalView.swift in Sources */,
 				55B0519A1F9950A5007B282E /* SpotifyAPI.swift in Sources */,
 				2D05B9DF1FA55D0900F26A79 /* SearchView.swift in Sources */,
+				2D8314D71FA70862002F6C78 /* FeedView.swift in Sources */,
 				2D3F9A551F92E18E00A09DCB /* VCExtensions.swift in Sources */,
 				2D3F9A571F92E2D100A09DCB /* FeedViewController.swift in Sources */,
 				2D6B7DD91F92AE71009DA338 /* Post.swift in Sources */,
@@ -752,7 +765,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9DE7Q23M2N;
+				DEVELOPMENT_TEAM = YKE7MMUC9J;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Streamline/Spotify\\ Frameworks",
@@ -779,7 +792,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9DE7Q23M2N;
+				DEVELOPMENT_TEAM = YKE7MMUC9J;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Streamline/Spotify\\ Frameworks",
