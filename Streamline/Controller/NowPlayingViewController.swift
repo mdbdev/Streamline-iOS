@@ -83,7 +83,10 @@ extension NowPlayingViewController: NowPlayingViewDelegate {
     }
     
     func sliderNoLongerChanging() {
-        sliderEdit = true
+        sliderEdit = true        
         // TODO: Need to seek to the correct place in the track!
+        let post = DB.posts[State.nowPlayingIndex!]
+        State.songPosition = TimeInterval(subView.slider.value) * post.duration
+        SpotifyAPI.player.seek(to: State.songPosition!, callback: nil)
     }
 }

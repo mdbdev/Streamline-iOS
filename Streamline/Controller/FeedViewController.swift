@@ -135,6 +135,7 @@ extension FeedViewController: SPTAudioStreamingDelegate, SPTAudioStreamingPlayba
     }
     
     func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didStopPlayingTrack trackUri: String!) {
+        // TODO: Pick another song to play
         self.nowPlayingLabel.text = ""
         State.nowPlayingIndex = -1
     }
