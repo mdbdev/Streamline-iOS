@@ -27,7 +27,7 @@ class NowPlayingViewController: UIViewController {
         if let index = State.nowPlayingIndex {
             let post = DB.posts[index]
             self.updateSongInformation(post: post)
-            let timer = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true, block: { (t) in
+            let timer = Timer.scheduledTimer(withTimeInterval: 0.016, repeats: true, block: { (t) in
                 if let songPosition = State.songPosition {
                     if self.sliderEdit {
                         let percent = (songPosition / post.duration)
