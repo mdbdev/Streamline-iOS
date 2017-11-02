@@ -13,6 +13,7 @@ class NowPlayingView: UIView {
     var songName: UILabel!
     var artistName: UILabel!
     var slider: UISlider!
+    var playButton: UIButton!
     var delegate: NowPlayingViewDelegate!
     
     override init(frame: CGRect) {
@@ -49,7 +50,16 @@ class NowPlayingView: UIView {
         slider.addTarget(self, action: #selector(sliderChanging), for: .touchDown)
         slider.addTarget(self, action: #selector(sliderNoLongerChanging), for: .touchUpInside)
         slider.addTarget(self, action: #selector(sliderNoLongerChanging), for: .touchUpOutside)
+        slider.setThumbImage(UIImage(named: "thumb"), for: .normal)
+        slider.minimumTrackTintColor = UIColor(hex: "d1c4e9")
+        slider.maximumTrackTintColor = UIColor.black
+        // TODO: Have to change the maximum and minimum image to match the figma
         addSubview(slider)
+        
+        playButton = UIButton(frame: rRect(rx: 206, ry: 534, rw: 44, rh: 44))
+        playButton.addTarget(self, action: #selector(playButtonPressed), for: .touchUpInside)
+        playButton.backgroundColor = UIColor.purple        
+        addSubview(playButton)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -57,6 +67,10 @@ class NowPlayingView: UIView {
     }
     
     // Selectors
+    func playButtonPressed() {
+        self.delegate?.playButtonPressed()
+    }
+    
     func backButtonPressed() {
         self.delegate?.backButtonPressed()
     }
@@ -71,6 +85,7 @@ class NowPlayingView: UIView {
 }
 
 protocol NowPlayingViewDelegate {
+    func playButtonPressed()
     func backButtonPressed()
     func sliderChanging()
     func sliderNoLongerChanging()

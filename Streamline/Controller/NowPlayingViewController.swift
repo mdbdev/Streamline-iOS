@@ -74,15 +74,21 @@ class NowPlayingViewController: UIViewController {
 
 extension NowPlayingViewController: NowPlayingViewDelegate {
     // Selectors
+    func playButtonPressed() {
+        State.paused = !State.paused
+        SpotifyAPI.player.setIsPlaying(!State.paused, callback: nil)
+    }
     func backButtonPressed() {
         self.dismiss(animated: true, completion: nil)
     }
 
     func sliderChanging() {
+        print("Slider changing")
         sliderEdit = false
     }
     
     func sliderNoLongerChanging() {
+        print("Slider no longer changing!")
         sliderEdit = true        
         // TODO: Need to seek to the correct place in the track!
         let post = DB.posts[State.nowPlayingIndex!]
