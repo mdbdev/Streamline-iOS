@@ -28,11 +28,9 @@ class NowPlayingViewController: UIViewController {
             let post = DB.posts[index]
             self.updateSongInformation(post: post)
             let timer = Timer.scheduledTimer(withTimeInterval: 0.016, repeats: true, block: { (t) in
-                if let songPosition = State.songPosition {
-                    if self.sliderEdit {
-                        let percent = (songPosition / post.duration)
-                        self.subView.slider.setValue(Float(percent), animated: true)
-                    }
+                if self.sliderEdit {
+                    let percent = (SpotifyAPI.player.playbackState.position / post.duration)
+                    self.subView.slider.setValue(Float(percent), animated: true)
                 }
             })
         } else {
@@ -75,8 +73,8 @@ class NowPlayingViewController: UIViewController {
 extension NowPlayingViewController: NowPlayingViewDelegate {
     // Selectors
     func playButtonPressed() {
+        SpotifyAPI.player.setIsPlaying(State.paused, callback: nil)
         State.paused = !State.paused
-        SpotifyAPI.player.setIsPlaying(!State.paused, callback: nil)
     }
     func backButtonPressed() {
         self.dismiss(animated: true, completion: nil)
@@ -93,6 +91,7 @@ extension NowPlayingViewController: NowPlayingViewDelegate {
     
     // TODO: Not implemented
     func backwardButtonPressed() {
+        print("Backward button pressed!")
     }
 
     func sliderChanging() {
@@ -105,7 +104,6 @@ extension NowPlayingViewController: NowPlayingViewDelegate {
         sliderEdit = true        
         // TODO: Need to seek to the correct place in the track!
         let post = DB.posts[State.nowPlayingIndex!]
-        State.songPosition = TimeInterval(subView.slider.value) * post.duration
-        SpotifyAPI.player.seek(to: State.songPosition!, callback: nil)
+        SpotifyAPI.player.seek(to: TimeInterval(subView.slider.value) * post.duration, callback: nil)
     }
 }
