@@ -81,6 +81,19 @@ extension NowPlayingViewController: NowPlayingViewDelegate {
     func backButtonPressed() {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    // TODO: Do we shuffle, or play the next song?
+    func forwardButtonPressed() {
+        let posts = DB.posts
+        let toPlayIndex = (State.nowPlayingIndex! + 1) % posts.count
+        let post = posts[toPlayIndex]
+        self.updateSongInformation(post: post)
+        SpotifyAPI.playPost(post: post, index: toPlayIndex)
+    }
+    
+    // TODO: Not implemented
+    func backwardButtonPressed() {
+    }
 
     func sliderChanging() {
         print("Slider changing")
