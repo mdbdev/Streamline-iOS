@@ -20,6 +20,7 @@ class FeedViewController: UIViewController {
     var nowPlayingButton: UIButton!
     var nowPlayingLabel: UILabel!
     var nowPlayingVC: NowPlayingViewController!
+    var searchView: SearchView!
     
     // Firebase
     var refHandle: DatabaseReference!
@@ -62,13 +63,18 @@ class FeedViewController: UIViewController {
     
     // Selectors
     func postButtonPressed() {
-        self.performSegue(withIdentifier: "toNewPost", sender: self)
-//        let searchView = SearchView(frame: CGRect(x: view.frame.width * 0.1 , y: view.frame.height * 0.15, width: view.frame.width * 0.8, height: view.frame.height * 0.3), large: true)
-//        searchView.delegate = self
-//        modalView = AKModalView(view: searchView)
-//        modalView.automaticallyCenter = true
-//        view.addSubview(modalView)
-//        modalView.show()
+        searchView = SearchView(frame: CGRect(x: view.frame.width * 0.1 , y: view.frame.height * 0.2, width: view.frame.width * 0.8, height: view.frame.height * 0.3), large: true)
+        searchView.delegate = self
+        //self.performSegue(withIdentifier: "toNewPost", sender: self)
+        DB.currentUser.getPID {
+            if DB.currentUser.pid == "" {
+                self.modalView = AKModalView(view: self.searchView)
+                self.modalView.automaticallyCenter = false
+                self.view.addSubview(self.modalView)
+                self.modalView.show()
+            }
+        }
+        
     }
     
     func logoutButtonPressed() {

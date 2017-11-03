@@ -54,8 +54,8 @@ class SearchView: UIView {
     }
     
     func setupSearch() {
-        searchBar = UISearchBar(frame: CGRect(x: 0, y: view.frame.height, width: view.frame.width, height : view.frame.height * 0.2))
-        searchBar.backgroundColor = UIColor.white
+        searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height : view.frame.height * 0.2))
+        searchBar.backgroundColor = UIColor.black
         searchBar.placeholder = "What song do you want to share?"
         searchBar.delegate = self
         view.addSubview(searchBar)
@@ -92,6 +92,7 @@ class SearchView: UIView {
                             duration: track.duration)
             
             DB.createPost(post: post, user: DB.currentUser)
+            u.createPost(pid: track.identifier)
             //self.dismiss(animated: true, completion: nil)
             delegate?.dismissView()
         }

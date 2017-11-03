@@ -62,13 +62,18 @@ class LoginViewController: UIViewController {
         let userDefaults = UserDefaults.standard
         if let sessionObj:AnyObject = userDefaults.object(forKey: "SpotifySession") as AnyObject? {
             let sessionDataObj = sessionObj as! Data
-            let firstTimeSession = NSKeyedUnarchiver.unarchiveObject(with: sessionDataObj) as! SPTSession
-            self.session = firstTimeSession
-            if self.session.isValid() {
-                SpotifyAPI.session = self.session
-                createUser()
-            } else {
-                setupUI()
+            //let firstTimeSession = NSKeyedUnarchiver.unarchiveObject(with: sessionDataObj) as! SPTSession
+            if let firstTimeSession = NSKeyedUnarchiver.unarchiveObject(with: sessionDataObj) as? SPTSession{
+                self.session = firstTimeSession
+                if self.session.isValid() {
+                    SpotifyAPI.session = self.session
+                    createUser()
+                } else {
+                    setupUI()
+                }
+            }
+            else {
+                print("Login Cancelled")
             }
         }
     }
