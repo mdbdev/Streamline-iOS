@@ -91,4 +91,9 @@ struct DB {
         // Need to set the pid value of Post
         ref.setValue(dict)
     }
+    
+    static func userPost(uid: String, pid: String){
+        var ref = Database.database().reference().child("users").child(uid).child("pid")
+        ref.setValue(pid)
+    }
 }
