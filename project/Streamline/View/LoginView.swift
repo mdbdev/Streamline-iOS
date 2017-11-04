@@ -33,7 +33,7 @@ class LoginView: UIView {
     
     func setupButton() {
         connectButton = UIButton(frame:
-            Utils.rRect(rx: 75, ry: 315, rw: 239, rh: 45))
+            Utils.rRect(rx: 68, ry: 315, rw: 239, rh: 45))
         connectButton.addTarget(self, action: #selector(connectButtonPressed), for: .touchUpInside)
         connectButton.layer.cornerRadius = 15
         connectButton.backgroundColor = UIColor.white
@@ -44,8 +44,8 @@ class LoginView: UIView {
         connectButton.layer.shadowColor = UIColor.black.cgColor
         connectButton.layer.shadowOpacity = 0.35
         
-        connectLabel = UILabel(frame:
-            Utils.rRect(rx: 120, ry: 328, rw: 185, rh: 20))
+        let connectLabel = UILabel(frame:
+            Utils.rRect(rx: 113, ry: 328, rw: 185, rh: 20))
         connectLabel.textColor = Constants.darkPurple
         connectLabel.text = "CONNECT WITH SPOTIFY"
         connectLabel.textAlignment = .center
@@ -56,7 +56,7 @@ class LoginView: UIView {
         addSubview(connectLabel)
         
         let spotifyLogo = UIImageView(frame:
-            Utils.rRect(rx: 90, ry: 325, rw: 26, rh: 26))
+            Utils.rRect(rx: 80, ry: 325, rw: 26, rh: 26))
         spotifyLogo.image = #imageLiteral(resourceName: "spotify-logo")
         addSubview(spotifyLogo)
     }
