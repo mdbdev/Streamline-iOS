@@ -180,10 +180,8 @@ extension FeedViewController: NowPlayingProtocol, FeedViewDelegate {
 //                    }
 //                })
 //            }
-            createSearchView()
-            
+            createSearchView()            
         }
-    }
     
     func nowPlayingButtonPressed() {
         if let index = State.nowPlayingIndex {
