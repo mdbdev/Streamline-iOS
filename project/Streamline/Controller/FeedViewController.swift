@@ -33,15 +33,19 @@ class FeedViewController: UIViewController {
         nowPlayingVC.delegate = self
         self.refHandle = Database.database().reference()
         self.refHandle.observe(DataEventType.value, with: { (snapshot) in
-            DB.getPosts()
-            self.postCollectionView.reloadData()
+            DB.getPosts(withBlock : {
+                self.postCollectionView.reloadData()
+            })
+            
         })
         setupUI()
         
         setupSpotify()
         
-        DB.getPosts()
-        populateFeed()
+        DB.getPosts(withBlock: {
+            self.populateFeed()
+        })
+        
     }
     
     // TODO: Change the now playing index to match the new data!

@@ -58,7 +58,7 @@ struct DB {
     }
 
     // Synchronous first time post call (we want feed view to be populated immediately)
-    static func getPosts() {
+    static func getPosts(withBlock: @escaping () -> ()) {
         let ref = Database.database().reference().child("posts")
         var posts: [Post] = []
         let startDate = Date().timeIntervalSince1970 - 86400
@@ -75,6 +75,7 @@ struct DB {
                 DB.posts = posts
                 // TODO: This doesn't scale xd
                 DB.sortPosts()
+                withBlock()
             }
         })
     }
