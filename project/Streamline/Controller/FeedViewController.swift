@@ -147,7 +147,12 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func changeLabel(post: Post, index: Int) {
-        nowPlayingLabel.text = DB.posts[index].songTitle //post.songTitle
+        let post = DB.posts[index]
+        nowPlayingLabel.text = post.songTitle //post.songTitle
+        nowPlayingArtist.text = post.artist
+        // TODO: Make it in the cell
+        let cell = postCollectionView.cellForItem(at: IndexPath(item: index, section: 0)) as! PostCollectionViewCell
+        nowPlayingImage.image = cell.albumImage.image
     }
 }
 
