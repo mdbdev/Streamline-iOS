@@ -88,8 +88,7 @@ class SearchView: UIView {
                             trackId: track.identifier,
                             songTitle: track.name,
                             artist: artist!,
-                            imageUrl: track.album.largestCover.imageURL.absoluteString,
-                            duration: track.duration)
+                            imageUrl: track.album.largestCover.imageURL.absoluteString)
             
             DB.createPost(post: post, user: DB.currentUser)
             u.createPost(pid: track.identifier)

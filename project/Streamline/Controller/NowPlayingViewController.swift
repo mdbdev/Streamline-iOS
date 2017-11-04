@@ -29,8 +29,10 @@ class NowPlayingViewController: UIViewController {
             self.updateSongInformation(post: post)
             let timer = Timer.scheduledTimer(withTimeInterval: 0.016, repeats: true, block: { (t) in
                 if self.sliderEdit {
-                    let percent = (SpotifyAPI.player.playbackState.position / post.duration)
-                    self.subView.slider.setValue(Float(percent), animated: true)
+                    if let duration = SpotifyAPI.player.metadata.currentTrack?.duration {
+                        let percent = (SpotifyAPI.player.playbackState.position / duration)
+                        self.subView.slider.setValue(Float(percent), animated: true)
+                    }
                 }
             })
         } else {
@@ -99,11 +101,13 @@ extension NowPlayingViewController: NowPlayingViewDelegate {
         sliderEdit = false
     }
     
+    // TODO: this might crash if the song finishes while seeking
     func sliderNoLongerChanging() {
         print("Slider no longer changing!")
         sliderEdit = true        
         // TODO: Need to seek to the correct place in the track!
         let post = DB.posts[State.nowPlayingIndex!]
-        SpotifyAPI.player.seek(to: TimeInterval(subView.slider.value) * post.duration, callback: nil)
+        let duration = SpotifyAPI.player.metadata.currentTrack?.duration
+        SpotifyAPI.player.seek(to: TimeInterval(subView.slider.value) * duration!, callback: nil)
     }
 }
