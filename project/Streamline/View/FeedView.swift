@@ -20,12 +20,13 @@ extension FeedViewController {
     
     func setupNowPlaying() {
         nowPlayingButton = UIButton(frame: rRect(rx: 0, ry: 609, rw: 375, rh: 60))
-        nowPlayingButton.backgroundColor = UIColor.black
+        nowPlayingButton.backgroundColor = UIColor.white
         nowPlayingButton.addTarget(self, action: #selector(nowPlayingButtonPressed), for: .touchUpInside)
         view.addSubview(nowPlayingButton)
         
         nowPlayingLabel = UILabel(frame: rRect(rx: 0, ry: 609, rw: 375, rh: 60))
-        nowPlayingLabel.textColor = UIColor.white
+        nowPlayingLabel.textAlignment = .center
+        nowPlayingLabel.textColor = Constants.darkPurple
         nowPlayingLabel.adjustsFontSizeToFitWidth = true
         nowPlayingLabel.font = Constants.averageSans
         view.addSubview(nowPlayingLabel)
