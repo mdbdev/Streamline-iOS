@@ -12,7 +12,7 @@ class Post {
     var pid: String!
     var uid: String!
     var username: String!
-    var timePosted: Date!
+    var timePosted: TimeInterval!
     var trackId: String!
     var songTitle: String!
     var artist: String!
@@ -20,7 +20,7 @@ class Post {
     
     init(uid: String,
          username: String,
-         timePosted: Date,
+         timePosted: TimeInterval,
          trackId: String,
          songTitle: String,
          artist: String,
@@ -38,12 +38,11 @@ class Post {
         let uid = postDict["uid"] as! String
         let username = postDict["username"] as! String
         let imageUrl = postDict["imageUrl"] as! String
-//        // TODO: This will crash
-//        let timePosted = postDict["timePosted"] as! Date
+        let timePosted = postDict["timePosted"] as! TimeInterval
         let songTitle = postDict["songTitle"] as! String
         let artist = postDict["artist"] as! String
         let trackId = postDict["trackId"] as! String
-        self.init(uid: uid, username: username, timePosted: Date(), trackId: trackId, songTitle: songTitle, artist: artist, imageUrl: imageUrl)
+        self.init(uid: uid, username: username, timePosted: timePosted, trackId: trackId, songTitle: songTitle, artist: artist, imageUrl: imageUrl)
         self.pid = pid
     }
     

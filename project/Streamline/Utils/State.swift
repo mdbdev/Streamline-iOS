@@ -10,4 +10,5 @@
 struct State {
     static var nowPlayingIndex: Int?
     static var paused: Bool = false
+    static var position: TimeInterval = 0
 }

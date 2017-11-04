@@ -61,7 +61,9 @@ struct DB {
     static func getPosts() {
         let ref = Database.database().reference().child("posts")
         var posts: [Post] = []
-        ref.observeSingleEvent(of: .value, with: { (snapshot) in
+        let startDate = Date().timeIntervalSince1970 - 86400
+        let query = ref.queryOrdered(byChild: "timePosted").queryStarting(atValue: startDate)
+        query.observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             if let value = value {
                 for (key, val) in value {
@@ -71,6 +73,8 @@ struct DB {
                     posts.append(post)
                 }
                 DB.posts = posts
+                // TODO: This doesn't scale xd
+                DB.sortPosts()
             }
         })
     }
@@ -83,7 +87,7 @@ struct DB {
         let dict: [String: Any] = ["uid": post.uid,
                                    "username": post.username,
                                    "imageUrl": post.imageUrl,
-                                   "timePosted": post.timePosted.timeIntervalSince1970,
+                                   "timePosted": post.timePosted,
                                    "songTitle": post.songTitle,
                                    "artist": post.artist,
                                    "trackId": post.trackId]
@@ -94,5 +98,11 @@ struct DB {
     static func userPost(uid: String, pid: String){
         var ref = Database.database().reference().child("users").child(uid).child("pid")
         ref.setValue(pid)
+    }
+    
+    static func sortPosts() {
+        DB.posts.sort(by: {(p1, p2) -> Bool in
+            return p1.timePosted >= p2.timePosted
+        })
     }
 }

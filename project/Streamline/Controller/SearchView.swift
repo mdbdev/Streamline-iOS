@@ -119,7 +119,7 @@ class SearchView: UIView {
             
             let post = Post(uid: u.uid,
                             username: u.username,
-                            timePosted: Date(),
+                            timePosted: Date().timeIntervalSince1970,
                             trackId: track.identifier,
                             songTitle: track.name,
                             artist: artist!,

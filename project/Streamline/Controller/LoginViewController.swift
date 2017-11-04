@@ -81,6 +81,7 @@ class LoginViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Assume segue destination is feed
         let dest = segue.destination as! FeedViewController
+        
     }
     
     //Spotify Functions
