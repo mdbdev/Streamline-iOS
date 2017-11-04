@@ -24,7 +24,7 @@ class SpotifyWeb {
             if (jsonResponse["images"] as! NSArray).count == 0 {
                 imageURL = "https://eliaslealblog.files.wordpress.com/2014/03/user-200.png"
             } else {
-                imageURL = (jsonResponse["images"] as! NSArray)[0] as! String
+                imageURL = ((jsonResponse["images"] as! NSArray)[0] as! NSDictionary)["url"] as! String
             }
             var usernameJson = jsonResponse["display_name"]
             if let x = jsonResponse["display_name"] as? String {
