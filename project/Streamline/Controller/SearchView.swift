@@ -183,17 +183,15 @@ extension SearchView: UITableViewDelegate, UITableViewDataSource, UISearchBarDel
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 31
+        return view.frame.height / 6
     }
     
+    
 //    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        let cellBackground : UIView = UIView(frame: CGRect(0, 10, self.view.frame.size.width, 120))
-//        
-//        cellBackground.layer.backgroundColor = CGColorCreate(CGColorSpaceCreateDeviceRGB(), [1.0, 1.0, 1.0, 1.0])
+//        let cellBackground : UIView = UIView(frame: Utils.rRect(0, 10, self.view.frame.size.width, 120))
+//
+//        cellBackground.layer.backgroundColor = UIColor.white.cgColor
 //        cellBackground.layer.masksToBounds = false
-//        cellBackground.layer.cornerRadius = 2.0
-//        cellBackground.layer.shadowOffset = CGSizeMake(-1, 1)
-//        cellBackground.layer.shadowOpacity = 0.2
 //
 //        cell.contentView.addSubview(cellBackground)
 //        cell.contentView.sendSubviewToBack(cellBackground)
