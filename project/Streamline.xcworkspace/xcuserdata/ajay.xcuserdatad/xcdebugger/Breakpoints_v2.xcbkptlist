@@ -106,12 +106,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Streamline/Controller/FeedViewController.swift"
-            timestampString = "531529308.908625"
+            timestampString = "531531137.713054"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
-            landmarkName = "collectionView(_:didSelectItemAt:)"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
+            landmarkName = "activateAudioSession()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -217,70 +217,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Streamline/Controller/FeedViewController.swift"
-            timestampString = "531529308.908809"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
-            landmarkName = "FeedViewController"
-            landmarkType = "3">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Streamline.FeedViewController.postButtonPressed() -&gt; ()"
-                  moduleName = "Streamline"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ajay/Dropbox/mdb/Streamline-iOS/project/Streamline/Controller/FeedViewController.swift"
-                  timestampString = "531455315.540019"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "69"
-                  endingLineNumber = "69"
-                  offsetFromSymbolStart = "1772">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in Streamline.FeedViewController.postButtonPressed() -&gt; ()"
-                  moduleName = "Streamline"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ajay/Dropbox/mdb/Streamline-iOS/project/Streamline/Controller/FeedViewController.swift"
-                  timestampString = "531455315.543634"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "70"
-                  endingLineNumber = "70"
-                  offsetFromSymbolStart = "17">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Streamline/Controller/FeedViewController.swift"
-            timestampString = "531529308.908869"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "setupSpotify()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Streamline/Utils/DB.swift"
             timestampString = "531527942.680499"
             startingColumnNumber = "9223372036854775807"
@@ -330,7 +266,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Streamline/View/LoginView.swift"
-            timestampString = "531529308.908948"
+            timestampString = "531531137.713518"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "71"

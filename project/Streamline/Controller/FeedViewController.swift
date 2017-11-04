@@ -13,14 +13,8 @@ import AVFoundation
 
 class FeedViewController: UIViewController {
     var modalView: AKModalView!
-    var postCollectionView: UICollectionView!
-    var postButton: UIButton!
-    var logoutButton: UIButton!
-    var discoverLabel: UILabel!
-    var nowPlayingButton: UIButton!
-    var nowPlayingLabel: UILabel!
-    var nowPlayingArtist: UILabel!
-    var nowPlayingImage: UIImageView!
+    var subView: FeedView!
+    
     var nowPlayingVC: NowPlayingViewController!
     var searchView: SearchView!
     
@@ -28,7 +22,12 @@ class FeedViewController: UIViewController {
     var refHandle: DatabaseReference!
     
     override func viewDidLoad() {
-        super.viewDidLoad()        
+        super.viewDidLoad()
+        subView = FeedView(frame: view.frame)
+        subView.delegate = self
+        view.addSubview(subView)
+        subView.postCollectionView.delegate = self
+        subView.postCollectionView.dataSource = self
         // Preloading the player view
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         nowPlayingVC = storyboard.instantiateViewController(withIdentifier: "NowPlayingViewController") as! NowPlayingViewController
@@ -36,11 +35,10 @@ class FeedViewController: UIViewController {
         self.refHandle = Database.database().reference()
         self.refHandle.observe(DataEventType.value, with: { (snapshot) in
             DB.getPosts(withBlock : {
-                self.postCollectionView.reloadData()
+                self.subView.postCollectionView.reloadData()
             })
             
         })
-        setupUI()
         
         setupSpotify()
         
@@ -52,7 +50,7 @@ class FeedViewController: UIViewController {
     
     // TODO: Change the now playing index to match the new data!
     func populateFeed() {
-        postCollectionView.reloadData()
+        subView.postCollectionView.reloadData()
     }
     
     // Setup Functions
@@ -67,46 +65,13 @@ class FeedViewController: UIViewController {
         }
     }
     
-    // Selectors
-    func postButtonPressed() {
-        searchView = SearchView(frame: Utils.rRect(rx: 40, ry: 152, rw: 295, rh: 289), large: true)
-        searchView.layer.cornerRadius = 20
-        searchView.delegate = self
-        //self.performSegue(withIdentifier: "toNewPost", sender: self)
-        DB.currentUser.getPID {
-            //if DB.currentUser.pid == "" {
-                self.createSearchView()
-            //} else {
-                //TODO: Check if song is past deadline
-                //let post =
-            //}
-            
-        }
-        
-    }
-    
     func createSearchView(){
         modalView = AKModalView(view: searchView)
         modalView.automaticallyCenter = false
         view.addSubview(modalView)
         modalView.show()
     }
-    
-    func logoutButtonPressed() {
-        
-        
-        let userDefaults = UserDefaults.standard
-        userDefaults.removeObject(forKey: "SpotifySession")
-        
-        SpotifyAPI.player.logout()
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    func nowPlayingButtonPressed() {
-        if let index = State.nowPlayingIndex {
-            self.present(nowPlayingVC, animated: true, completion: nil)
-        }
-    }
+
 }
 
 extension FeedViewController: SearchViewDelegate {
@@ -160,23 +125,19 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func changeLabel(post: Post, index: Int) {
         let post = DB.posts[index]
-        nowPlayingLabel.text = post.songTitle //post.songTitle
-        nowPlayingArtist.text = post.artist
+        subView.nowPlayingLabel.text = post.songTitle //post.songTitle
+        subView.nowPlayingArtist.text = post.artist
         // TODO: Make it in the cell
-        let cell = postCollectionView.cellForItem(at: IndexPath(item: index, section: 0)) as! PostCollectionViewCell
-        nowPlayingImage.image = cell.albumImage.image
+        let cell = subView.postCollectionView.cellForItem(at: IndexPath(item: index, section: 0)) as! PostCollectionViewCell
+        subView.nowPlayingImage.image = cell.albumImage.image
     }
 }
 
+// Spotify Extension
 extension FeedViewController: SPTAudioStreamingDelegate, SPTAudioStreamingPlaybackDelegate {
     func activateAudioSession() {
         try? AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
         try? AVAudioSession.sharedInstance().setActive(true)
-    }
-    
-    func audioStreamingDidSkip(toNextTrack audioStreaming: SPTAudioStreamingController!) {
-        print("awlekfjawelkfjawe;lfjkawe;flkajwef")
-        self.nowPlayingLabel.text = audioStreaming.metadata.currentTrack?.albumName
     }
     
     func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didStopPlayingTrack trackUri: String!) {
@@ -196,8 +157,34 @@ extension FeedViewController: SPTAudioStreamingDelegate, SPTAudioStreamingPlayba
     }
 }
 
-extension FeedViewController: NowPlayingProtocol {
+extension FeedViewController: NowPlayingProtocol, FeedViewDelegate {
     func passLabel(post: Post, index: Int) {
         changeLabel(post: post, index: index)
+    }
+    
+    // Selectors
+    func postButtonPressed() {
+        searchView = SearchView(frame: Utils.rRect(rx: 40, ry: 152, rw: 295, rh: 289), large: true)
+        searchView.layer.cornerRadius = 20
+        searchView.delegate = self
+        //self.performSegue(withIdentifier: "toNewPost", sender: self)
+        DB.currentUser.getPID {
+            //if DB.currentUser.pid == "" {
+            self.createSearchView()
+        }
+    }
+    
+    func nowPlayingButtonPressed() {
+        if let index = State.nowPlayingIndex {
+            self.present(nowPlayingVC, animated: true, completion: nil)
+        }
+    }
+    
+    func logoutButtonPressed() {
+        let userDefaults = UserDefaults.standard
+        userDefaults.removeObject(forKey: "SpotifySession")
+        
+        SpotifyAPI.player.logout()
+        self.dismiss(animated: true, completion: nil)
     }
 }
