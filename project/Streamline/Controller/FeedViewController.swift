@@ -67,7 +67,8 @@ class FeedViewController: UIViewController {
     
     // Selectors
     func postButtonPressed() {
-        searchView = SearchView(frame: CGRect(x: view.frame.width * 0.1 , y: view.frame.height * 0.2, width: view.frame.width * 0.8, height: view.frame.height * 0.3), large: true)
+        searchView = SearchView(frame: rRect(rx: 40, ry: 152, rw: 295, rh: 289), large: true)
+        searchView.layer.cornerRadius = 20
         searchView.delegate = self
         //self.performSegue(withIdentifier: "toNewPost", sender: self)
 //        DB.currentUser.getPID {
