@@ -9,6 +9,7 @@
 
 // TODO: Rewrite these to actual views rather than extensions
 extension FeedViewController {    
+    
     func setupUI() {
         setupCollectionView()
         setupBackground()
@@ -53,6 +54,9 @@ extension FeedViewController {
         postButton.setTitle("+", for: .normal)
         postButton.setTitleColor(UIColor(hex: "311b92"), for: .normal)
         postButton.backgroundColor = UIColor.white
+        
+        postButton.backgroundImage(for: .normal)
+        postButton.setBackgroundImage(#imageLiteral(resourceName: "PostButton"), for: .normal)
         
         
         postButton.backgroundColor = .clear
