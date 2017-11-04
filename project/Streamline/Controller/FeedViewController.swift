@@ -79,6 +79,8 @@ class FeedViewController: UIViewController {
     }
     
     func logoutButtonPressed() {
+        
+        SpotifyAPI.player.logout()
         self.dismiss(animated: true, completion: nil)
     }
     
