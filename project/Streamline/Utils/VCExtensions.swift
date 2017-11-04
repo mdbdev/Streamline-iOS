@@ -12,13 +12,19 @@ extension UIView {
     func rRect(rx: CGFloat, ry: CGFloat,
                rw: CGFloat, rh: CGFloat) -> CGRect {
         // magic numbers for iPhone 6/7 relative coords
+        let screenSize = UIScreen.main.bounds
+        let screenWidth = screenSize.width
+        let screenHeight = screenSize.height
+        
         let w: CGFloat = 375
         let h: CGFloat = 667
-        let x: CGFloat = (rx / w) * self.frame.width
-        let y: CGFloat = (ry / h) * self.frame.height
+        let x: CGFloat = (rx / w) * screenWidth
+        let y: CGFloat = (ry / h) * screenHeight
         
-        let width: CGFloat = (rw / w) * self.frame.width
-        let height: CGFloat = (rh / h) * self.frame.height
+        let width: CGFloat = (rw / w) * screenWidth
+        let height: CGFloat = (rh / h) * screenHeight
+        
+        print(x, y, width, height)
         
         
         return CGRect(x: x, y: y, width: width, height: height)
@@ -32,11 +38,16 @@ extension UIViewController {
         // magic numbers for iPhone 6/7 relative coords
         let w: CGFloat = 375
         let h: CGFloat = 667
-        let x: CGFloat = (rx / w) * view.frame.width
-        let y: CGFloat = (ry / h) * view.frame.height
+        let screenSize = UIScreen.main.bounds
+        let screenWidth = screenSize.width
+        let screenHeight = screenSize.height
         
-        let width: CGFloat = (rw / w) * view.frame.width
-        let height: CGFloat = (rh / h) * view.frame.height
+        
+        let x: CGFloat = (rx / w) * screenWidth
+        let y: CGFloat = (ry / h) * screenHeight
+        
+        let width: CGFloat = (rw / w) * screenWidth
+        let height: CGFloat = (rh / h) * screenHeight
         
         if rw == rh {
             return sRect(sqx: x, sqy: y, sqw: width, sqh: height)
