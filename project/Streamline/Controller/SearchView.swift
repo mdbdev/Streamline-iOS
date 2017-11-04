@@ -47,7 +47,7 @@ class SearchView: UIView {
     
     func setupButtons() {
         //view.addSubview(cancelButton)
-        cancelButton = UIButton(frame: rRect(rx: 28.14, ry: 229.93, rw: 107.33, rh: 31.81))
+        cancelButton = UIButton(frame: Utils.rRect(rx: 28.14, ry: 229.93, rw: 107.33, rh: 31.81))
         cancelButton.layer.cornerRadius = 15
         cancelButton.backgroundColor = UIColor.white
         cancelButton.setTitleColor(Constants.darkPurple, for: .normal)
@@ -55,7 +55,7 @@ class SearchView: UIView {
         cancelButton.addTarget(self, action: #selector(cancelButtonPressed), for: .touchUpInside)
         view.addSubview(cancelButton)
         
-        shareButton = UIButton(frame: rRect(rx: 153.18, ry: 229.93, rw: 107.33, rh: 31.81))
+        shareButton = UIButton(frame: Utils.rRect(rx: 153.18, ry: 229.93, rw: 107.33, rh: 31.81))
         shareButton.layer.cornerRadius = 15
         shareButton.backgroundColor = UIColor(hex: "673AB7")
         shareButton.setTitleColor(UIColor.white, for: .normal)
@@ -88,7 +88,10 @@ class SearchView: UIView {
         view.addSubview(searchBar)
         
         let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
-        textFieldInsideSearchBar?.textColor = UIColor(hex: "5E5D60")
+//        textFieldInsideSearchBar?.textColor = UIColor(hex: "5E5D60")
+        
+        let placeholderText = searchBar.value(forKey: "placeholder") as? UITextField
+        //        textFieldInsideSearchBar?.textColor = UIColor(hex: "5E5D60")
     }
     
     func setupTableView() {
