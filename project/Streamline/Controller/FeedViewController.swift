@@ -149,6 +149,9 @@ extension FeedViewController: SPTAudioStreamingDelegate, SPTAudioStreamingPlayba
         let toPlayIndex = (State.nowPlayingIndex! + 1) % posts.count
         let post = posts[toPlayIndex]
         State.position = 0
+        if let vc = nowPlayingVC {
+            vc.updateSongInformation(post: post)
+        }
         SpotifyAPI.playPost(post: post, index: toPlayIndex)
     }
     
