@@ -50,7 +50,4 @@ extension LoginViewController {
         spotifyLogo.image = #imageLiteral(resourceName: "spotify-logo")
         view.addSubview(spotifyLogo)
     }
-
-    
-
 }

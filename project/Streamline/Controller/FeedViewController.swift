@@ -73,18 +73,30 @@ class FeedViewController: UIViewController {
         searchView.layer.cornerRadius = 20
         searchView.delegate = self
         //self.performSegue(withIdentifier: "toNewPost", sender: self)
-//        DB.currentUser.getPID {
-//            if DB.currentUser.pid == "" {
-        self.modalView = AKModalView(view: self.searchView)
-        self.modalView.automaticallyCenter = false
-        self.view.addSubview(self.modalView)
-        self.modalView.show()
-//            }
-//        }
+        DB.currentUser.getPID {
+            //if DB.currentUser.pid == "" {
+                self.createSearchView()
+            //} else {
+                //TODO: Check if song is past deadline
+                //let post =
+            //}
+            
+        }
         
     }
     
+    func createSearchView(){
+        modalView = AKModalView(view: searchView)
+        modalView.automaticallyCenter = false
+        view.addSubview(modalView)
+        modalView.show()
+    }
+    
     func logoutButtonPressed() {
+        
+        
+        let userDefaults = UserDefaults.standard
+        userDefaults.removeObject(forKey: "SpotifySession")
         
         SpotifyAPI.player.logout()
         self.dismiss(animated: true, completion: nil)

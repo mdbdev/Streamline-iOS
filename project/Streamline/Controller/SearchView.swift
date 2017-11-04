@@ -128,7 +128,7 @@ class SearchView: UIView {
                             imageUrl: track.album.largestCover.imageURL.absoluteString)
             
             DB.createPost(post: post, user: DB.currentUser)
-            u.createPost(pid: track.identifier)
+            u.createPost(pid: post.pid)
             //self.dismiss(animated: true, completion: nil)
             delegate?.dismissView()
         }
