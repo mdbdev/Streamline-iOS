@@ -19,25 +19,26 @@ extension FeedViewController {
     }
     
     func setupNowPlaying() {
-        nowPlayingButton = UIButton(frame: rRect(rx: 0, ry: 609, rw: 375, rh: 60))
+        nowPlayingButton = UIButton(frame: Utils.rRect(rx: 0, ry: 609, rw: 375, rh: 60))
         nowPlayingButton.backgroundColor = UIColor.white
         nowPlayingButton.addTarget(self, action: #selector(nowPlayingButtonPressed), for: .touchUpInside)
         view.addSubview(nowPlayingButton)
         
-        nowPlayingLabel = UILabel(frame: rRect(rx: 61, ry: 617, rw: 268, rh: 28))
+        nowPlayingLabel = UILabel(frame: Utils.rRect(rx: 61, ry: 617, rw: 268, rh: 28))
         nowPlayingLabel.textColor = UIColor.black
+
         nowPlayingLabel.adjustsFontSizeToFitWidth = true
         nowPlayingLabel.font = Constants.averageSans?.withSize(25)
         view.addSubview(nowPlayingLabel)
         
-        nowPlayingArtist = UILabel(frame: rRect(rx: 61, ry: 644, rw: 268, rh: 16))
+        nowPlayingArtist = UILabel(frame: Utils.rRect(rx: 61, ry: 644, rw: 268, rh: 16))
         nowPlayingArtist.textColor = UIColor.black
         nowPlayingArtist.adjustsFontSizeToFitWidth = true
         nowPlayingArtist.font = Constants.averageSans?.withSize(15)
         view.addSubview(nowPlayingArtist)
         
         // TODO: Use annie's square function
-        nowPlayingImage = UIImageView(frame: rRect(rx: 8, ry: 617, rw: 47, rh: 47))
+        nowPlayingImage = UIImageView(frame: Utils.rRect(rx: 8, ry: 617, rw: 47, rh: 47))
         nowPlayingImage.image = UIImage(named: "albumPlaceholder")
         nowPlayingImage.contentMode = .scaleAspectFit
         view.addSubview(nowPlayingImage)
@@ -52,7 +53,7 @@ extension FeedViewController {
         // TODO: Change these to match the figma
         layout.minimumLineSpacing = 8
         layout.minimumInteritemSpacing = 8
-        postCollectionView = UICollectionView(frame: rRect(rx: 21, ry: 69, rw: 334, rh: 541), collectionViewLayout: layout)
+        postCollectionView = UICollectionView(frame: Utils.rRect(rx: 21, ry: 69, rw: 334, rh: 541), collectionViewLayout: layout)
         postCollectionView.register(PostCollectionViewCell.self, forCellWithReuseIdentifier: "postCell")
         postCollectionView.delegate = self
         postCollectionView.dataSource = self
@@ -61,7 +62,7 @@ extension FeedViewController {
     }
     
     func setupButton() {
-        postButton = UIButton(frame: sRect(sqx: 328, sqy: 26, sqw: 30, sqh: 30))
+        postButton = UIButton(frame: Utils.sRect(sqx: 329, sqy: 28, sqw: 24, sqh: 24))
         
         postButton.setTitle("+", for: .normal)
         postButton.setTitleColor(UIColor(hex: "311b92"), for: .normal)
@@ -75,7 +76,7 @@ extension FeedViewController {
         postButton.addTarget(self, action: #selector(postButtonPressed), for: .touchUpInside)
         view.addSubview(postButton)
         
-        logoutButton = UIButton(frame: rRect(rx: 15, ry: 30, rw: 74, rh: 22))
+        logoutButton = UIButton(frame: Utils.rRect(rx: 15, ry: 30, rw: 74, rh: 22))
         logoutButton.setTitle("Log Out", for: .normal)
         logoutButton.setTitleColor(UIColor(hex: "737171"), for: .normal)
         logoutButton.addTarget(self, action: #selector(logoutButtonPressed), for: .touchUpInside)
