@@ -86,8 +86,7 @@ struct DB {
                                    "timePosted": post.timePosted.timeIntervalSince1970,
                                    "songTitle": post.songTitle,
                                    "artist": post.artist,
-                                   "trackId": post.trackId,
-                                   "duration": post.duration]
+                                   "trackId": post.trackId]
         // Need to set the pid value of Post
         ref.setValue(dict)
     }

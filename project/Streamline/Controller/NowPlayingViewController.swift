@@ -28,9 +28,9 @@ class NowPlayingViewController: UIViewController {
             let post = DB.posts[index]
             self.updateSongInformation(post: post)
             let timer = Timer.scheduledTimer(withTimeInterval: 0.016, repeats: true, block: { (t) in
-                if let songPosition = State.songPosition {
-                    if self.sliderEdit {
-                        let percent = (songPosition / post.duration)
+                if self.sliderEdit {
+                    if let duration = SpotifyAPI.player.metadata.currentTrack?.duration {
+                        let percent = (SpotifyAPI.player.playbackState.position / duration)
                         self.subView.slider.setValue(Float(percent), animated: true)
                     }
                 }
@@ -75,11 +75,25 @@ class NowPlayingViewController: UIViewController {
 extension NowPlayingViewController: NowPlayingViewDelegate {
     // Selectors
     func playButtonPressed() {
+        SpotifyAPI.player.setIsPlaying(State.paused, callback: nil)
         State.paused = !State.paused
-        SpotifyAPI.player.setIsPlaying(!State.paused, callback: nil)
     }
     func backButtonPressed() {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    // TODO: Do we shuffle, or play the next song?
+    func forwardButtonPressed() {
+        let posts = DB.posts
+        let toPlayIndex = (State.nowPlayingIndex! + 1) % posts.count
+        let post = posts[toPlayIndex]
+        self.updateSongInformation(post: post)
+        SpotifyAPI.playPost(post: post, index: toPlayIndex)
+    }
+    
+    // TODO: Not implemented
+    func backwardButtonPressed() {
+        print("Backward button pressed!")
     }
 
     func sliderChanging() {
@@ -87,12 +101,13 @@ extension NowPlayingViewController: NowPlayingViewDelegate {
         sliderEdit = false
     }
     
+    // TODO: this might crash if the song finishes while seeking
     func sliderNoLongerChanging() {
         print("Slider no longer changing!")
         sliderEdit = true        
         // TODO: Need to seek to the correct place in the track!
         let post = DB.posts[State.nowPlayingIndex!]
-        State.songPosition = TimeInterval(subView.slider.value) * post.duration
-        SpotifyAPI.player.seek(to: State.songPosition!, callback: nil)
+        let duration = SpotifyAPI.player.metadata.currentTrack?.duration
+        SpotifyAPI.player.seek(to: TimeInterval(subView.slider.value) * duration!, callback: nil)
     }
 }

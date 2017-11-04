@@ -39,8 +39,7 @@ class NewPostViewController: UIViewController {
                             trackId: track.identifier,
                             songTitle: track.name,
                             artist: artist!,
-                            imageUrl: track.album.largestCover.imageURL.absoluteString,
-                            duration: track.duration)
+                            imageUrl: track.album.largestCover.imageURL.absoluteString)
             
             DB.createPost(post: post, user: DB.currentUser)
             self.dismiss(animated: true, completion: nil)

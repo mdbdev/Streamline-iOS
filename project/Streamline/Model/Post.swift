@@ -17,7 +17,6 @@ class Post {
     var songTitle: String!
     var artist: String!
     var imageUrl: String!
-    var duration: TimeInterval
     
     init(uid: String,
          username: String,
@@ -25,8 +24,7 @@ class Post {
          trackId: String,
          songTitle: String,
          artist: String,
-         imageUrl: String,
-         duration: TimeInterval) {
+         imageUrl: String) {
         self.uid = uid
         self.username = username
         self.timePosted = timePosted
@@ -34,7 +32,6 @@ class Post {
         self.songTitle = songTitle
         self.artist = artist
         self.imageUrl = imageUrl
-        self.duration = duration
     }
     
     convenience init(pid: String, postDict: [String: Any]) {
@@ -46,8 +43,7 @@ class Post {
         let songTitle = postDict["songTitle"] as! String
         let artist = postDict["artist"] as! String
         let trackId = postDict["trackId"] as! String
-        let duration = postDict["duration"] as! TimeInterval
-        self.init(uid: uid, username: username, timePosted: Date(), trackId: trackId, songTitle: songTitle, artist: artist, imageUrl: imageUrl, duration: duration)
+        self.init(uid: uid, username: username, timePosted: Date(), trackId: trackId, songTitle: songTitle, artist: artist, imageUrl: imageUrl)
         self.pid = pid
     }
     
