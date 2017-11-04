@@ -40,6 +40,7 @@
 		55B0519A1F9950A5007B282E /* SpotifyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B051991F9950A5007B282E /* SpotifyAPI.swift */; };
 		9E0506D595C11CEBF4B7AF0B /* Pods_StreamlineTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB284140F1C8E9C54DFC8762 /* Pods_StreamlineTests.framework */; };
 		B269B4E280C9962B2F8D6148 /* Pods_StreamlineUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BBAE761855C48CADA2FEEBE /* Pods_StreamlineUITests.framework */; };
+		D14C0E7D1FAE6C36000818C5 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14C0E7C1FAE6C36000818C5 /* Utils.swift */; };
 		D44DE8F71FA4FD4B00B4DB65 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D44DE8F51FA4FB7A00B4DB65 /* Main.storyboard */; };
 		D44DE8F81FA4FD5000B4DB65 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D44DE8F61FA4FB8100B4DB65 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -105,6 +106,7 @@
 		617D6BC49E2D68BD311C03E2 /* Pods_Streamline.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Streamline.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FC9F10E8984FB6D86F6A1B2 /* Pods-StreamlineTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StreamlineTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StreamlineTests/Pods-StreamlineTests.debug.xcconfig"; sourceTree = "<group>"; };
 		AB284140F1C8E9C54DFC8762 /* Pods_StreamlineTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StreamlineTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D14C0E7C1FAE6C36000818C5 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		D44DE8F51FA4FB7A00B4DB65 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		D44DE8F61FA4FB8100B4DB65 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D820384DCC0130E08F981A2A /* Pods-Streamline.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Streamline.release.xcconfig"; path = "Pods/Target Support Files/Pods-Streamline/Pods-Streamline.release.xcconfig"; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 				55B051991F9950A5007B282E /* SpotifyAPI.swift */,
 				2D552A5F1FA54B0500C2093C /* State.swift */,
 				2D3F9A541F92E18E00A09DCB /* VCExtensions.swift */,
+				D14C0E7C1FAE6C36000818C5 /* Utils.swift */,
 				557A828F1F95A86900A189AB /* SpotifyWeb.swift */,
 				2D29EE881F98690B0053FDF0 /* UIColorHexExtension.swift */,
 				2DDF1E261F99AB850089489C /* Constants.swift */,
@@ -606,6 +609,7 @@
 				55B0519A1F9950A5007B282E /* SpotifyAPI.swift in Sources */,
 				2D05B9DF1FA55D0900F26A79 /* SearchView.swift in Sources */,
 				2D8314D71FA70862002F6C78 /* FeedView.swift in Sources */,
+				D14C0E7D1FAE6C36000818C5 /* Utils.swift in Sources */,
 				2D3F9A551F92E18E00A09DCB /* VCExtensions.swift in Sources */,
 				2D3F9A571F92E2D100A09DCB /* FeedViewController.swift in Sources */,
 				2D6B7DD91F92AE71009DA338 /* Post.swift in Sources */,
