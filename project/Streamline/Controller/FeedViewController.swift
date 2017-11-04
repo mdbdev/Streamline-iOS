@@ -145,8 +145,11 @@ extension FeedViewController: SPTAudioStreamingDelegate, SPTAudioStreamingPlayba
     
     func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didStopPlayingTrack trackUri: String!) {
         // TODO: Pick another song to play
-        self.nowPlayingLabel.text = ""
-        State.nowPlayingIndex = -1
+        let posts = DB.posts
+        let toPlayIndex = (State.nowPlayingIndex! + 1) % posts.count
+        let post = posts[toPlayIndex]
+        State.position = 0
+        SpotifyAPI.playPost(post: post, index: toPlayIndex)
     }
     
     func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didChangePosition position: TimeInterval) {
