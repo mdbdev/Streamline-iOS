@@ -25,6 +25,8 @@ The following CocoaPods/libraries were used in the project:
  
 ### Backend Overview
 
+This project uses Firebase for authentication, realtime database, and are integrated using the Firebase Auth and FirebaseDatabase Cocoapods respectively. The first time a user logs into the app, their Spotify username is stored under the Users node of our database. Also, whenever a song is uploaded, the necessary information (e.g. track name, artist, album art, duration, etc.) are accessed using the Spotify API and stored under the Posts node in the database.
+
 ### Database Structure
 
-The primary nodes of the database are User and Post, each of which has a model class (see above). User represents the different users that log in with the Spotify API on the app, and are uniquely identified by their Spotify username. Posts represent the various songs that were posted for the day (and are refreshed every 24 hours). All information regarding songs (e.g. track name, artist, album art, duration, etc.) are accessed using the Spotify API.
+The primary nodes of the database are User and Post, each of which has a model class (see above). User represents the different users that log in with the Spotify API on the app, and are uniquely identified by their Spotify username. Posts represent the various songs that were posted for the day (and are refreshed every 24 hours). All information regarding songs are accessed using the Spotify API.
