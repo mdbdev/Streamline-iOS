@@ -31,7 +31,6 @@ class FeedViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         nowPlayingVC = storyboard.instantiateViewController(withIdentifier: "NowPlayingViewController") as! NowPlayingViewController
         nowPlayingVC.delegate = self
-        // This is a really bad way of doing this :)
         self.refHandle = Database.database().reference()
         self.refHandle.observe(DataEventType.value, with: { (snapshot) in
             DB.getPosts()
