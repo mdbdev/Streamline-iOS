@@ -137,10 +137,15 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
             }
             //print(SpotifyAPI.player.loggedIn)
             if (SpotifyAPI.player.loggedIn){
-                self.nowPlayingLabel.text = "Now playing " + post.songTitle
+//                self.nowPlayingLabel.text = "Now playing " + post.songTitle
+                self.changeLabel(post: post)
                 State.nowPlayingIndex = indexPath.row
             }
         })
+    }
+    
+    func changeLabel(post: Post){
+        nowPlayingLabel.text = "Now playing " + post.songTitle
     }
 }
 
@@ -173,7 +178,7 @@ extension FeedViewController: SPTAudioStreamingDelegate, SPTAudioStreamingPlayba
 }
 
 extension FeedViewController: NowPlayingProtocol {
-    func passLabel(label: String) {
-        self.nowPlayingLabel.text = "Now playing " + label
+    func passLabel(post: Post) {
+        changeLabel(post: post)
     }
 }

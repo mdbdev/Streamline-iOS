@@ -13,6 +13,7 @@ class User {
     var pid: String!
     var uid: String!
     var username: String!
+    var imageURL: String!
     
     //Username needs to be set from the view controllers
     init(uid: String) {

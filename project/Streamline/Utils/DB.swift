@@ -14,12 +14,12 @@ struct DB {
     static var posts: [Post] = []
     // Probably add withBlock for asynch
     // Should probably pass in User type into withBlcok
-    static func createUser(uid: String, username: String, withBlock: @escaping () -> ()) {
+    static func createUser(uid: String, username: String, userprofile: String, withBlock: @escaping () -> ()) {
         let reference = Database.database().reference()
         checkUserExists(uid: uid) { (userExists) in
             if userExists == false {
                 //This is a new user so create the user and assign them a pID of ""
-                let userData = ["pid": "", "username" : username]
+                let userData = ["pid": "", "displayName" : username, "profileImageURL" : userprofile]
                 reference.child("users").child(uid).setValue(userData)
             } else {
                 //This is an old user so the pid is not changed
@@ -86,7 +86,7 @@ struct DB {
         post.pid = key
         ref = ref.child(key)
         let dict: [String: Any] = ["uid": post.uid,
-                                   "username": post.username,
+                                   "displayName": post.username,
                                    "imageUrl": post.imageUrl,
                                    "timePosted": post.timePosted,
                                    "songTitle": post.songTitle,

@@ -36,7 +36,7 @@ class Post {
     
     convenience init(pid: String, postDict: [String: Any]) {
         let uid = postDict["uid"] as! String
-        let username = postDict["username"] as! String
+        let username = postDict["displayName"] as! String
         let imageUrl = postDict["imageUrl"] as! String
         let timePosted = postDict["timePosted"] as! TimeInterval
         let songTitle = postDict["songTitle"] as! String
