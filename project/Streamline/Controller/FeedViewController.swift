@@ -128,8 +128,11 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
             if (error != nil) {
                 print(error!.localizedDescription)
             }
-            self.nowPlayingLabel.text = "Now playing " + post.songTitle
-            State.nowPlayingIndex = indexPath.row
+            //print(SpotifyAPI.player.loggedIn)
+            if (SpotifyAPI.player.loggedIn){
+                self.nowPlayingLabel.text = "Now playing " + post.songTitle
+                State.nowPlayingIndex = indexPath.row
+            }
         })
     }
 }
