@@ -63,7 +63,7 @@ extension UIViewController {
         let offset: CGFloat = max(sqw, sqh) - squareDim
         let y: CGFloat = sqy + offset/2
         
-        return CGRect(x: sqx, y: y, width: squareDim, height: squareDim)
+        return CGRect(x: sqx, y: sqy, width: squareDim, height: squareDim)
     }
     
     

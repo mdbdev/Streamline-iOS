@@ -49,7 +49,7 @@ extension FeedViewController {
     }
     
     func setupButton() {
-        postButton = UIButton(frame: sRect(sqx: 328, sqy: 26, sqw: 30, sqh: 30))
+        postButton = UIButton(frame: sRect(sqx: 329, sqy: 28, sqw: 24, sqh: 24))
         
         postButton.setTitle("+", for: .normal)
         postButton.setTitleColor(UIColor(hex: "311b92"), for: .normal)

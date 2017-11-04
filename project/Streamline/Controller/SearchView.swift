@@ -55,8 +55,7 @@ class SearchView: UIView {
         cancelButton.addTarget(self, action: #selector(cancelButtonPressed), for: .touchUpInside)
         view.addSubview(cancelButton)
         
-        shareButton = UIButton(frame: CGRect(x: 153.18, y: 229.93, width: 107.33, height: 31.81))
-//            UIButton(frame: rRect(rx: 153.18, ry: 229.93, rw: 107.33, rh: 31.81))
+        shareButton = UIButton(frame: rRect(rx: 153.18, ry: 229.93, rw: 107.33, rh: 31.81))
         shareButton.layer.cornerRadius = 15
         shareButton.backgroundColor = UIColor(hex: "673AB7")
         shareButton.setTitleColor(UIColor.white, for: .normal)
@@ -78,13 +77,13 @@ class SearchView: UIView {
     }
     
     func setupSearch() {
-        searchBar = UISearchBar(frame: CGRect(x: 28.14, y: 20, width: 232.37, height: 44.53))
+        searchBar = UISearchBar(frame: CGRect(x: 28.14, y: 20, width: 266.86, height: 44.53))
 //            UISearchBar(frame: CGRect(x: 0, y: 0, width: 232.37, height: 44.53))
             
         searchBar.searchBarStyle = .minimal
         searchBar.backgroundColor = UIColor.white
         
-        searchBar.placeholder = "What song will you share?"
+        searchBar.placeholder = "Search & share a song!"
         searchBar.delegate = self
         view.addSubview(searchBar)
         
