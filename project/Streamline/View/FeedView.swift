@@ -63,16 +63,12 @@ extension FeedViewController {
         
         postButton.addTarget(self, action: #selector(postButtonPressed), for: .touchUpInside)
         view.addSubview(postButton)
-//        DB.currentUser.getPID {
-//            if DB.currentUser.pid != ""{
-//                self.postButton.isEnabled = false
-//            }
-//        }
         
         logoutButton = UIButton(frame: rRect(rx: 15, ry: 30, rw: 74, rh: 22))
         logoutButton.setTitle("Log Out", for: .normal)
         logoutButton.setTitleColor(UIColor(hex: "737171"), for: .normal)
         logoutButton.addTarget(self, action: #selector(logoutButtonPressed), for: .touchUpInside)
+        logoutButton.titleLabel?.adjustsFontSizeToFitWidth = true
         view.addSubview(logoutButton)
     }
     
