@@ -9,6 +9,7 @@
 
 // TODO: Rewrite these to actual views rather than extensions
 extension FeedViewController {    
+    
     func setupUI() {
         setupCollectionView()
         setupBackground()
@@ -48,12 +49,11 @@ extension FeedViewController {
     }
     
     func setupButton() {
-        postButton = UIButton(frame: rRect(rx: 328, ry: 26, rw: 30, rh: 30))
-        // TODO: Change this to an image that's in the Figma
+        postButton = UIButton(frame: sRect(sqx: 328, sqy: 26, sqw: 30, sqh: 30))
+        
         postButton.setTitle("+", for: .normal)
         postButton.setTitleColor(UIColor(hex: "311b92"), for: .normal)
         postButton.backgroundColor = UIColor.white
-        
         
         postButton.backgroundColor = .clear
         postButton.layer.cornerRadius = 1
