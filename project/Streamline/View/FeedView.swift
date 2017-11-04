@@ -24,12 +24,23 @@ extension FeedViewController {
         nowPlayingButton.addTarget(self, action: #selector(nowPlayingButtonPressed), for: .touchUpInside)
         view.addSubview(nowPlayingButton)
         
-        nowPlayingLabel = UILabel(frame: rRect(rx: 0, ry: 609, rw: 375, rh: 60))
-        nowPlayingLabel.textAlignment = .center
-        nowPlayingLabel.textColor = Constants.darkPurple
+        nowPlayingLabel = UILabel(frame: rRect(rx: 61, ry: 617, rw: 268, rh: 28))
+        nowPlayingLabel.textColor = UIColor.black
         nowPlayingLabel.adjustsFontSizeToFitWidth = true
-        nowPlayingLabel.font = Constants.averageSans
+        nowPlayingLabel.font = Constants.averageSans?.withSize(25)
         view.addSubview(nowPlayingLabel)
+        
+        nowPlayingArtist = UILabel(frame: rRect(rx: 61, ry: 644, rw: 268, rh: 16))
+        nowPlayingArtist.textColor = UIColor.black
+        nowPlayingArtist.adjustsFontSizeToFitWidth = true
+        nowPlayingArtist.font = Constants.averageSans?.withSize(15)
+        view.addSubview(nowPlayingArtist)
+        
+        // TODO: Use annie's square function
+        nowPlayingImage = UIImageView(frame: rRect(rx: 8, ry: 617, rw: 47, rh: 47))
+        nowPlayingImage.image = UIImage(named: "albumPlaceholder")
+        nowPlayingImage.contentMode = .scaleAspectFit
+        view.addSubview(nowPlayingImage)
     }
     
     func setupBackground() {

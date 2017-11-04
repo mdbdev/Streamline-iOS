@@ -19,6 +19,8 @@ class FeedViewController: UIViewController {
     var discoverLabel: UILabel!
     var nowPlayingButton: UIButton!
     var nowPlayingLabel: UILabel!
+    var nowPlayingArtist: UILabel!
+    var nowPlayingImage: UIImageView!
     var nowPlayingVC: NowPlayingViewController!
     var searchView: SearchView!
     
