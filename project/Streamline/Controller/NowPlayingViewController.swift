@@ -88,6 +88,7 @@ extension NowPlayingViewController: NowPlayingViewDelegate {
         let toPlayIndex = (State.nowPlayingIndex! + 1) % posts.count
         let post = posts[toPlayIndex]
         self.updateSongInformation(post: post)
+        self.subView.slider.setValue(0, animated: true)
         SpotifyAPI.playPost(post: post, index: toPlayIndex)
     }
     
