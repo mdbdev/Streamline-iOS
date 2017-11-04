@@ -77,21 +77,14 @@ class SearchView: UIView {
     }
     
     func setupSearch() {
-        searchBar = UISearchBar(frame: CGRect(x: 28.14, y: 20, width: 266.86, height: 44.53))
-//            UISearchBar(frame: CGRect(x: 0, y: 0, width: 232.37, height: 44.53))
+        searchBar = UISearchBar(frame: Utils.rRect(rx: 28, ry: 20, rw: 235, rh: 44.53))
             
         searchBar.searchBarStyle = .minimal
         searchBar.backgroundColor = UIColor.white
         
-        searchBar.placeholder = "Search & share a song!"
+        searchBar.placeholder = "Search for a song!"
         searchBar.delegate = self
         view.addSubview(searchBar)
-        
-        let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
-//        textFieldInsideSearchBar?.textColor = UIColor(hex: "5E5D60")
-        
-        let placeholderText = searchBar.value(forKey: "placeholder") as? UITextField
-        //        textFieldInsideSearchBar?.textColor = UIColor(hex: "5E5D60")
     }
     
     func setupTableView() {
