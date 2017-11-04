@@ -31,12 +31,12 @@ class SearchView: UIView {
     
     init(frame: CGRect, large: Bool) {
         super.init(frame: frame)
-        backgroundColor = UIColor.green
         layer.cornerRadius = 5
         clipsToBounds = true
         view = UIView(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))
         view.layer.cornerRadius = 20
         view.backgroundColor = UIColor.white
+        
         addSubview(view)
         setupSearch()
         setupButtons()
@@ -78,11 +78,18 @@ class SearchView: UIView {
     }
     
     func setupSearch() {
-        searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height : view.frame.height * 0.2))
-        searchBar.backgroundColor = UIColor.black
-        searchBar.placeholder = "What song do you want to share?"
+        searchBar = UISearchBar(frame: CGRect(x: 28.14, y: 20, width: 232.37, height: 44.53))
+//            UISearchBar(frame: CGRect(x: 0, y: 0, width: 232.37, height: 44.53))
+            
+        searchBar.searchBarStyle = .minimal
+        searchBar.backgroundColor = UIColor.white
+        
+        searchBar.placeholder = "What song will you share?"
         searchBar.delegate = self
         view.addSubview(searchBar)
+        
+        let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
+        textFieldInsideSearchBar?.textColor = UIColor(hex: "5E5D60")
     }
     
     func setupTableView() {
