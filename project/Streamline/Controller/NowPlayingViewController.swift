@@ -29,9 +29,11 @@ class NowPlayingViewController: UIViewController {
             self.updateSongInformation(post: post)
             let timer = Timer.scheduledTimer(withTimeInterval: 0.016, repeats: true, block: { (t) in
                 if self.sliderEdit {
-                    if let duration = SpotifyAPI.player.metadata.currentTrack?.duration {
-                        let percent = (SpotifyAPI.player.playbackState.position / duration)
-                        self.subView.slider.setValue(Float(percent), animated: true)
+                    if SpotifyAPI.player.metadata != nil {
+                        if let duration = SpotifyAPI.player.metadata.currentTrack?.duration {
+                            let percent = (SpotifyAPI.player.playbackState.position / duration)
+                            self.subView.slider.setValue(Float(percent), animated: true)
+                        }
                     }
                 }
             })
