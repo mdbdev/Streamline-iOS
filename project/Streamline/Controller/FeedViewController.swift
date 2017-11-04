@@ -140,14 +140,14 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
             //print(SpotifyAPI.player.loggedIn)
             if (SpotifyAPI.player.loggedIn){
 //                self.nowPlayingLabel.text = "Now playing " + post.songTitle
-                self.changeLabel(post: post)
                 State.nowPlayingIndex = indexPath.row
+                self.changeLabel(post: post, index: State.nowPlayingIndex!)
             }
         })
     }
     
-    func changeLabel(post: Post){
-        nowPlayingLabel.text = "Now playing " + post.songTitle
+    func changeLabel(post: Post, index: Int) {
+        nowPlayingLabel.text = DB.posts[index].songTitle //post.songTitle
     }
 }
 
@@ -169,7 +169,7 @@ extension FeedViewController: SPTAudioStreamingDelegate, SPTAudioStreamingPlayba
         let post = posts[toPlayIndex]
         State.position = 0
         if let vc = nowPlayingVC {
-            vc.updateSongInformation(post: post)
+            vc.updateSongInformation(post: post, index: toPlayIndex)
         }
         SpotifyAPI.playPost(post: post, index: toPlayIndex)
     }
@@ -180,7 +180,7 @@ extension FeedViewController: SPTAudioStreamingDelegate, SPTAudioStreamingPlayba
 }
 
 extension FeedViewController: NowPlayingProtocol {
-    func passLabel(post: Post) {
-        changeLabel(post: post)
+    func passLabel(post: Post, index: Int) {
+        changeLabel(post: post, index: index)
     }
 }

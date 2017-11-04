@@ -10,7 +10,7 @@ import UIKit
 import Foundation
 
 protocol NowPlayingProtocol {
-    func passLabel(post: Post)
+    func passLabel(post: Post, index: Int)
 }
 
 class NowPlayingViewController: UIViewController {
@@ -31,7 +31,7 @@ class NowPlayingViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         if let index = State.nowPlayingIndex {
             let post = DB.posts[index]
-            self.updateSongInformation(post: post)
+            self.updateSongInformation(post: post, index: index)
             let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { (t) in
                 if self.sliderEdit {
                     if SpotifyAPI.player.metadata != nil {
@@ -47,10 +47,10 @@ class NowPlayingViewController: UIViewController {
         }
     }
     
-    func updateSongInformation(post: Post) {
+    func updateSongInformation(post: Post, index: Int) {
         self.subView.songName.text = post.songTitle
         self.subView.artistName.text = post.artist
-        delegate?.passLabel(post: post)
+        delegate?.passLabel(post: post, index: index)
         post.getImage(withBlock: { (img) in
             self.subView.albumImage.image = img
         })
@@ -95,7 +95,7 @@ extension NowPlayingViewController: NowPlayingViewDelegate {
         let posts = DB.posts
         let toPlayIndex = (State.nowPlayingIndex! + 1) % posts.count
         let post = posts[toPlayIndex]
-        self.updateSongInformation(post: post)
+        self.updateSongInformation(post: post, index: toPlayIndex)
         self.subView.slider.setValue(0, animated: true)
         State.position = 0
         SpotifyAPI.playPost(post: post, index: toPlayIndex)
@@ -105,7 +105,7 @@ extension NowPlayingViewController: NowPlayingViewDelegate {
         let posts = DB.posts
         let toPlayIndex = (State.nowPlayingIndex! - 1 + posts.count) % posts.count
         let post = posts[toPlayIndex]
-        self.updateSongInformation(post: post)
+        self.updateSongInformation(post: post, index: toPlayIndex)
         self.subView.slider.setValue(0, animated: true)
         State.position = 0
         SpotifyAPI.playPost(post: post, index: toPlayIndex)
