@@ -140,14 +140,14 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
             //print(SpotifyAPI.player.loggedIn)
             if (SpotifyAPI.player.loggedIn){
 //                self.nowPlayingLabel.text = "Now playing " + post.songTitle
-                self.changeLabel(post: post)
                 State.nowPlayingIndex = indexPath.row
+                self.changeLabel(post: post)
             }
         })
     }
     
-    func changeLabel(post: Post){
-        nowPlayingLabel.text = "Now playing " + post.songTitle
+    func changeLabel(post: Post) {
+        nowPlayingLabel.text = DB.posts[State.nowPlayingIndex!].songTitle //post.songTitle
     }
 }
 
