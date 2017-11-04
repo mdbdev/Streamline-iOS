@@ -21,8 +21,7 @@ Here is a brief overview of the app flow:
 
 The following CocoaPods/libraries were used in the project:
  * Spotify API: Used for authorization, adding songs, and playing songs.
- * Firebase SDK: 
- * ...
+ * Firebase SDK: Used for storing data regarding users and songs.
  
 ### Backend Overview
 
