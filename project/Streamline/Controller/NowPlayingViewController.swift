@@ -9,11 +9,16 @@
 import UIKit
 import Foundation
 
+protocol NowPlayingProtocol {
+    func passLabel(label: String)
+}
+
 class NowPlayingViewController: UIViewController {
     var recognizer: UIPanGestureRecognizer!
     var initialTouchPoint: CGPoint = CGPoint(x: 0, y: 0)
     var subView: NowPlayingView!
     var sliderEdit: Bool = true
+    var delegate: NowPlayingProtocol?
     
     override func viewDidLoad() {
         subView = NowPlayingView(frame: view.frame)
@@ -45,6 +50,7 @@ class NowPlayingViewController: UIViewController {
     func updateSongInformation(post: Post) {
         self.subView.songName.text = post.songTitle
         self.subView.artistName.text = post.artist
+        delegate?.passLabel(label: post.songTitle)
         post.getImage(withBlock: { (img) in
             self.subView.albumImage.image = img
         })
