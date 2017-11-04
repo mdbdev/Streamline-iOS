@@ -27,11 +27,11 @@ class NowPlayingViewController: UIViewController {
         if let index = State.nowPlayingIndex {
             let post = DB.posts[index]
             self.updateSongInformation(post: post)
-            let timer = Timer.scheduledTimer(withTimeInterval: 0.016, repeats: true, block: { (t) in
+            let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { (t) in
                 if self.sliderEdit {
                     if SpotifyAPI.player.metadata != nil {
                         if let duration = SpotifyAPI.player.metadata.currentTrack?.duration {
-                            let percent = (SpotifyAPI.player.playbackState.position / duration)
+                            let percent = (State.position / duration)
                             self.subView.slider.setValue(Float(percent), animated: true)
                         }
                     }
@@ -94,9 +94,13 @@ extension NowPlayingViewController: NowPlayingViewDelegate {
         SpotifyAPI.playPost(post: post, index: toPlayIndex)
     }
     
-    // TODO: Not implemented
     func backwardButtonPressed() {
-        print("Backward button pressed!")
+        let posts = DB.posts
+        let toPlayIndex = (State.nowPlayingIndex! - 1 + posts.count) % posts.count
+        let post = posts[toPlayIndex]
+        self.updateSongInformation(post: post)
+        self.subView.slider.setValue(0, animated: true)
+        SpotifyAPI.playPost(post: post, index: toPlayIndex)
     }
 
     func sliderChanging() {
@@ -111,6 +115,7 @@ extension NowPlayingViewController: NowPlayingViewDelegate {
         // TODO: Need to seek to the correct place in the track!
         let post = DB.posts[State.nowPlayingIndex!]
         let duration = SpotifyAPI.player.metadata.currentTrack?.duration
-        SpotifyAPI.player.seek(to: TimeInterval(subView.slider.value) * duration!, callback: nil)
+        State.position = TimeInterval(subView.slider.value) * duration!
+        SpotifyAPI.player.seek(to: State.position, callback: nil)
     }
 }

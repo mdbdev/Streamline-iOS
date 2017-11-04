@@ -145,4 +145,8 @@ extension FeedViewController: SPTAudioStreamingDelegate, SPTAudioStreamingPlayba
         self.nowPlayingLabel.text = ""
         State.nowPlayingIndex = -1
     }
+    
+    func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didChangePosition position: TimeInterval) {
+        State.position = position
+    }
 }
