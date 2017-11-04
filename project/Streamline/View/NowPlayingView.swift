@@ -14,6 +14,8 @@ class NowPlayingView: UIView {
     var artistName: UILabel!
     var slider: UISlider!
     var playButton: UIButton!
+    var forwardButton: UIButton!
+    var backwardButton: UIButton!
     var delegate: NowPlayingViewDelegate!
     
     override init(frame: CGRect) {
@@ -56,10 +58,20 @@ class NowPlayingView: UIView {
         // TODO: Have to change the maximum and minimum image to match the figma
         addSubview(slider)
         
-        playButton = UIButton(frame: rRect(rx: 206, ry: 534, rw: 44, rh: 44))
+        playButton = UIButton(frame: rRect(rx: 155, ry: 507, rw: 65, rh: 65))
         playButton.addTarget(self, action: #selector(playButtonPressed), for: .touchUpInside)
         playButton.backgroundColor = UIColor.purple        
         addSubview(playButton)
+        
+        forwardButton = UIButton(frame: rRect(rx: 264, ry: 518, rw: 43, rh: 43))
+        forwardButton.addTarget(self, action: #selector(forwardButtonPressed), for: .touchUpInside)
+        forwardButton.backgroundColor = UIColor.purple
+        addSubview(forwardButton)
+        
+        backwardButton = UIButton(frame: rRect(rx: 68, ry: 518, rw: 43, rh: 43))
+        backwardButton.addTarget(self, action: #selector(backwardButtonPressed), for: .touchUpInside)
+        backwardButton.backgroundColor = UIColor.purple
+        addSubview(backwardButton)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -75,6 +87,14 @@ class NowPlayingView: UIView {
         self.delegate?.backButtonPressed()
     }
     
+    func forwardButtonPressed() {
+        self.delegate?.forwardButtonPressed()
+    }
+    
+    func backwardButtonPressed() {
+        self.delegate?.backwardButtonPressed()
+    }
+    
     func sliderChanging() {
         self.delegate?.sliderChanging()
     }
@@ -87,6 +107,8 @@ class NowPlayingView: UIView {
 protocol NowPlayingViewDelegate {
     func playButtonPressed()
     func backButtonPressed()
+    func forwardButtonPressed()
+    func backwardButtonPressed()
     func sliderChanging()
     func sliderNoLongerChanging()
 }

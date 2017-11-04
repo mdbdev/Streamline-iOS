@@ -49,7 +49,7 @@ extension FeedViewController {
     }
     
     func setupButton() {
-        postButton = UIButton(frame: rRect(rx: 328, ry: 26, rw: 20, rh: 20))
+        postButton = UIButton(frame: rRect(rx: 328, ry: 26, rw: 30, rh: 30))
         // TODO: Change this to an image that's in the Figma
         postButton.setTitle("+", for: .normal)
         postButton.setTitleColor(UIColor(hex: "311b92"), for: .normal)
@@ -66,13 +66,11 @@ extension FeedViewController {
         
         postButton.addTarget(self, action: #selector(postButtonPressed), for: .touchUpInside)
         view.addSubview(postButton)
-        DB.currentUser.getPID {
-            if DB.currentUser.pid != ""{
-                self.postButton.isEnabled = false
-            }
-        }
-        
-        
+//        DB.currentUser.getPID {
+//            if DB.currentUser.pid != ""{
+//                self.postButton.isEnabled = false
+//            }
+//        }
         
         logoutButton = UIButton(frame: rRect(rx: 15, ry: 30, rw: 74, rh: 22))
         logoutButton.setTitle("Log Out", for: .normal)
