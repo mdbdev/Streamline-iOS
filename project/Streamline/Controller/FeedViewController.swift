@@ -74,12 +74,17 @@ class FeedViewController: UIViewController {
         searchView.delegate = self
         //self.performSegue(withIdentifier: "toNewPost", sender: self)
         DB.currentUser.getPID {
-            //if DB.currentUser.pid == "" {
+            if DB.currentUser.pid == "" {
                 self.createSearchView()
-            //} else {
+            } else {
                 //TODO: Check if song is past deadline
-                //let post =
-            //}
+                DB.getSinglePost(pid: DB.currentUser.pid, withBlock: { (post) in
+                    if (Date().timeIntervalSince1970 - post.timePosted >= 43200) {
+                        DB.currentUser.createPost(pid: "")
+                        self.createSearchView()
+                    }
+                })
+            }
             
         }
         

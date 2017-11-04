@@ -101,12 +101,13 @@ struct DB {
         ref.setValue(pid)
     }
     
-    static func getSinglePost(pid: String) {
-        let ref = Database.database().reference().child("posts").child(pid)
-        var post: Post
-        //ref.observeSingleEvent(of: .value) { (snapshot) in
-            
-        //}
+    static func getSinglePost(pid: String, withBlock: @escaping (Post) -> ()) {
+        var ref = Database.database().reference().child("posts").child(pid)
+        
+        ref.observeSingleEvent(of: .value) { (snapshot, error) in
+            let post = Post(pid: pid, postDict: snapshot.value as! [String : Any])
+            withBlock(post)
+        }
     }
     
     static func sortPosts() {
