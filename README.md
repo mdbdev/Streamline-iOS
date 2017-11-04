@@ -16,6 +16,7 @@ Here is a brief overview of the app flow:
   * **New Post**: Pops up a modal (SearchView.swift) that allows users to add songs to the playlist. The user is allowed to add up to one song per day.
   * This VC also allows users to log out.
 * **SearchView**: Displays a modal that allows users to add songs from Spotify, searching based on name.
+* **NowPlayingViewController**: Serves as a player within our app. Users can pause, play, skip forward, and skip back.
 
 ### Technologies
 
