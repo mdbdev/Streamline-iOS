@@ -22,7 +22,7 @@ class SpotifyWeb {
             print((jsonResponse["images"] as! NSArray).count)
             var imageURL = ""
             if (jsonResponse["images"] as! NSArray).count == 0 {
-                imageURL = "https://eliaslealblog.files.wordpress.com/2014/03/user-200.png"
+                imageURL = "https://firebasestorage.googleapis.com/v0/b/streamline-b9599.appspot.com/o/defaultprof.png?alt=media&token=5c582f75-8415-4ef5-86eb-2d1063f5684b"
             } else {
                 imageURL = ((jsonResponse["images"] as! NSArray)[0] as! NSDictionary)["url"] as! String
             }
