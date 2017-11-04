@@ -17,6 +17,7 @@ class FeedViewController: UIViewController {
     
     var nowPlayingVC: NowPlayingViewController!
     var searchView: SearchView!
+    var plusSign: UILabel!
     
     // Firebase
     var refHandle: DatabaseReference!

@@ -77,9 +77,10 @@ class FeedView: UIView {
     func setupButton() {
         postButton = UIButton(frame: Utils.rRect(rx: 332, ry: 31, rw: 23, rh: 23))
         
-        postButton.setTitle("+", for: .normal)
+        postButton.setTitle("", for: .normal)
         postButton.setTitleColor(UIColor(hex: "311b92"), for: .normal)
         postButton.backgroundColor = UIColor.white
+        //postButton.contentVerticalAlignment = UIControlContentVerticalAlignment
         
         postButton.backgroundColor = .clear
         postButton.layer.cornerRadius = 1.5
@@ -88,6 +89,14 @@ class FeedView: UIView {
         
         postButton.addTarget(self, action: #selector(postButtonPressed), for: .touchUpInside)
         addSubview(postButton)
+        
+        
+        plusSign = UILabel(frame: Utils.rRect(rx: 332, ry: 30.2, rw: 23, rh: 23))
+        plusSign.textColor = UIColor(hex: "311b92")
+        plusSign.text = "+"
+        plusSign.textAlignment = .center
+        
+        view.addSubview(plusSign)
         
         logoutButton = UIButton(frame: Utils.rRect(rx: 15, ry: 30, rw: 74, rh: 22))
         logoutButton.setTitle("Log Out", for: .normal)
