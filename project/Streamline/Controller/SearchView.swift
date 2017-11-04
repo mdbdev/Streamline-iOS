@@ -47,7 +47,7 @@ class SearchView: UIView {
     
     func setupButtons() {
         //view.addSubview(cancelButton)
-        cancelButton = UIButton(frame: rRect(rx: 28.14, ry: 229.93, rw: 107.33, rh: 31.81))
+        cancelButton = UIButton(frame: Utils.rRect(rx: 28.14, ry: 229.93, rw: 107.33, rh: 31.81))
         cancelButton.layer.cornerRadius = 15
         cancelButton.backgroundColor = UIColor.white
         cancelButton.setTitleColor(Constants.darkPurple, for: .normal)
@@ -55,8 +55,7 @@ class SearchView: UIView {
         cancelButton.addTarget(self, action: #selector(cancelButtonPressed), for: .touchUpInside)
         view.addSubview(cancelButton)
         
-        shareButton = UIButton(frame: CGRect(x: 153.18, y: 229.93, width: 107.33, height: 31.81))
-//            UIButton(frame: rRect(rx: 153.18, ry: 229.93, rw: 107.33, rh: 31.81))
+        shareButton = UIButton(frame: Utils.rRect(rx: 153.18, ry: 229.93, rw: 107.33, rh: 31.81))
         shareButton.layer.cornerRadius = 15
         shareButton.backgroundColor = UIColor(hex: "673AB7")
         shareButton.setTitleColor(UIColor.white, for: .normal)
@@ -78,18 +77,21 @@ class SearchView: UIView {
     }
     
     func setupSearch() {
-        searchBar = UISearchBar(frame: CGRect(x: 28.14, y: 20, width: 232.37, height: 44.53))
+        searchBar = UISearchBar(frame: CGRect(x: 28.14, y: 20, width: 266.86, height: 44.53))
 //            UISearchBar(frame: CGRect(x: 0, y: 0, width: 232.37, height: 44.53))
             
         searchBar.searchBarStyle = .minimal
         searchBar.backgroundColor = UIColor.white
         
-        searchBar.placeholder = "What song will you share?"
+        searchBar.placeholder = "Search & share a song!"
         searchBar.delegate = self
         view.addSubview(searchBar)
         
         let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
-        textFieldInsideSearchBar?.textColor = UIColor(hex: "5E5D60")
+//        textFieldInsideSearchBar?.textColor = UIColor(hex: "5E5D60")
+        
+        let placeholderText = searchBar.value(forKey: "placeholder") as? UITextField
+        //        textFieldInsideSearchBar?.textColor = UIColor(hex: "5E5D60")
     }
     
     func setupTableView() {
@@ -179,6 +181,23 @@ extension SearchView: UITableViewDelegate, UITableViewDataSource, UISearchBarDel
         cell.artist.text = (song.artists[0] as! SPTPartialArtist).name
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 31
+    }
+    
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        let cellBackground : UIView = UIView(frame: CGRect(0, 10, self.view.frame.size.width, 120))
+//        
+//        cellBackground.layer.backgroundColor = CGColorCreate(CGColorSpaceCreateDeviceRGB(), [1.0, 1.0, 1.0, 1.0])
+//        cellBackground.layer.masksToBounds = false
+//        cellBackground.layer.cornerRadius = 2.0
+//        cellBackground.layer.shadowOffset = CGSizeMake(-1, 1)
+//        cellBackground.layer.shadowOpacity = 0.2
+//
+//        cell.contentView.addSubview(cellBackground)
+//        cell.contentView.sendSubviewToBack(cellBackground)
+//    }
     
     // UISearchBar
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

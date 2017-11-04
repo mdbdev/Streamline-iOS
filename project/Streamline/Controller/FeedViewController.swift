@@ -69,7 +69,7 @@ class FeedViewController: UIViewController {
     
     // Selectors
     func postButtonPressed() {
-        searchView = SearchView(frame: rRect(rx: 40, ry: 152, rw: 295, rh: 289), large: true)
+        searchView = SearchView(frame: Utils.rRect(rx: 40, ry: 152, rw: 295, rh: 289), large: true)
         searchView.layer.cornerRadius = 20
         searchView.delegate = self
         //self.performSegue(withIdentifier: "toNewPost", sender: self)
@@ -115,7 +115,7 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        var cell = collectionView.dequeueReusableCell(withReuseIdentifier: "postCell", for: indexPath) as! PostCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "postCell", for: indexPath) as! PostCollectionViewCell
         cell.awakeFromNib()
         cell.post = DB.posts[indexPath.row]
         cell.updateData()
@@ -147,7 +147,12 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func changeLabel(post: Post, index: Int) {
-        nowPlayingLabel.text = DB.posts[index].songTitle //post.songTitle
+        let post = DB.posts[index]
+        nowPlayingLabel.text = post.songTitle //post.songTitle
+        nowPlayingArtist.text = post.artist
+        // TODO: Make it in the cell
+        let cell = postCollectionView.cellForItem(at: IndexPath(item: index, section: 0)) as! PostCollectionViewCell
+        nowPlayingImage.image = cell.albumImage.image
     }
 }
 
