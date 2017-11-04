@@ -10,7 +10,7 @@ import UIKit
 
 class Utils {
     // creating a relative rectangle for specific mapping from Figma mockup
-    func rRect(rx: CGFloat, ry: CGFloat,
+    static func rRect(rx: CGFloat, ry: CGFloat,
                rw: CGFloat, rh: CGFloat) -> CGRect {
         // magic numbers for iPhone 6/7 relative coords
         let w: CGFloat = 375
@@ -34,7 +34,7 @@ class Utils {
     }
     
     // creating a relative square, using rRect
-    func sRect(sqx: CGFloat, sqy: CGFloat,
+    static func sRect(sqx: CGFloat, sqy: CGFloat,
                sqw: CGFloat, sqh: CGFloat) -> CGRect {
         let squareDim: CGFloat = min(sqw, sqh)
         let offset: CGFloat = max(sqw, sqh) - squareDim

@@ -19,6 +19,8 @@ class FeedViewController: UIViewController {
     var discoverLabel: UILabel!
     var nowPlayingButton: UIButton!
     var nowPlayingLabel: UILabel!
+    var nowPlayingArtist: UILabel!
+    var nowPlayingImage: UIImageView!
     var nowPlayingVC: NowPlayingViewController!
     var searchView: SearchView!
     
@@ -113,7 +115,7 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        var cell = collectionView.dequeueReusableCell(withReuseIdentifier: "postCell", for: indexPath) as! PostCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "postCell", for: indexPath) as! PostCollectionViewCell
         cell.awakeFromNib()
         cell.post = DB.posts[indexPath.row]
         cell.updateData()
@@ -137,10 +139,15 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
             }
             //print(SpotifyAPI.player.loggedIn)
             if (SpotifyAPI.player.loggedIn){
-                self.nowPlayingLabel.text = "Now playing " + post.songTitle
+//                self.nowPlayingLabel.text = "Now playing " + post.songTitle
+                self.changeLabel(post: post)
                 State.nowPlayingIndex = indexPath.row
             }
         })
+    }
+    
+    func changeLabel(post: Post){
+        nowPlayingLabel.text = "Now playing " + post.songTitle
     }
 }
 
@@ -173,7 +180,7 @@ extension FeedViewController: SPTAudioStreamingDelegate, SPTAudioStreamingPlayba
 }
 
 extension FeedViewController: NowPlayingProtocol {
-    func passLabel(label: String) {
-        self.nowPlayingLabel.text = "Now playing " + label
+    func passLabel(post: Post) {
+        changeLabel(post: post)
     }
 }

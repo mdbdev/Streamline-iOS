@@ -10,7 +10,7 @@ import UIKit
 import Foundation
 
 protocol NowPlayingProtocol {
-    func passLabel(label: String)
+    func passLabel(post: Post)
 }
 
 class NowPlayingViewController: UIViewController {
@@ -50,7 +50,7 @@ class NowPlayingViewController: UIViewController {
     func updateSongInformation(post: Post) {
         self.subView.songName.text = post.songTitle
         self.subView.artistName.text = post.artist
-        delegate?.passLabel(label: post.songTitle)
+        delegate?.passLabel(post: post)
         post.getImage(withBlock: { (img) in
             self.subView.albumImage.image = img
         })

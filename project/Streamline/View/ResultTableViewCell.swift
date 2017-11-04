@@ -24,12 +24,14 @@ class ResultTableViewCell: UITableViewCell {
         
         songTitle = UILabel(frame: Utils.rRect(rx: 30.05, ry: 6, rw: 188.19, rh: 17.27))
         songTitle.text = ""
-        songTitle.textColor = UIColor.black
+        songTitle.textColor = UIColor(hex: "524968")
+        songTitle.font = Constants.averageSans?.withSize(14)
         contentView.addSubview(songTitle)
         
-        artist = UILabel(frame: CGRect(x: 0, y: contentView.frame.height / 2, width: contentView.frame.width, height: contentView.frame.height / 2))
+        artist = UILabel(frame: Utils.rRect(rx: 30.05, ry: 20, rw: 188.19, rh: 17.27))
         artist.text = ""
-        artist.textColor = UIColor.black
+        artist.textColor = UIColor(hex: "76747B")
+        artist.font = Constants.averageSans?.withSize(10)
         contentView.addSubview(artist)
     }
     
