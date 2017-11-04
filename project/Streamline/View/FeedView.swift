@@ -8,7 +8,7 @@
 
 
 // TODO: Rewrite these to actual views rather than extensions
-extension FeedViewController {    
+extension FeedViewController {
     
     func setupUI() {
         setupCollectionView()
@@ -49,23 +49,17 @@ extension FeedViewController {
     }
     
     func setupButton() {
-        postButton = UIButton(frame: rRect(rx: 328, ry: 26, rw: 30, rh: 30))
-        // TODO: Change this to an image that's in the Figma
-        postButton.setTitle("+", for: .normal)
-        postButton.setTitleColor(UIColor(hex: "311b92"), for: .normal)
-        postButton.backgroundColor = UIColor.white
+        
+        let postButton = UIButton(frame: sRect(sqx: 328, sqy: 26, sqw: 25, sqh: 25))
+        postButton.backgroundColor = .white
+        view.addSubview(postButton)
         
         postButton.backgroundImage(for: .normal)
         postButton.setBackgroundImage(#imageLiteral(resourceName: "PostButton"), for: .normal)
         
-        
-        postButton.backgroundColor = .clear
-        postButton.layer.cornerRadius = 1
-        postButton.layer.borderWidth = 2
-        postButton.layer.borderColor = UIColor(hex: "311b92").cgColor
-        
         postButton.addTarget(self, action: #selector(postButtonPressed), for: .touchUpInside)
         view.addSubview(postButton)
+        
 //        DB.currentUser.getPID {
 //            if DB.currentUser.pid != ""{
 //                self.postButton.isEnabled = false
