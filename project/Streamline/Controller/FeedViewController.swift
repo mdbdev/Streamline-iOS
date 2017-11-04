@@ -168,9 +168,20 @@ extension FeedViewController: NowPlayingProtocol, FeedViewDelegate {
         searchView.layer.cornerRadius = 20
         searchView.delegate = self
         //self.performSegue(withIdentifier: "toNewPost", sender: self)
-        DB.currentUser.getPID {
-            //if DB.currentUser.pid == "" {
-            self.createSearchView()
+//        DB.currentUser.getPID {
+//            if DB.currentUser.pid == "" {
+//                self.createSearchView()
+//            } else {
+//                //TODO: Check if song is past deadline
+//                DB.getSinglePost(pid: DB.currentUser.pid, withBlock: { (post) in
+//                    if (Date().timeIntervalSince1970 - post.timePosted >= 43200) {
+//                        DB.currentUser.createPost(pid: "")
+//                        self.createSearchView()
+//                    }
+//                })
+//            }
+            createSearchView()
+            
         }
     }
     
