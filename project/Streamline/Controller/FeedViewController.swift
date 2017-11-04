@@ -30,6 +30,7 @@ class FeedViewController: UIViewController {
         // Preloading the player view
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         nowPlayingVC = storyboard.instantiateViewController(withIdentifier: "NowPlayingViewController") as! NowPlayingViewController
+        nowPlayingVC.delegate = self
         // This is a really bad way of doing this :)
         self.refHandle = Database.database().reference()
         self.refHandle.observe(DataEventType.value, with: { (snapshot) in
@@ -143,6 +144,11 @@ extension FeedViewController: SPTAudioStreamingDelegate, SPTAudioStreamingPlayba
         try? AVAudioSession.sharedInstance().setActive(true)
     }
     
+    func audioStreamingDidSkip(toNextTrack audioStreaming: SPTAudioStreamingController!) {
+        print("awlekfjawelkfjawe;lfjkawe;flkajwef")
+        self.nowPlayingLabel.text = audioStreaming.metadata.currentTrack?.albumName
+    }
+    
     func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didStopPlayingTrack trackUri: String!) {
         // TODO: Pick another song to play
         let posts = DB.posts
@@ -157,5 +163,11 @@ extension FeedViewController: SPTAudioStreamingDelegate, SPTAudioStreamingPlayba
     
     func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didChangePosition position: TimeInterval) {
         State.position = position
+    }
+}
+
+extension FeedViewController: NowPlayingProtocol {
+    func passLabel(label: String) {
+        self.nowPlayingLabel.text = "Now playing " + label
     }
 }
