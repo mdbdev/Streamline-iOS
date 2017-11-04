@@ -8,7 +8,17 @@
 
 import UIKit
 
-extension LoginViewController {
+class LoginView: UIView {
+    var logoImage: UIImageView!
+    var logoText: UILabel!
+    var connectButton: UIButton!
+    var connectLabel: UILabel!
+    var delegate: LoginViewDelegate?
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupUI()
+    }
     
     func setupUI() {
         setupLandingImage()
@@ -16,9 +26,9 @@ extension LoginViewController {
     }
     
     func setupLandingImage() {
-        let landingImageView = UIImageView(frame: view.bounds)
+        let landingImageView = UIImageView(frame: bounds)
         landingImageView.image = #imageLiteral(resourceName: "LandingImage")
-        view.addSubview(landingImageView)
+        addSubview(landingImageView)
     }
     
     func setupButton() {
@@ -27,7 +37,7 @@ extension LoginViewController {
         connectButton.addTarget(self, action: #selector(connectButtonPressed), for: .touchUpInside)
         connectButton.layer.cornerRadius = 15
         connectButton.backgroundColor = UIColor.white
-        view.addSubview(connectButton)
+        addSubview(connectButton)
         // Drop Shadow
         connectButton.layer.shadowRadius = 3
         connectButton.layer.shadowOffset = CGSize(width: 0, height: 4)
@@ -41,16 +51,27 @@ extension LoginViewController {
         connectLabel.textAlignment = .center
         connectLabel.font = Constants.averageSans
         connectLabel.font = UIFont.systemFont(ofSize: 14, weight: 1)
-        view.addSubview(connectLabel)
-        connectLabel.minimumScaleFactor = 10/UIFont.labelFontSize
+        connectLabel.minimumScaleFactor = 10 / UIFont.labelFontSize
         connectLabel.adjustsFontSizeToFitWidth = true
+        addSubview(connectLabel)
         
         let spotifyLogo = UIImageView(frame:
-            Utils.rRect(rx: 83, ry: 325, rw: 26, rh: 26))
+            Utils.rRect(rx: 80, ry: 325, rw: 26, rh: 26))
         spotifyLogo.image = #imageLiteral(resourceName: "spotify-logo")
-        view.addSubview(spotifyLogo)
+        addSubview(spotifyLogo)
     }
 
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
+    // Selectors
+    @objc
+    func connectButtonPressed() {
+        self.delegate?.connectButtonPressed()
+    }
+}
 
+protocol LoginViewDelegate {
+    func connectButtonPressed()
 }

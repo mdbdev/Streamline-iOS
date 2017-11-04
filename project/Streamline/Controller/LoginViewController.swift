@@ -10,13 +10,9 @@ import UIKit
 
 // TODO: Logging in, then out, then in again crashes!
 class LoginViewController: UIViewController {
+    var subView: LoginView!
     
-    //UI Elements
-    var logoImage: UIImageView!
-    var logoText: UILabel!
-    var connectButton: UIButton!
-    
-    //Spotify Elements
+    // Spotify Elements
     var auth = SPTAuth.defaultInstance()!
     var session: SPTSession!
     var user: User!
@@ -25,11 +21,13 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Add observer to listen for spotify login success
+        // Add observer to listen for spotify login success
         NotificationCenter.default.addObserver(self, selector: #selector(toFeedView), name: NSNotification.Name(rawValue: "loginSuccessfull"), object: nil)
         setupAuth()
-        setupUI()
-        if(UserDefaults.standard.value(forKey: "SpotifySession") != nil) {
+        subView = LoginView(frame: view.frame)
+        subView.delegate = self
+        view.addSubview(subView)
+        if (UserDefaults.standard.value(forKey: "SpotifySession") != nil) {
             toFeedView()
         }
     }
@@ -45,31 +43,18 @@ class LoginViewController: UIViewController {
         loginUrl = auth.spotifyWebAuthenticationURL()
         SpotifyAPI.auth = auth
     }
-
-    
-    // Selectors
-    // TODO: This crashes if you don't authenticate successfully 
-    func connectButtonPressed() {
-        // This is where we will try connecting with Spotify
-        if UIApplication.shared.openURL(loginUrl!) {
-            if auth.canHandle(auth.redirectURL) {
-                // handle errors
-            }
-        }
-    }
     
     func toFeedView(){
         let userDefaults = UserDefaults.standard
         if let sessionObj:AnyObject = userDefaults.object(forKey: "SpotifySession") as AnyObject? {
             let sessionDataObj = sessionObj as! Data
-            //let firstTimeSession = NSKeyedUnarchiver.unarchiveObject(with: sessionDataObj) as! SPTSession
             if let firstTimeSession = NSKeyedUnarchiver.unarchiveObject(with: sessionDataObj) as? SPTSession{
                 self.session = firstTimeSession
                 if self.session.isValid() {
                     SpotifyAPI.session = self.session
                     createUser()
                 } else {
-                    setupUI()
+                    subView.setupUI()
                 }
             }
             else {
@@ -93,11 +78,20 @@ class LoginViewController: UIViewController {
         SpotifyWeb.getUserDisplayName(accessToken: self.session.accessToken, withBlock: { (username, imageURL) in
             self.user.username = username
             self.user.imageURL = imageURL
-            //DB.createUser(uid: self.session.canonicalUsername, username: self.user.username)
             DB.createUser(uid: self.session.canonicalUsername, username: self.user.username, userprofile: imageURL, withBlock: {
                 self.performSegue(withIdentifier: "toFeed", sender: self)
             })
         })
     }
     
+}
+
+extension LoginViewController: LoginViewDelegate {
+    func connectButtonPressed() {
+        if UIApplication.shared.openURL(loginUrl!) {
+            if auth.canHandle(auth.redirectURL) {
+                // handle errors
+            }
+        }
+    }
 }
