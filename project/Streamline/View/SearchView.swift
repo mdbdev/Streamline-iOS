@@ -11,9 +11,6 @@ import UIKit
 
 protocol SearchViewDelegate {
     func dismissView()
-    //func inviteCollaborators(ids: [String])
-    //func inviteObserver(withId: String)
-    //func getUsers(withPrefix: String, withBlock: @escaping ([User]) -> Void)
 }
 
 
@@ -46,7 +43,6 @@ class SearchView: UIView {
     
     
     func setupButtons() {
-        //view.addSubview(cancelButton)
         cancelButton = UIButton(frame: Utils.rRect(rx: 28.14, ry: 229.93, rw: 107.33, rh: 31.81))
         cancelButton.layer.cornerRadius = 15
         cancelButton.backgroundColor = UIColor.white
@@ -78,7 +74,6 @@ class SearchView: UIView {
     
     func setupSearch() {
         searchBar = UISearchBar(frame: CGRect(x: 28.14, y: 20, width: 266.86, height: 44.53))
-//            UISearchBar(frame: CGRect(x: 0, y: 0, width: 232.37, height: 44.53))
             
         searchBar.searchBarStyle = .minimal
         searchBar.backgroundColor = UIColor.white
@@ -88,14 +83,11 @@ class SearchView: UIView {
         view.addSubview(searchBar)
         
         let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
-//        textFieldInsideSearchBar?.textColor = UIColor(hex: "5E5D60")
         
         let placeholderText = searchBar.value(forKey: "placeholder") as? UITextField
-        //        textFieldInsideSearchBar?.textColor = UIColor(hex: "5E5D60")
     }
     
     func setupTableView() {
-        //let style = UITableViewStyle.grouped
         resultsTableView = UITableView(frame: CGRect(x: 0, y: view.frame.height * 0.2, width: view.frame.width, height: view.frame.height * 0.5))
         resultsTableView.delegate = self
         resultsTableView.dataSource = self
@@ -129,12 +121,10 @@ class SearchView: UIView {
             
             DB.createPost(post: post, user: DB.currentUser)
             u.createPost(pid: post.pid)
-            //self.dismiss(animated: true, completion: nil)
             delegate?.dismissView()
         }
     }
     
-    // For now only gets the first track that comes up
     func searchSpotify() {
         let songTitle = searchBar.text!
         
@@ -185,17 +175,6 @@ extension SearchView: UITableViewDelegate, UITableViewDataSource, UISearchBarDel
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return view.frame.height / 6
     }
-    
-    
-//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        let cellBackground : UIView = UIView(frame: Utils.rRect(0, 10, self.view.frame.size.width, 120))
-//
-//        cellBackground.layer.backgroundColor = UIColor.white.cgColor
-//        cellBackground.layer.masksToBounds = false
-//
-//        cell.contentView.addSubview(cellBackground)
-//        cell.contentView.sendSubviewToBack(cellBackground)
-//    }
     
     // UISearchBar
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
