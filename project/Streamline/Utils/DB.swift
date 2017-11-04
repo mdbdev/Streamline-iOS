@@ -96,9 +96,17 @@ struct DB {
         ref.setValue(dict)
     }
     
-    static func userPost(uid: String, pid: String){
+    static func userPost(uid: String, pid: String) {
         var ref = Database.database().reference().child("users").child(uid).child("pid")
         ref.setValue(pid)
+    }
+    
+    static func getSinglePost(pid: String) {
+        let ref = Database.database().reference().child("posts").child(pid)
+        var post: Post
+        //ref.observeSingleEvent(of: .value) { (snapshot) in
+            
+        //}
     }
     
     static func sortPosts() {

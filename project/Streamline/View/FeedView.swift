@@ -62,15 +62,15 @@ extension FeedViewController {
     }
     
     func setupButton() {
-        postButton = UIButton(frame: Utils.sRect(sqx: 329, sqy: 28, sqw: 24, sqh: 24))
+        postButton = UIButton(frame: Utils.rRect(rx: 332, ry: 31, rw: 23, rh: 23))
         
         postButton.setTitle("+", for: .normal)
         postButton.setTitleColor(UIColor(hex: "311b92"), for: .normal)
         postButton.backgroundColor = UIColor.white
         
         postButton.backgroundColor = .clear
-        postButton.layer.cornerRadius = 1
-        postButton.layer.borderWidth = 2
+        postButton.layer.cornerRadius = 1.5
+        postButton.layer.borderWidth = 2.5
         postButton.layer.borderColor = UIColor(hex: "311b92").cgColor
         
         postButton.addTarget(self, action: #selector(postButtonPressed), for: .touchUpInside)
@@ -85,7 +85,7 @@ extension FeedViewController {
     }
     
     func setupLabel() {
-        discoverLabel = UILabel(frame: CGRect(x: 0, y: 25, width: view.frame.width, height: 44))
+        discoverLabel = UILabel(frame: Utils.rRect(rx: 0, ry: 20, rw: 375, rh: 44))
         
         discoverLabel.textColor = UIColor(hex: "311b92")
         discoverLabel.text = "DISCOVER"
