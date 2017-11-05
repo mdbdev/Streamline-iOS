@@ -103,12 +103,16 @@ extension NowPlayingViewController: NowPlayingViewDelegate {
     
     func backwardButtonPressed() {
         let posts = DB.posts
-        let toPlayIndex = (State.nowPlayingIndex! - 1 + posts.count) % posts.count
-        let post = posts[toPlayIndex]
-        self.updateSongInformation(post: post, index: toPlayIndex)
+        let toPlayIndex = (State.nowPlayingIndex! - 1)
         self.subView.slider.setValue(0, animated: true)
         State.position = 0
-        SpotifyAPI.playPost(post: post, index: toPlayIndex)
+        if toPlayIndex >= 0 {
+            let post = posts[toPlayIndex]
+            self.updateSongInformation(post: post, index: toPlayIndex)
+            SpotifyAPI.playPost(post: post, index: toPlayIndex)
+        } else {
+            SpotifyAPI.playPost(post: posts[0], index: 0)
+        }
     }
 
     func sliderChanging() {
