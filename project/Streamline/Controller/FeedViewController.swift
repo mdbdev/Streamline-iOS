@@ -45,10 +45,10 @@ class FeedViewController: UIViewController {
         nowPlayingVC?.delegate = self
         
         //Initial post loading
-        self.refHandle = Database.database().reference()
-        self.refHandle.observe(DataEventType.value, with: { (snapshot) in
+        self.refHandle = Database.database().reference().child("posts")
+        self.refHandle.observe(DataEventType.childAdded, with: { (snapshot) in
             DB.getPosts(withBlock : {
-                self.subView.postCollectionView.reloadData()
+                self.populateFeed()
             })
         })
         
@@ -116,23 +116,21 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
         for sub in cell.contentView.subviews {
             sub.removeFromSuperview()
         }
-        let post = DB.posts[indexPath.row]
-        //let cell = cell as! PostCollectionViewCell
-        
         cell.awakeFromNib()
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        let cell = cell as! PostCollectionViewCell
+        let post = DB.posts[indexPath.row]
         
         cell.songTitleLabel.text = post.songTitle
         cell.artistLabel.text = post.artist
         cell.postUserLabel.text = post.username
-        /*post.getImage { (img) in
-         cell.albumImage.image = img
-         }*/
-        let url = URL(string:post.imageUrl)
-        let data = try? Data(contentsOf: url!)
-        cell.albumImage.image = UIImage(data: data!)
-        return cell
-        
-        //return cell
+        post.getImage { (img) in
+            print(post.songTitle)
+            cell.albumImage.image = img
+        }
     }
     
     /*func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {

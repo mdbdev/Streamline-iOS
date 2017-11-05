@@ -80,7 +80,7 @@ struct DB {
         })
     }
     
-    //Creates a post in the database
+    // Creates a post in the database
     static func createPost(post: Post, user: User) {
         var ref = Database.database().reference().child("posts")
         let key = ref.childByAutoId().key
@@ -96,13 +96,13 @@ struct DB {
         ref.setValue(dict)
     }
     
-    //Sets the users post pid in the database
+    // Sets the users post pid in the database
     static func userPost(uid: String, pid: String) {
         var ref = Database.database().reference().child("users").child(uid).child("pid")
         ref.setValue(pid)
     }
     
-    //Gets a single post with the user id
+    // Gets a single post with the user id
     static func getSinglePost(pid: String, withBlock: @escaping (Post) -> ()) {
         var ref = Database.database().reference().child("posts").child(pid)
         ref.observeSingleEvent(of: .value) { (snapshot, error) in
