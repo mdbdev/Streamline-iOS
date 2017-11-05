@@ -138,6 +138,11 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func changeLabel(post: Post, index: Int) {
+        subView.nowPlayingButton.isHidden = false
+        subView.nowPlayingArtist.isHidden = false
+        subView.nowPlayingImage.isHidden = false
+        subView.nowPlayingLabel.isHidden = false
+        subView.postCollectionView.frame = Utils.rRect(rx: 21, ry: 69, rw: 334, rh: 541)
         let post = DB.posts[index]
         subView.nowPlayingLabel.text = post.songTitle //post.songTitle
         subView.nowPlayingArtist.text = post.artist

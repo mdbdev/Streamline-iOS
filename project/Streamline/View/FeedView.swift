@@ -17,6 +17,7 @@ class FeedView: UIView {
     var nowPlayingLabel: UILabel!
     var nowPlayingArtist: UILabel!
     var nowPlayingImage: UIImageView!
+    var plusSign: UILabel!
     var delegate: FeedViewDelegate?
     
     override init(frame: CGRect) {
@@ -36,6 +37,7 @@ class FeedView: UIView {
         nowPlayingButton = UIButton(frame: Utils.rRect(rx: 0, ry: 609, rw: 375, rh: 60))
         nowPlayingButton.backgroundColor = UIColor.white
         nowPlayingButton.addTarget(self, action: #selector(nowPlayingButtonPressed), for: .touchUpInside)
+        nowPlayingButton.isHidden = true
         addSubview(nowPlayingButton)
         
         nowPlayingLabel = UILabel(frame: Utils.rRect(rx: 61, ry: 617, rw: 268, rh: 28))
@@ -43,18 +45,21 @@ class FeedView: UIView {
 
         nowPlayingLabel.adjustsFontSizeToFitWidth = true
         nowPlayingLabel.font = Constants.averageSans?.withSize(25)
+        nowPlayingLabel.isHidden = true
         addSubview(nowPlayingLabel)
         
         nowPlayingArtist = UILabel(frame: Utils.rRect(rx: 61, ry: 644, rw: 268, rh: 16))
         nowPlayingArtist.textColor = UIColor.black
         nowPlayingArtist.adjustsFontSizeToFitWidth = true
         nowPlayingArtist.font = Constants.averageSans?.withSize(15)
+        nowPlayingArtist.isHidden = true
         addSubview(nowPlayingArtist)
         
         // TODO: Use annie's square function
         nowPlayingImage = UIImageView(frame: Utils.rRect(rx: 8, ry: 617, rw: 47, rh: 47))
         nowPlayingImage.image = UIImage(named: "albumPlaceholder")
         nowPlayingImage.contentMode = .scaleAspectFit
+        nowPlayingImage.isHidden = true
         addSubview(nowPlayingImage)
     }
     
@@ -64,10 +69,9 @@ class FeedView: UIView {
     
     func setupCollectionView() {
         let layout = UICollectionViewFlowLayout()
-        // TODO: Change these to match the figma
         layout.minimumLineSpacing = 8
         layout.minimumInteritemSpacing = 8
-        postCollectionView = UICollectionView(frame: Utils.rRect(rx: 21, ry: 69, rw: 334, rh: 541), collectionViewLayout: layout)
+        postCollectionView = UICollectionView(frame: Utils.rRect(rx: 21, ry: 69, rw: 334, rh: 598), collectionViewLayout: layout)
         postCollectionView.register(PostCollectionViewCell.self, forCellWithReuseIdentifier: "postCell")
 
         postCollectionView.backgroundColor = Constants.cvBackground
@@ -76,18 +80,22 @@ class FeedView: UIView {
     
     func setupButton() {
         postButton = UIButton(frame: Utils.rRect(rx: 332, ry: 31, rw: 23, rh: 23))
-        
-        postButton.setTitle("+", for: .normal)
+        postButton.setTitle("", for: .normal)
         postButton.setTitleColor(UIColor(hex: "311b92"), for: .normal)
         postButton.backgroundColor = UIColor.white
-        
         postButton.backgroundColor = .clear
         postButton.layer.cornerRadius = 1.5
         postButton.layer.borderWidth = 2.5
         postButton.layer.borderColor = UIColor(hex: "311b92").cgColor
-        
         postButton.addTarget(self, action: #selector(postButtonPressed), for: .touchUpInside)
         addSubview(postButton)
+        
+        
+        plusSign = UILabel(frame: Utils.rRect(rx: 332, ry: 30.2, rw: 23, rh: 23))
+        plusSign.textColor = UIColor(hex: "311b92")
+        plusSign.text = "+"
+        plusSign.textAlignment = .center
+        addSubview(plusSign)
         
         logoutButton = UIButton(frame: Utils.rRect(rx: 15, ry: 30, rw: 74, rh: 22))
         logoutButton.setTitle("Log Out", for: .normal)
