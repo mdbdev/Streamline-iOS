@@ -271,6 +271,7 @@ extension FeedViewController: NowPlayingProtocol, FeedViewDelegate {
     func nowPlayingButtonPressed() {
         if let index = State.nowPlayingIndex {
             if let npvc = nowPlayingVC {
+                npvc.modalPresentationCapturesStatusBarAppearance = true
                 self.present(npvc, animated: true, completion: nil)
                 UIView.animate(withDuration: 0.4, animations: {
                     self.blur.alpha = BLUR_MAX

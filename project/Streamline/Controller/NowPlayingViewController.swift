@@ -31,7 +31,7 @@ class NowPlayingViewController: UIViewController {
     var subView: NowPlayingView!
     var delegate: NowPlayingProtocol?
     
-    override func viewDidLoad() {
+    override func viewDidLoad() {        
         view.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.7)
         
         // Setups player view
