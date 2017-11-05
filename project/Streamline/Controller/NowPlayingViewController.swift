@@ -6,6 +6,7 @@
 //  Copyright © 2017 Stephen Jayakar. All rights reserved.
 //
 
+
 import UIKit
 import Foundation
 
@@ -17,17 +18,20 @@ protocol NowPlayingProtocol {
 
 //Player controls and detailed info about song
 class NowPlayingViewController: UIViewController {
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
     
-    //Seekbar variables
+    // Seekbar variables
     var recognizer: UIPanGestureRecognizer!
     var initialTouchPoint: CGPoint = CGPoint(x: 0, y: 0)
     var sliderEdit: Bool = true
     
-    //Delegate/subview
+    // Delegate/subview
     var subView: NowPlayingView!
     var delegate: NowPlayingProtocol?
     
-    override func viewDidLoad() {
+    override func viewDidLoad() {        
         view.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.7)
         
         // Setups player view
@@ -42,6 +46,8 @@ class NowPlayingViewController: UIViewController {
     
     //Manages the seekbar loading for the specific song being played
     override func viewWillAppear(_ animated: Bool) {
+        setNeedsStatusBarAppearanceUpdate()
+        super.viewWillAppear(animated)
         if let index = State.nowPlayingIndex {
             let post = DB.posts[index]
             self.updateSongInformation(post: post, index: index)
