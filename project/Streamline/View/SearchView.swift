@@ -11,9 +11,6 @@ import UIKit
 
 protocol SearchViewDelegate {
     func dismissView()
-    //func inviteCollaborators(ids: [String])
-    //func inviteObserver(withId: String)
-    //func getUsers(withPrefix: String, withBlock: @escaping ([User]) -> Void)
 }
 
 
@@ -46,7 +43,6 @@ class SearchView: UIView {
     
     
     func setupButtons() {
-        //view.addSubview(cancelButton)
         cancelButton = UIButton(frame: Utils.rRect(rx: 28.14, ry: 229.93, rw: 107.33, rh: 31.81))
         cancelButton.layer.cornerRadius = 15
         cancelButton.backgroundColor = UIColor.white
@@ -122,12 +118,10 @@ class SearchView: UIView {
             
             DB.createPost(post: post, user: DB.currentUser)
             u.createPost(pid: post.pid)
-            //self.dismiss(animated: true, completion: nil)
             delegate?.dismissView()
         }
     }
     
-    // For now only gets the first track that comes up
     func searchSpotify() {
         let songTitle = searchBar.text!
         
@@ -178,17 +172,6 @@ extension SearchView: UITableViewDelegate, UITableViewDataSource, UISearchBarDel
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return view.frame.height / 6
     }
-    
-    
-//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        let cellBackground : UIView = UIView(frame: Utils.rRect(0, 10, self.view.frame.size.width, 120))
-//
-//        cellBackground.layer.backgroundColor = UIColor.white.cgColor
-//        cellBackground.layer.masksToBounds = false
-//
-//        cell.contentView.addSubview(cellBackground)
-//        cell.contentView.sendSubviewToBack(cellBackground)
-//    }
     
     // UISearchBar
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
