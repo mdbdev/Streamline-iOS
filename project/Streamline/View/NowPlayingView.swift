@@ -26,7 +26,8 @@ class NowPlayingView: UIView {
         backButton.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
         addSubview(backButton)
         
-        albumImage = UIImageView(frame: Utils.rRect(rx: 66, ry: 136, rw: 245, rh: 245))
+        //albumImage = UIImageView(frame: Utils.rRect(rx: 66, ry: 136, rw: 245, rh: 245))
+        albumImage = UIImageView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.width))
         albumImage.image = UIImage(named: "albumPlaceholder")
         albumImage.contentMode = .scaleAspectFit
         addSubview(albumImage)
