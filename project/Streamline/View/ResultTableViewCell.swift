@@ -19,17 +19,17 @@ class ResultTableViewCell: UITableViewCell {
     
     func setupLabels() {
         let musicIcon: UIImageView = UIImageView(frame: Utils.rRect(rx: 28, ry: 9, rw: 9, rh: 10))
-        musicIcon.image = #imageLiteral(resourceName: "music note")
+        musicIcon.image            = #imageLiteral(resourceName: "music note")
         contentView.addSubview(musicIcon)
         
-        songTitle = UILabel(frame: Utils.rRect(rx: 45.05, ry: 6, rw: 249.95, rh: 17.27))
-        songTitle.text = ""
+        songTitle           = UILabel(frame: Utils.rRect(rx: 45.05, ry: 6, rw: 249.95, rh: 17.27))
+        songTitle.text      = ""
         songTitle.textColor = UIColor(hex: "524968")
         songTitle.font = Constants.averageSans
         songTitle.font = UIFont.systemFont(ofSize: 14)
         contentView.addSubview(songTitle)
         
-        artist = UILabel(frame: Utils.rRect(rx: 45.05, ry: 20, rw: 249.95, rh: 17.27))
+        artist      = UILabel(frame: Utils.rRect(rx: 45.05, ry: 20, rw: 249.95, rh: 17.27))
         artist.text = ""
         artist.textColor = UIColor(hex: "76747B")
         artist.font = Constants.averageSans

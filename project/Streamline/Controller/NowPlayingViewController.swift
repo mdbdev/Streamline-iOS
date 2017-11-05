@@ -113,13 +113,6 @@ extension NowPlayingViewController: NowPlayingViewDelegate {
             SpotifyAPI.player.setIsPlaying(true, callback: nil)
             subView.playButton.setBackgroundImage(UIImage(named: "pause"), for: .normal)
         }
-//        State.paused = !State.paused
-//        SpotifyAPI.player.setIsPlaying(State.paused, callback: nil)
-//        if !State.paused {
-//            subView.playButton.setBackgroundImage(UIImage(named: "play"), for: .normal)
-//        } else {
-//            subView.playButton.setBackgroundImage(UIImage(named: "pause"), for: .normal)
-//        }
     }
     
     func backButtonPressed() {

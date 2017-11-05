@@ -13,17 +13,17 @@ class Utils {
     static func rRect(rx: CGFloat, ry: CGFloat,
                rw: CGFloat, rh: CGFloat) -> CGRect {
         // magic numbers for iPhone 6/7 relative coords
-        let w: CGFloat = 375
-        let h: CGFloat = 667
-        let screenSize = UIScreen.main.bounds
-        let screenWidth = screenSize.width
+        let w: CGFloat   = 375
+        let h: CGFloat   = 667
+        let screenSize   = UIScreen.main.bounds
+        let screenWidth  = screenSize.width
         let screenHeight = screenSize.height
         
         
         let x: CGFloat = (rx / w) * screenWidth
         let y: CGFloat = (ry / h) * screenHeight
         
-        let width: CGFloat = (rw / w) * screenWidth
+        let width : CGFloat = (rw / w) * screenWidth
         let height: CGFloat = (rh / h) * screenHeight
         
         if rw == rh {
@@ -37,8 +37,8 @@ class Utils {
     static func sRect(sqx: CGFloat, sqy: CGFloat,
                sqw: CGFloat, sqh: CGFloat) -> CGRect {
         let squareDim: CGFloat = min(sqw, sqh)
-        let offset: CGFloat = max(sqw, sqh) - squareDim
-        let y: CGFloat = sqy + offset/2
+        let offset   : CGFloat = max(sqw, sqh) - squareDim
+        let y        : CGFloat = sqy + offset/2
         
         return CGRect(x: sqx, y: y, width: squareDim, height: squareDim)
     }

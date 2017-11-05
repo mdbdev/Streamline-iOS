@@ -15,9 +15,10 @@ let BLUR_MAX = CGFloat(0.9)
 
 class FeedViewController: UIViewController {
     var blur: UIVisualEffectView!
+    
     //Search View
     var searchView: SearchView!
-    var modalView: AKModalView!
+    var modalView : AKModalView!
     
     //Feed View for UI elements
     var subView: FeedView!
@@ -32,7 +33,7 @@ class FeedViewController: UIViewController {
         super.viewDidLoad()
         
         // Setups the feed view elements
-        subView = FeedView(frame: view.frame)
+        subView          = FeedView(frame: view.frame)
         subView.delegate = self
         view.addSubview(subView)
         subView.postCollectionView.delegate = self
@@ -115,23 +116,39 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
         for sub in cell.contentView.subviews {
             sub.removeFromSuperview()
         }
+        let post = DB.posts[indexPath.row]
+        //let cell = cell as! PostCollectionViewCell
         
         cell.awakeFromNib()
         
+        cell.songTitleLabel.text = post.songTitle
+        cell.artistLabel.text = post.artist
+        cell.postUserLabel.text = post.username
+        /*post.getImage { (img) in
+         cell.albumImage.image = img
+         }*/
+        let url = URL(string:post.imageUrl)
+        let data = try? Data(contentsOf: url!)
+        cell.albumImage.image = UIImage(data: data!)
         return cell
+        
+        //return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    /*func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let post = DB.posts[indexPath.row]
         let cell = cell as! PostCollectionViewCell
         cell.songTitleLabel.text = post.songTitle
         cell.artistLabel.text = post.artist
         cell.postUserLabel.text = post.username
-        cell.albumImage.image = #imageLiteral(resourceName: "spotify-logo")
-        post.getImage { (img) in
+        /*post.getImage { (img) in
             cell.albumImage.image = img
-        }
-    }
+        }*/
+        let url = URL(string:post.imageUrl)
+        let data = try? Data(contentsOf: url!)
+        cell.albumImage.image = UIImage(data: data!)
+        return cell
+    }*/
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: (334 / 375) * view.frame.width, height: 69)
@@ -225,7 +242,11 @@ extension FeedViewController: NowPlayingProtocol, FeedViewDelegate {
     // Selectors
     func postButtonPressed() {
         
-        searchView = SearchView(frame: Utils.rRect(rx: 40, ry: 152, rw: 295, rh: 289), large: true)
+        searchView = SearchView(frame: Utils.rRect(rx: 40, ry: 120, rw: 295, rh: 289), large: true)
+        searchView.delegate = self
+        searchView.searchBar.text = "a"
+        searchView.searchSpotify()
+        searchView.searchBar.text = ""
         searchView.delegate = self
         
         /* Code to limit user to one song a day and delete user pid if it has been 12 hours */

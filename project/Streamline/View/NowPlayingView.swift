@@ -20,36 +20,36 @@ class NowPlayingView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        albumImage              = UIImageView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.width))
+        albumImage.image        = UIImage(named: "albumPlaceholder")
+        albumImage.contentMode  = .scaleAspectFit
+        addSubview(albumImage)
+        
         backButton = UIButton(frame: Utils.rRect(rx: 26, ry: 25.5, rw: 25, rh: 25))
-        backButton.setImage(UIImage(named: "Vector"), for: .normal)
+        backButton.setImage(UIImage(named: "arrow"), for: .normal)
         backButton.imageView?.contentMode = .scaleAspectFit
         backButton.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
         addSubview(backButton)
         
-        //albumImage = UIImageView(frame: Utils.rRect(rx: 66, ry: 136, rw: 245, rh: 245))
-        albumImage = UIImageView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.width))
-        albumImage.image = UIImage(named: "albumPlaceholder")
-        albumImage.contentMode = .scaleAspectFit
-        addSubview(albumImage)
-        
-        songName = UILabel(frame: CGRect(x: 0, y: frame.height * 0.62, width: frame.width, height: 35))
-        songName.text = "Song"
+        songName        = UILabel(frame: CGRect(x: 0, y: frame.height * 0.62, width: frame.width, height: 35))
+        songName.text   = "Song"
         songName.adjustsFontSizeToFitWidth = true
-        songName.textColor = .black
+        songName.textColor                 = .black
         songName.font = Constants.averageSans
         songName.font = UIFont.systemFont(ofSize: 20, weight: 1)
         songName.textAlignment = .center
         addSubview(songName)
         
-        artistName = UILabel(frame: CGRect(x: 0, y: frame.height * 0.67, width: frame.width, height: 25))
+        artistName      = UILabel(frame: CGRect(x: 0, y: frame.height * 0.67, width: frame.width, height: 25))
         artistName.text = "Artist"
         artistName.adjustsFontSizeToFitWidth = true
-        artistName.textColor = .black
-        artistName.font = Constants.averageSans?.withSize(15)
-        artistName.textAlignment = .center
+        artistName.textColor                 = .black
+        artistName.font                      = Constants.averageSans?.withSize(15)
+        artistName.textAlignment             = .center
         addSubview(artistName)
         
-        slider = UISlider(frame: Utils.rRect(rx: 26, ry: 500, rw: 328, rh: 20))
+        slider              = UISlider(frame: Utils.rRect(rx: 26, ry: 500, rw: 328, rh: 20))
         slider.isContinuous = false
         slider.maximumValue = 1
         slider.minimumValue = 0

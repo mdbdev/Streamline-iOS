@@ -13,6 +13,7 @@ class PostCollectionViewCell: UICollectionViewCell {
     var songTitleLabel: UILabel!
     var artistLabel: UILabel!
     var postUserLabel: UILabel!
+    var postImageURL: String!
     var albumImage: UIImageView!
     
     override func awakeFromNib() {
@@ -33,7 +34,7 @@ class PostCollectionViewCell: UICollectionViewCell {
                                                width: contentView.frame.width - (contentView.frame.height + 10),
                                                height: 28))
         songTitleLabel.adjustsFontSizeToFitWidth = true
-        songTitleLabel.textColor = UIColor.black
+        songTitleLabel.textColor                 = UIColor.black
         songTitleLabel.text = "Song"
         songTitleLabel.font = Constants.averageSans?.withSize(20)
         songTitleLabel.font = UIFont.systemFont(ofSize: 13, weight: 2)
@@ -45,7 +46,7 @@ class PostCollectionViewCell: UICollectionViewCell {
                                             width: contentView.frame.width - (contentView.frame.height + 10),
                                             height: 28))
         artistLabel.adjustsFontSizeToFitWidth = true
-        artistLabel.textColor = UIColor.black
+        artistLabel.textColor                 = UIColor.black
         artistLabel.text = "Artist"
         artistLabel.font = Constants.averageSans
         artistLabel.font = UIFont.systemFont(ofSize: 13)
@@ -56,7 +57,7 @@ class PostCollectionViewCell: UICollectionViewCell {
                                               width: contentView.frame.width - (contentView.frame.height + 24),
                                               height: 16))
         postUserLabel.textColor = UIColor(hex: "77747a")
-        postUserLabel.text = "User"
+        postUserLabel.text      = "User"
         postUserLabel.adjustsFontSizeToFitWidth = true
         postUserLabel.font = Constants.averageSans?.withSize(12)
         postUserLabel.font = UIFont.systemFont(ofSize: 12)
@@ -64,17 +65,17 @@ class PostCollectionViewCell: UICollectionViewCell {
     }
     
     func setupAlbumImage() {
-        albumImage = UIImageView(frame: CGRect(x: 0, y: 0, width: contentView.frame.height, height: contentView.frame.height))
-        albumImage.contentMode = .scaleAspectFit
-        albumImage.image = UIImage(named: "albumPlaceholder")
+        albumImage              = UIImageView(frame: CGRect(x: 0, y: 0, width: contentView.frame.height, height: contentView.frame.height))
+        albumImage.contentMode  = .scaleAspectFit
+        albumImage.image        = UIImage(named: "albumPlaceholder")
         contentView.addSubview(albumImage)
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        postUserLabel.isHidden = true
-        artistLabel.isHidden = true
+        postUserLabel.isHidden  = true
+        artistLabel.isHidden    = true
         songTitleLabel.isHidden = true
-        albumImage.isHidden = true
+        albumImage.isHidden     = true
     }
 }
