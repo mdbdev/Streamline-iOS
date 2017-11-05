@@ -115,23 +115,39 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
         for sub in cell.contentView.subviews {
             sub.removeFromSuperview()
         }
+        let post = DB.posts[indexPath.row]
+        //let cell = cell as! PostCollectionViewCell
         
         cell.awakeFromNib()
         
+        cell.songTitleLabel.text = post.songTitle
+        cell.artistLabel.text = post.artist
+        cell.postUserLabel.text = post.username
+        /*post.getImage { (img) in
+         cell.albumImage.image = img
+         }*/
+        let url = URL(string:post.imageUrl)
+        let data = try? Data(contentsOf: url!)
+        cell.albumImage.image = UIImage(data: data!)
         return cell
+        
+        //return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    /*func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let post = DB.posts[indexPath.row]
         let cell = cell as! PostCollectionViewCell
         cell.songTitleLabel.text = post.songTitle
         cell.artistLabel.text = post.artist
         cell.postUserLabel.text = post.username
-        cell.albumImage.image = #imageLiteral(resourceName: "spotify-logo")
-        post.getImage { (img) in
+        /*post.getImage { (img) in
             cell.albumImage.image = img
-        }
-    }
+        }*/
+        let url = URL(string:post.imageUrl)
+        let data = try? Data(contentsOf: url!)
+        cell.albumImage.image = UIImage(data: data!)
+        return cell
+    }*/
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: (334 / 375) * view.frame.width, height: 69)

@@ -13,6 +13,7 @@ class PostCollectionViewCell: UICollectionViewCell {
     var songTitleLabel: UILabel!
     var artistLabel: UILabel!
     var postUserLabel: UILabel!
+    var postImageURL: String!
     var albumImage: UIImageView!
     
     override func awakeFromNib() {
