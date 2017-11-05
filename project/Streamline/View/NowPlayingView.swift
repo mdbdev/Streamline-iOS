@@ -27,12 +27,12 @@ class NowPlayingView: UIView {
         addSubview(backButton)
         
         //albumImage = UIImageView(frame: Utils.rRect(rx: 66, ry: 136, rw: 245, rh: 245))
-        albumImage = UIImageView(frame: CGRect(x: 0, y: frame.width * 0.17, width: self.frame.width, height: self.frame.width))
+        albumImage = UIImageView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.width))
         albumImage.image = UIImage(named: "albumPlaceholder")
         albumImage.contentMode = .scaleAspectFit
         addSubview(albumImage)
         
-        songName = UILabel(frame: CGRect(x: 0, y: frame.height * 0.69, width: frame.width, height: 35))
+        songName = UILabel(frame: CGRect(x: 0, y: frame.height * 0.62, width: frame.width, height: 35))
         songName.text = "Song"
         songName.adjustsFontSizeToFitWidth = true
         songName.textColor = .black
@@ -41,7 +41,7 @@ class NowPlayingView: UIView {
         songName.textAlignment = .center
         addSubview(songName)
         
-        artistName = UILabel(frame: CGRect(x: 0, y: frame.height * 0.74, width: frame.width, height: 25))
+        artistName = UILabel(frame: CGRect(x: 0, y: frame.height * 0.67, width: frame.width, height: 25))
         artistName.text = "Artist"
         artistName.adjustsFontSizeToFitWidth = true
         artistName.textColor = .black
@@ -49,7 +49,7 @@ class NowPlayingView: UIView {
         artistName.textAlignment = .center
         addSubview(artistName)
         
-        slider = UISlider(frame: Utils.rRect(rx: 26, ry: 540, rw: 328, rh: 20))
+        slider = UISlider(frame: Utils.rRect(rx: 26, ry: 500, rw: 328, rh: 20))
         slider.isContinuous = false
         slider.maximumValue = 1
         slider.minimumValue = 0
@@ -62,7 +62,7 @@ class NowPlayingView: UIView {
         // TODO: Have to change the maximum and minimum image to match the figma
         addSubview(slider)
         
-        playButton = UIButton(frame: Utils.rRect(rx: 175, ry: 598, rw: 25, rh: 25))
+        playButton = UIButton(frame: Utils.rRect(rx: 175, ry: 558, rw: 25, rh: 25))
         playButton.addTarget(self, action: #selector(playButtonPressed), for: .touchUpInside)
         if State.paused {
             playButton.setBackgroundImage(UIImage(named: "play"), for: .normal)
@@ -71,12 +71,12 @@ class NowPlayingView: UIView {
         }
         addSubview(playButton)
         
-        forwardButton = UIButton(frame: Utils.rRect(rx: 250.5, ry: 600.5, rw: 20, rh: 20))
+        forwardButton = UIButton(frame: Utils.rRect(rx: 250.5, ry: 560.5, rw: 20, rh: 20))
         forwardButton.addTarget(self, action: #selector(forwardButtonPressed), for: .touchUpInside)
         forwardButton.setBackgroundImage(#imageLiteral(resourceName: "forward"), for: .normal)
         addSubview(forwardButton)
         
-        backwardButton = UIButton(frame: Utils.rRect(rx: 104.5, ry: 600.5, rw: 20, rh: 20))
+        backwardButton = UIButton(frame: Utils.rRect(rx: 104.5, ry: 560.5, rw: 20, rh: 20))
         backwardButton.addTarget(self, action: #selector(backwardButtonPressed), for: .touchUpInside)
         backwardButton.setBackgroundImage(#imageLiteral(resourceName: "rewind"), for: .normal)
         addSubview(backwardButton)
