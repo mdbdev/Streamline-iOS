@@ -12,6 +12,7 @@ import Foundation
 //Allows feed view to see the new song in label
 protocol NowPlayingProtocol {
     func passLabel(post: Post, index: Int)
+    func dismissNowPlaying()
 }
 
 //Player controls and detailed info about song
@@ -27,13 +28,14 @@ class NowPlayingViewController: UIViewController {
     var delegate: NowPlayingProtocol?
     
     override func viewDidLoad() {
+        view.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.7)
         
-        //Setups player view
+        // Setups player view
         subView = NowPlayingView(frame: view.frame)
         view.addSubview(subView)
         subView.delegate = self
         
-        //Setups seeks bar
+        // Setups seeks bar
         recognizer = UIPanGestureRecognizer(target: self, action: #selector(panGestureRecognizerHandler))
         self.view.addGestureRecognizer(recognizer)
     }
@@ -81,7 +83,7 @@ class NowPlayingViewController: UIViewController {
                 }
             } else if sender.state == UIGestureRecognizerState.ended || sender.state == UIGestureRecognizerState.cancelled {
                 if touchPoint.y - initialTouchPoint.y > 100 {
-                    self.dismiss(animated: true, completion: nil)
+                    delegate?.dismissNowPlaying()
                 } else {
                     UIView.animate(withDuration: 0.3, animations: {
                         self.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
@@ -115,7 +117,7 @@ extension NowPlayingViewController: NowPlayingViewDelegate {
     }
     
     func backButtonPressed() {
-        self.dismiss(animated: true, completion: nil)
+        delegate?.dismissNowPlaying()
     }
     
     func forwardButtonPressed() {

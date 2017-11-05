@@ -11,8 +11,10 @@ import UIKit
 import Firebase
 import AVFoundation
 
+let BLUR_MAX = CGFloat(0.9)
+
 class FeedViewController: UIViewController {
-    
+    var blur: UIVisualEffectView!
     //Search View
     var searchView: SearchView!
     var modalView: AKModalView!
@@ -21,7 +23,7 @@ class FeedViewController: UIViewController {
     var subView: FeedView!
     
     //Music controller view controller
-    var nowPlayingVC: NowPlayingViewController!
+    var nowPlayingVC: NowPlayingViewController?
     
     // Firebase
     var refHandle: DatabaseReference!
@@ -29,7 +31,7 @@ class FeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Setups the feed view elements
+        // Setups the feed view elements
         subView = FeedView(frame: view.frame)
         subView.delegate = self
         view.addSubview(subView)
@@ -38,8 +40,8 @@ class FeedViewController: UIViewController {
         
         // Preloading the player view
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        nowPlayingVC = storyboard.instantiateViewController(withIdentifier: "NowPlayingViewController") as! NowPlayingViewController
-        nowPlayingVC.delegate = self
+        nowPlayingVC = storyboard.instantiateViewController(withIdentifier: "NowPlayingViewController") as? NowPlayingViewController
+        nowPlayingVC?.delegate = self
         
         //Initial post loading
         self.refHandle = Database.database().reference()
@@ -57,6 +59,12 @@ class FeedViewController: UIViewController {
             self.populateFeed()
         })
         
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.extraLight)
+        blur = UIVisualEffectView(effect: blurEffect)
+        blur.frame = view.bounds
+        blur.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        blur.alpha = 0
+        view.addSubview(blur)
     }
     
     //Reloading the feed whenever the database changes
@@ -207,6 +215,13 @@ extension FeedViewController: NowPlayingProtocol, FeedViewDelegate {
         changeLabel(post: post, index: index)
     }
     
+    func dismissNowPlaying() {
+        nowPlayingVC?.dismiss(animated: true)
+        UIView.animate(withDuration: 0.4, animations: {
+            self.blur.alpha = 0
+        })
+    }
+    
     // Selectors
     func postButtonPressed() {
         
@@ -235,7 +250,12 @@ extension FeedViewController: NowPlayingProtocol, FeedViewDelegate {
     //Handles player button pressed
     func nowPlayingButtonPressed() {
         if let index = State.nowPlayingIndex {
-            self.present(nowPlayingVC, animated: true, completion: nil)
+            if let npvc = nowPlayingVC {
+                self.present(npvc, animated: true, completion: nil)
+                UIView.animate(withDuration: 0.4, animations: {
+                    self.blur.alpha = BLUR_MAX
+                })
+            }
         }
     }
     
