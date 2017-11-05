@@ -32,7 +32,7 @@ class SearchView: UIView {
         clipsToBounds = true
         
         view = UIView(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))
-        view.layer.cornerRadius = 20
+        view.layer.cornerRadius = 4
         view.backgroundColor = UIColor.white
         
         addSubview(view)
@@ -46,10 +46,14 @@ class SearchView: UIView {
     func setupButtons() {
         cancelButton = UIButton(frame: Utils.rRect(rx: 28.14, ry: 229.93, rw: 107.33, rh: 31.81))
         cancelButton.layer.cornerRadius = 15
+        cancelButton.layer.borderColor = UIColor(hex: "673AB7").cgColor
+        cancelButton.layer.borderWidth = 2
+        
         cancelButton.backgroundColor = UIColor.white
         cancelButton.setTitleColor(Constants.darkPurple, for: .normal)
         cancelButton.setTitle("CANCEL", for: .normal)
         cancelButton.addTarget(self, action: #selector(cancelButtonPressed), for: .touchUpInside)
+
         view.addSubview(cancelButton)
         
         shareButton = UIButton(frame: Utils.rRect(rx: 153.18, ry: 229.93, rw: 107.33, rh: 31.81))
@@ -61,20 +65,22 @@ class SearchView: UIView {
         view.addSubview(shareButton)
         
         
-        // Drop Shadow
-        cancelButton.layer.shadowRadius = 4
-        cancelButton.layer.shadowOffset = CGSize(width: 0, height: 2)
-        cancelButton.layer.shadowColor = UIColor.black.cgColor
-        cancelButton.layer.shadowOpacity = 0.15
-        
-        shareButton.layer.shadowRadius = 4
-        shareButton.layer.shadowOffset = CGSize(width: 0, height: 2)
-        shareButton.layer.shadowColor = UIColor.black.cgColor
-        shareButton.layer.shadowOpacity = 0.15
+//        // Drop Shadow
+//        cancelButton.layer.shadowRadius = 4
+//        cancelButton.layer.shadowOffset = CGSize(width: 0, height: 2)
+//        cancelButton.layer.shadowColor = UIColor.black.cgColor
+//        cancelButton.layer.shadowOpacity = 0.15
+//
+//        shareButton.layer.shadowRadius = 4
+//        shareButton.layer.shadowOffset = CGSize(width: 0, height: 2)
+//        shareButton.layer.shadowColor = UIColor.black.cgColor
+//        shareButton.layer.shadowOpacity = 0.15
     }
     
     func setupSearch() {
-        searchBar = UISearchBar(frame: Utils.rRect(rx: 28, ry: 20, rw: 235, rh: 44.53))
+//        searchView = SearchView(frame: Utils.rRect(rx: 40, ry: 152, rw: 295, rh: 289), large: true)
+        
+        searchBar = UISearchBar(frame: Utils.rRect(rx: 10, ry: 16, rw: 275, rh: 44))
         searchBar.searchBarStyle = .minimal
         searchBar.backgroundColor = UIColor.white
         
