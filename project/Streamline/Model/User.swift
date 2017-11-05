@@ -6,14 +6,13 @@
 //  Copyright © 2017 Stephen Jayakar. All rights reserved.
 //
 
+import Haneke
 
 class User {
-    
-    //User Name
     var pid: String!
     var uid: String!
     var username: String!
-    var imageURL: String!
+    var imageUrl: String!
     
     //Username needs to be set from the view controllers
     init(uid: String) {
@@ -30,5 +29,15 @@ class User {
     
     func createPost(pid: String){
         DB.userPost(uid: self.uid, pid: pid)
+    }
+    
+    func getProfileImage(withBlock: @escaping (UIImage) -> ()) {
+        let url = URL(string: imageUrl)
+        let cache = Shared.imageCache
+        if let url = url {
+            cache.fetch(URL: url).onSuccess({ img in
+                withBlock(img)
+            })
+        }
     }
 }
