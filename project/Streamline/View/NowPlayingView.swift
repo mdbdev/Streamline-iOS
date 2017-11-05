@@ -26,7 +26,8 @@ class NowPlayingView: UIView {
         backButton.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
         addSubview(backButton)
         
-        albumImage = UIImageView(frame: Utils.rRect(rx: 66, ry: 136, rw: 245, rh: 245))
+        //albumImage = UIImageView(frame: Utils.rRect(rx: 66, ry: 136, rw: 245, rh: 245))
+        albumImage = UIImageView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.width))
         albumImage.image = UIImage(named: "albumPlaceholder")
         albumImage.contentMode = .scaleAspectFit
         addSubview(albumImage)
@@ -58,19 +59,19 @@ class NowPlayingView: UIView {
         // TODO: Have to change the maximum and minimum image to match the figma
         addSubview(slider)
         
-        playButton = UIButton(frame: Utils.rRect(rx: 155, ry: 507, rw: 65, rh: 65))
+        playButton = UIButton(frame: Utils.rRect(rx: 166, ry: 518, rw: 43, rh: 43))
         playButton.addTarget(self, action: #selector(playButtonPressed), for: .touchUpInside)
-        playButton.backgroundColor = UIColor.purple        
+        playButton.setBackgroundImage(#imageLiteral(resourceName: "pause"), for: .normal)
         addSubview(playButton)
         
-        forwardButton = UIButton(frame: Utils.rRect(rx: 264, ry: 518, rw: 43, rh: 43))
+        forwardButton = UIButton(frame: Utils.rRect(rx: 268, ry: 522, rw: 35, rh: 35))
         forwardButton.addTarget(self, action: #selector(forwardButtonPressed), for: .touchUpInside)
-        forwardButton.backgroundColor = UIColor.purple
+        forwardButton.setBackgroundImage(#imageLiteral(resourceName: "right skip"), for: .normal)
         addSubview(forwardButton)
         
-        backwardButton = UIButton(frame: Utils.rRect(rx: 68, ry: 518, rw: 43, rh: 43))
+        backwardButton = UIButton(frame: Utils.rRect(rx: 72, ry: 522, rw: 35, rh: 35))
         backwardButton.addTarget(self, action: #selector(backwardButtonPressed), for: .touchUpInside)
-        backwardButton.backgroundColor = UIColor.purple
+        backwardButton.setBackgroundImage(#imageLiteral(resourceName: "left skip"), for: .normal)
         addSubview(backwardButton)
     }
     
@@ -81,6 +82,11 @@ class NowPlayingView: UIView {
     // Selectors
     func playButtonPressed() {
         self.delegate?.playButtonPressed()
+        if SpotifyAPI.player.playbackState.isPlaying {
+            playButton.setBackgroundImage(#imageLiteral(resourceName: "play"), for: .normal)
+        } else {
+            playButton.setBackgroundImage(#imageLiteral(resourceName: "pause"), for: .normal)
+        }
     }
     
     func backButtonPressed() {
