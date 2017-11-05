@@ -9,7 +9,7 @@
 import UIKit
 
 class PostCollectionViewCell: UICollectionViewCell {
-    var post: Post!
+    //var post: Post!
     var songTitleLabel: UILabel!
     var artistLabel: UILabel!
     var postUserLabel: UILabel!
@@ -23,14 +23,14 @@ class PostCollectionViewCell: UICollectionViewCell {
         setupAlbumImage()
     }
     
-    func updateData() {
+    /*func updateData() {
         songTitleLabel.text = post.songTitle
         artistLabel.text = post.artist
         postUserLabel.text = post.username
         post.getImage { (img) in
             self.albumImage.image = img
         }
-    }
+    }*/
     
     // Setup Functions
     func setupView() {

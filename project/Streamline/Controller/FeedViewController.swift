@@ -93,10 +93,24 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "postCell", for: indexPath) as! PostCollectionViewCell
+        for sub in cell.contentView.subviews {
+            sub.removeFromSuperview()
+        }
         cell.awakeFromNib()
-        cell.post = DB.posts[indexPath.row]
-        cell.updateData()
+        let post = DB.posts[indexPath.row]
+        cell.songTitleLabel.text = post.songTitle
+        cell.artistLabel.text = post.artist
+        cell.postUserLabel.text = post.username
+        cell.albumImage.image = #imageLiteral(resourceName: "spotify-logo")
+        post.getImage { (img) in
+            cell.albumImage.image = img
+            collectionView.reloadItems(at: [indexPath])
+        }
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
     }
 
     
