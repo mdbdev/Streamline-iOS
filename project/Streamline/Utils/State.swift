@@ -6,7 +6,7 @@
 //  Copyright © 2017 Stephen Jayakar. All rights reserved.
 //
 
-
+//Maintains the state of the player
 struct State {
     static var nowPlayingIndex: Int?
     static var paused: Bool = false

@@ -7,6 +7,7 @@
 import Foundation
 import UIKit
 
+//Easy way to pick colors with hex values
 extension UIColor {
     convenience init(hex: String) {
         let scanner = Scanner(string: hex)

@@ -37,12 +37,11 @@ class LoginView: UIView {
         connectButton.addTarget(self, action: #selector(connectButtonPressed), for: .touchUpInside)
         connectButton.layer.cornerRadius = 15
         connectButton.backgroundColor = UIColor.white
-        addSubview(connectButton)
-        // Drop Shadow
         connectButton.layer.shadowRadius = 3
         connectButton.layer.shadowOffset = CGSize(width: 0, height: 4)
         connectButton.layer.shadowColor = UIColor.black.cgColor
         connectButton.layer.shadowOpacity = 0.35
+        addSubview(connectButton)
         
         let connectLabel = UILabel(frame:
             Utils.rRect(rx: 113, ry: 328, rw: 185, rh: 20))

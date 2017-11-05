@@ -8,8 +8,9 @@
 
 import UIKit
 
-// TODO: Logging in, then out, then in again crashes!
 class LoginViewController: UIViewController {
+    
+    //LoginView
     var subView: LoginView!
     
     // Spotify Elements
@@ -23,17 +24,22 @@ class LoginViewController: UIViewController {
         
         // Add observer to listen for spotify login success
         NotificationCenter.default.addObserver(self, selector: #selector(toFeedView), name: NSNotification.Name(rawValue: "loginSuccessfull"), object: nil)
+        
         setupAuth()
+        
+        //Login view setup
         subView = LoginView(frame: view.frame)
         subView.delegate = self
         view.addSubview(subView)
+        
+        //Checks the user defaults for existing spotify sessions
         if (UserDefaults.standard.value(forKey: "SpotifySession") != nil) {
             toFeedView()
         }
     }
     
     
-    /* Spotify Connect Functions */
+    //Setup SPTAuth
     func setupAuth() {
         let redirectURL = SpotifyAPI.redirectURL // redirectURL
         let clientID = SpotifyAPI.clientID // clientID
@@ -44,6 +50,7 @@ class LoginViewController: UIViewController {
         SpotifyAPI.auth = auth
     }
     
+    //Segue to feed view
     func toFeedView(){
         let userDefaults = UserDefaults.standard
         if let sessionObj:AnyObject = userDefaults.object(forKey: "SpotifySession") as AnyObject? {
@@ -63,14 +70,14 @@ class LoginViewController: UIViewController {
         }
     }
     
+    //Setup the segue to feed view
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Assume segue destination is feed
         let dest = segue.destination as! FeedViewController
         
     }
     
-    //Spotify Functions
-    
+    //Creates the user if they don't exist in database already
     func createUser(){
         user = User(uid: self.session.canonicalUsername)
         DB.currentUser = user
@@ -83,9 +90,9 @@ class LoginViewController: UIViewController {
             })
         })
     }
-    
 }
 
+//Managing button presses in the LoginView
 extension LoginViewController: LoginViewDelegate {
     func connectButtonPressed() {
         if UIApplication.shared.openURL(loginUrl!) {
