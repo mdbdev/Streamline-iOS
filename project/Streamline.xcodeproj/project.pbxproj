@@ -158,8 +158,8 @@
 				2D8314D61FA70862002F6C78 /* FeedView.swift */,
 				2D05B9DC1FA55C8100F26A79 /* AKModalView.swift */,
 				2D3F9A5B1F92E52300A09DCB /* PostCollectionViewCell.swift */,
-				2D763B131FA29D6600546166 /* ResultTableViewCell.swift */,
 				2D6780171FA501E700F30971 /* NowPlayingView.swift */,
+				2D763B131FA29D6600546166 /* ResultTableViewCell.swift */,
 				2D05B9DE1FA55D0900F26A79 /* SearchView.swift */,
 			);
 			path = View;

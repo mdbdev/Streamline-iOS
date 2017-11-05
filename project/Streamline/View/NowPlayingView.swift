@@ -61,7 +61,11 @@ class NowPlayingView: UIView {
         
         playButton = UIButton(frame: Utils.rRect(rx: 166, ry: 518, rw: 43, rh: 43))
         playButton.addTarget(self, action: #selector(playButtonPressed), for: .touchUpInside)
-        playButton.setBackgroundImage(#imageLiteral(resourceName: "pause"), for: .normal)
+        if State.paused {
+            playButton.setBackgroundImage(UIImage(named: "play"), for: .normal)
+        } else {
+            playButton.setBackgroundImage(UIImage(named: "pause"), for: .normal)
+        }
         addSubview(playButton)
         
         forwardButton = UIButton(frame: Utils.rRect(rx: 268, ry: 522, rw: 35, rh: 35))
@@ -82,11 +86,6 @@ class NowPlayingView: UIView {
     // Selectors
     func playButtonPressed() {
         self.delegate?.playButtonPressed()
-        if SpotifyAPI.player.playbackState.isPlaying {
-            playButton.setBackgroundImage(#imageLiteral(resourceName: "play"), for: .normal)
-        } else {
-            playButton.setBackgroundImage(#imageLiteral(resourceName: "pause"), for: .normal)
-        }
     }
     
     func backButtonPressed() {

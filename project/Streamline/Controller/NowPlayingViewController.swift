@@ -97,8 +97,21 @@ extension NowPlayingViewController: NowPlayingViewDelegate {
     
     //Manages buttons presses
     func playButtonPressed() {
-        SpotifyAPI.player.setIsPlaying(State.paused, callback: nil)
-        State.paused = !State.paused
+        let isPlaying = SpotifyAPI.player.playbackState.isPlaying
+        if isPlaying {
+            SpotifyAPI.player.setIsPlaying(false, callback: nil)
+            subView.playButton.setBackgroundImage(UIImage(named: "play"), for: .normal)
+        } else {
+            SpotifyAPI.player.setIsPlaying(true, callback: nil)
+            subView.playButton.setBackgroundImage(UIImage(named: "pause"), for: .normal)
+        }
+//        State.paused = !State.paused
+//        SpotifyAPI.player.setIsPlaying(State.paused, callback: nil)
+//        if !State.paused {
+//            subView.playButton.setBackgroundImage(UIImage(named: "play"), for: .normal)
+//        } else {
+//            subView.playButton.setBackgroundImage(UIImage(named: "pause"), for: .normal)
+//        }
     }
     
     func backButtonPressed() {
@@ -111,6 +124,7 @@ extension NowPlayingViewController: NowPlayingViewDelegate {
         let post = posts[toPlayIndex]
         self.updateSongInformation(post: post, index: toPlayIndex)
         self.subView.slider.setValue(0, animated: true)
+        self.subView.playButton.setBackgroundImage(#imageLiteral(resourceName: "pause"), for: .normal)
         State.position = 0
         SpotifyAPI.playPost(post: post, index: toPlayIndex)
     }
@@ -119,6 +133,7 @@ extension NowPlayingViewController: NowPlayingViewDelegate {
         let posts = DB.posts
         let toPlayIndex = (State.nowPlayingIndex! - 1)
         self.subView.slider.setValue(0, animated: true)
+        self.subView.playButton.setBackgroundImage(#imageLiteral(resourceName: "pause"), for: .normal)
         State.position = 0
         if toPlayIndex >= 0 {
             let post = posts[toPlayIndex]

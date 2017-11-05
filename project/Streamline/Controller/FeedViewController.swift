@@ -164,6 +164,7 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let post = DB.posts[index]
         subView.nowPlayingLabel.text = post.songTitle
         subView.nowPlayingArtist.text = post.artist
+        
         post.getImage() { (img) in
             self.subView.nowPlayingImage.image = img
         }
