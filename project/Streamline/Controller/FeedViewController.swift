@@ -119,7 +119,7 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.albumImage.image = #imageLiteral(resourceName: "spotify-logo")
         post.getImage { (img) in
             cell.albumImage.image = img
-            collectionView.reloadItems(at: [indexPath])
+//            collectionView.reloadItems(at: [indexPath])
         }
         
         return cell
