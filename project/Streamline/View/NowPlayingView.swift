@@ -20,33 +20,36 @@ class NowPlayingView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backButton = UIButton(frame: Utils.rRect(rx: 26, ry: 26, rw: 40, rh: 40))
-        backButton.setImage(UIImage(named: "arrow"), for: .normal)
+        backButton = UIButton(frame: Utils.rRect(rx: 26, ry: 25.5, rw: 25, rh: 25))
+        backButton.setImage(UIImage(named: "Vector"), for: .normal)
         backButton.imageView?.contentMode = .scaleAspectFit
         backButton.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
         addSubview(backButton)
         
         //albumImage = UIImageView(frame: Utils.rRect(rx: 66, ry: 136, rw: 245, rh: 245))
-        albumImage = UIImageView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.width))
+        albumImage = UIImageView(frame: CGRect(x: 0, y: frame.width * 0.17, width: self.frame.width, height: self.frame.width))
         albumImage.image = UIImage(named: "albumPlaceholder")
         albumImage.contentMode = .scaleAspectFit
         addSubview(albumImage)
         
-        songName = UILabel(frame: Utils.rRect(rx: 65, ry: 387, rw: 245, rh: 25))
+        songName = UILabel(frame: CGRect(x: 0, y: frame.height * 0.69, width: frame.width, height: 35))
         songName.text = "Song"
         songName.adjustsFontSizeToFitWidth = true
-        songName.textColor = Constants.weirdGreen
-        songName.font = Constants.averageSans?.withSize(20)
+        songName.textColor = .black
+        songName.font = Constants.averageSans
+        songName.font = UIFont.systemFont(ofSize: 20, weight: 1)
+        songName.textAlignment = .center
         addSubview(songName)
         
-        artistName = UILabel(frame: Utils.rRect(rx: 65, ry: 412, rw: 245, rh: 25))
+        artistName = UILabel(frame: CGRect(x: 0, y: frame.height * 0.74, width: frame.width, height: 25))
         artistName.text = "Artist"
         artistName.adjustsFontSizeToFitWidth = true
-        artistName.textColor = Constants.weirdGreen
+        artistName.textColor = .black
         artistName.font = Constants.averageSans?.withSize(15)
+        artistName.textAlignment = .center
         addSubview(artistName)
         
-        slider = UISlider(frame: Utils.rRect(rx: 26, ry: 447, rw: 328, rh: 20))
+        slider = UISlider(frame: Utils.rRect(rx: 26, ry: 540, rw: 328, rh: 20))
         slider.isContinuous = false
         slider.maximumValue = 1
         slider.minimumValue = 0
@@ -54,24 +57,24 @@ class NowPlayingView: UIView {
         slider.addTarget(self, action: #selector(sliderNoLongerChanging), for: .touchUpInside)
         slider.addTarget(self, action: #selector(sliderNoLongerChanging), for: .touchUpOutside)
         slider.setThumbImage(UIImage(named: "thumb"), for: .normal)
-        slider.minimumTrackTintColor = UIColor(hex: "d1c4e9")
-        slider.maximumTrackTintColor = UIColor.black
+        slider.minimumTrackTintColor = UIColor.black
+        slider.maximumTrackTintColor = UIColor(hex: "d1c4e9")
         // TODO: Have to change the maximum and minimum image to match the figma
         addSubview(slider)
         
-        playButton = UIButton(frame: Utils.rRect(rx: 166, ry: 518, rw: 43, rh: 43))
+        playButton = UIButton(frame: Utils.rRect(rx: 175, ry: 598, rw: 25, rh: 25))
         playButton.addTarget(self, action: #selector(playButtonPressed), for: .touchUpInside)
         playButton.setBackgroundImage(#imageLiteral(resourceName: "pause"), for: .normal)
         addSubview(playButton)
         
-        forwardButton = UIButton(frame: Utils.rRect(rx: 268, ry: 522, rw: 35, rh: 35))
+        forwardButton = UIButton(frame: Utils.rRect(rx: 250.5, ry: 600.5, rw: 20, rh: 20))
         forwardButton.addTarget(self, action: #selector(forwardButtonPressed), for: .touchUpInside)
-        forwardButton.setBackgroundImage(#imageLiteral(resourceName: "right skip"), for: .normal)
+        forwardButton.setBackgroundImage(#imageLiteral(resourceName: "forward"), for: .normal)
         addSubview(forwardButton)
         
-        backwardButton = UIButton(frame: Utils.rRect(rx: 72, ry: 522, rw: 35, rh: 35))
+        backwardButton = UIButton(frame: Utils.rRect(rx: 104.5, ry: 600.5, rw: 20, rh: 20))
         backwardButton.addTarget(self, action: #selector(backwardButtonPressed), for: .touchUpInside)
-        backwardButton.setBackgroundImage(#imageLiteral(resourceName: "left skip"), for: .normal)
+        backwardButton.setBackgroundImage(#imageLiteral(resourceName: "rewind"), for: .normal)
         addSubview(backwardButton)
     }
     
