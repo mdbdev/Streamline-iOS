@@ -110,21 +110,21 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         cell.awakeFromNib()
         
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let post = DB.posts[indexPath.row]
-        
-        //Setups the cell data
+        let cell = cell as! PostCollectionViewCell
         cell.songTitleLabel.text = post.songTitle
         cell.artistLabel.text = post.artist
         cell.postUserLabel.text = post.username
         cell.albumImage.image = #imageLiteral(resourceName: "spotify-logo")
         post.getImage { (img) in
             cell.albumImage.image = img
-//            collectionView.reloadItems(at: [indexPath])
         }
-        
-        return cell
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: (334 / 375) * view.frame.width, height: 69)
     }
