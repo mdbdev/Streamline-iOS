@@ -44,10 +44,10 @@ class SearchView: UIView {
     
     
     func setupButtons() {
-        cancelButton = UIButton(frame: Utils.rRect(rx: 28.14, ry: 229.93, rw: 107.33, rh: 31.81))
+        cancelButton                    = UIButton(frame: Utils.rRect(rx: 28.14, ry: 229.93, rw: 107.33, rh: 31.81))
         cancelButton.layer.cornerRadius = 15
-        cancelButton.layer.borderColor = UIColor(hex: "673AB7").cgColor
-        cancelButton.layer.borderWidth = 2
+        cancelButton.layer.borderColor  = UIColor(hex: "673AB7").cgColor
+        cancelButton.layer.borderWidth  = 2
         
         cancelButton.backgroundColor = UIColor.white
         cancelButton.setTitleColor(Constants.darkPurple, for: .normal)
@@ -56,44 +56,31 @@ class SearchView: UIView {
 
         view.addSubview(cancelButton)
         
-        shareButton = UIButton(frame: Utils.rRect(rx: 153.18, ry: 229.93, rw: 107.33, rh: 31.81))
-        shareButton.layer.cornerRadius = 15
-        shareButton.backgroundColor = UIColor(hex: "673AB7")
+        shareButton                     = UIButton(frame: Utils.rRect(rx: 153.18, ry: 229.93, rw: 107.33, rh: 31.81))
+        shareButton.layer.cornerRadius  = 15
+        shareButton.backgroundColor     = UIColor(hex: "673AB7")
         shareButton.setTitleColor(UIColor.white, for: .normal)
         shareButton.setTitle("SHARE", for: .normal)
         shareButton.addTarget(self, action: #selector(shareButtonPressed), for: .touchUpInside)
         view.addSubview(shareButton)
-        
-        
-//        // Drop Shadow
-//        cancelButton.layer.shadowRadius = 4
-//        cancelButton.layer.shadowOffset = CGSize(width: 0, height: 2)
-//        cancelButton.layer.shadowColor = UIColor.black.cgColor
-//        cancelButton.layer.shadowOpacity = 0.15
-//
-//        shareButton.layer.shadowRadius = 4
-//        shareButton.layer.shadowOffset = CGSize(width: 0, height: 2)
-//        shareButton.layer.shadowColor = UIColor.black.cgColor
-//        shareButton.layer.shadowOpacity = 0.15
     }
     
     func setupSearch() {
-//        searchView = SearchView(frame: Utils.rRect(rx: 40, ry: 152, rw: 295, rh: 289), large: true)
         
-        searchBar = UISearchBar(frame: Utils.rRect(rx: 10, ry: 16, rw: 275, rh: 44))
-        searchBar.searchBarStyle = .minimal
+        searchBar                 = UISearchBar(frame: Utils.rRect(rx: 10, ry: 16, rw: 275, rh: 44))
+        searchBar.searchBarStyle  = .minimal
         searchBar.backgroundColor = UIColor.white
         
-        searchBar.placeholder = "Search a song"
+        searchBar.placeholder     = "Search a song"
         
         searchBar.delegate = self
         view.addSubview(searchBar)
     }
     
     func setupTableView() {
-        resultsTableView = UITableView(frame: CGRect(x: 0, y: view.frame.height * 0.25, width: view.frame.width, height: view.frame.height * 0.5))
-        resultsTableView.delegate = self
-        resultsTableView.dataSource = self
+        resultsTableView                 = UITableView(frame: CGRect(x: 0, y: view.frame.height * 0.25, width: view.frame.width, height: view.frame.height * 0.5))
+        resultsTableView.delegate        = self
+        resultsTableView.dataSource      = self
         resultsTableView.allowsSelection = true
         resultsTableView.register(ResultTableViewCell.self, forCellReuseIdentifier: "resultCell")
         view.addSubview(resultsTableView)
@@ -110,11 +97,11 @@ class SearchView: UIView {
     
     func shareButtonPressed() {
         if (selectedResult >= 0 && selectedResult < results.count) {
-            let track = results[selectedResult]
-            let u = DB.currentUser!
-            let artist = (track.artists[0] as! SPTPartialArtist).name
+            let track   = results[selectedResult]
+            let u       = DB.currentUser!
+            let artist  = (track.artists[0] as! SPTPartialArtist).name
             
-            let post = Post(uid: u.uid,
+            let post    = Post(uid: u.uid,
                             username: u.username,
                             timePosted: Date().timeIntervalSince1970,
                             trackId: track.identifier,

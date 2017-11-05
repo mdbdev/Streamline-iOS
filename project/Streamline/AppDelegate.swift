@@ -29,11 +29,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if auth.canHandle(auth.redirectURL) {
             auth.handleAuthCallback(withTriggeredAuthURL: url, callback: { (error, session) in
-                
-                
+
                 if error != nil {
                     print("error!")
                 }
+                
                 let userDefaults = UserDefaults.standard
                 let sessionData = NSKeyedArchiver.archivedData(withRootObject: session)
                 print(sessionData)

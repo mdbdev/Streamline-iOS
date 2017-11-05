@@ -9,8 +9,8 @@
 import Haneke
 
 class User {
-    var pid: String!
-    var uid: String!
+    var pid     : String!
+    var uid     : String!
     var username: String!
     var imageUrl: String!
     
@@ -32,9 +32,9 @@ class User {
     }
     
     func getProfileImage(withBlock: @escaping (UIImage) -> ()) {
-        let url = URL(string: imageUrl)
-        let cache = Shared.imageCache
-        if let url = url {
+        let url     = URL(string: imageUrl)
+        let cache   = Shared.imageCache
+        if let url  = url {
             cache.fetch(URL: url).onSuccess({ img in
                 withBlock(img)
             })

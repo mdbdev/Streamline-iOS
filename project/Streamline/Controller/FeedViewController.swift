@@ -15,9 +15,10 @@ let BLUR_MAX = CGFloat(0.9)
 
 class FeedViewController: UIViewController {
     var blur: UIVisualEffectView!
+    
     //Search View
     var searchView: SearchView!
-    var modalView: AKModalView!
+    var modalView : AKModalView!
     
     //Feed View for UI elements
     var subView: FeedView!
@@ -32,7 +33,7 @@ class FeedViewController: UIViewController {
         super.viewDidLoad()
         
         // Setups the feed view elements
-        subView = FeedView(frame: view.frame)
+        subView          = FeedView(frame: view.frame)
         subView.delegate = self
         view.addSubview(subView)
         subView.postCollectionView.delegate = self
