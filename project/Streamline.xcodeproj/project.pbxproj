@@ -772,7 +772,7 @@
 				INFOPLIST_FILE = Streamline/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = mdb.Streamline;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mdb.Streamline;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Streamline/Streamline-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -799,7 +799,7 @@
 				INFOPLIST_FILE = Streamline/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = mdb.Streamline;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mdb.Streamline;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Streamline/Streamline-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
