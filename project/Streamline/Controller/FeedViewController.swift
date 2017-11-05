@@ -225,7 +225,7 @@ extension FeedViewController: NowPlayingProtocol, FeedViewDelegate {
     // Selectors
     func postButtonPressed() {
         
-        searchView = SearchView(frame: Utils.rRect(rx: 40, ry: 152, rw: 295, rh: 289), large: true)
+        searchView = SearchView(frame: Utils.rRect(rx: 40, ry: 120, rw: 295, rh: 289), large: true)
         searchView.delegate = self
         searchView.searchBar.text = "a"
         searchView.searchSpotify()
