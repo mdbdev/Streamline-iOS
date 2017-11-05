@@ -78,18 +78,18 @@ class SearchView: UIView {
     
     func setupSearch() {
         searchBar = UISearchBar(frame: Utils.rRect(rx: 28, ry: 20, rw: 235, rh: 44.53))
-            
         searchBar.searchBarStyle = .minimal
         searchBar.backgroundColor = UIColor.white
         
-        searchBar.placeholder = "Search for a song!"
+        searchBar.placeholder = "Search a song"
+        
         searchBar.delegate = self
         view.addSubview(searchBar)
     }
     
     func setupTableView() {
         //let style = UITableViewStyle.grouped
-        resultsTableView = UITableView(frame: CGRect(x: 0, y: view.frame.height * 0.2, width: view.frame.width, height: view.frame.height * 0.5))
+        resultsTableView = UITableView(frame: CGRect(x: 0, y: view.frame.height * 0.25, width: view.frame.width, height: view.frame.height * 0.5))
         resultsTableView.delegate = self
         resultsTableView.dataSource = self
         resultsTableView.allowsSelection = true
