@@ -9,25 +9,36 @@
 import UIKit
 import Foundation
 
+//Allows feed view to see the new song in label
 protocol NowPlayingProtocol {
     func passLabel(post: Post, index: Int)
 }
 
+//Player controls and detailed info about song
 class NowPlayingViewController: UIViewController {
+    
+    //Seekbar variables
     var recognizer: UIPanGestureRecognizer!
     var initialTouchPoint: CGPoint = CGPoint(x: 0, y: 0)
-    var subView: NowPlayingView!
     var sliderEdit: Bool = true
+    
+    //Delegate/subview
+    var subView: NowPlayingView!
     var delegate: NowPlayingProtocol?
     
     override func viewDidLoad() {
+        
+        //Setups player view
         subView = NowPlayingView(frame: view.frame)
         view.addSubview(subView)
         subView.delegate = self
+        
+        //Setups seeks bar
         recognizer = UIPanGestureRecognizer(target: self, action: #selector(panGestureRecognizerHandler))
         self.view.addGestureRecognizer(recognizer)
     }
     
+    //Manages the seekbar loading for the specific song being played
     override func viewWillAppear(_ animated: Bool) {
         if let index = State.nowPlayingIndex {
             let post = DB.posts[index]
@@ -47,6 +58,7 @@ class NowPlayingViewController: UIViewController {
         }
     }
     
+    //Sets song specific information
     func updateSongInformation(post: Post, index: Int) {
         self.subView.songName.text = post.songTitle
         self.subView.artistName.text = post.artist
@@ -56,7 +68,7 @@ class NowPlayingViewController: UIViewController {
         })
     }
 
-    // Selectors
+    // Selectors for seek bar
     func panGestureRecognizerHandler(_ sender: UIPanGestureRecognizer) {
         if sliderEdit {
             let touchPoint = sender.location(in: self.view?.window)
@@ -80,17 +92,19 @@ class NowPlayingViewController: UIViewController {
     }
 }
 
+//Mangaes the ui elements
 extension NowPlayingViewController: NowPlayingViewDelegate {
-    // Selectors
+    
+    //Manages buttons presses
     func playButtonPressed() {
         SpotifyAPI.player.setIsPlaying(State.paused, callback: nil)
         State.paused = !State.paused
     }
+    
     func backButtonPressed() {
         self.dismiss(animated: true, completion: nil)
     }
     
-    // TODO: Do we shuffle, or play the next song?
     func forwardButtonPressed() {
         let posts = DB.posts
         let toPlayIndex = (State.nowPlayingIndex! + 1) % posts.count
@@ -103,24 +117,27 @@ extension NowPlayingViewController: NowPlayingViewDelegate {
     
     func backwardButtonPressed() {
         let posts = DB.posts
-        let toPlayIndex = (State.nowPlayingIndex! - 1 + posts.count) % posts.count
-        let post = posts[toPlayIndex]
-        self.updateSongInformation(post: post, index: toPlayIndex)
+        let toPlayIndex = (State.nowPlayingIndex! - 1)
         self.subView.slider.setValue(0, animated: true)
         State.position = 0
-        SpotifyAPI.playPost(post: post, index: toPlayIndex)
+        if toPlayIndex >= 0 {
+            let post = posts[toPlayIndex]
+            self.updateSongInformation(post: post, index: toPlayIndex)
+            SpotifyAPI.playPost(post: post, index: toPlayIndex)
+        } else {
+            SpotifyAPI.playPost(post: posts[0], index: 0)
+        }
     }
 
+    //Manages slider changes
     func sliderChanging() {
         print("Slider changing")
         sliderEdit = false
     }
     
-    // TODO: this might crash if the song finishes while seeking
     func sliderNoLongerChanging() {
         print("Slider no longer changing!")
         sliderEdit = true        
-        // TODO: Need to seek to the correct place in the track!
         let post = DB.posts[State.nowPlayingIndex!]
         let duration = SpotifyAPI.player.metadata.currentTrack?.duration
         State.position = TimeInterval(subView.slider.value) * duration!

@@ -111,7 +111,6 @@ class FeedView: UIView {
         discoverLabel.textColor = UIColor(hex: "311b92")
         discoverLabel.text = "DISCOVER"
         discoverLabel.textAlignment = .center
-        //discoverLabel.font = UIFont(name: "AverageSans-Regular", size: 100)
         
         discoverLabel.font = Constants.averageSans?.withSize(20)
         discoverLabel.font = UIFont.systemFont(ofSize: 30)

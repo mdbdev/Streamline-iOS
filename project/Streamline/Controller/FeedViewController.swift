@@ -12,50 +12,60 @@ import Firebase
 import AVFoundation
 
 class FeedViewController: UIViewController {
+    
+    //Search View
+    var searchView: SearchView!
     var modalView: AKModalView!
+    
+    //Feed View for UI elements
     var subView: FeedView!
     
+    //Music controller view controller
     var nowPlayingVC: NowPlayingViewController!
-    var searchView: SearchView!
     
     // Firebase
     var refHandle: DatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Setups the feed view elements
         subView = FeedView(frame: view.frame)
         subView.delegate = self
         view.addSubview(subView)
         subView.postCollectionView.delegate = self
         subView.postCollectionView.dataSource = self
+        
         // Preloading the player view
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         nowPlayingVC = storyboard.instantiateViewController(withIdentifier: "NowPlayingViewController") as! NowPlayingViewController
         nowPlayingVC.delegate = self
+        
+        //Initial post loading
         self.refHandle = Database.database().reference()
         self.refHandle.observe(DataEventType.value, with: { (snapshot) in
             DB.getPosts(withBlock : {
                 self.subView.postCollectionView.reloadData()
             })
-            
         })
         
+        //Setups the spotify player
         setupSpotify()
         
+        //Reloads posts
         DB.getPosts(withBlock: {
             self.populateFeed()
         })
         
     }
     
-    // TODO: Change the now playing index to match the new data!
+    //Reloading the feed whenever the database changes
     func populateFeed() {
         subView.postCollectionView.reloadData()
     }
     
-    // Setup Functions
+    //Creates the spotify player
     func setupSpotify() {
-        // Initialize player
         if SpotifyAPI.player == nil {
             SpotifyAPI.player = SPTAudioStreamingController.sharedInstance()
             SpotifyAPI.player!.playbackDelegate = self
@@ -65,22 +75,23 @@ class FeedViewController: UIViewController {
         }
     }
     
+    //Creates the modal search view
     func createSearchView(){
         modalView = AKModalView(view: searchView)
         modalView.automaticallyCenter = false
         view.addSubview(modalView)
         modalView.show()
     }
-
 }
 
+//Manages the search view modal
 extension FeedViewController: SearchViewDelegate {
     func dismissView() {
         modalView.dismiss()
     }
-    
-    
 }
+
+//Manages the collection view
 extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -90,33 +101,48 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
         return DB.posts.count
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "postCell", for: indexPath) as! PostCollectionViewCell
+        
+        for sub in cell.contentView.subviews {
+            sub.removeFromSuperview()
+        }
+        
         cell.awakeFromNib()
-        cell.post = DB.posts[indexPath.row]
-        cell.updateData()
+        
+        let post = DB.posts[indexPath.row]
+        
+        //Setups the cell data
+        cell.songTitleLabel.text = post.songTitle
+        cell.artistLabel.text = post.artist
+        cell.postUserLabel.text = post.username
+        cell.albumImage.image = #imageLiteral(resourceName: "spotify-logo")
+        post.getImage { (img) in
+            cell.albumImage.image = img
+            collectionView.reloadItems(at: [indexPath])
+        }
+        
         return cell
     }
 
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        // Maybe make the height relative too?
         return CGSize(width: (334 / 375) * view.frame.width, height: 69)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // Play the song somewhere haha
-        // Get the post pointer
         let post = DB.posts[indexPath.row]
+        
         activateAudioSession()
+        
         SpotifyAPI.player.playSpotifyURI("spotify:track:" + post.trackId, startingWith: 0, startingWithPosition: 0, callback: { (error) in
+            
+            //Print any errors
             if (error != nil) {
                 print(error!.localizedDescription)
             }
-            //print(SpotifyAPI.player.loggedIn)
+            
+            //Check player is active before creating the label
             if (SpotifyAPI.player.loggedIn){
-//                self.nowPlayingLabel.text = "Now playing " + post.songTitle
                 State.nowPlayingIndex = indexPath.row
                 self.changeLabel(post: post, index: State.nowPlayingIndex!)
             }
@@ -124,36 +150,48 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func changeLabel(post: Post, index: Int) {
+        
+        //If this is first press change enable all hidden elements
         subView.nowPlayingButton.isHidden = false
         subView.nowPlayingArtist.isHidden = false
         subView.nowPlayingImage.isHidden = false
         subView.nowPlayingLabel.isHidden = false
+        
+        //Resize collection view so bottom post isn't cut off
         subView.postCollectionView.frame = Utils.rRect(rx: 21, ry: 69, rw: 334, rh: 541)
+        
+        //Get post info and change label
         let post = DB.posts[index]
-        subView.nowPlayingLabel.text = post.songTitle //post.songTitle
+        subView.nowPlayingLabel.text = post.songTitle
         subView.nowPlayingArtist.text = post.artist
-        // TODO: Make it in the cell
-        let cell = subView.postCollectionView.cellForItem(at: IndexPath(item: index, section: 0)) as! PostCollectionViewCell
-        subView.nowPlayingImage.image = cell.albumImage.image
+        post.getImage() { (img) in
+            self.subView.nowPlayingImage.image = img
+        }
     }
 }
 
-// Spotify Extension
+//Manages spotify player extensions
 extension FeedViewController: SPTAudioStreamingDelegate, SPTAudioStreamingPlaybackDelegate {
+    
     func activateAudioSession() {
         try? AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
         try? AVAudioSession.sharedInstance().setActive(true)
     }
     
     func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didStopPlayingTrack trackUri: String!) {
-        // TODO: Pick another song to play
+        
         let posts = DB.posts
         let toPlayIndex = (State.nowPlayingIndex! + 1) % posts.count
         let post = posts[toPlayIndex]
+        
         State.position = 0
+        
+        //Change the song info in player view
         if let vc = nowPlayingVC {
             vc.updateSongInformation(post: post, index: toPlayIndex)
         }
+        
+        //Play next song
         SpotifyAPI.playPost(post: post, index: toPlayIndex)
     }
     
@@ -162,6 +200,7 @@ extension FeedViewController: SPTAudioStreamingDelegate, SPTAudioStreamingPlayba
     }
 }
 
+//
 extension FeedViewController: NowPlayingProtocol, FeedViewDelegate {
     func passLabel(post: Post, index: Int) {
         changeLabel(post: post, index: index)
@@ -169,10 +208,12 @@ extension FeedViewController: NowPlayingProtocol, FeedViewDelegate {
     
     // Selectors
     func postButtonPressed() {
+        
         searchView = SearchView(frame: Utils.rRect(rx: 40, ry: 152, rw: 295, rh: 289), large: true)
         searchView.layer.cornerRadius = 20
         searchView.delegate = self
-        //self.performSegue(withIdentifier: "toNewPost", sender: self)
+        
+        /* Code to limit user to one song a day and delete user pid if it has been 12 hours */
 //        DB.currentUser.getPID {
 //            if DB.currentUser.pid == "" {
 //                self.createSearchView()
@@ -185,15 +226,19 @@ extension FeedViewController: NowPlayingProtocol, FeedViewDelegate {
 //                    }
 //                })
 //            }
-            createSearchView()            
-        }
+        
+        //Create search modal
+        createSearchView()
+    }
     
+    //Handles player button pressed
     func nowPlayingButtonPressed() {
         if let index = State.nowPlayingIndex {
             self.present(nowPlayingVC, animated: true, completion: nil)
         }
     }
     
+    //Handles logout
     func logoutButtonPressed() {
         let userDefaults = UserDefaults.standard
         userDefaults.removeObject(forKey: "SpotifySession")

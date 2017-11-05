@@ -9,9 +9,9 @@
 import Foundation
 import Alamofire
 
-class SpotifyWeb {        
-    //Get the user display name with cURL command
-    //cURL format : curl -X GET "https://api.spotify.com/v1/me" -H "Authorization: Bearer {your access token}"
+class SpotifyWeb {
+    
+    //Get the users display name with the spotify web api
     static func getUserDisplayName(accessToken: String, withBlock: @escaping (String, String) -> ()) {
         print(accessToken)
         let headers = ["Accept": "application/json",

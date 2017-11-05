@@ -13,7 +13,6 @@ protocol SearchViewDelegate {
     func dismissView()
 }
 
-
 class SearchView: UIView {
     var delegate: SearchViewDelegate? = nil
     var view: UIView!
@@ -28,8 +27,10 @@ class SearchView: UIView {
     
     init(frame: CGRect, large: Bool) {
         super.init(frame: frame)
+        
         layer.cornerRadius = 5
         clipsToBounds = true
+        
         view = UIView(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))
         view.layer.cornerRadius = 20
         view.backgroundColor = UIColor.white
@@ -84,7 +85,6 @@ class SearchView: UIView {
     }
     
     func setupTableView() {
-        //let style = UITableViewStyle.grouped
         resultsTableView = UITableView(frame: CGRect(x: 0, y: view.frame.height * 0.25, width: view.frame.width, height: view.frame.height * 0.5))
         resultsTableView.delegate = self
         resultsTableView.dataSource = self
