@@ -8,6 +8,8 @@
 
 
 struct Constants {
+    
+    //Color constants
     static let darkPurple = UIColor(hex: "673AB7")
     static let averageSans = UIFont(name: "AverageSans-Regular", size: 15)
     static let cvBackground = UIColor(hex: "F4F4F4")

@@ -8,6 +8,7 @@
 
 import UIKit
 
+//Used for seek bar scrubbing
 extension UIViewController {
     override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)

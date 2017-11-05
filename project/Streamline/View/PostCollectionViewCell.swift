@@ -23,26 +23,8 @@ class PostCollectionViewCell: UICollectionViewCell {
         setupAlbumImage()
     }
     
-    /*func updateData() {
-        songTitleLabel.text = post.songTitle
-        artistLabel.text = post.artist
-        postUserLabel.text = post.username
-        post.getImage { (img) in
-            self.albumImage.image = img
-        }
-    }*/
-    
     // Setup Functions
     func setupView() {
-        //contentView.layer.borderWidth = 1
-        //contentView.layer.borderColor = UIColor.black.cgColor
-        // Drawing the shadow around the cell
-        // TODO: investigate runtime of this, as well as shadowPath
-        // Shadow is not working correctly :(
-//        contentView.layer.shadowColor = UIColor.black.cgColor
-//        contentView.layer.shadowOpacity = 1
-//        contentView.layer.shadowOffset = CGSize.zero
-//        contentView.layer.shadowRadius = 10
         self.backgroundColor = UIColor.white
     }
     func setupLabels() {

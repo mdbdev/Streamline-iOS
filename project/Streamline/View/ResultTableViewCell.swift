@@ -35,9 +35,6 @@ class ResultTableViewCell: UITableViewCell {
         artist.font = Constants.averageSans
         artist.font = UIFont.systemFont(ofSize: 10)
         contentView.addSubview(artist)
-        
-//        contentView.layer.borderColor = UIColor.black.cgColor
-//        contentView.layer.borderWidth = 1
     }
     
     override func prepareForReuse() {
