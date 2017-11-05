@@ -154,8 +154,10 @@ extension NowPlayingViewController: NowPlayingViewDelegate {
         print("Slider no longer changing!")
         sliderEdit = true        
         let post = DB.posts[State.nowPlayingIndex!]
-        let duration = SpotifyAPI.player.metadata.currentTrack?.duration
-        State.position = TimeInterval(subView.slider.value) * duration!
-        SpotifyAPI.player.seek(to: State.position, callback: nil)
+        if let currentTrack = SpotifyAPI.player.metadata.currentTrack {
+            let duration = currentTrack.duration
+            State.position = TimeInterval(subView.slider.value) * duration
+            SpotifyAPI.player.seek(to: State.position, callback: nil)
+        }
     }
 }

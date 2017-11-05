@@ -46,7 +46,7 @@ class Post {
         self.pid = pid
     }
     
-    func getImage(withBlock: @escaping (UIImage) -> ()) {        
+    func getImage(withBlock: @escaping (UIImage) -> ()) {
         let url = URL(string: imageUrl)
         let cache = Shared.imageCache
         if let url = url {

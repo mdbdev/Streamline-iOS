@@ -79,23 +79,17 @@ class FeedView: UIView {
     }
     
     func setupButton() {
-        postButton = UIButton(frame: Utils.rRect(rx: 332, ry: 31, rw: 23, rh: 23))
-        postButton.setTitle("", for: .normal)
-        postButton.setTitleColor(UIColor(hex: "311b92"), for: .normal)
-        postButton.backgroundColor = UIColor.white
-        postButton.backgroundColor = .clear
-        postButton.layer.cornerRadius = 1.5
-        postButton.layer.borderWidth = 2.5
-        postButton.layer.borderColor = UIColor(hex: "311b92").cgColor
+        postButton = UIButton(frame: Utils.rRect(rx: 330, ry: 28.5, rw: 26, rh: 26))
+//        postButton.setTitle("", for: .normal)
+//        postButton.setTitleColor(UIColor(hex: "311b92"), for: .normal)
+//        postButton.backgroundColor = UIColor.white
+//        postButton.backgroundColor = .clear
+//        postButton.layer.cornerRadius = 1.5
+//        postButton.layer.borderWidth = 2.5
+//        postButton.layer.borderColor = UIColor(hex: "311b92").cgColor
+        postButton.setBackgroundImage(#imageLiteral(resourceName: "new"), for: .normal)
         postButton.addTarget(self, action: #selector(postButtonPressed), for: .touchUpInside)
         addSubview(postButton)
-        
-        
-        plusSign = UILabel(frame: Utils.rRect(rx: 332, ry: 30.2, rw: 23, rh: 23))
-        plusSign.textColor = UIColor(hex: "311b92")
-        plusSign.text = "+"
-        plusSign.textAlignment = .center
-        addSubview(plusSign)
         
         logoutButton = UIButton(frame: Utils.rRect(rx: 15, ry: 30, rw: 74, rh: 22))
         logoutButton.setTitle("Log Out", for: .normal)
@@ -109,11 +103,12 @@ class FeedView: UIView {
         discoverLabel = UILabel(frame: Utils.rRect(rx: 0, ry: 20, rw: 375, rh: 44))
         
         discoverLabel.textColor = UIColor(hex: "311b92")
-        discoverLabel.text = "DISCOVER"
+        discoverLabel.text = "Discover"
         discoverLabel.textAlignment = .center
         
-        discoverLabel.font = Constants.averageSans?.withSize(20)
-        discoverLabel.font = UIFont.systemFont(ofSize: 30)
+        discoverLabel.font = Constants.averageSans
+        discoverLabel.font = UIFont.systemFont(ofSize: ((frame.width / 375) * 26))
+
         
         addSubview(discoverLabel)
     }
