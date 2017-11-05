@@ -133,8 +133,9 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
         subView.nowPlayingLabel.text = post.songTitle //post.songTitle
         subView.nowPlayingArtist.text = post.artist
         // TODO: Make it in the cell
-        let cell = subView.postCollectionView.cellForItem(at: IndexPath(item: index, section: 0)) as! PostCollectionViewCell
-        subView.nowPlayingImage.image = cell.albumImage.image
+        post.getImage() { (img) in
+            self.subView.nowPlayingImage.image = img
+        }
     }
 }
 
