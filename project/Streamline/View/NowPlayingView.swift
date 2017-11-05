@@ -32,6 +32,12 @@ class NowPlayingView: UIView {
         albumImage.contentMode = .scaleAspectFit
         addSubview(albumImage)
         
+        backButton = UIButton(frame: Utils.rRect(rx: 26, ry: 25.5, rw: 25, rh: 25))
+        backButton.setImage(UIImage(named: "arrow"), for: .normal)
+        backButton.imageView?.contentMode = .scaleAspectFit
+        backButton.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
+        addSubview(backButton)
+        
         songName = UILabel(frame: CGRect(x: 0, y: frame.height * 0.62, width: frame.width, height: 35))
         songName.text = "Song"
         songName.adjustsFontSizeToFitWidth = true
