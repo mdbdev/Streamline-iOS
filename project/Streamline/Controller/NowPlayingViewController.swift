@@ -13,6 +13,7 @@ import Foundation
 protocol NowPlayingProtocol {
     func passLabel(post: Post, index: Int)
     func dismissNowPlaying()
+    func updateBlur(dy: CGFloat)
 }
 
 //Player controls and detailed info about song
@@ -80,6 +81,7 @@ class NowPlayingViewController: UIViewController {
             } else if sender.state == UIGestureRecognizerState.changed {
                 if touchPoint.y - initialTouchPoint.y > 0 {
                     self.view.frame = CGRect(x: 0, y: touchPoint.y - initialTouchPoint.y, width: self.view.frame.size.width, height: self.view.frame.size.height)
+                    self.delegate?.updateBlur(dy: touchPoint.y - initialTouchPoint.y)
                 }
             } else if sender.state == UIGestureRecognizerState.ended || sender.state == UIGestureRecognizerState.cancelled {
                 if touchPoint.y - initialTouchPoint.y > 100 {

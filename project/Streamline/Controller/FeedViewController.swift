@@ -239,6 +239,11 @@ extension FeedViewController: NowPlayingProtocol, FeedViewDelegate {
         })
     }
     
+    func updateBlur(dy: CGFloat) {
+        let ratio = dy / view.frame.height
+        self.blur.alpha = BLUR_MAX - (ratio * BLUR_MAX)
+    }
+    
     // Selectors
     func postButtonPressed() {
         
