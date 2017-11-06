@@ -45,20 +45,13 @@ class FeedViewController: UIViewController {
         nowPlayingVC?.delegate = self
         
         //Initial post loading
-        self.refHandle = Database.database().reference()
+        self.refHandle = Database.database().reference().child("posts")
         self.refHandle.observe(DataEventType.value, with: { (snapshot) in
-            DB.getPosts(withBlock : {
-                self.subView.postCollectionView.reloadData()
-            })
-        })
-        
-        //Setups the spotify player
-        setupSpotify()
-        
-        //Reloads posts
-        DB.getPosts(withBlock: {
             self.populateFeed()
         })
+        
+        // Setups the spotify player
+        setupSpotify()
         
         let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.extraLight)
         blur = UIVisualEffectView(effect: blurEffect)
@@ -70,7 +63,11 @@ class FeedViewController: UIViewController {
     
     //Reloading the feed whenever the database changes
     func populateFeed() {
-        subView.postCollectionView.reloadData()
+        DispatchQueue.main.async {
+            DB.getPosts {
+                self.subView.postCollectionView.reloadData()
+            }
+        }
     }
     
     //Creates the spotify player
@@ -112,27 +109,21 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "postCell", for: indexPath) as! PostCollectionViewCell
-        
-        for sub in cell.contentView.subviews {
-            sub.removeFromSuperview()
-        }
         let post = DB.posts[indexPath.row]
-        //let cell = cell as! PostCollectionViewCell
-        
         cell.awakeFromNib()
+        post.getImage { (img) in
+            cell.albumImage.image = img
+        }
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        let cell = cell as! PostCollectionViewCell
+        let post = DB.posts[indexPath.row]
         
         cell.songTitleLabel.text = post.songTitle
         cell.artistLabel.text = post.artist
         cell.postUserLabel.text = post.username
-        /*post.getImage { (img) in
-         cell.albumImage.image = img
-         }*/
-        let url = URL(string:post.imageUrl)
-        let data = try? Data(contentsOf: url!)
-        cell.albumImage.image = UIImage(data: data!)
-        return cell
-        
-        //return cell
     }
     
     /*func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -237,6 +228,11 @@ extension FeedViewController: NowPlayingProtocol, FeedViewDelegate {
         UIView.animate(withDuration: 0.4, animations: {
             self.blur.alpha = 0
         })
+    }
+    
+    func updateBlur(dy: CGFloat) {
+        let ratio = dy / view.frame.height
+        self.blur.alpha = BLUR_MAX - (ratio * BLUR_MAX)
     }
     
     // Selectors
