@@ -54,12 +54,12 @@ class Post {
     
     func getImage(withBlock: @escaping (UIImage) -> ()) {
         DispatchQueue.main.async {
-            let url         = URL(string: self.imageUrl)
-            let cache       = Shared.imageCache
-            if let url      = url {
-                cache.fetch(URL: url).onSuccess({ img in
+            let url = URL(string: self.imageUrl)
+            let cache = Shared.imageCache
+            if let url = url {
+                cache.fetch(URL: url).onSuccess { img in
                     withBlock(img)
-                })
+                }
             }
         }
     }
