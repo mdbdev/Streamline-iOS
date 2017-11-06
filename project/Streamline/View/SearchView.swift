@@ -118,7 +118,18 @@ class SearchView: UIView {
     func searchSpotify() {
         let songTitle = searchBar.text!
         DispatchQueue.main.async {
-    9
+            SPTSearch.perform(withQuery: songTitle, queryType: .queryTypeTrack, accessToken: SpotifyAPI.session.accessToken) { (error: Error?, result: Any?) in
+                    if let e = error {
+                        print(e.localizedDescription)
+                    } else {
+                        if let r = result as? SPTListPage {
+                            if let items = r.items {
+                                self.results = items as! [SPTPartialTrack]
+                                self.updateResults()
+                            }
+                        }
+                }
+            }
         }
     }
     
