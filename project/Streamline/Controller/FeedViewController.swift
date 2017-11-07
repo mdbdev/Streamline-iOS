@@ -40,7 +40,6 @@ class FeedViewController: UIViewController {
         State.MPCommandCenter.pauseCommand.isEnabled = true
         State.MPCommandCenter.pauseCommand.addTarget(self, action: #selector(togglePlaybackState))
         
-        // add play command
         State.MPCommandCenter.playCommand.isEnabled = true
         State.MPCommandCenter.playCommand.addTarget(self, action: #selector(togglePlaybackState))
         
@@ -189,7 +188,6 @@ extension FeedViewController: SPTAudioStreamingDelegate, SPTAudioStreamingPlayba
     }
     
     func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didStopPlayingTrack trackUri: String!) {
-        
         let posts = DB.posts
         let toPlayIndex = (State.nowPlayingIndex! + 1) % posts.count
         let post = posts[toPlayIndex]
@@ -207,10 +205,14 @@ extension FeedViewController: SPTAudioStreamingDelegate, SPTAudioStreamingPlayba
     
     func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didChangePosition position: TimeInterval) {
         State.position = position
+        // Modifying percent
+        let percent = position / audioStreaming.metadata.currentTrack!.duration
+        if let vc = nowPlayingVC {
+            vc.updateSlider(percent: percent)
+        }
     }
 }
 
-//
 extension FeedViewController: NowPlayingProtocol, FeedViewDelegate {
     func passLabel(post: Post, index: Int) {
         changeLabel(post: post, index: index)
@@ -230,7 +232,6 @@ extension FeedViewController: NowPlayingProtocol, FeedViewDelegate {
     
     // Selectors
     func postButtonPressed() {
-        
         searchView = SearchView(frame: Utils.rRect(rx: 40, ry: 120, rw: 295, rh: 289), large: true)
         searchView.delegate = self
         searchView.searchBar.text = "a"
