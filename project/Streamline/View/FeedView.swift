@@ -11,6 +11,7 @@
 class FeedView: UIView {
     var postCollectionView      : UICollectionView!
     var postButton              : UIButton!
+    var postButtonArea          : UIButton!
     var logoutButton            : UIButton!
     var discoverLabel           : UILabel!
     var nowPlayingButton        : UIButton!
@@ -84,6 +85,10 @@ class FeedView: UIView {
         postButton.setBackgroundImage(#imageLiteral(resourceName: "new"), for: .normal)
         postButton.addTarget(self, action: #selector(postButtonPressed), for: .touchUpInside)
         addSubview(postButton)
+        
+        postButtonArea = UIButton(frame: Utils.rRect(rx: 375 * 0.75, ry: 0, rw: 375 * 0.25, rh: 68))
+        postButtonArea.addTarget(self, action: #selector(postButtonPressed), for: .touchUpInside)
+        addSubview(postButtonArea)
         
         logoutButton = UIButton(frame: Utils.rRect(rx: 15, ry: 30, rw: 74, rh: 22))
         logoutButton.setTitle("Log Out", for: .normal)
