@@ -35,22 +35,22 @@ class LoginView: UIView {
         connectButton = UIButton(frame:
             Utils.rRect(rx: 47, ry: 522, rw: 281, rh: 53))
         connectButton.addTarget(self, action: #selector(connectButtonPressed), for: .touchUpInside)
-        connectButton.layer.cornerRadius = 15
-        connectButton.backgroundColor = UIColor.white
-        connectButton.layer.shadowRadius = 3
-        connectButton.layer.shadowOffset = CGSize(width: 0, height: 4)
-        connectButton.layer.shadowColor = UIColor.black.cgColor
-        connectButton.layer.shadowOpacity = 0.35
+        connectButton.layer.cornerRadius    = 15
+        connectButton.backgroundColor       = UIColor.white
+        connectButton.layer.shadowRadius    = 3
+        connectButton.layer.shadowOffset    = CGSize(width: 0, height: 4)
+        connectButton.layer.shadowColor     = UIColor.black.cgColor
+        connectButton.layer.shadowOpacity   = 0.35
         addSubview(connectButton)
         
-        let connectLabel = UILabel(frame:
+        let connectLabel                    = UILabel(frame:
             Utils.rRect(rx: 113, ry: 537, rw: 185, rh: 20))
-        connectLabel.textColor = Constants.darkPurple
-        connectLabel.text = "CONNECT WITH SPOTIFY"
-        connectLabel.textAlignment = .center
-        connectLabel.font = Constants.averageSans
-        connectLabel.font = UIFont.systemFont(ofSize: 14, weight: 1)
-        connectLabel.minimumScaleFactor = 10 / UIFont.labelFontSize
+        connectLabel.textColor              = Constants.darkPurple
+        connectLabel.text                   = "CONNECT WITH SPOTIFY"
+        connectLabel.textAlignment          = .center
+        connectLabel.font                   = Constants.averageSans
+        connectLabel.font                   = UIFont.systemFont(ofSize: 14, weight: 1)
+        connectLabel.minimumScaleFactor     = 10 / UIFont.labelFontSize
         connectLabel.adjustsFontSizeToFitWidth = true
         addSubview(connectLabel)
         

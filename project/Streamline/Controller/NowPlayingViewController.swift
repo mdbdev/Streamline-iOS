@@ -6,40 +6,49 @@
 //  Copyright © 2017 Stephen Jayakar. All rights reserved.
 //
 
+
 import UIKit
 import Foundation
 
 //Allows feed view to see the new song in label
 protocol NowPlayingProtocol {
     func passLabel(post: Post, index: Int)
+    func dismissNowPlaying()
+    func updateBlur(dy: CGFloat)
 }
 
 //Player controls and detailed info about song
 class NowPlayingViewController: UIViewController {
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
     
-    //Seekbar variables
+    // Seekbar variables
     var recognizer: UIPanGestureRecognizer!
     var initialTouchPoint: CGPoint = CGPoint(x: 0, y: 0)
     var sliderEdit: Bool = true
     
-    //Delegate/subview
+    // Delegate/subview
     var subView: NowPlayingView!
     var delegate: NowPlayingProtocol?
     
-    override func viewDidLoad() {
+    override func viewDidLoad() {        
+        view.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.7)
         
-        //Setups player view
+        // Setups player view
         subView = NowPlayingView(frame: view.frame)
         view.addSubview(subView)
         subView.delegate = self
         
-        //Setups seeks bar
+        // Setups seeks bar
         recognizer = UIPanGestureRecognizer(target: self, action: #selector(panGestureRecognizerHandler))
         self.view.addGestureRecognizer(recognizer)
     }
     
     //Manages the seekbar loading for the specific song being played
     override func viewWillAppear(_ animated: Bool) {
+        setNeedsStatusBarAppearanceUpdate()
+        super.viewWillAppear(animated)
         if let index = State.nowPlayingIndex {
             let post = DB.posts[index]
             self.updateSongInformation(post: post, index: index)
@@ -78,10 +87,11 @@ class NowPlayingViewController: UIViewController {
             } else if sender.state == UIGestureRecognizerState.changed {
                 if touchPoint.y - initialTouchPoint.y > 0 {
                     self.view.frame = CGRect(x: 0, y: touchPoint.y - initialTouchPoint.y, width: self.view.frame.size.width, height: self.view.frame.size.height)
+                    self.delegate?.updateBlur(dy: touchPoint.y - initialTouchPoint.y)
                 }
             } else if sender.state == UIGestureRecognizerState.ended || sender.state == UIGestureRecognizerState.cancelled {
                 if touchPoint.y - initialTouchPoint.y > 100 {
-                    self.dismiss(animated: true, completion: nil)
+                    delegate?.dismissNowPlaying()
                 } else {
                     UIView.animate(withDuration: 0.3, animations: {
                         self.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
@@ -105,17 +115,10 @@ extension NowPlayingViewController: NowPlayingViewDelegate {
             SpotifyAPI.player.setIsPlaying(true, callback: nil)
             subView.playButton.setBackgroundImage(UIImage(named: "pause"), for: .normal)
         }
-//        State.paused = !State.paused
-//        SpotifyAPI.player.setIsPlaying(State.paused, callback: nil)
-//        if !State.paused {
-//            subView.playButton.setBackgroundImage(UIImage(named: "play"), for: .normal)
-//        } else {
-//            subView.playButton.setBackgroundImage(UIImage(named: "pause"), for: .normal)
-//        }
     }
     
     func backButtonPressed() {
-        self.dismiss(animated: true, completion: nil)
+        delegate?.dismissNowPlaying()
     }
     
     func forwardButtonPressed() {

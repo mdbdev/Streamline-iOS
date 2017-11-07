@@ -14,16 +14,21 @@ class LoginViewController: UIViewController {
     var subView: LoginView!
     
     // Spotify Elements
-    var auth = SPTAuth.defaultInstance()!
-    var session: SPTSession!
-    var user: User!
+    var auth    = SPTAuth.defaultInstance()!
+    var session : SPTSession!
+    var user    : User!
     var loginUrl: URL?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Add observer to listen for spotify login success
-        NotificationCenter.default.addObserver(self, selector: #selector(toFeedView), name: NSNotification.Name(rawValue: "loginSuccessfull"), object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(toFeedView),
+            name    : NSNotification.Name(rawValue: "loginSuccessfull"),
+            object  : nil
+        )
         
         setupAuth()
         
@@ -41,13 +46,19 @@ class LoginViewController: UIViewController {
     
     //Setup SPTAuth
     func setupAuth() {
-        let redirectURL = SpotifyAPI.redirectURL // redirectURL
-        let clientID = SpotifyAPI.clientID // clientID
+        let redirectURL      = SpotifyAPI.redirectURL // redirectURL
+        let clientID         = SpotifyAPI.clientID // clientID
         auth.redirectURL     = URL(string: "\(redirectURL)")
         auth.clientID        = clientID
-        auth.requestedScopes = [SPTAuthStreamingScope, SPTAuthPlaylistReadPrivateScope, SPTAuthPlaylistModifyPublicScope, SPTAuthPlaylistModifyPrivateScope, SPTAuthUserReadPrivateScope]
-        loginUrl = auth.spotifyWebAuthenticationURL()
-        SpotifyAPI.auth = auth
+        auth.requestedScopes = [
+            SPTAuthStreamingScope,
+            SPTAuthPlaylistReadPrivateScope,
+            SPTAuthPlaylistModifyPublicScope,
+            SPTAuthPlaylistModifyPrivateScope,
+            SPTAuthUserReadPrivateScope
+        ]
+        loginUrl             = auth.spotifyWebAuthenticationURL()
+        SpotifyAPI.auth      = auth
     }
     
     //Segue to feed view
@@ -79,15 +90,21 @@ class LoginViewController: UIViewController {
     
     //Creates the user if they don't exist in database already
     func createUser(){
-        user = User(uid: self.session.canonicalUsername)
+        user           = User(uid: self.session.canonicalUsername)
         DB.currentUser = user
+        
         //Determine if the proper name to display
         SpotifyWeb.getUserDisplayName(accessToken: self.session.accessToken, withBlock: { (username, imageURL) in
             self.user.username = username
             self.user.imageUrl = imageURL
-            DB.createUser(uid: self.session.canonicalUsername, username: self.user.username, userprofile: imageURL, withBlock: {
-                self.performSegue(withIdentifier: "toFeed", sender: self)
-            })
+            DB.createUser(
+                uid        : self.session.canonicalUsername,
+                username   : self.user.username,
+                userprofile: imageURL,
+                withBlock  : {
+                    self.performSegue(withIdentifier: "toFeed", sender: self)
+                }
+            )
         })
     }
 }

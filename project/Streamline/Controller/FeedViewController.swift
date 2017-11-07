@@ -11,17 +11,20 @@ import UIKit
 import Firebase
 import AVFoundation
 
+let BLUR_MAX = CGFloat(0.9)
+
 class FeedViewController: UIViewController {
+    var blur: UIVisualEffectView!
     
     //Search View
     var searchView: SearchView!
-    var modalView: AKModalView!
+    var modalView : AKModalView!
     
     //Feed View for UI elements
     var subView: FeedView!
     
     //Music controller view controller
-    var nowPlayingVC: NowPlayingViewController!
+    var nowPlayingVC: NowPlayingViewController?
     
     // Firebase
     var refHandle: DatabaseReference!
@@ -29,8 +32,8 @@ class FeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Setups the feed view elements
-        subView = FeedView(frame: view.frame)
+        // Setups the feed view elements
+        subView          = FeedView(frame: view.frame)
         subView.delegate = self
         view.addSubview(subView)
         subView.postCollectionView.delegate = self
@@ -38,30 +41,33 @@ class FeedViewController: UIViewController {
         
         // Preloading the player view
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        nowPlayingVC = storyboard.instantiateViewController(withIdentifier: "NowPlayingViewController") as! NowPlayingViewController
-        nowPlayingVC.delegate = self
+        nowPlayingVC = storyboard.instantiateViewController(withIdentifier: "NowPlayingViewController") as? NowPlayingViewController
+        nowPlayingVC?.delegate = self
         
         //Initial post loading
-        self.refHandle = Database.database().reference()
+        self.refHandle = Database.database().reference().child("posts")
         self.refHandle.observe(DataEventType.value, with: { (snapshot) in
-            DB.getPosts(withBlock : {
-                self.subView.postCollectionView.reloadData()
-            })
-        })
-        
-        //Setups the spotify player
-        setupSpotify()
-        
-        //Reloads posts
-        DB.getPosts(withBlock: {
             self.populateFeed()
         })
         
+        // Setups the spotify player
+        setupSpotify()
+        
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.extraLight)
+        blur = UIVisualEffectView(effect: blurEffect)
+        blur.frame = view.bounds
+        blur.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        blur.alpha = 0
+        view.addSubview(blur)
     }
     
     //Reloading the feed whenever the database changes
     func populateFeed() {
-        subView.postCollectionView.reloadData()
+        DispatchQueue.main.async {
+            DB.getPosts {
+                self.subView.postCollectionView.reloadData()
+            }
+        }
     }
     
     //Creates the spotify player
@@ -103,27 +109,37 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "postCell", for: indexPath) as! PostCollectionViewCell
-        
-        for sub in cell.contentView.subviews {
-            sub.removeFromSuperview()
-        }
-        
+        let post = DB.posts[indexPath.row]
         cell.awakeFromNib()
-        
+        post.getImage { (img) in
+            cell.albumImage.image = img
+        }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        let cell = cell as! PostCollectionViewCell
+        let post = DB.posts[indexPath.row]
+        
+        cell.songTitleLabel.text = post.songTitle
+        cell.artistLabel.text = post.artist
+        cell.postUserLabel.text = post.username
+    }
+    
+    /*func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let post = DB.posts[indexPath.row]
         let cell = cell as! PostCollectionViewCell
         cell.songTitleLabel.text = post.songTitle
         cell.artistLabel.text = post.artist
         cell.postUserLabel.text = post.username
-        cell.albumImage.image = #imageLiteral(resourceName: "spotify-logo")
-        post.getImage { (img) in
+        /*post.getImage { (img) in
             cell.albumImage.image = img
-        }
-    }
+        }*/
+        let url = URL(string:post.imageUrl)
+        let data = try? Data(contentsOf: url!)
+        cell.albumImage.image = UIImage(data: data!)
+        return cell
+    }*/
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: (334 / 375) * view.frame.width, height: 69)
@@ -207,10 +223,26 @@ extension FeedViewController: NowPlayingProtocol, FeedViewDelegate {
         changeLabel(post: post, index: index)
     }
     
+    func dismissNowPlaying() {
+        nowPlayingVC?.dismiss(animated: true)
+        UIView.animate(withDuration: 0.4, animations: {
+            self.blur.alpha = 0
+        })
+    }
+    
+    func updateBlur(dy: CGFloat) {
+        let ratio = dy / view.frame.height
+        self.blur.alpha = BLUR_MAX - (ratio * BLUR_MAX)
+    }
+    
     // Selectors
     func postButtonPressed() {
         
-        searchView = SearchView(frame: Utils.rRect(rx: 40, ry: 152, rw: 295, rh: 289), large: true)
+        searchView = SearchView(frame: Utils.rRect(rx: 40, ry: 120, rw: 295, rh: 289), large: true)
+        searchView.delegate = self
+        searchView.searchBar.text = "a"
+        searchView.searchSpotify()
+        searchView.searchBar.text = ""
         searchView.delegate = self
         
         /* Code to limit user to one song a day and delete user pid if it has been 12 hours */
@@ -234,7 +266,13 @@ extension FeedViewController: NowPlayingProtocol, FeedViewDelegate {
     //Handles player button pressed
     func nowPlayingButtonPressed() {
         if let index = State.nowPlayingIndex {
-            self.present(nowPlayingVC, animated: true, completion: nil)
+            if let npvc = nowPlayingVC {
+                npvc.modalPresentationCapturesStatusBarAppearance = true
+                self.present(npvc, animated: true, completion: nil)
+                UIView.animate(withDuration: 0.4, animations: {
+                    self.blur.alpha = BLUR_MAX
+                })
+            }
         }
     }
     

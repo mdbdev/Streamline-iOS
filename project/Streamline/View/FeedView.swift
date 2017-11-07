@@ -9,16 +9,16 @@
 
 // TODO: Rewrite these to actual views rather than extensions
 class FeedView: UIView {
-    var postCollectionView: UICollectionView!
-    var postButton: UIButton!
-    var logoutButton: UIButton!
-    var discoverLabel: UILabel!
-    var nowPlayingButton: UIButton!
-    var nowPlayingLabel: UILabel!
-    var nowPlayingArtist: UILabel!
-    var nowPlayingImage: UIImageView!
-    var plusSign: UILabel!
-    var delegate: FeedViewDelegate?
+    var postCollectionView      : UICollectionView!
+    var postButton              : UIButton!
+    var logoutButton            : UIButton!
+    var discoverLabel           : UILabel!
+    var nowPlayingButton        : UIButton!
+    var nowPlayingLabel         : UILabel!
+    var nowPlayingArtist        : UILabel!
+    var nowPlayingImage         : UIImageView!
+    var plusSign                : UILabel!
+    var delegate                : FeedViewDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -35,31 +35,32 @@ class FeedView: UIView {
     
     func setupNowPlaying() {
         nowPlayingButton = UIButton(frame: Utils.rRect(rx: 0, ry: 609, rw: 375, rh: 60))
-        nowPlayingButton.backgroundColor = UIColor.white
+        nowPlayingButton.backgroundColor    = UIColor.white
+        nowPlayingButton.isHidden           = true
         nowPlayingButton.addTarget(self, action: #selector(nowPlayingButtonPressed), for: .touchUpInside)
-        nowPlayingButton.isHidden = true
         addSubview(nowPlayingButton)
         
-        nowPlayingLabel = UILabel(frame: Utils.rRect(rx: 61, ry: 617, rw: 268, rh: 28))
-        nowPlayingLabel.textColor = UIColor.black
+        nowPlayingLabel             = UILabel(frame: Utils.rRect(rx: 61, ry: 617, rw: 268, rh: 28))
+        nowPlayingLabel.textColor   = UIColor.black
 
-        nowPlayingLabel.adjustsFontSizeToFitWidth = true
-        nowPlayingLabel.font = Constants.averageSans?.withSize(25)
-        nowPlayingLabel.isHidden = true
+        nowPlayingLabel.adjustsFontSizeToFitWidth   = true
+        nowPlayingLabel.font                        = Constants.averageSans
+        nowPlayingLabel.font                        = UIFont.systemFont(ofSize: 20, weight: 0.8)
+        nowPlayingLabel.isHidden                    = true
         addSubview(nowPlayingLabel)
         
         nowPlayingArtist = UILabel(frame: Utils.rRect(rx: 61, ry: 644, rw: 268, rh: 16))
-        nowPlayingArtist.textColor = UIColor.black
-        nowPlayingArtist.adjustsFontSizeToFitWidth = true
-        nowPlayingArtist.font = Constants.averageSans?.withSize(15)
-        nowPlayingArtist.isHidden = true
+        nowPlayingArtist.textColor                  = UIColor.black
+        nowPlayingArtist.adjustsFontSizeToFitWidth  = true
+        nowPlayingArtist.font                       = Constants.averageSans?.withSize(15)
+        nowPlayingArtist.isHidden                   = true
         addSubview(nowPlayingArtist)
         
         // TODO: Use annie's square function
-        nowPlayingImage = UIImageView(frame: Utils.rRect(rx: 8, ry: 617, rw: 47, rh: 47))
-        nowPlayingImage.image = UIImage(named: "albumPlaceholder")
+        nowPlayingImage             = UIImageView(frame: Utils.rRect(rx: 8, ry: 617, rw: 47, rh: 47))
+        nowPlayingImage.image       = UIImage(named: "albumPlaceholder")
         nowPlayingImage.contentMode = .scaleAspectFit
-        nowPlayingImage.isHidden = true
+        nowPlayingImage.isHidden    = true
         addSubview(nowPlayingImage)
     }
     
@@ -69,9 +70,9 @@ class FeedView: UIView {
     
     func setupCollectionView() {
         let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 8
-        layout.minimumInteritemSpacing = 8
-        postCollectionView = UICollectionView(frame: Utils.rRect(rx: 21, ry: 69, rw: 334, rh: 598), collectionViewLayout: layout)
+        layout.minimumLineSpacing       = 8
+        layout.minimumInteritemSpacing  = 8
+        postCollectionView              = UICollectionView(frame: Utils.rRect(rx: 21, ry: 69, rw: 334, rh: 598), collectionViewLayout: layout)
         postCollectionView.register(PostCollectionViewCell.self, forCellWithReuseIdentifier: "postCell")
 
         postCollectionView.backgroundColor = Constants.cvBackground
@@ -80,13 +81,6 @@ class FeedView: UIView {
     
     func setupButton() {
         postButton = UIButton(frame: Utils.rRect(rx: 330, ry: 28.5, rw: 26, rh: 26))
-//        postButton.setTitle("", for: .normal)
-//        postButton.setTitleColor(UIColor(hex: "311b92"), for: .normal)
-//        postButton.backgroundColor = UIColor.white
-//        postButton.backgroundColor = .clear
-//        postButton.layer.cornerRadius = 1.5
-//        postButton.layer.borderWidth = 2.5
-//        postButton.layer.borderColor = UIColor(hex: "311b92").cgColor
         postButton.setBackgroundImage(#imageLiteral(resourceName: "new"), for: .normal)
         postButton.addTarget(self, action: #selector(postButtonPressed), for: .touchUpInside)
         addSubview(postButton)
@@ -102,8 +96,8 @@ class FeedView: UIView {
     func setupLabel() {
         discoverLabel = UILabel(frame: Utils.rRect(rx: 0, ry: 20, rw: 375, rh: 44))
         
-        discoverLabel.textColor = UIColor(hex: "311b92")
-        discoverLabel.text = "Discover"
+        discoverLabel.textColor     = UIColor(hex: "311b92")
+        discoverLabel.text          = "Discover"
         discoverLabel.textAlignment = .center
         
         discoverLabel.font = Constants.averageSans
