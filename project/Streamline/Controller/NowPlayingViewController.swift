@@ -52,16 +52,6 @@ class NowPlayingViewController: UIViewController {
         if let index = State.nowPlayingIndex {
             let post = DB.posts[index]
             self.updateSongInformation(post: post, index: index)
-//            let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { (t) in
-//                if self.sliderEdit {
-//                    if SpotifyAPI.player.metadata != nil {
-//                        if let duration = SpotifyAPI.player.metadata.currentTrack?.duration {
-//                            let percent = (State.position / duration)
-//                            self.subView.slider.setValue(Float(percent), animated: true)
-//                        }
-//                    }
-//                }
-//            })
         } else {
             self.dismiss(animated: true, completion: nil)
         }
@@ -79,7 +69,9 @@ class NowPlayingViewController: UIViewController {
     
     func updateSlider(percent: Double) {
         if sliderEdit {
-            subView.slider.setValue(Float(percent), animated: true)
+            if let sv = subView {
+                sv.slider.setValue(Float(percent), animated: true)
+            }
         }
     }
 
