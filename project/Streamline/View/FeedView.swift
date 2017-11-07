@@ -41,19 +41,19 @@ class FeedView: UIView {
         nowPlayingButton.addTarget(self, action: #selector(nowPlayingButtonPressed), for: .touchUpInside)
         addSubview(nowPlayingButton)
         
-        nowPlayingLabel             = UILabel(frame: Utils.rRect(rx: 61, ry: 617, rw: 268, rh: 28))
+        nowPlayingLabel             = UILabel(frame: Utils.rRect(rx: 61, ry: 615, rw: 268, rh: 28))
         nowPlayingLabel.textColor   = UIColor.black
 
         nowPlayingLabel.adjustsFontSizeToFitWidth   = true
         nowPlayingLabel.font                        = Constants.averageSans
-        nowPlayingLabel.font                        = UIFont.systemFont(ofSize: 20, weight: 0.8)
+        nowPlayingLabel.font                        = UIFont.systemFont(ofSize: ((frame.width / 375) * 18), weight: 0.8)
         nowPlayingLabel.isHidden                    = true
         addSubview(nowPlayingLabel)
         
-        nowPlayingArtist = UILabel(frame: Utils.rRect(rx: 61, ry: 644, rw: 268, rh: 16))
+        nowPlayingArtist = UILabel(frame: Utils.rRect(rx: 61, ry: 637, rw: 268, rh: 28))
         nowPlayingArtist.textColor                  = UIColor.black
         nowPlayingArtist.adjustsFontSizeToFitWidth  = true
-        nowPlayingArtist.font                       = Constants.averageSans?.withSize(15)
+        nowPlayingArtist.font                       = UIFont.systemFont(ofSize: ((frame.width / 375) * 16))
         nowPlayingArtist.isHidden                   = true
         addSubview(nowPlayingArtist)
         

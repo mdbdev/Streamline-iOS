@@ -49,6 +49,8 @@ class NowPlayingView: UIView {
         artistName.textAlignment             = .center
         addSubview(artistName)
         
+        
+        
         slider              = UISlider(frame: Utils.rRect(rx: 26, ry: 500, rw: 328, rh: 20))
         slider.isContinuous = false
         slider.maximumValue = 1
