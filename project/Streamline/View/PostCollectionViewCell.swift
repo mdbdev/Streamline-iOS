@@ -41,7 +41,7 @@ class PostCollectionViewCell: UICollectionViewCell {
         
         
         artistLabel = UILabel(frame: CGRect(x: contentView.frame.height + 10,
-                                            y: 16 + 7,
+                                            y: 16 + 6,
                                             width: contentView.frame.width - (contentView.frame.height + 10),
                                             height: 28))
         artistLabel.adjustsFontSizeToFitWidth = true
