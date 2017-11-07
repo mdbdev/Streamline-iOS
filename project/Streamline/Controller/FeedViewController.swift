@@ -207,7 +207,14 @@ extension FeedViewController: SPTAudioStreamingDelegate, SPTAudioStreamingPlayba
     func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didChangePosition position: TimeInterval) {
         State.position = position
         // Update MP
-        
+        let duration = audioStreaming.metadata.currentTrack!.duration
+        // Modifying percent
+        let percent = position / duration
+        State.MPInfoCenter.nowPlayingInfo![MPNowPlayingInfoPropertyElapsedPlaybackTime] = position
+        State.MPInfoCenter.nowPlayingInfo![MPMediaItemPropertyPlaybackDuration] = duration
+        if let vc = nowPlayingVC {
+            vc.updateSlider(percent: percent)
+        }
     }
 }
 

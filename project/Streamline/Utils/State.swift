@@ -17,6 +17,7 @@ struct State {
     
     static func updateMP(post: Post) {
         post.getImage { (img) in
+//            let duration = SpotifyAPI.player.metadata.currentTrack?.duration
             State.MPInfoCenter.nowPlayingInfo = [MPMediaItemPropertyArtist: post.artist,
                                                  MPMediaItemPropertyTitle: post.songTitle,
                                                  MPMediaItemPropertyArtwork: MPMediaItemArtwork(image: img),
