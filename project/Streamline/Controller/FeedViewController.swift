@@ -10,17 +10,19 @@ import Foundation
 import UIKit
 import Firebase
 import AVFoundation
+import MediaPlayer
 
 let BLUR_MAX = CGFloat(0.9)
 
 class FeedViewController: UIViewController {
     var blur: UIVisualEffectView!
+    var commandCenter: MPRemoteCommandCenter!
     
-    //Search View
+    // Search View
     var searchView: SearchView!
     var modalView : AKModalView!
     
-    //Feed View for UI elements
+    // Feed View for UI elements
     var subView: FeedView!
     
     //Music controller view controller
@@ -31,6 +33,12 @@ class FeedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        UIApplication.shared.beginReceivingRemoteControlEvents()
+        
+        // add paused command
+        
+        // add play command
         
         // Setups the feed view elements
         subView          = FeedView(frame: view.frame)
@@ -44,7 +52,7 @@ class FeedViewController: UIViewController {
         nowPlayingVC = storyboard.instantiateViewController(withIdentifier: "NowPlayingViewController") as? NowPlayingViewController
         nowPlayingVC?.delegate = self
         
-        //Initial post loading
+        // Initial post loading
         self.refHandle = Database.database().reference().child("posts")
         self.refHandle.observe(DataEventType.value, with: { (snapshot) in
             self.populateFeed()
@@ -61,7 +69,7 @@ class FeedViewController: UIViewController {
         view.addSubview(blur)
     }
     
-    //Reloading the feed whenever the database changes
+    // Reloading the feed whenever the database changes
     func populateFeed() {
         DispatchQueue.main.async {
             DB.getPosts {
@@ -70,7 +78,7 @@ class FeedViewController: UIViewController {
         }
     }
     
-    //Creates the spotify player
+    // Creates the spotify player
     func setupSpotify() {
         if SpotifyAPI.player == nil {
             SpotifyAPI.player = SPTAudioStreamingController.sharedInstance()
@@ -81,7 +89,7 @@ class FeedViewController: UIViewController {
         }
     }
     
-    //Creates the modal search view
+    // Creates the modal search view
     func createSearchView(){
         modalView = AKModalView(view: searchView)
         modalView.automaticallyCenter = false
@@ -90,14 +98,14 @@ class FeedViewController: UIViewController {
     }
 }
 
-//Manages the search view modal
+// Manages the search view modal
 extension FeedViewController: SearchViewDelegate {
     func dismissView() {
         modalView.dismiss()
     }
 }
 
-//Manages the collection view
+// Manages the collection view
 extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -126,21 +134,6 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.postUserLabel.text = post.username
     }
     
-    /*func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        let post = DB.posts[indexPath.row]
-        let cell = cell as! PostCollectionViewCell
-        cell.songTitleLabel.text = post.songTitle
-        cell.artistLabel.text = post.artist
-        cell.postUserLabel.text = post.username
-        /*post.getImage { (img) in
-            cell.albumImage.image = img
-        }*/
-        let url = URL(string:post.imageUrl)
-        let data = try? Data(contentsOf: url!)
-        cell.albumImage.image = UIImage(data: data!)
-        return cell
-    }*/
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: (334 / 375) * view.frame.width, height: 69)
     }
@@ -157,7 +150,7 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 print(error!.localizedDescription)
             }
             
-            //Check player is active before creating the label
+            // Check player is active before creating the label
             if (SpotifyAPI.player.loggedIn){
                 State.nowPlayingIndex = indexPath.row
                 self.changeLabel(post: post, index: State.nowPlayingIndex!)
@@ -167,16 +160,16 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func changeLabel(post: Post, index: Int) {
         
-        //If this is first press change enable all hidden elements
+        // If this is first press change enable all hidden elements
         subView.nowPlayingButton.isHidden = false
         subView.nowPlayingArtist.isHidden = false
         subView.nowPlayingImage.isHidden = false
         subView.nowPlayingLabel.isHidden = false
         
-        //Resize collection view so bottom post isn't cut off
+        // Resize collection view so bottom post isn't cut off
         subView.postCollectionView.frame = Utils.rRect(rx: 21, ry: 69, rw: 334, rh: 541)
         
-        //Get post info and change label
+        // Get post info and change label
         let post = DB.posts[index]
         subView.nowPlayingLabel.text = post.songTitle
         subView.nowPlayingArtist.text = post.artist
@@ -187,9 +180,8 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
 }
 
-//Manages spotify player extensions
+// Manages spotify player extensions
 extension FeedViewController: SPTAudioStreamingDelegate, SPTAudioStreamingPlaybackDelegate {
-    
     func activateAudioSession() {
         try? AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
         try? AVAudioSession.sharedInstance().setActive(true)
@@ -203,12 +195,12 @@ extension FeedViewController: SPTAudioStreamingDelegate, SPTAudioStreamingPlayba
         
         State.position = 0
         
-        //Change the song info in player view
+        // Change the song info in player view
         if let vc = nowPlayingVC {
             vc.updateSongInformation(post: post, index: toPlayIndex)
         }
         
-        //Play next song
+        // Play next song
         SpotifyAPI.playPost(post: post, index: toPlayIndex)
     }
     
