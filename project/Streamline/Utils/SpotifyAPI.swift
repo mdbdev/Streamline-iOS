@@ -16,7 +16,7 @@ struct SpotifyAPI {
     static var player: SPTAudioStreamingController!
     static var auth: SPTAuth!
     
-    //Play the post with the player
+    // Play the post with the player
     static func playPost(post: Post, index: Int) {
         player.playSpotifyURI("spotify:track:" + post.trackId, startingWith: 0, startingWithPosition: 0, callback: { (error) in
             if (error != nil) {
@@ -26,5 +26,14 @@ struct SpotifyAPI {
             // Update the external MediaPlayer
             State.updateMP(post: post)
         })
+    }
+    
+    static func togglePlaybackState() {
+        let isPlaying = SpotifyAPI.player.playbackState.isPlaying
+        if isPlaying {
+            SpotifyAPI.player.setIsPlaying(false, callback: nil)
+        } else {
+            SpotifyAPI.player.setIsPlaying(true, callback: nil)
+        }
     }
 }

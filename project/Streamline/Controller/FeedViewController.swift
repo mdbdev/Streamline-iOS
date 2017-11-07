@@ -36,9 +36,13 @@ class FeedViewController: UIViewController {
         
         UIApplication.shared.beginReceivingRemoteControlEvents()
         
-        // add paused command
+        // TODO: This needs to be centralized in the code (which is why there will be bugs now)
+        State.MPCommandCenter.pauseCommand.isEnabled = true
+        State.MPCommandCenter.pauseCommand.addTarget(self, action: #selector(togglePlaybackState))
         
         // add play command
+        State.MPCommandCenter.playCommand.isEnabled = true
+        State.MPCommandCenter.playCommand.addTarget(self, action: #selector(togglePlaybackState))
         
         // Setups the feed view elements
         subView          = FeedView(frame: view.frame)
@@ -96,6 +100,12 @@ class FeedViewController: UIViewController {
         view.addSubview(modalView)
         modalView.show()
     }
+    
+    // Selectors
+    @objc
+    func togglePlaybackState() {
+        SpotifyAPI.togglePlaybackState()
+    }
 }
 
 // Manages the search view modal
@@ -142,20 +152,11 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let post = DB.posts[indexPath.row]
         
         activateAudioSession()
-        
-        SpotifyAPI.player.playSpotifyURI("spotify:track:" + post.trackId, startingWith: 0, startingWithPosition: 0, callback: { (error) in
-            
-            //Print any errors
-            if (error != nil) {
-                print(error!.localizedDescription)
-            }
-            
-            // Check player is active before creating the label
-            if (SpotifyAPI.player.loggedIn){
-                State.nowPlayingIndex = indexPath.row
-                self.changeLabel(post: post, index: State.nowPlayingIndex!)
-            }
-        })
+        SpotifyAPI.playPost(post: post, index: indexPath.row)
+        if (SpotifyAPI.player.loggedIn) {
+            State.nowPlayingIndex = indexPath.row
+            self.changeLabel(post: post, index: indexPath.row)
+        }
     }
     
     func changeLabel(post: Post, index: Int) {
