@@ -42,6 +42,15 @@ class Utils {
         
         return CGRect(x: sqx, y: y, width: squareDim, height: squareDim)
     }
+    
+    // presents popup alert
+    static func createAlert(warningMessage: String) -> UIAlertController {
+        let alert = UIAlertController(title: "WARNING:",
+                                      message: warningMessage,
+                                      preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+        return alert
+    }
 
 }
 

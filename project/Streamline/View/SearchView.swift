@@ -110,7 +110,7 @@ class SearchView: UIView {
                             imageUrl: track.album.largestCover.imageURL.absoluteString)
             
             DB.createPost(post: post, user: DB.currentUser)
-            u.createPost(pid: post.pid)
+            u.createPost(pid: post.pid, timePosted: post.timePosted)
             delegate?.dismissView()
         }
     }

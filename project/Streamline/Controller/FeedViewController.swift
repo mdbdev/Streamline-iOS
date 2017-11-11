@@ -245,22 +245,33 @@ extension FeedViewController: NowPlayingProtocol, FeedViewDelegate {
         searchView.searchBar.text = ""
         searchView.delegate = self
         
-        /* Code to limit user to one song a day and delete user pid if it has been 12 hours */
+        /* Code to limit user to one song a day and delete user pid if it has been 24 hours */
+        if let timePosted = DB.currentUser.timePosted {
+            if (Date().timeIntervalSince1970 - timePosted <= 86400) {
+                let alert = Utils.createAlert(warningMessage: "Sorry! You can only post one song a day. Try post again later")
+                self.present(alert, animated: true, completion: nil)
+            }
+        } else {
+            self.createSearchView()
+        }
+        
+        
 //        DB.currentUser.getPID {
 //            if DB.currentUser.pid == "" {
 //                self.createSearchView()
 //            } else {
-//                //TODO: Check if song is past deadline
-//                DB.getSinglePost(pid: DB.currentUser.pid, withBlock: { (post) in
-//                    if (Date().timeIntervalSince1970 - post.timePosted >= 43200) {
-//                        DB.currentUser.createPost(pid: "")
-//                        self.createSearchView()
-//                    }
-//                })
+////                TODO: Check if song is past deadline
+//                
+////                DB.getSinglePost(pid: DB.currentUser.pid, withBlock: { (post) in
+////                    if (Date().timeIntervalSince1970 - post.timePosted >= 43200) {
+////                        DB.currentUser.createPost(pid: "")
+////                        self.createSearchView()
+////                    }
+////                })
 //            }
         
         //Create search modal
-        createSearchView()
+//        self.createSearchView()
     }
     
     //Handles player button pressed
