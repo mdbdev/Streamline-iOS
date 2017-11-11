@@ -92,7 +92,8 @@ struct DB {
                                    "timePosted": post.timePosted,
                                    "songTitle": post.songTitle,
                                    "artist": post.artist,
-                                   "trackId": post.trackId]
+                                   "trackId": post.trackId,
+                                   "profileImageURL": currentUser.imageUrl]
         ref.setValue(dict)
     }
     
