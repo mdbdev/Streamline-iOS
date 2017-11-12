@@ -8,6 +8,7 @@
 
 import Foundation
 import MediaPlayer
+import NotificationCenter
 
 
 struct SpotifyAPI {
@@ -30,11 +31,15 @@ struct SpotifyAPI {
     }
     
     static func togglePlaybackState() {
-        let isPlaying = SpotifyAPI.player.playbackState.isPlaying
+        var isPlaying = SpotifyAPI.player.playbackState.isPlaying
         if isPlaying {
             SpotifyAPI.player.setIsPlaying(false, callback: nil)
         } else {
             SpotifyAPI.player.setIsPlaying(true, callback: nil)
         }
+        isPlaying = !isPlaying
+        // Post notification
+        let nc = NotificationCenter.default
+        nc.post(name: Notification.Name(rawValue: "playbackState"), object: nil, userInfo: ["isPlaying": isPlaying])
     }
 }

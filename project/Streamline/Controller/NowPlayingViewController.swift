@@ -100,11 +100,11 @@ class NowPlayingViewController: UIViewController {
     }
 }
 
-//Mangaes the ui elements
+// Mangaes the ui elements
 extension NowPlayingViewController: NowPlayingViewDelegate {
-    
-    //Manages buttons presses
+    // Manages buttons presses
     func playButtonPressed() {
+        // CHANGE THIS TO USE THE SPOTIFYAPI FUNCTION
         let isPlaying = SpotifyAPI.player.playbackState.isPlaying
         if isPlaying {
             SpotifyAPI.player.setIsPlaying(false, callback: nil)
