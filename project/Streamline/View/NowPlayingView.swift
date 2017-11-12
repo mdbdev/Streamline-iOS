@@ -49,6 +49,8 @@ class NowPlayingView: UIView {
         artistName.textAlignment             = .center
         addSubview(artistName)
         
+        
+        
         slider              = UISlider(frame: Utils.rRect(rx: 26, ry: 500, rw: 328, rh: 20))
         slider.isContinuous = false
         slider.maximumValue = 1
@@ -56,7 +58,7 @@ class NowPlayingView: UIView {
         slider.addTarget(self, action: #selector(sliderChanging), for: .touchDown)
         slider.addTarget(self, action: #selector(sliderNoLongerChanging), for: .touchUpInside)
         slider.addTarget(self, action: #selector(sliderNoLongerChanging), for: .touchUpOutside)
-        slider.setThumbImage(UIImage(named: "thumb"), for: .normal)
+        slider.setThumbImage(UIImage(named: "slider_dot"), for: .normal)
         slider.minimumTrackTintColor = UIColor.black
         slider.maximumTrackTintColor = UIColor(hex: "d1c4e9")
         // TODO: Have to change the maximum and minimum image to match the figma
