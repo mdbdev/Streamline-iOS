@@ -14,11 +14,13 @@ class PostCollectionViewCell: UICollectionViewCell {
     var artistLabel: UILabel!
     var postUserLabel: UILabel!
     var albumImage: UIImageView!
+    var profileImage: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
         setupView()
+//        setupProfileImage()
         setupLabels()
         setupAlbumImage()
     }
@@ -51,6 +53,7 @@ class PostCollectionViewCell: UICollectionViewCell {
         artistLabel.font = UIFont.systemFont(ofSize: 13)
         contentView.addSubview(artistLabel)
         
+//        postUserLabel = UILabel(frame: CGRect(x: contentView.frame.height + 30,
         postUserLabel = UILabel(frame: CGRect(x: contentView.frame.height + 10,
                                               y: 16 + 7 + 20,
                                               width: contentView.frame.width - (contentView.frame.height + 24),
@@ -61,6 +64,17 @@ class PostCollectionViewCell: UICollectionViewCell {
         postUserLabel.font = Constants.averageSans?.withSize(12)
         postUserLabel.font = UIFont.systemFont(ofSize: 12)
         contentView.addSubview(postUserLabel)
+    }
+    
+    func setupProfileImage() {
+        profileImage = UIImageView(frame: CGRect(x: contentView.frame.height + 10,
+                                                 y: 16 + 7 + 23,
+                                                 width: 10,
+                                                 height: 10))
+        profileImage.layer.cornerRadius = 3
+        profileImage.image = #imageLiteral(resourceName: "music note")
+        profileImage.contentMode  = .scaleAspectFit
+        contentView.addSubview(profileImage)
     }
     
     func setupAlbumImage() {
