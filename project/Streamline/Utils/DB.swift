@@ -99,9 +99,9 @@ struct DB {
     
     // Sets the users post pid in the database
     static func userPost(uid: String, pid: String, timePosted: TimeInterval) {
-        let ref = Database.database().reference().child("users").child(uid) //.child("pid")
-        let dict = ["pid":pid, "timePosted":timePosted] as [String : Any]
-        ref.setValue(dict)
+        let ref = Database.database().reference().child("users").child(uid)
+        ref.child("pid").setValue(pid)
+        ref.child("timePosted").setValue(timePosted)
     }
     
     // Gets a single post with the user id
