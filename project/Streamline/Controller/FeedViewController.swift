@@ -261,7 +261,7 @@ extension FeedViewController: NowPlayingProtocol, FeedViewDelegate {
         createSearchView()
     }
     
-    //Handles player button pressed
+    // Handles player button pressed
     func nowPlayingButtonPressed() {
         if let index = State.nowPlayingIndex {
             if let npvc = nowPlayingVC {

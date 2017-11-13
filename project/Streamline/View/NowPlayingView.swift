@@ -67,10 +67,10 @@ class NowPlayingView: UIView {
         playButton = UIButton(frame: Utils.rRect(rx: 175, ry: 558, rw: 25, rh: 25))
         playButton.addTarget(self, action: #selector(playButtonPressed), for: .touchUpInside)
         let isPlaying = SpotifyAPI.player.playbackState.isPlaying
-        if !isPlaying {
-            playButton.setBackgroundImage(UIImage(named: "play"), for: .normal)
-        } else {
+        if isPlaying {
             playButton.setBackgroundImage(UIImage(named: "pause"), for: .normal)
+        } else {
+            playButton.setBackgroundImage(UIImage(named: "play"), for: .normal)
         }
         addSubview(playButton)
         

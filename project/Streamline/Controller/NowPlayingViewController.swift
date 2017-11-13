@@ -43,6 +43,10 @@ class NowPlayingViewController: UIViewController {
         // Setups seeks bar
         recognizer = UIPanGestureRecognizer(target: self, action: #selector(panGestureRecognizerHandler))
         self.view.addGestureRecognizer(recognizer)
+        
+        // Setup observer for playback status
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(updatePlayback(_ :)), name: Notification.Name(rawValue: "playbackState"), object: nil)
     }
     
     // Manages the seekbar loading for the specific song being played
@@ -75,6 +79,16 @@ class NowPlayingViewController: UIViewController {
         }
     }
 
+    // Selector for playback notification
+    func updatePlayback(_ notification: Notification) {
+        let isPlaying = notification.userInfo!["isPlaying"] as! Bool
+        if isPlaying {
+            subView.playButton.setBackgroundImage(UIImage(named: "pause"), for: .normal)
+        } else {
+            subView.playButton.setBackgroundImage(UIImage(named: "play"), for: .normal)
+        }
+    }
+    
     // Selectors for seek bar
     func panGestureRecognizerHandler(_ sender: UIPanGestureRecognizer) {
         if sliderEdit {
@@ -104,15 +118,7 @@ class NowPlayingViewController: UIViewController {
 extension NowPlayingViewController: NowPlayingViewDelegate {
     // Manages buttons presses
     func playButtonPressed() {
-        // CHANGE THIS TO USE THE SPOTIFYAPI FUNCTION
-        let isPlaying = SpotifyAPI.player.playbackState.isPlaying
-        if isPlaying {
-            SpotifyAPI.player.setIsPlaying(false, callback: nil)
-            subView.playButton.setBackgroundImage(UIImage(named: "play"), for: .normal)
-        } else {
-            SpotifyAPI.player.setIsPlaying(true, callback: nil)
-            subView.playButton.setBackgroundImage(UIImage(named: "pause"), for: .normal)
-        }
+        SpotifyAPI.togglePlaybackState()
     }
     
     func backButtonPressed() {
