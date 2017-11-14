@@ -112,7 +112,12 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let post = DB.posts[indexPath.row]
         cell.awakeFromNib()
         post.getImage { (img) in
-            cell.albumImage.image = img
+            UIView.transition(with: cell.albumImage,
+                              duration: 1,
+                              options: .transitionCrossDissolve,
+                              animations: { cell.albumImage.image = img },
+                              completion: nil)
+//            cell.albumImage.image = img
         }
         return cell
     }
@@ -126,21 +131,6 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.postUserLabel.text = post.username
     }
     
-    /*func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        let post = DB.posts[indexPath.row]
-        let cell = cell as! PostCollectionViewCell
-        cell.songTitleLabel.text = post.songTitle
-        cell.artistLabel.text = post.artist
-        cell.postUserLabel.text = post.username
-        /*post.getImage { (img) in
-            cell.albumImage.image = img
-        }*/
-        let url = URL(string:post.imageUrl)
-        let data = try? Data(contentsOf: url!)
-        cell.albumImage.image = UIImage(data: data!)
-        return cell
-    }*/
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: (334 / 375) * view.frame.width, height: 69)
     }
@@ -152,13 +142,13 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         SpotifyAPI.player.playSpotifyURI("spotify:track:" + post.trackId, startingWith: 0, startingWithPosition: 0, callback: { (error) in
             
-            //Print any errors
+            // Print any errors
             if (error != nil) {
                 print(error!.localizedDescription)
             }
             
-            //Check player is active before creating the label
-            if (SpotifyAPI.player.loggedIn){
+            // Check player is active before creating the label
+            if (SpotifyAPI.player.loggedIn) {
                 State.nowPlayingIndex = indexPath.row
                 self.changeLabel(post: post, index: State.nowPlayingIndex!)
             }
@@ -236,7 +226,6 @@ extension FeedViewController: NowPlayingProtocol, FeedViewDelegate {
     
     // Selectors
     func postButtonPressed() {
-        
         searchView = SearchView(frame: Utils.rRect(rx: 40, ry: 120, rw: 295, rh: 289), large: true)
         searchView.delegate = self
         searchView.searchBar.text = "a"
@@ -245,32 +234,15 @@ extension FeedViewController: NowPlayingProtocol, FeedViewDelegate {
         searchView.delegate = self
         
         /* Code to limit user to one song a day and delete user pid if it has been 24 hours */
+        // TODO: Add a debug flag for operators (I hardcoded in my profile to be able to post multiple for a test)
         if let timePosted = DB.currentUser.timePosted {
-            if (Date().timeIntervalSince1970 - timePosted <= 86400) {
+            if (Date().timeIntervalSince1970 - timePosted > 86400 || DB.currentUser.username == "Stephen") {
+                self.createSearchView()
+            } else {
                 let alert = Utils.createAlert(warningMessage: "Sorry! You can only post one song a day. Try post again later")
                 self.present(alert, animated: true, completion: nil)
             }
-        } else {
-            self.createSearchView()
         }
-        
-        
-//        DB.currentUser.getPID {
-//            if DB.currentUser.pid == "" {
-//                self.createSearchView()
-//            } else {
-////                TODO: Check if song is past deadline
-//                
-////                DB.getSinglePost(pid: DB.currentUser.pid, withBlock: { (post) in
-////                    if (Date().timeIntervalSince1970 - post.timePosted >= 43200) {
-////                        DB.currentUser.createPost(pid: "")
-////                        self.createSearchView()
-////                    }
-////                })
-//            }
-        
-        // Create search modal
-//        self.createSearchView()
     }
     
     // Handles player button pressed
