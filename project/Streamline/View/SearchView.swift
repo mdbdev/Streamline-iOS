@@ -126,7 +126,7 @@ class SearchView: UIView {
                         if let r = result as? SPTListPage {
                             if let items = r.items {
                                 self.results = items as! [SPTPartialTrack]
-                                if songTitle != self.searchBar.text! {
+                                if songTitle == self.searchBar.text! {
                                     self.updateResults()
                                 }
                             }
