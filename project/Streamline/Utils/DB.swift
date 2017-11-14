@@ -92,24 +92,26 @@ struct DB {
                                    "timePosted": post.timePosted,
                                    "songTitle": post.songTitle,
                                    "artist": post.artist,
-                                   "trackId": post.trackId]
+                                   "trackId": post.trackId,
+                                   "profileImageURL": currentUser.imageUrl]
         ref.setValue(dict)
     }
     
     // Sets the users post pid in the database
-    static func userPost(uid: String, pid: String) {
-        var ref = Database.database().reference().child("users").child(uid).child("pid")
-        ref.setValue(pid)
+    static func userPost(uid: String, pid: String, timePosted: TimeInterval) {
+        let ref = Database.database().reference().child("users").child(uid) //.child("pid")
+        let dict = ["pid":pid, "timePosted":timePosted] as [String : Any]
+        ref.setValue(dict)
     }
     
     // Gets a single post with the user id
-    static func getSinglePost(pid: String, withBlock: @escaping (Post) -> ()) {
-        var ref = Database.database().reference().child("posts").child(pid)
-        ref.observeSingleEvent(of: .value) { (snapshot, error) in
-            let post = Post(pid: pid, postDict: snapshot.value as! [String : Any])
-            withBlock(post)
-        }
-    }
+//    static func getSinglePost(pid: String, withBlock: @escaping (Post) -> ()) {
+//        var ref = Database.database().reference().child("posts").child(pid)
+//        ref.observeSingleEvent(of: .value) { (snapshot, error) in
+//            let post = Post(pid: pid, postDict: snapshot.value as! [String : Any])
+//            withBlock(post)
+//        }
+//    }
     
     //Sorts the posts by time stamp
     static func sortPosts() {

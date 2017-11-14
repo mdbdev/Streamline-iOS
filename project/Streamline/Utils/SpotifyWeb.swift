@@ -19,7 +19,7 @@ class SpotifyWeb {
         Alamofire.request("https://api.spotify.com/v1/me", headers: headers).responseJSON(completionHandler: { (response) in
             let initialJsonResponse = response.result.value as? NSDictionary
             if let jsonResponse = initialJsonResponse {
-                var username : String = "Anonymous User"
+                let username : String = "Anonymous User"
                 print((jsonResponse["images"] as! NSArray).count)
                 var imageURL = ""
                 if (jsonResponse["images"] as! NSArray).count == 0 {
@@ -27,7 +27,7 @@ class SpotifyWeb {
                 } else {
                     imageURL = ((jsonResponse["images"] as! NSArray)[0] as! NSDictionary)["url"] as! String
                 }
-                var usernameJson = jsonResponse["display_name"]
+                let usernameJson = jsonResponse["display_name"]
                 if let x = jsonResponse["display_name"] as? String {
                     withBlock(x, imageURL)
                 } else {
