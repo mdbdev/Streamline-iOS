@@ -15,9 +15,24 @@ class User {
     var imageUrl   : String!
     var timePosted : TimeInterval?
     
-    //Username needs to be set from the view controllers
-    init(uid: String) {
+    init(uid: String,
+         pid: String,
+         username: String,
+         imageUrl: String,
+         timePosted: TimeInterval?) {
+        self.pid = pid
         self.uid = uid
+        self.username = username
+        self.imageUrl = imageUrl
+        self.timePosted = timePosted
+    }
+    
+    convenience init(uid: String, userDict: [String: Any]) {
+        let username = userDict["displayName"] as! String
+        let pid = userDict["pid"] as! String
+        let imageUrl = userDict["profileImageURL"] as! String
+        let timePosted = userDict["timePosted"] as? TimeInterval
+        self.init(uid: uid, pid: pid, username: username, imageUrl: imageUrl, timePosted: timePosted)
     }
     
     // Get the users current pid from the database

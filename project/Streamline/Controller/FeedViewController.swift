@@ -44,7 +44,7 @@ class FeedViewController: UIViewController {
         nowPlayingVC = storyboard.instantiateViewController(withIdentifier: "NowPlayingViewController") as? NowPlayingViewController
         nowPlayingVC?.delegate = self
         
-        //Initial post loading
+        // Initial post loading
         self.refHandle = Database.database().reference().child("posts")
         self.refHandle.observe(DataEventType.value, with: { (snapshot) in
             self.populateFeed()
@@ -58,7 +58,7 @@ class FeedViewController: UIViewController {
         blur.frame = view.bounds
         blur.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         blur.alpha = 0
-        view.addSubview(blur)
+        view.addSubview(blur)        
     }
     
     //Reloading the feed whenever the database changes
@@ -269,11 +269,11 @@ extension FeedViewController: NowPlayingProtocol, FeedViewDelegate {
 ////                })
 //            }
         
-        //Create search modal
+        // Create search modal
 //        self.createSearchView()
     }
     
-    //Handles player button pressed
+    // Handles player button pressed
     func nowPlayingButtonPressed() {
         if let index = State.nowPlayingIndex {
             if let npvc = nowPlayingVC {
