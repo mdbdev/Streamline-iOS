@@ -10,11 +10,10 @@
 import Firebase
 
 struct DB {
-    
     static var currentUser: User!
     static var posts: [Post] = []
     
-    //Creates a user in the database
+    // Creates a user in the database
     static func createUser(uid: String, username: String, userprofile: String, withBlock: @escaping () -> ()) {
         let reference = Database.database().reference()
         checkUserExists(uid: uid) { (userExists) in
@@ -22,15 +21,33 @@ struct DB {
                 //This is a new user so create the user and assign them a pid of ""
                 let userData = ["pid": "", "displayName" : username, "profileImageURL" : userprofile]
                 reference.child("users").child(uid).setValue(userData)
+                withBlock()
             } else {
-                //This is an old user so the pid is not changed
+                // This is an old user so the pid is not changed
                 print("Logged in User has used app before and exists in database with username \(username)")
             }
-            withBlock()
         }
     }
     
-    //Checks if the user already exists in the database
+    static func fetchUser(uid: String, withBlock: @escaping (User?) -> ()) {
+        let reference = Database.database().reference().child("users").child(uid)
+        reference.observeSingleEvent(of: .value) { (snapshot, error) in
+            if snapshot.exists() {
+                let user = User(uid: uid, userDict: snapshot.value as! [String: Any])
+                withBlock(user)
+            } else {
+                withBlock(nil)
+            }
+        }
+    }
+    
+    // TODO: Test this a little more
+    static func updateUsername(user: User) {
+        let reference = Database.database().reference().child("users").child(user.uid).child("displayName")
+        reference.setValue(user.username)
+    }
+    
+    // Checks if the user already exists in the database
     static func checkUserExists(uid: String, withBlock: @escaping (Bool) -> ()){
         var userExists = false
         let reference = Database.database().reference().child("users")
@@ -46,7 +63,7 @@ struct DB {
         }
     }
     
-    //Gets the pid of the current users post from database
+    // Gets the pid of the current users post from database
     static func retrievePID(uid: String, withBlock: @escaping (String) -> ()) {
         let reference = Database.database().reference().child("users").child(uid).child("pid")
         reference.observeSingleEvent(of: .value) { (snapshot, error) in
@@ -58,7 +75,7 @@ struct DB {
         }
     }
 
-    //Gets the posts from all users from the database
+    // Gets the posts from all users from the database
     static func getPosts(withBlock: @escaping () -> ()) {
         let ref = Database.database().reference().child("posts")
         var posts: [Post] = []
@@ -113,7 +130,7 @@ struct DB {
 //        }
 //    }
     
-    //Sorts the posts by time stamp
+    // Sorts the posts by time stamp
     static func sortPosts() {
         DB.posts.sort(by: {(p1, p2) -> Bool in
             return p1.timePosted >= p2.timePosted

@@ -29,6 +29,7 @@
 		2D8314D71FA70862002F6C78 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8314D61FA70862002F6C78 /* FeedView.swift */; };
 		2D8BA5421F984D5400D8DBE2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8BA5411F984D5400D8DBE2 /* LoginViewController.swift */; };
 		2D9017C21F92CCAA00A8C038 /* BridgeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9017C11F92CCAA00A8C038 /* BridgeViewController.m */; };
+		2D9074A91FBB9E7600A71A5C /* UsernameInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9074A81FBB9E7600A71A5C /* UsernameInputViewController.swift */; };
 		2DA03D1C1F92A8E900F88C13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA03D1B1F92A8E900F88C13 /* AppDelegate.swift */; };
 		2DA03D311F92A8E900F88C13 /* StreamlineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA03D301F92A8E900F88C13 /* StreamlineTests.swift */; };
 		2DA03D3C1F92A8E900F88C13 /* StreamlineUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA03D3B1F92A8E900F88C13 /* StreamlineUITests.swift */; };
@@ -86,6 +87,7 @@
 		2D9017BF1F92CCA900A8C038 /* Streamline-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Streamline-Bridging-Header.h"; sourceTree = "<group>"; };
 		2D9017C01F92CCAA00A8C038 /* BridgeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgeViewController.h; sourceTree = "<group>"; };
 		2D9017C11F92CCAA00A8C038 /* BridgeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BridgeViewController.m; sourceTree = "<group>"; };
+		2D9074A81FBB9E7600A71A5C /* UsernameInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsernameInputViewController.swift; sourceTree = "<group>"; };
 		2DA03D181F92A8E900F88C13 /* Streamline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Streamline.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DA03D1B1F92A8E900F88C13 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2DA03D271F92A8E900F88C13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 				2D8BA5411F984D5400D8DBE2 /* LoginViewController.swift */,
 				2D3F9A561F92E2D100A09DCB /* FeedViewController.swift */,
 				2D6780151FA5014F00F30971 /* NowPlayingViewController.swift */,
+				2D9074A81FBB9E7600A71A5C /* UsernameInputViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -600,6 +603,7 @@
 				2D6B7DD51F92ABCE009DA338 /* DB.swift in Sources */,
 				2D05B9DD1FA55C8100F26A79 /* AKModalView.swift in Sources */,
 				55B0519A1F9950A5007B282E /* SpotifyAPI.swift in Sources */,
+				2D9074A91FBB9E7600A71A5C /* UsernameInputViewController.swift in Sources */,
 				2D05B9DF1FA55D0900F26A79 /* SearchView.swift in Sources */,
 				2D8314D71FA70862002F6C78 /* FeedView.swift in Sources */,
 				D14C0E7D1FAE6C36000818C5 /* Utils.swift in Sources */,

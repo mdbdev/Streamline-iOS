@@ -21,6 +21,7 @@
                     </view>
                     <connections>
                         <segue destination="DDU-QV-9ps" kind="show" identifier="toFeed" id="4HJ-0n-kjq"/>
+                        <segue destination="bUN-pO-Soi" kind="show" identifier="toUsername" id="gxP-6e-w4y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pDU-ri-33H" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -43,7 +44,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XZR-IP-eBF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="738" y="-241"/>
+            <point key="canvasLocation" x="766" y="-242"/>
         </scene>
         <!--New Post View Controller-->
         <scene sceneID="QWg-VH-ttb">
@@ -59,6 +60,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2MD-i7-uSu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1494" y="-241"/>
+        </scene>
+        <!--Username Input View Controller-->
+        <scene sceneID="aSu-Ed-9vb">
+            <objects>
+                <viewController storyboardIdentifier="UsernameInputViewController" modalTransitionStyle="crossDissolve" id="bUN-pO-Soi" customClass="UsernameInputViewController" customModule="Streamline" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="02O-D6-OHv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="sVQ-LG-4pI"/>
+                    </view>
+                    <connections>
+                        <segue destination="DDU-QV-9ps" kind="show" identifier="usernameToFeed" id="VK6-D6-41K"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hcl-Sc-1ve" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="12" y="547"/>
         </scene>
         <!--Now Playing View Controller-->
         <scene sceneID="xJy-26-X06">
@@ -77,4 +96,7 @@
             <point key="canvasLocation" x="1483" y="484"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="VK6-D6-41K"/>
+    </inferredMetricsTieBreakers>
 </document>
