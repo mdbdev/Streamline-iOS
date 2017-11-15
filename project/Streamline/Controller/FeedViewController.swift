@@ -246,7 +246,7 @@ extension FeedViewController: NowPlayingProtocol, FeedViewDelegate {
         searchView.searchSpotify()
         searchView.searchBar.text = ""
         searchView.delegate = self
-        
+        print("postbuttonpressed")
         /* Code to limit user to one song a day and delete user pid if it has been 24 hours */
         // TODO: Add a debug flag for operators (I hardcoded in my profile to be able to post multiple for a test)
         /*if let timePosted = DB.currentUser.timePosted {
