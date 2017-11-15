@@ -46,10 +46,13 @@ class FeedViewController: UIViewController {
         
         // Initial post loading
         self.refHandle = Database.database().reference().child("posts")
-        self.refHandle.observe(DataEventType.value, with: { (snapshot) in
-            self.populateFeed()
-        })
-        
+        self.populateFeed()
+        self.refHandle.observe(DataEventType.childAdded) { (snapshot, error) in
+            //self.subView.postCollectionView.insertItems(at: [IndexPath])
+            let post = Post(pid: snapshot.key, postDict: snapshot.value as! [String : Any])
+            DB.posts.insert(post, at: 0)
+            self.subView.postCollectionView.insertItems(at: [IndexPath(item: 0, section: 0)])
+        }
         // Setups the spotify player
         setupSpotify()
         
@@ -108,6 +111,7 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        print(indexPath)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "postCell", for: indexPath) as! PostCollectionViewCell
         let post = DB.posts[indexPath.row]
         cell.awakeFromNib()
@@ -235,14 +239,15 @@ extension FeedViewController: NowPlayingProtocol, FeedViewDelegate {
         
         /* Code to limit user to one song a day and delete user pid if it has been 24 hours */
         // TODO: Add a debug flag for operators (I hardcoded in my profile to be able to post multiple for a test)
-        if let timePosted = DB.currentUser.timePosted {
+        /*if let timePosted = DB.currentUser.timePosted {
             if (Date().timeIntervalSince1970 - timePosted > 86400 || DB.currentUser.username == "Stephen") {
                 self.createSearchView()
             } else {
                 let alert = Utils.createAlert(warningMessage: "Sorry! You can only post one song a day. Try post again later")
                 self.present(alert, animated: true, completion: nil)
             }
-        }
+        }*/
+        self.createSearchView()
     }
     
     // Handles player button pressed
