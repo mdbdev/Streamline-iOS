@@ -98,11 +98,11 @@ class LoginViewController: UIViewController {
                                   username: self.user.username,
                                   userprofile: imageURL,
                                   withBlock: {
-                        if DB.currentUser.username == "Anonymous User" {
+                        //if DB.currentUser.username == "Anonymous User" {
                             self.performSegue(withIdentifier: "toUsername", sender: self)
-                        } else {
-                            self.performSegue(withIdentifier: "toFeed", sender: self)
-                        }
+                        //} else {
+                        //a    self.performSegue(withIdentifier: "toFeed", sender: self)
+                        //}
                     })
                 })
             }

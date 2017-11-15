@@ -29,8 +29,11 @@ class FeedViewController: UIViewController {
     // Firebase
     var refHandle: DatabaseReference!
     
+    var numberOfPosts: Int!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         // Setups the feed view elements
         subView          = FeedView(frame: view.frame)
@@ -50,7 +53,9 @@ class FeedViewController: UIViewController {
         self.refHandle.observe(DataEventType.childAdded) { (snapshot, error) in
             //self.subView.postCollectionView.insertItems(at: [IndexPath])
             let post = Post(pid: snapshot.key, postDict: snapshot.value as! [String : Any])
+            self.subView.postCollectionView.numberOfItems(inSection: 0)
             DB.posts.insert(post, at: 0)
+            //self.numberOfPosts = self.numberOfPosts + 1
             self.subView.postCollectionView.insertItems(at: [IndexPath(item: 0, section: 0)])
         }
         // Setups the spotify player
@@ -68,6 +73,7 @@ class FeedViewController: UIViewController {
     func populateFeed() {
         DispatchQueue.main.async {
             DB.getPosts {
+                self.numberOfPosts = DB.posts.count
                 self.subView.postCollectionView.reloadData()
             }
         }
@@ -111,7 +117,6 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        print(indexPath)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "postCell", for: indexPath) as! PostCollectionViewCell
         let post = DB.posts[indexPath.row]
         cell.awakeFromNib()
