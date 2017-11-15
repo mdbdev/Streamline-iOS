@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import MediaPlayer
 
 struct SpotifyAPI {
     static let clientID = "e4603453585849a6ad176d0fb81acd97"
@@ -22,6 +23,18 @@ struct SpotifyAPI {
                 print(error!.localizedDescription)
             }
             State.nowPlayingIndex = index
+            // Update the external MediaPlayer
+            State.updateMP(post: post)
         })
+    }
+    
+    static func togglePlayback() -> Bool {
+        let isPlaying = SpotifyAPI.player.playbackState.isPlaying
+        if isPlaying {
+            SpotifyAPI.player.setIsPlaying(false, callback: nil)
+        } else {
+            SpotifyAPI.player.setIsPlaying(true, callback: nil)
+        }
+        return !isPlaying
     }
 }

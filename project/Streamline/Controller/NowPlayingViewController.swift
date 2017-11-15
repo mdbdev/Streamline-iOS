@@ -107,13 +107,11 @@ extension NowPlayingViewController: NowPlayingViewDelegate {
     
     //Manages buttons presses
     func playButtonPressed() {
-        let isPlaying = SpotifyAPI.player.playbackState.isPlaying
+        let isPlaying = SpotifyAPI.togglePlayback()
         if isPlaying {
-            SpotifyAPI.player.setIsPlaying(false, callback: nil)
-            subView.playButton.setBackgroundImage(UIImage(named: "play"), for: .normal)
-        } else {
-            SpotifyAPI.player.setIsPlaying(true, callback: nil)
             subView.playButton.setBackgroundImage(UIImage(named: "pause"), for: .normal)
+        } else {
+            subView.playButton.setBackgroundImage(UIImage(named: "play"), for: .normal)
         }
     }
     
@@ -147,7 +145,7 @@ extension NowPlayingViewController: NowPlayingViewDelegate {
         }
     }
 
-    //Manages slider changes
+    // Manages slider changes
     func sliderChanging() {
         print("Slider changing")
         sliderEdit = false
