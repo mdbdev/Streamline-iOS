@@ -71,6 +71,9 @@ class FeedViewController: UIViewController {
             DB.posts.insert(post, at: 0)
             //self.numberOfPosts = self.numberOfPosts + 1
             self.subView.postCollectionView.insertItems(at: [IndexPath(item: 0, section: 0)])
+            if State.nowPlayingIndex != nil {
+                State.nowPlayingIndex = State.nowPlayingIndex! + 1
+            }
         }
         // Setups the spotify player
         setupSpotify()
