@@ -10,17 +10,19 @@ import Foundation
 import UIKit
 import Firebase
 import AVFoundation
+import MediaPlayer
 
 let BLUR_MAX = CGFloat(0.9)
 
 class FeedViewController: UIViewController {
     var blur: UIVisualEffectView!
+    var commandCenter: MPRemoteCommandCenter!
     
-    //Search View
+    // Search View
     var searchView: SearchView!
     var modalView : AKModalView!
     
-    //Feed View for UI elements
+    // Feed View for UI elements
     var subView: FeedView!
     
     //Music controller view controller
@@ -31,6 +33,14 @@ class FeedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        UIApplication.shared.beginReceivingRemoteControlEvents()
+        
+        State.MPCommandCenter.pauseCommand.isEnabled = true
+        State.MPCommandCenter.pauseCommand.addTarget(self, action: #selector(togglePlaybackState))
+        
+        State.MPCommandCenter.playCommand.isEnabled = true
+        State.MPCommandCenter.playCommand.addTarget(self, action: #selector(togglePlaybackState))
         
         // Setups the feed view elements
         subView          = FeedView(frame: view.frame)
@@ -64,7 +74,7 @@ class FeedViewController: UIViewController {
         view.addSubview(blur)        
     }
     
-    //Reloading the feed whenever the database changes
+    // Reloading the feed whenever the database changes
     func populateFeed() {
         DispatchQueue.main.async {
             DB.getPosts {
@@ -73,7 +83,7 @@ class FeedViewController: UIViewController {
         }
     }
     
-    //Creates the spotify player
+    // Creates the spotify player
     func setupSpotify() {
         if SpotifyAPI.player == nil {
             SpotifyAPI.player = SPTAudioStreamingController.sharedInstance()
@@ -84,23 +94,29 @@ class FeedViewController: UIViewController {
         }
     }
     
-    //Creates the modal search view
+    // Creates the modal search view
     func createSearchView(){
         modalView = AKModalView(view: searchView)
         modalView.automaticallyCenter = false
         view.addSubview(modalView)
         modalView.show()
     }
+    
+    // Selectors
+    @objc
+    func togglePlaybackState() {
+        SpotifyAPI.togglePlayback()
+    }
 }
 
-//Manages the search view modal
+// Manages the search view modal
 extension FeedViewController: SearchViewDelegate {
     func dismissView() {
         modalView.dismiss()
     }
 }
 
-//Manages the collection view
+// Manages the collection view
 extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -143,34 +159,21 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let post = DB.posts[indexPath.row]
         
         activateAudioSession()
-        
-        SpotifyAPI.player.playSpotifyURI("spotify:track:" + post.trackId, startingWith: 0, startingWithPosition: 0, callback: { (error) in
-            
-            // Print any errors
-            if (error != nil) {
-                print(error!.localizedDescription)
-            }
-            
-            // Check player is active before creating the label
-            if (SpotifyAPI.player.loggedIn) {
-                State.nowPlayingIndex = indexPath.row
-                self.changeLabel(post: post, index: State.nowPlayingIndex!)
-            }
-        })
+        SpotifyAPI.playPost(post: post, index: indexPath.row)
+        self.changeLabel(post: post, index: indexPath.row)
     }
     
     func changeLabel(post: Post, index: Int) {
-        
-        //If this is first press change enable all hidden elements
+        // If this is first press change enable all hidden elements
         subView.nowPlayingButton.isHidden = false
         subView.nowPlayingArtist.isHidden = false
         subView.nowPlayingImage.isHidden = false
         subView.nowPlayingLabel.isHidden = false
         
-        //Resize collection view so bottom post isn't cut off
+        // Resize collection view so bottom post isn't cut off
         subView.postCollectionView.frame = Utils.rRect(rx: 21, ry: 69, rw: 334, rh: 541)
         
-        //Get post info and change label
+        // Get post info and change label
         let post = DB.posts[index]
         subView.nowPlayingLabel.text = post.songTitle
         subView.nowPlayingArtist.text = post.artist
@@ -181,9 +184,8 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
 }
 
-//Manages spotify player extensions
+// Manages spotify player extensions
 extension FeedViewController: SPTAudioStreamingDelegate, SPTAudioStreamingPlaybackDelegate {
-    
     func activateAudioSession() {
         try? AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
         try? AVAudioSession.sharedInstance().setActive(true)
@@ -196,21 +198,29 @@ extension FeedViewController: SPTAudioStreamingDelegate, SPTAudioStreamingPlayba
         
         State.position = 0
         
-        //Change the song info in player view
+        // Change the song info in player view
         if let vc = nowPlayingVC {
             vc.updateSongInformation(post: post, index: toPlayIndex)
         }
         
-        //Play next song
+        // Play next song
         SpotifyAPI.playPost(post: post, index: toPlayIndex)
     }
     
     func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didChangePosition position: TimeInterval) {
         State.position = position
+        if let duration = audioStreaming.metadata.currentTrack?.duration {
+            // Modifying percent
+            let percent = position / duration            
+            State.MPInfoCenter.nowPlayingInfo![MPNowPlayingInfoPropertyElapsedPlaybackTime] = position
+            State.MPInfoCenter.nowPlayingInfo![MPMediaItemPropertyPlaybackDuration] = duration
+            if let vc = nowPlayingVC {
+                vc.updateSlider(percent: percent)
+            }
+        }
     }
 }
 
-//
 extension FeedViewController: NowPlayingProtocol, FeedViewDelegate {
     func passLabel(post: Post, index: Int) {
         changeLabel(post: post, index: index)

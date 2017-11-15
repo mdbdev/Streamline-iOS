@@ -45,29 +45,19 @@ class NowPlayingViewController: UIViewController {
         self.view.addGestureRecognizer(recognizer)
     }
     
-    //Manages the seekbar loading for the specific song being played
+    // Manages the seekbar loading for the specific song being played
     override func viewWillAppear(_ animated: Bool) {
         setNeedsStatusBarAppearanceUpdate()
         super.viewWillAppear(animated)
         if let index = State.nowPlayingIndex {
             let post = DB.posts[index]
             self.updateSongInformation(post: post, index: index)
-            let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { (t) in
-                if self.sliderEdit {
-                    if SpotifyAPI.player.metadata != nil {
-                        if let duration = SpotifyAPI.player.metadata.currentTrack?.duration {
-                            let percent = (State.position / duration)
-                            self.subView.slider.setValue(Float(percent), animated: true)
-                        }
-                    }
-                }
-            })
         } else {
             self.dismiss(animated: true, completion: nil)
         }
     }
     
-    //Sets song specific information
+    // Sets song specific information
     func updateSongInformation(post: Post, index: Int) {
         self.subView.songName.text = post.songTitle
         self.subView.artistName.text = post.artist
@@ -75,6 +65,14 @@ class NowPlayingViewController: UIViewController {
         post.getImage(withBlock: { (img) in
             self.subView.albumImage.image = img
         })
+    }
+    
+    func updateSlider(percent: Double) {
+        if sliderEdit {
+            if let sv = subView {
+                sv.slider.setValue(Float(percent), animated: true)
+            }
+        }
     }
 
     // Selectors for seek bar
@@ -107,13 +105,11 @@ extension NowPlayingViewController: NowPlayingViewDelegate {
     
     //Manages buttons presses
     func playButtonPressed() {
-        let isPlaying = SpotifyAPI.player.playbackState.isPlaying
+        let isPlaying = SpotifyAPI.togglePlayback()
         if isPlaying {
-            SpotifyAPI.player.setIsPlaying(false, callback: nil)
-            subView.playButton.setBackgroundImage(UIImage(named: "play"), for: .normal)
-        } else {
-            SpotifyAPI.player.setIsPlaying(true, callback: nil)
             subView.playButton.setBackgroundImage(UIImage(named: "pause"), for: .normal)
+        } else {
+            subView.playButton.setBackgroundImage(UIImage(named: "play"), for: .normal)
         }
     }
     
@@ -147,7 +143,7 @@ extension NowPlayingViewController: NowPlayingViewDelegate {
         }
     }
 
-    //Manages slider changes
+    // Manages slider changes
     func sliderChanging() {
         print("Slider changing")
         sliderEdit = false
