@@ -23,33 +23,34 @@ class UsernameInputViewController: UIViewController {
     func setupUI() {
         view.backgroundColor = Constants.darkPurple
         
-        titleOne = UILabel(frame: Utils.rRect(rx: 0, ry: 188, rw: 375, rh: 50))
+        titleOne = UILabel(frame: Utils.rRect(rx: 0, ry: 193, rw: 375, rh: 50))
         titleOne.text = "Almost finished!"
         titleOne.textAlignment = .center
-        titleOne.font = Constants.averageSans?.withSize(90)
-//        titleOne.adjustsFontSizeToFitWidth = true
+        titleOne.font = UIFont.systemFont(ofSize: ((view.frame.width / 375) * 30), weight: 0.5)
+        titleOne.adjustsFontSizeToFitWidth = true
         titleOne.textColor = UIColor.white
         view.addSubview(titleOne)
         
-        titleTwo = UILabel(frame: Utils.rRect(rx: 33, ry: 226, rw: 310, rh: 27))
+        titleTwo = UILabel(frame: Utils.rRect(rx: 33, ry: 237.5, rw: 310, rh: 27))
         titleTwo.text = "Just let us know your name,"
         titleTwo.textAlignment = .center
-        titleTwo.font = Constants.averageSans?.withSize(30)
+        titleTwo.font = UIFont.systemFont(ofSize: ((view.frame.width / 375) * 18))
         titleTwo.adjustsFontSizeToFitWidth = true
         titleTwo.textColor = UIColor.white
         view.addSubview(titleTwo)
         
-        titleThree = UILabel(frame: Utils.rRect(rx: 33, ry: 235, rw: 310, rh: 27))
+        titleThree = UILabel(frame: Utils.rRect(rx: 33, ry: 260.5, rw: 310, rh: 27))
         titleThree.text = "and welcome to Streamline."
         titleThree.textAlignment = .center
-        titleThree.font = Constants.averageSans?.withSize(30)
+        titleThree.font = UIFont.systemFont(ofSize: ((view.frame.width / 375) * 18))
         titleThree.adjustsFontSizeToFitWidth = true
         titleThree.textColor = UIColor.white
         view.addSubview(titleThree)
         
-        inputField = UITextField(frame: Utils.rRect(rx: 58, ry: 299, rw: 253, rh: 45))
+        inputField = UITextField(frame: Utils.rRect(rx: 58, ry: 305, rw: 253, rh: 45))
         inputField.placeholder = "   Type in your name here!"
         inputField.backgroundColor = UIColor.white
+        inputField.layer.cornerRadius = 7
         inputField.textColor = UIColor.black
         inputField.font = Constants.averageSans
         view.addSubview(inputField)
