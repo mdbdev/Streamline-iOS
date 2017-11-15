@@ -16,6 +16,7 @@ let BLUR_MAX = CGFloat(0.9)
 
 class FeedViewController: UIViewController {
     var blur: UIVisualEffectView!
+    var commandCenter: MPRemoteCommandCenter!
     
     // Search View
     var searchView: SearchView!
@@ -35,7 +36,6 @@ class FeedViewController: UIViewController {
         
         UIApplication.shared.beginReceivingRemoteControlEvents()
         
-
         State.MPCommandCenter.pauseCommand.isEnabled = true
         State.MPCommandCenter.pauseCommand.addTarget(self, action: #selector(togglePlaybackState))
         
@@ -160,7 +160,6 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func changeLabel(post: Post, index: Int) {
-        
         // If this is first press change enable all hidden elements
         subView.nowPlayingButton.isHidden = false
         subView.nowPlayingArtist.isHidden = false
@@ -218,7 +217,6 @@ extension FeedViewController: SPTAudioStreamingDelegate, SPTAudioStreamingPlayba
     }
 }
 
-//
 extension FeedViewController: NowPlayingProtocol, FeedViewDelegate {
     func passLabel(post: Post, index: Int) {
         changeLabel(post: post, index: index)

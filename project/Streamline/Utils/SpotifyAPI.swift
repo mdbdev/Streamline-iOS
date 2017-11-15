@@ -9,6 +9,7 @@
 import Foundation
 import MediaPlayer
 
+
 struct SpotifyAPI {
     static let clientID = "e4603453585849a6ad176d0fb81acd97"
     static let redirectURL = "Streamline://returnAfterLogin"
