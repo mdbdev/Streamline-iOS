@@ -10,7 +10,9 @@
 import UIKit
 
 class UsernameInputViewController: UIViewController {
-    var message: UILabel!
+    var titleOne: UILabel!
+    var titleTwo: UILabel!
+    var titleThree: UILabel!
     var inputField: UITextField!
     var submitButton: UIButton!
     
@@ -21,22 +23,44 @@ class UsernameInputViewController: UIViewController {
     func setupUI() {
         view.backgroundColor = Constants.darkPurple
         
-        message = UILabel(frame: Utils.rRect(rx: 27, ry: 69, rw: 322, rh: 187))
-        message.text = "Hey, we weren't able to get your name!"
-        message.font = Constants.averageSans?.withSize(90)
-        message.adjustsFontSizeToFitWidth = true
-        message.textColor = UIColor.white
-        view.addSubview(message)
+        titleOne = UILabel(frame: Utils.rRect(rx: 0, ry: 188, rw: 375, rh: 50))
+        titleOne.text = "Almost finished!"
+        titleOne.textAlignment = .center
+        titleOne.font = Constants.averageSans?.withSize(90)
+//        titleOne.adjustsFontSizeToFitWidth = true
+        titleOne.textColor = UIColor.white
+        view.addSubview(titleOne)
         
-        inputField = UITextField(frame: Utils.rRect(rx: 39, ry: 302, rw: 255, rh: 45))
-        inputField.placeholder = "Type it in here..."
+        titleTwo = UILabel(frame: Utils.rRect(rx: 33, ry: 226, rw: 310, rh: 27))
+        titleTwo.text = "Just let us know your name,"
+        titleTwo.textAlignment = .center
+        titleTwo.font = Constants.averageSans?.withSize(30)
+        titleTwo.adjustsFontSizeToFitWidth = true
+        titleTwo.textColor = UIColor.white
+        view.addSubview(titleTwo)
+        
+        titleThree = UILabel(frame: Utils.rRect(rx: 33, ry: 235, rw: 310, rh: 27))
+        titleThree.text = "and welcome to Streamline."
+        titleThree.textAlignment = .center
+        titleThree.font = Constants.averageSans?.withSize(30)
+        titleThree.adjustsFontSizeToFitWidth = true
+        titleThree.textColor = UIColor.white
+        view.addSubview(titleThree)
+        
+        inputField = UITextField(frame: Utils.rRect(rx: 58, ry: 299, rw: 253, rh: 45))
+        inputField.placeholder = "   Type in your name here!"
         inputField.backgroundColor = UIColor.white
         inputField.textColor = UIColor.black
         inputField.font = Constants.averageSans
         view.addSubview(inputField)
         
-        submitButton = UIButton(frame: Utils.sRect(sqx: 313, sqy: 291, sqw: 60, sqh: 60))
+        
+        submitButton                    = UIButton(frame: Utils.rRect(rx: 58, ry: 370, rw: 253, rh: 35))
+        submitButton.layer.cornerRadius = 15
         submitButton.backgroundColor = UIColor.white
+        submitButton.setTitleColor(Constants.darkPurple, for: .normal)
+        submitButton.setTitle("DONE", for: .normal)
+        
         submitButton.addTarget(self, action: #selector(submitButtonPressed), for: .touchUpInside)
         view.addSubview(submitButton)
     }
