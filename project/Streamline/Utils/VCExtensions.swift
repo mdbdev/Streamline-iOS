@@ -8,7 +8,7 @@
 
 import UIKit
 
-//Used for seek bar scrubbing
+// Makes it so when you tap outside of keyboard, it's dismissed (not sure why this isn't enabled by default)
 extension UIViewController {
     override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
