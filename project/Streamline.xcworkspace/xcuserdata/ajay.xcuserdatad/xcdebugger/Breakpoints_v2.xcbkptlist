@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Streamline/Controller/FeedViewController.swift"
-            timestampString = "532421409.991846"
+            timestampString = "532421737.240381"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -58,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Streamline/Utils/State.swift"
-            timestampString = "532421409.992195"
+            timestampString = "532421737.240492"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "20"
@@ -74,28 +74,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Streamline/Utils/SpotifyAPI.swift"
-            timestampString = "532421409.992259"
+            timestampString = "532421737.240869"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "26"
             endingLineNumber = "26"
             landmarkName = "playPost(post:index:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Streamline/Utils/State.swift"
-            timestampString = "532421409.992321"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
-            landmarkName = "updateMP(post:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

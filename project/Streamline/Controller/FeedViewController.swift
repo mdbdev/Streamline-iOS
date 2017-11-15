@@ -35,6 +35,7 @@ class FeedViewController: UIViewController {
         
         UIApplication.shared.beginReceivingRemoteControlEvents()
         
+
         State.MPCommandCenter.pauseCommand.isEnabled = true
         State.MPCommandCenter.pauseCommand.addTarget(self, action: #selector(togglePlaybackState))
         
@@ -205,6 +206,8 @@ extension FeedViewController: SPTAudioStreamingDelegate, SPTAudioStreamingPlayba
     
     func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didChangePosition position: TimeInterval) {
         State.position = position
+        // Update MP
+        
     }
 }
 

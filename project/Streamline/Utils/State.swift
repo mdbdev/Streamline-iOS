@@ -11,7 +11,6 @@ import MediaPlayer
 // Maintains the state of the player
 struct State {
     static var nowPlayingIndex: Int?
-    static var paused: Bool = false
     static var position: TimeInterval = 0
     static let MPInfoCenter = MPNowPlayingInfoCenter.default()
     static let MPCommandCenter = MPRemoteCommandCenter.shared()
