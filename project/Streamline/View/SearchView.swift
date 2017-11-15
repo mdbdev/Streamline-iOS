@@ -118,7 +118,6 @@ class SearchView: UIView {
     
     func searchSpotify() {
         let songTitle = searchBar.text!
-        DispatchQueue.main.async {
             SPTSearch.perform(withQuery: songTitle, queryType: .queryTypeTrack, accessToken: SpotifyAPI.session.accessToken) { (error: Error?, result: Any?) in
                     if let e = error {
                         print(e.localizedDescription)
@@ -132,7 +131,6 @@ class SearchView: UIView {
                             }
                         }
                 }
-            }
         }
     }
     
