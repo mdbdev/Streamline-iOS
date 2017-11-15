@@ -9,40 +9,24 @@
 import UIKit
 
 class PostCollectionViewCell: UICollectionViewCell {
-    var post: Post!
+    //var post: Post!
     var songTitleLabel: UILabel!
     var artistLabel: UILabel!
     var postUserLabel: UILabel!
     var albumImage: UIImageView!
+    var profileImage: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
         setupView()
+//        setupProfileImage()
         setupLabels()
         setupAlbumImage()
     }
     
-    func updateData() {
-        songTitleLabel.text = post.songTitle
-        artistLabel.text = post.artist
-        postUserLabel.text = post.username
-        post.getImage { (img) in
-            self.albumImage.image = img
-        }
-    }
-    
     // Setup Functions
     func setupView() {
-        //contentView.layer.borderWidth = 1
-        //contentView.layer.borderColor = UIColor.black.cgColor
-        // Drawing the shadow around the cell
-        // TODO: investigate runtime of this, as well as shadowPath
-        // Shadow is not working correctly :(
-//        contentView.layer.shadowColor = UIColor.black.cgColor
-//        contentView.layer.shadowOpacity = 1
-//        contentView.layer.shadowOffset = CGSize.zero
-//        contentView.layer.shadowRadius = 10
         self.backgroundColor = UIColor.white
     }
     func setupLabels() {
@@ -51,7 +35,7 @@ class PostCollectionViewCell: UICollectionViewCell {
                                                width: contentView.frame.width - (contentView.frame.height + 10),
                                                height: 28))
         songTitleLabel.adjustsFontSizeToFitWidth = true
-        songTitleLabel.textColor = UIColor.black
+        songTitleLabel.textColor                 = UIColor.black
         songTitleLabel.text = "Song"
         songTitleLabel.font = Constants.averageSans?.withSize(20)
         songTitleLabel.font = UIFont.systemFont(ofSize: 13, weight: 2)
@@ -59,40 +43,52 @@ class PostCollectionViewCell: UICollectionViewCell {
         
         
         artistLabel = UILabel(frame: CGRect(x: contentView.frame.height + 10,
-                                            y: 16 + 7,
+                                            y: 16 + 6,
                                             width: contentView.frame.width - (contentView.frame.height + 10),
                                             height: 28))
         artistLabel.adjustsFontSizeToFitWidth = true
-        artistLabel.textColor = UIColor.black
+        artistLabel.textColor                 = UIColor.black
         artistLabel.text = "Artist"
         artistLabel.font = Constants.averageSans
         artistLabel.font = UIFont.systemFont(ofSize: 13)
         contentView.addSubview(artistLabel)
         
+//        postUserLabel = UILabel(frame: CGRect(x: contentView.frame.height + 30,
         postUserLabel = UILabel(frame: CGRect(x: contentView.frame.height + 10,
                                               y: 16 + 7 + 20,
                                               width: contentView.frame.width - (contentView.frame.height + 24),
                                               height: 16))
         postUserLabel.textColor = UIColor(hex: "77747a")
-        postUserLabel.text = "User"
+        postUserLabel.text      = "User"
         postUserLabel.adjustsFontSizeToFitWidth = true
         postUserLabel.font = Constants.averageSans?.withSize(12)
         postUserLabel.font = UIFont.systemFont(ofSize: 12)
         contentView.addSubview(postUserLabel)
     }
     
+    func setupProfileImage() {
+        profileImage = UIImageView(frame: CGRect(x: contentView.frame.height + 10,
+                                                 y: 16 + 7 + 23,
+                                                 width: 10,
+                                                 height: 10))
+        profileImage.layer.cornerRadius = 3
+        profileImage.image = #imageLiteral(resourceName: "music note")
+        profileImage.contentMode  = .scaleAspectFit
+        contentView.addSubview(profileImage)
+    }
+    
     func setupAlbumImage() {
-        albumImage = UIImageView(frame: CGRect(x: 0, y: 0, width: contentView.frame.height, height: contentView.frame.height))
-        albumImage.contentMode = .scaleAspectFit
-        albumImage.image = UIImage(named: "albumPlaceholder")
+        albumImage              = UIImageView(frame: CGRect(x: 0, y: 0, width: contentView.frame.height, height: contentView.frame.height))
+        albumImage.contentMode  = .scaleAspectFit
+        albumImage.image        = UIImage(named: "albumPlaceholder")
         contentView.addSubview(albumImage)
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        postUserLabel.isHidden = true
-        artistLabel.isHidden = true
+        postUserLabel.isHidden  = true
+        artistLabel.isHidden    = true
         songTitleLabel.isHidden = true
-        albumImage.isHidden = true
+        albumImage.isHidden     = true
     }
 }

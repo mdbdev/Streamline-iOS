@@ -7,6 +7,7 @@
 import Foundation
 import UIKit
 
+//Easy way to pick colors with hex values
 extension UIColor {
     convenience init(hex: String) {
         let scanner = Scanner(string: hex)
@@ -21,9 +22,9 @@ extension UIColor {
         let b = rgbValue & 0xff
         
         self.init(
-            red: CGFloat(r) / 0xff,
+            red  : CGFloat(r) / 0xff,
             green: CGFloat(g) / 0xff,
-            blue: CGFloat(b) / 0xff, alpha: 1
+            blue : CGFloat(b) / 0xff, alpha: 1
         )
     }
 }
