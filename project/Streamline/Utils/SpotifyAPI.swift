@@ -39,4 +39,17 @@ struct SpotifyAPI {
         }
         return !isPlaying
     }
+    
+    static func skipForward() {
+        let posts = DB.posts
+        let toPlayIndex = (State.nowPlayingIndex! + 1) % posts.count
+        State.nowPlayingIndex = toPlayIndex
+        let post = posts[toPlayIndex]
+        State.position = 0
+        SpotifyAPI.playPost(post: post, index: toPlayIndex)
+    }
+    
+    static func skipBackward() {
+        
+    }
 }

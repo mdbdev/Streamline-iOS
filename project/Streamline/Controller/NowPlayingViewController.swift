@@ -118,14 +118,11 @@ extension NowPlayingViewController: NowPlayingViewDelegate {
     }
     
     func forwardButtonPressed() {
-        let posts = DB.posts
-        let toPlayIndex = (State.nowPlayingIndex! + 1) % posts.count
-        let post = posts[toPlayIndex]
-        self.updateSongInformation(post: post, index: toPlayIndex)
+        SpotifyAPI.skipForward()
+        let post = DB.posts[State.nowPlayingIndex!]
+        self.updateSongInformation(post: post, index: State.nowPlayingIndex!)
         self.subView.slider.setValue(0, animated: true)
         self.subView.playButton.setBackgroundImage(#imageLiteral(resourceName: "pause"), for: .normal)
-        State.position = 0
-        SpotifyAPI.playPost(post: post, index: toPlayIndex)
     }
     
     func backwardButtonPressed() {

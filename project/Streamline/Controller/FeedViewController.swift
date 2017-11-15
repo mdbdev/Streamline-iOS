@@ -42,6 +42,10 @@ class FeedViewController: UIViewController {
         State.MPCommandCenter.playCommand.isEnabled = true
         State.MPCommandCenter.playCommand.addTarget(self, action: #selector(togglePlaybackState))
         
+        // TODO
+//        State.MPCommandCenter.nextTrackCommand.isEnabled = true
+//        State.MPCommandCenter.nextTrackCommand.addTarget(self, action: #selector(skipForward))
+        
         // Setups the feed view elements
         subView          = FeedView(frame: view.frame)
         subView.delegate = self
@@ -107,6 +111,11 @@ class FeedViewController: UIViewController {
     func togglePlaybackState() {
         SpotifyAPI.togglePlayback()
     }
+    
+    @objc
+    func skipForward() {
+        SpotifyAPI.skipForward()
+    }
 }
 
 // Manages the search view modal
@@ -133,7 +142,7 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.awakeFromNib()
         post.getImage { (img) in
             UIView.transition(with: cell.albumImage,
-                              duration: 1,
+                              duration: 0.5,
                               options: .transitionCrossDissolve,
                               animations: { cell.albumImage.image = img },
                               completion: nil)
@@ -211,11 +220,14 @@ extension FeedViewController: SPTAudioStreamingDelegate, SPTAudioStreamingPlayba
         State.position = position
         if let duration = audioStreaming.metadata.currentTrack?.duration {
             // Modifying percent
-            let percent = position / duration            
-            State.MPInfoCenter.nowPlayingInfo![MPNowPlayingInfoPropertyElapsedPlaybackTime] = Int(position)
-            State.MPInfoCenter.nowPlayingInfo![MPMediaItemPropertyPlaybackDuration] = duration
+            let percent = position / duration
             if let vc = nowPlayingVC {
                 vc.updateSlider(percent: percent)
+                let position = Int(position)
+                if position != 0 {
+                    State.MPInfoCenter.nowPlayingInfo![MPNowPlayingInfoPropertyElapsedPlaybackTime] = Int(position)
+                    State.MPInfoCenter.nowPlayingInfo![MPMediaItemPropertyPlaybackDuration] = duration
+                }
             }
         }
     }
