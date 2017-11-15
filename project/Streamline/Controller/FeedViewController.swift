@@ -212,7 +212,7 @@ extension FeedViewController: SPTAudioStreamingDelegate, SPTAudioStreamingPlayba
         if let duration = audioStreaming.metadata.currentTrack?.duration {
             // Modifying percent
             let percent = position / duration            
-            State.MPInfoCenter.nowPlayingInfo![MPNowPlayingInfoPropertyElapsedPlaybackTime] = position
+            State.MPInfoCenter.nowPlayingInfo![MPNowPlayingInfoPropertyElapsedPlaybackTime] = Int(position)
             State.MPInfoCenter.nowPlayingInfo![MPMediaItemPropertyPlaybackDuration] = duration
             if let vc = nowPlayingVC {
                 vc.updateSlider(percent: percent)
