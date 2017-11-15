@@ -33,7 +33,7 @@ class LoginView: UIView {
     
     func setupButton() {
         connectButton = UIButton(frame:
-            Utils.rRect(rx: 47, ry: 522, rw: 281, rh: 53))
+            Utils.rRect(rx: 56, ry: 522, rw: 263, rh: 53))
         connectButton.addTarget(self, action: #selector(connectButtonPressed), for: .touchUpInside)
         connectButton.layer.cornerRadius    = 15
         connectButton.backgroundColor       = UIColor.white
