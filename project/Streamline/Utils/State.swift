@@ -6,9 +6,23 @@
 //  Copyright © 2017 Stephen Jayakar. All rights reserved.
 //
 
-//Maintains the state of the player
+import MediaPlayer
+
+// Maintains the state of the player
 struct State {
     static var nowPlayingIndex: Int?
-    static var paused: Bool = false
     static var position: TimeInterval = 0
+    static let MPInfoCenter = MPNowPlayingInfoCenter.default()
+    static let MPCommandCenter = MPRemoteCommandCenter.shared()
+    
+    static func updateMP(post: Post) {
+        post.getImage { (img) in
+//            let duration = SpotifyAPI.player.metadata.currentTrack?.duration
+            State.MPInfoCenter.nowPlayingInfo = [MPMediaItemPropertyArtist: post.artist,
+                                                  MPMediaItemPropertyTitle: post.songTitle,
+                                                  MPMediaItemPropertyArtwork: MPMediaItemArtwork(image: img),
+                                                  MPNowPlayingInfoPropertyElapsedPlaybackTime: 0]
+            State.MPInfoCenter.playbackState = MPNowPlayingPlaybackState.playing
+        }
+    }
 }
