@@ -54,9 +54,10 @@ class UsernameInputView: UIView {
         addSubview(titleThree)
         
         inputField = UITextField(frame: Utils.rRect(rx: 58, ry: 305, rw: 253, rh: 45))
-        inputField.placeholder = "   Type in your name here!"
+        inputField.placeholder = "Type in your name here!"
         inputField.backgroundColor = UIColor.white
-        inputField.layer.cornerRadius = 7
+        inputField.textAlignment = .center
+        inputField.layer.cornerRadius = 15
         inputField.textColor = UIColor.black
         inputField.font = Constants.averageSans
         addSubview(inputField)
