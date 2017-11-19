@@ -276,6 +276,8 @@ extension FeedViewController: NowPlayingProtocol, FeedViewDelegate {
                 let alert = Utils.createAlert(warningMessage: "Sorry! You can only post one song a day. Try post again later")
                 self.present(alert, animated: true, completion: nil)
             }
+        } else {
+            self.createSearchView()
         }
         //self.createSearchView()
     }
