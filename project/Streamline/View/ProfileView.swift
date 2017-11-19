@@ -13,6 +13,7 @@ class ProfileView: UIView {
     var name: UILabel!
     var logoutButton: UIButton!
     var backButton: UIButton!
+    var delegate: ProfileViewDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -53,11 +54,16 @@ class ProfileView: UIView {
     // Selectors
     @objc
     func logoutButtonPressed() {
-        // Delegate
+        delegate?.logoutButtonPressed()
     }
     
     @objc
     func backButtonPressed() {
-    
+        delegate?.backButtonPressed()
     }
+}
+
+protocol ProfileViewDelegate {
+    func logoutButtonPressed()
+    func backButtonPressed()
 }

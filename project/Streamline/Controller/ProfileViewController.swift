@@ -14,11 +14,22 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         subView = ProfileView(frame: view.frame)
+        subView.delegate = self
         view.addSubview(subView)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+}
+
+extension ProfileViewController: ProfileViewDelegate {
+    func logoutButtonPressed() {
+        // please logout
+    }
+    
+    func backButtonPressed() {
+        self.dismiss(animated: true, completion: nil)
     }
 }
