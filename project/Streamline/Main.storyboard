@@ -26,7 +26,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pDU-ri-33H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="12" y="-240"/>
+            <point key="canvasLocation" x="-490" y="-240"/>
         </scene>
         <!--Feed View Controller-->
         <scene sceneID="3cD-1P-sMr">
@@ -40,11 +40,12 @@
                     </view>
                     <connections>
                         <segue destination="pug-vZ-hh8" kind="show" identifier="toNewPost" id="s2F-sH-ZGI"/>
+                        <segue destination="Iqa-aF-twj" kind="show" identifier="feedToProfile" id="vSb-uv-Wbu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XZR-IP-eBF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="766" y="-242"/>
+            <point key="canvasLocation" x="462" y="-240"/>
         </scene>
         <!--New Post View Controller-->
         <scene sceneID="QWg-VH-ttb">
@@ -77,7 +78,22 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hcl-Sc-1ve" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="12" y="547"/>
+            <point key="canvasLocation" x="-490" y="528"/>
+        </scene>
+        <!--Profile View Controller-->
+        <scene sceneID="nv8-f6-XG5">
+            <objects>
+                <viewController id="Iqa-aF-twj" customClass="ProfileViewController" customModule="Streamline" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="eOM-kE-ULN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Pgu-l0-B1H"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Uf5-Gz-GVj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="462" y="528"/>
         </scene>
         <!--Now Playing View Controller-->
         <scene sceneID="xJy-26-X06">

@@ -293,12 +293,16 @@ extension FeedViewController: NowPlayingProtocol, FeedViewDelegate {
         }
     }
     
-    //Handles logout
-    func logoutButtonPressed() {
-        let userDefaults = UserDefaults.standard
-        userDefaults.removeObject(forKey: "SpotifySession")
-        
-        SpotifyAPI.player.logout()
-        self.dismiss(animated: true, completion: nil)
+    @objc
+    func profileButtonPressed() {
+        performSegue(withIdentifier: "feedToProfile", sender: self)
     }
+    // Handles logout
+//    func logoutButtonPressed() {
+//        let userDefaults = UserDefaults.standard
+//        userDefaults.removeObject(forKey: "SpotifySession")
+//
+//        SpotifyAPI.player.logout()
+//        self.dismiss(animated: true, completion: nil)
+//    }
 }

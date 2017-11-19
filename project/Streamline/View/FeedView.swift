@@ -12,7 +12,7 @@ class FeedView: UIView {
     var postCollectionView      : UICollectionView!
     var postButton              : UIButton!
     var postButtonArea          : UIButton!
-    var logoutButton            : UIButton!
+    var profileButton            : UIButton!
     var discoverLabel           : UILabel!
     var nowPlayingButton        : UIButton!
     var nowPlayingLabel         : UILabel!
@@ -90,12 +90,12 @@ class FeedView: UIView {
         postButtonArea.addTarget(self, action: #selector(postButtonPressed), for: .touchUpInside)
         addSubview(postButtonArea)
         
-        logoutButton = UIButton(frame: Utils.rRect(rx: 15, ry: 30, rw: 74, rh: 22))
-        logoutButton.setTitle("Log Out", for: .normal)
-        logoutButton.setTitleColor(UIColor(hex: "737171"), for: .normal)
-        logoutButton.addTarget(self, action: #selector(logoutButtonPressed), for: .touchUpInside)
-        logoutButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        addSubview(logoutButton)
+        profileButton = UIButton(frame: Utils.rRect(rx: 15, ry: 30, rw: 74, rh: 22))
+        profileButton.setTitle("Profile", for: .normal)
+        profileButton.setTitleColor(UIColor(hex: "737171"), for: .normal)
+        profileButton.addTarget(self, action: #selector(profileButtonPressed), for: .touchUpInside)
+        profileButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        addSubview(profileButton)
     }
     
     func setupLabel() {
@@ -125,13 +125,13 @@ class FeedView: UIView {
         self.delegate?.nowPlayingButtonPressed()
     }
     
-    func logoutButtonPressed() {
-        self.delegate?.logoutButtonPressed()
+    func profileButtonPressed() {
+        self.delegate?.profileButtonPressed()
     }
 }
 
 protocol FeedViewDelegate {
     func postButtonPressed()
     func nowPlayingButtonPressed()
-    func logoutButtonPressed()
+    func profileButtonPressed()
 }
