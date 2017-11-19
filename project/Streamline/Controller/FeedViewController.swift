@@ -270,7 +270,7 @@ extension FeedViewController: NowPlayingProtocol, FeedViewDelegate {
         /* Code to limit user to one song a day and delete user pid if it has been 24 hours */
         // TODO: Add a debug flag for operators (I hardcoded in my profile to be able to post multiple for a test)
         if let timePosted = DB.currentUser.timePosted {
-            if (Date().timeIntervalSince1970 - timePosted > 86400 || DB.currentUser.username == "Stephen") {
+            if (Date().timeIntervalSince1970 - timePosted > 86400 || DB.currentUser.uid == "1261764229") {
                 self.createSearchView()
             } else {
                 let alert = Utils.createAlert(warningMessage: "Sorry! You can only post one song a day. Try post again later")
