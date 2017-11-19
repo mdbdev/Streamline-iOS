@@ -9,9 +9,10 @@
 import Foundation
 import Alamofire
 
+
+// TODO: We definitely need to reconsider the existence of this class
 class SpotifyWeb {
-    
-    //Get the users display name with the spotify web api
+    // Get the users display name with the spotify web api
     static func getUserDisplayName(accessToken: String, withBlock: @escaping (String, String) -> ()) {
         print(accessToken)
         let headers = ["Accept": "application/json",

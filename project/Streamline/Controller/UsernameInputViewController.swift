@@ -16,60 +16,19 @@ class UsernameInputViewController: UIViewController {
     var inputField: UITextField!
     var submitButton: UIButton!
     
+    var subView: UsernameInputView!
+    
     override func viewDidLoad() {
-        setupUI()
+        subView = UsernameInputView(frame: view.frame)
+        subView.delegate = self
+        view.addSubview(subView)
     }
-    
-    func setupUI() {
-        view.backgroundColor = Constants.darkPurple
-        
-        titleOne = UILabel(frame: Utils.rRect(rx: 0, ry: 188, rw: 375, rh: 50))
-        titleOne.text = "Almost finished!"
-        titleOne.textAlignment = .center
-        titleOne.font = Constants.averageSans?.withSize(90)
-//        titleOne.adjustsFontSizeToFitWidth = true
-        titleOne.textColor = UIColor.white
-        view.addSubview(titleOne)
-        
-        titleTwo = UILabel(frame: Utils.rRect(rx: 33, ry: 226, rw: 310, rh: 27))
-        titleTwo.text = "Just let us know your name,"
-        titleTwo.textAlignment = .center
-        titleTwo.font = Constants.averageSans?.withSize(30)
-        titleTwo.adjustsFontSizeToFitWidth = true
-        titleTwo.textColor = UIColor.white
-        view.addSubview(titleTwo)
-        
-        titleThree = UILabel(frame: Utils.rRect(rx: 33, ry: 235, rw: 310, rh: 27))
-        titleThree.text = "and welcome to Streamline."
-        titleThree.textAlignment = .center
-        titleThree.font = Constants.averageSans?.withSize(30)
-        titleThree.adjustsFontSizeToFitWidth = true
-        titleThree.textColor = UIColor.white
-        view.addSubview(titleThree)
-        
-        inputField = UITextField(frame: Utils.rRect(rx: 58, ry: 299, rw: 253, rh: 45))
-        inputField.placeholder = "   Type in your name here!"
-        inputField.backgroundColor = UIColor.white
-        inputField.textColor = UIColor.black
-        inputField.font = Constants.averageSans
-        view.addSubview(inputField)
-        
-        
-        submitButton                    = UIButton(frame: Utils.rRect(rx: 58, ry: 370, rw: 253, rh: 35))
-        submitButton.layer.cornerRadius = 15
-        submitButton.backgroundColor = UIColor.white
-        submitButton.setTitleColor(Constants.darkPurple, for: .normal)
-        submitButton.setTitle("DONE", for: .normal)
-        
-        submitButton.addTarget(self, action: #selector(submitButtonPressed), for: .touchUpInside)
-        view.addSubview(submitButton)
-    }
-    
-    // Selectors
-    @objc
+}
+
+extension UsernameInputViewController: UsernameInputDelegate {
     func submitButtonPressed() {
         // This is never nil
-        let username = inputField.text!
+        let username = subView.inputField.text!
         if username != "" {
             DB.currentUser.username = username
             DB.updateUsername(user: DB.currentUser)
