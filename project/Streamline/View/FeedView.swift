@@ -12,7 +12,8 @@ class FeedView: UIView {
     var postCollectionView      : UICollectionView!
     var postButton              : UIButton!
     var postButtonArea          : UIButton!
-    var logoutButton            : UIButton!
+    var menuButton              : UIButton!
+    var groupButton             : UIButton!
     var discoverLabel           : UILabel!
     var nowPlayingButton        : UIButton!
     var nowPlayingLabel         : UILabel!
@@ -90,15 +91,22 @@ class FeedView: UIView {
         postButtonArea.addTarget(self, action: #selector(postButtonPressed), for: .touchUpInside)
         addSubview(postButtonArea)
         
-        logoutButton = UIButton(frame: Utils.rRect(rx: 15, ry: 30, rw: 74, rh: 22))
-        logoutButton.setTitle("Log Out", for: .normal)
-        logoutButton.setTitleColor(UIColor(hex: "737171"), for: .normal)
-        logoutButton.addTarget(self, action: #selector(logoutButtonPressed), for: .touchUpInside)
-        logoutButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        addSubview(logoutButton)
+        menuButton = UIButton(frame: Utils.rRect(rx: 15, ry: 30, rw: 74, rh: 22))
+        menuButton.setTitle("Menu", for: .normal)
+        menuButton.setTitleColor(UIColor(hex: "737171"), for: .normal)
+        menuButton.addTarget(self, action: #selector(menuButtonPressed), for: .touchUpInside)
+        menuButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        addSubview(menuButton)
     }
     
     func setupLabel() {
+        groupButton = UIButton(frame: Utils.rRect(rx: 375*0.35, ry: 20, rw: 375*0.3, rh: 44))
+        groupButton.setTitle("GROUPS", for: .normal)
+        groupButton.setTitleColor(UIColor(hex: "737171"), for: .normal)
+        groupButton.addTarget(self, action: #selector(groupsSelectorButtonPressed), for: .touchUpInside)
+        groupButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        addSubview(groupButton)
+        
         discoverLabel = UILabel(frame: Utils.rRect(rx: 0, ry: 20, rw: 375, rh: 44))
         
         discoverLabel.textColor     = UIColor(hex: "311b92")
@@ -109,7 +117,7 @@ class FeedView: UIView {
         discoverLabel.font = UIFont.systemFont(ofSize: ((frame.width / 375) * 26))
 
         
-        addSubview(discoverLabel)
+        //addSubview(discoverLabel)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -125,13 +133,18 @@ class FeedView: UIView {
         self.delegate?.nowPlayingButtonPressed()
     }
     
-    func logoutButtonPressed() {
-        self.delegate?.logoutButtonPressed()
+    func menuButtonPressed() {
+        self.delegate?.menuButtonPressed()
+    }
+    
+    func groupsSelectorButtonPressed() {
+        self.delegate?.groupsSelectorButtonPressed()
     }
 }
 
 protocol FeedViewDelegate {
     func postButtonPressed()
     func nowPlayingButtonPressed()
-    func logoutButtonPressed()
+    func menuButtonPressed()
+    func groupsSelectorButtonPressed()
 }

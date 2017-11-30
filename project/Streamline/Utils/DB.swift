@@ -97,6 +97,19 @@ struct DB {
         })
     }
     
+    //Get the posts in a group
+    static func getGroupPosts(group: Group) {
+        //Refreshes posts on local storage
+        getPosts(withBlock: {
+            //Checks if each post is contained within the group id for the specific group
+            for post in DB.posts {
+                if group.pids.contains(post.pid) {
+                    group.posts.append(post)
+                }
+            }
+        })
+    }
+    
     // Creates a post in the database
     static func createPost(post: Post, user: User) {
         var ref = Database.database().reference().child("posts")
@@ -121,19 +134,56 @@ struct DB {
         ref.child("timePosted").setValue(timePosted)
     }
     
-    // Gets a single post with the user id
-//    static func getSinglePost(pid: String, withBlock: @escaping (Post) -> ()) {
-//        var ref = Database.database().reference().child("posts").child(pid)
-//        ref.observeSingleEvent(of: .value) { (snapshot, error) in
-//            let post = Post(pid: pid, postDict: snapshot.value as! [String : Any])
-//            withBlock(post)
-//        }
-//    }
-    
     // Sorts the posts by time stamp
     static func sortPosts() {
         DB.posts.sort(by: {(p1, p2) -> Bool in
             return p1.timePosted >= p2.timePosted
         })
+    }
+    
+    static func getGIDS(withBlock: @escaping () -> ()) {
+        let ref = Database.database().reference().child("users").child(DB.currentUser.uid).child("gids")
+        ref.observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? [String]
+            if let value = value {
+                DB.currentUser.gids = value
+            }
+        })
+    }
+    
+    static func getGroups(withBlock: @escaping () -> ()) {
+        getGIDS(withBlock: {
+            for gid in DB.currentUser.gids {
+                DB.currentUser.groups.append(Group(gid: gid))
+                withBlock()
+            }
+        })
+    }
+    
+    static func updateGroupsPosts(withBlock: @escaping () -> ()){
+        getGroups(withBlock: {
+            for group in DB.currentUser.groups {
+                getGroupPosts(group: group)
+            }
+            withBlock()
+        })
+    }
+    
+    static func createGroup(groupName: String){
+        //Create the group and set the values to the random key
+        var ref = Database.database().reference().child("groups")
+        let key = ref.childByAutoId().key
+        ref = ref.child(key)
+        var dict: [String: Any] = ["name": groupName, "uid": [DB.currentUser.uid], "pids": [DB.currentUser.pid]]
+        ref.setValue(dict)
+        
+        //Take the current list of group ids and append the new group id to it
+        getGIDS(withBlock: {
+            ref = Database.database().reference().child("users").child(DB.currentUser.uid).child("gids")
+            DB.currentUser.gids.append(key)
+            ref.setValue(DB.currentUser.gids)
+        })
+        
+        
     }
 }

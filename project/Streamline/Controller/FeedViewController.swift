@@ -18,9 +18,14 @@ class FeedViewController: UIViewController {
     var blur: UIVisualEffectView!
     var commandCenter: MPRemoteCommandCenter!
     
-    // Search View
-    var searchView: SearchView!
-    var modalView : AKModalView!
+    // Search View and Menu View
+    var menuView    : MenuView!
+    var searchView  : SearchView!
+    var settingView : SettingView!
+    var groupSettingsView   : GroupSettingsView!
+    var addGroupView: AddGroupView!
+    var groupSelectorView : GroupSelectorView!
+    var modalView   : AKModalView!
     
     // Feed View for UI elements
     var subView: FeedView!
@@ -71,11 +76,11 @@ class FeedViewController: UIViewController {
         // Setups the spotify player
         setupSpotify()
         
-        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.extraLight)
-        blur = UIVisualEffectView(effect: blurEffect)
-        blur.frame = view.bounds
-        blur.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        blur.alpha = 0
+        let blurEffect          = UIBlurEffect(style: UIBlurEffectStyle.extraLight)
+        blur                    = UIVisualEffectView(effect: blurEffect)
+        blur.frame              = view.bounds
+        blur.autoresizingMask   = [.flexibleWidth, .flexibleHeight]
+        blur.alpha              = 0
         view.addSubview(blur)        
     }
     
@@ -100,9 +105,8 @@ class FeedViewController: UIViewController {
         }
     }
     
-    // Creates the modal search view
-    func createSearchView(){
-        modalView = AKModalView(view: searchView)
+    func createModalView(uiView: UIView) {
+        modalView = AKModalView(view: uiView)
         modalView.automaticallyCenter = false
         view.addSubview(modalView)
         modalView.show()
@@ -258,18 +262,25 @@ extension FeedViewController: NowPlayingProtocol, FeedViewDelegate {
         searchView.searchSpotify()
         searchView.searchBar.text = ""
         searchView.delegate = self
-        print("postbuttonpressed")
         /* Code to limit user to one song a day and delete user pid if it has been 24 hours */
         if let timePosted = DB.currentUser.timePosted {
             if (Date().timeIntervalSince1970 - timePosted > 86400 || DB.currentUser.uid == "1261764229") {
-                self.createSearchView()
+                //self.createSearchView()
+                self.createModalView(uiView: searchView)
             } else {
                 let alert = Utils.createAlert(warningMessage: "Sorry! You can only post one song a day. Try post again later")
                 self.present(alert, animated: true, completion: nil)
             }
         } else {
-            self.createSearchView()
+            //self.createSearchView()
+            self.createModalView(uiView: searchView)
         }
+    }
+    
+    func groupsSelectorButtonPressed() {
+        groupSelectorView = GroupSelectorView(frame: Utils.rRect(rx: 40, ry: 120, rw: 295, rh: 289), large: true)
+        groupSelectorView.delegate = self
+        createModalView(uiView: groupSelectorView)
     }
     
     // Handles player button pressed
@@ -286,6 +297,15 @@ extension FeedViewController: NowPlayingProtocol, FeedViewDelegate {
     }
     
     //Handles logout
+    func menuButtonPressed() {
+        menuView = MenuView(frame: Utils.rRect(rx: 40, ry: 120, rw: 295, rh: 289), large: true)
+        menuView.delegate = self
+        //createMenuView()
+        createModalView(uiView: menuView)
+    }
+}
+
+extension FeedViewController: MenuViewDelegate {
     func logoutButtonPressed() {
         let userDefaults = UserDefaults.standard
         userDefaults.removeObject(forKey: "SpotifySession")
@@ -293,4 +313,45 @@ extension FeedViewController: NowPlayingProtocol, FeedViewDelegate {
         SpotifyAPI.player.logout()
         self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
     }
+    
+    func settingButtonPressed() {
+        settingView = SettingView(frame: Utils.rRect(rx: 40, ry: 120, rw: 295, rh: 289), large: true)
+        settingView.delegate = self
+        createModalView(uiView: settingView)
+    }
+    
+    func groupButtonPressed() {
+        groupSettingsView = GroupSettingsView(frame: Utils.rRect(rx: 40, ry: 120, rw: 295, rh: 289), large: true)
+        groupSettingsView.delegate = self
+        createModalView(uiView: groupSettingsView)
+    }
+}
+
+extension FeedViewController: SettingViewDelegate {
+    func setNameButtonPressed() {
+        DB.currentUser.username = settingView.usernameTextField.text
+        DB.updateUsername(user: DB.currentUser)
+        modalView.dismiss()
+    }
+}
+
+extension FeedViewController: GroupSettingsViewDelegate {
+    func createButtonPressed() {
+        addGroupView = AddGroupView(frame: Utils.rRect(rx: 40, ry: 120, rw: 295, rh: 289), large: true)
+        addGroupView.delegate = self
+        createModalView(uiView: addGroupView)
+        //DB.createGroup()
+    }
+}
+
+extension FeedViewController: AddGroupViewDelegate {
+    func addGroupButtonPressed() {
+        if addGroupView.groupNameTextField.text != nil || addGroupView.groupNameTextField.text != "" {
+            DB.createGroup(groupName: self.addGroupView.groupNameTextField.text!)
+        }
+    }
+}
+
+extension FeedViewController: GroupSelectorViewDelegate {
+    
 }

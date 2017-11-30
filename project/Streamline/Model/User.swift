@@ -7,12 +7,15 @@
 //
 
 import Haneke
+import Firebase
 
 class User {
     var pid        : String!
     var uid        : String!
     var username   : String!
     var imageUrl   : String!
+    var gids       : [String] = []
+    var groups     : [Group] = []
     var timePosted : TimeInterval?
     
     init(uid: String,

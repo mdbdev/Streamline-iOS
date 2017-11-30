@@ -5,7 +5,6 @@
 //  Created by Vineeth Yeevani on 10/28/17.
 //  Copyright © 2017 Stephen Jayakar. All rights reserved.
 //
-
 //
 //  AKModalView.swift
 //  AKModalView
@@ -13,7 +12,6 @@
 //  Created by Akkshay Khoslaa on 7/20/16.
 //  Copyright © 2016 Akkshay Khoslaa. All rights reserved.
 //
-
 import UIKit
 import Spring
 
