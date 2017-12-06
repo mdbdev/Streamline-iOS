@@ -10,12 +10,6 @@
 import UIKit
 
 class UsernameInputViewController: UIViewController {
-    var titleOne: UILabel!
-    var titleTwo: UILabel!
-    var titleThree: UILabel!
-    var inputField: UITextField!
-    var submitButton: UIButton!
-    
     var subView: UsernameInputView!
     
     override func viewDidLoad() {

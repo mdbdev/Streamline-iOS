@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class LoginViewController: UIViewController {
     
@@ -18,6 +19,9 @@ class LoginViewController: UIViewController {
     var session : SPTSession!
     var user    : User!
     var loginUrl: URL?
+    
+    //Safari View
+    var svc     : SFSafariViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,6 +67,11 @@ class LoginViewController: UIViewController {
     
     // Segue to feed view
     func toFeedView(){
+        if svc != nil {
+            if svc.isViewLoaded {
+                print(UIApplication.topViewController())
+            }
+        }
         let userDefaults = UserDefaults.standard
         if let sessionObj:AnyObject = userDefaults.object(forKey: "SpotifySession") as AnyObject? {
             let sessionDataObj = sessionObj as! Data
@@ -87,57 +96,55 @@ class LoginViewController: UIViewController {
             // User already exists in database
             if let user = user {
                 DB.currentUser = user
-                self.performSegue(withIdentifier: "toFeed", sender: self)
+                let feedView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FeedViewController")
+                UIApplication.topViewController()?.present(feedView, animated: true, completion: nil)
             } else {
                 self.user = User(uid: self.session.canonicalUsername, pid: "", username: "", imageUrl: "", timePosted: nil)
                 DB.currentUser = self.user
                 SpotifyWeb.getUserDisplayName(accessToken: self.session.accessToken, withBlock: { (username, imageURL) in
                     self.user.username = username
                     self.user.imageUrl = imageURL
+                    let usernameView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "UsernameInputViewController")
                     DB.createUser(uid: self.session.canonicalUsername,
                                   username: self.user.username,
                                   userprofile: imageURL,
                                   withBlock: {
-                        //if DB.currentUser.username == "Anonymous User" {
-                            self.performSegue(withIdentifier: "toUsername", sender: self)
-                        //} else {
-                        //a    self.performSegue(withIdentifier: "toFeed", sender: self)
-                        //}
+                                    UIApplication.topViewController()?.present(usernameView, animated: true, completion: nil)
                     })
                 })
             }
         }
     }
-//        user           = User(uid: self.session.canonicalUsername)
-//        DB.currentUser = user
-//
-//        // Determine if the proper name to display
-//        SpotifyWeb.getUserDisplayName(accessToken: self.session.accessToken, withBlock: { (username, imageURL) in
-//            self.user.username = username
-//            self.user.imageUrl = imageURL
-//            DB.createUser(
-//                uid        : self.session.canonicalUsername,
-//                username   : self.user.username,
-//                userprofile: imageURL,
-//                withBlock  : {
-//                    if DB.currentUser.username == "Anonymous User" {
-//                        self.performSegue(withIdentifier: "toUsername", sender: self)
-//                    } else {
-//                        self.performSegue(withIdentifier: "toFeed", sender: self)
-//                    }
-//                }
-//            )
-//        })
-//    }
 }
 
 //Managing button presses in the LoginView
 extension LoginViewController: LoginViewDelegate {
     func connectButtonPressed() {
-        if UIApplication.shared.openURL(loginUrl!) {
-            if auth.canHandle(auth.redirectURL) {
-                // handle errors
+        svc = SFSafariViewController(url: self.loginUrl!)
+        svc.delegate = self
+        self.present(svc, animated: true, completion: nil)
+    }
+}
+
+extension LoginViewController: SFSafariViewControllerDelegate {
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension UIApplication {
+    class func topViewController(base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+        if let nav = base as? UINavigationController {
+            return topViewController(base: nav.visibleViewController)
+        }
+        if let tab = base as? UITabBarController {
+            if let selected = tab.selectedViewController {
+                return topViewController(base: selected)
             }
         }
+        if let presented = base?.presentedViewController {
+            return topViewController(base: presented)
+        }
+        return base
     }
 }

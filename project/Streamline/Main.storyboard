@@ -31,7 +31,7 @@
         <!--Feed View Controller-->
         <scene sceneID="3cD-1P-sMr">
             <objects>
-                <viewController id="DDU-QV-9ps" customClass="FeedViewController" customModule="Streamline" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FeedViewController" id="DDU-QV-9ps" customClass="FeedViewController" customModule="Streamline" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ehy-Ha-is4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -97,6 +97,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="VK6-D6-41K"/>
+        <segue reference="4HJ-0n-kjq"/>
     </inferredMetricsTieBreakers>
 </document>

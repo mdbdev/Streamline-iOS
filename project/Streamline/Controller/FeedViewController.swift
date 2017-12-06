@@ -44,11 +44,6 @@ class FeedViewController: UIViewController {
         State.MPCommandCenter.playCommand.isEnabled = true
         State.MPCommandCenter.playCommand.addTarget(self, action: #selector(togglePlaybackState))
         
-        // TODO
-//        State.MPCommandCenter.nextTrackCommand.isEnabled = true
-//        State.MPCommandCenter.nextTrackCommand.addTarget(self, action: #selector(skipForward))
-
-        
         // Setups the feed view elements
         subView          = FeedView(frame: view.frame)
         subView.delegate = self
@@ -65,11 +60,9 @@ class FeedViewController: UIViewController {
         self.refHandle = Database.database().reference().child("posts")
         self.populateFeed()
         self.refHandle.observe(DataEventType.childAdded) { (snapshot, error) in
-            //self.subView.postCollectionView.insertItems(at: [IndexPath])
             let post = Post(pid: snapshot.key, postDict: snapshot.value as! [String : Any])
             self.subView.postCollectionView.numberOfItems(inSection: 0)
             DB.posts.insert(post, at: 0)
-            //self.numberOfPosts = self.numberOfPosts + 1
             self.subView.postCollectionView.insertItems(at: [IndexPath(item: 0, section: 0)])
             if State.nowPlayingIndex != nil {
                 State.nowPlayingIndex = State.nowPlayingIndex! + 1
@@ -154,7 +147,6 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
                               options: .transitionCrossDissolve,
                               animations: { cell.albumImage.image = img },
                               completion: nil)
-//            cell.albumImage.image = img
         }
         return cell
     }
@@ -268,7 +260,6 @@ extension FeedViewController: NowPlayingProtocol, FeedViewDelegate {
         searchView.delegate = self
         print("postbuttonpressed")
         /* Code to limit user to one song a day and delete user pid if it has been 24 hours */
-        // TODO: Add a debug flag for operators (I hardcoded in my profile to be able to post multiple for a test)
         if let timePosted = DB.currentUser.timePosted {
             if (Date().timeIntervalSince1970 - timePosted > 86400 || DB.currentUser.uid == "1261764229") {
                 self.createSearchView()
@@ -279,7 +270,6 @@ extension FeedViewController: NowPlayingProtocol, FeedViewDelegate {
         } else {
             self.createSearchView()
         }
-        //self.createSearchView()
     }
     
     // Handles player button pressed
@@ -301,6 +291,6 @@ extension FeedViewController: NowPlayingProtocol, FeedViewDelegate {
         userDefaults.removeObject(forKey: "SpotifySession")
         
         SpotifyAPI.player.logout()
-        self.dismiss(animated: true, completion: nil)
+        self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
     }
 }
