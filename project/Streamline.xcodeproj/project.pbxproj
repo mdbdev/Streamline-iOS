@@ -770,7 +770,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y2JVY29H4R;
+				DEVELOPMENT_TEAM = YKE7MMUC9J;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Streamline/Spotify\\ Frameworks",
@@ -798,7 +798,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y2JVY29H4R;
+				DEVELOPMENT_TEAM = YKE7MMUC9J;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Streamline/Spotify\\ Frameworks",

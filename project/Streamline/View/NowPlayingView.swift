@@ -64,7 +64,8 @@ class NowPlayingView: UIView {
         // TODO: Have to change the maximum and minimum image to match the figma
         addSubview(slider)
         
-        playButton = UIButton(frame: Utils.rRect(rx: 175, ry: 558, rw: 25, rh: 25))
+        playButton = UIButton(frame: Utils.rRect(rx: 170, ry: 553, rw: 35, rh: 35))
+        playButton.contentEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         playButton.addTarget(self, action: #selector(playButtonPressed), for: .touchUpInside)
         let isPlaying = SpotifyAPI.player.playbackState.isPlaying
         if !isPlaying {

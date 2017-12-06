@@ -224,7 +224,7 @@ extension FeedViewController: SPTAudioStreamingDelegate, SPTAudioStreamingPlayba
             if let vc = nowPlayingVC {
                 vc.updateSlider(percent: percent)
                 let position = Int(position)
-                if position != 0 {
+                if position != 0 && position <= 1 {
                     State.MPInfoCenter.nowPlayingInfo![MPNowPlayingInfoPropertyElapsedPlaybackTime] = Int(position)
                     State.MPInfoCenter.nowPlayingInfo![MPMediaItemPropertyPlaybackDuration] = duration
                 }
