@@ -273,7 +273,7 @@ extension FeedViewController: NowPlayingProtocol, FeedViewDelegate {
             if (Date().timeIntervalSince1970 - timePosted > 86400 || DB.currentUser.uid == "1261764229") {
                 self.createSearchView()
             } else {
-                let alert = Utils.createAlert(warningMessage: "Sorry! You can only post one song a day. Try post again later")
+                let alert = Utils.createAlert(warningMessage: "Sorry! You've already posted today. Try again later!")
                 self.present(alert, animated: true, completion: nil)
             }
         } else {
